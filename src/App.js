@@ -15,6 +15,9 @@ export default function App() {
       >
         <Link to="/login">Login</Link> |{" "}
         <Link to="/new_applicant">New Applicant</Link>
+        <Link to="/search">Search Applicants</Link>
+        <Link to="/current_registered_list">Food Bank List</Link>
+        <Link to="/past_registered_list">Past Registered List</Link>
       </nav>
     </div>
   );
