@@ -17,16 +17,20 @@ app.listen(port, () => {
 
 })
 
-let userInfo = [];
+let userInfo = {};
 
 app.post('/login_attempt', (req, res, next) => {
-    userInfo.push(req.body);
-    res.send(req.body);
-    console.log(userInfo);
-    next();
+    userInfo.name = req.body.user_name;
+    userInfo.password = req.body.password;
+    console.log(req.body);
 })
 
 app.get('/login_credentials', (req, res, next) => {
-    res.send(userInfo);
+    
+    if (userInfo.user_name === "Miles") {
+        res.send({"message": "Success"});
+    } else {
+        res.send({"message": "Failure"});
+    }
     next();
 })
