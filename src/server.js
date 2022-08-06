@@ -20,9 +20,13 @@ app.listen(port, () => {
 let userInfo = {};
 
 app.post('/login_attempt', (req, res, next) => {
-    userInfo.name = req.body.user_name;
-    userInfo.password = req.body.password;
-    console.log(req.body);
+    if (req.body.currentUser === 'Miles') {
+        res.send({"message": 'valid'});
+        console.log(req.body);
+    } else {
+        res.send({"message": 'invalid'});
+        console.log(req.body);
+    }
 })
 
 app.get('/login_credentials', (req, res, next) => {
