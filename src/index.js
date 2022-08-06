@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './assets/styles/App.scss';
+import './assets/styles/index.scss';
+import './assets/styles/foodBankList.scss';
+import './assets/styles/login.scss';
+import './assets/styles/newApplicant.scss';
+import './assets/styles/pastLists.scss';
+import './assets/styles/searchApplicants.scss';
+
 import {
   BrowserRouter,
   Routes,
@@ -16,7 +23,7 @@ import PastLists from "./routes/pastLists.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter style={{backgroundColor: "purple"}}>
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="new_applicant" element={<Applicant />} />

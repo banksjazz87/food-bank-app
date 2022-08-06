@@ -1,11 +1,11 @@
-import './App.css';
+import './assets/styles/App.scss';
 import React from "react";
 import { Link } from "react-router-dom";
 
 
 export default function App() {
   return (
-    <div>
+    <div id="homepage_wrapper">
       <h1>Welcome to the Chapel Food Bank Application</h1>
       <nav
         style={{

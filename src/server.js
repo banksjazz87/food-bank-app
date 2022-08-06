@@ -16,3 +16,17 @@ app.listen(port, () => {
     console.log(`App is listening on port ${port}`);
 
 })
+
+let userInfo = [];
+
+app.post('/login_attempt', (req, res, next) => {
+    userInfo.push(req.body);
+    res.send(req.body);
+    console.log(userInfo);
+    next();
+})
+
+app.get('/login_credentials', (req, res, next) => {
+    res.send(userInfo);
+    next();
+})
