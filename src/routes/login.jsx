@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import '../assets/styles/login.scss';
-import  {useNavigate } from "react-router-dom";
+import  { useNavigate } from "react-router-dom";
 
 
 
@@ -8,6 +8,8 @@ export default function Login() {
   
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+
 
   const checkCredentials = async (url = '', data = {}) => {
     const response = await fetch (url, {
@@ -29,10 +31,8 @@ export default function Login() {
 
   const redirect = (message, confirmed) => {
     if (message === confirmed) {
-      useNavigate("../", {replace: true});
-    } else {
-      alert('Invalid Credentials, please try again');
-    }
+      return true;
+    } 
   }
 
     return (
@@ -41,7 +41,7 @@ export default function Login() {
           action="/login_attempt" 
           onSubmit={(e) => {
             e.preventDefault(); 
-            checkCredentials('/login_attempt', {currentUser: userName, currentPassword: password}).then(data=> redirect(data.message, "valid"));
+            checkCredentials('/login_attempt', {currentUser: userName, currentPassword: password}).then(data=> redirect(data.message, "valid") ? navigate("/", {replace: true}) : alert('invalid credentials'));
             }} 
             method="post">
           <label for="user_name">User Name</label>

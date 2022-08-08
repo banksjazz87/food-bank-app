@@ -33,10 +33,12 @@ const Tester = {
 app.post('/login_attempt', (req, res, next) => {
     if (req.body.currentUser === Chapel.user && req.body.currentPassword === Chapel.password) {
         res.send({"message": 'valid'});
+        console.log({"message": 'valid'})
         
     } else if (req.body.currentUser === Tester.user && req.body.currentPassword === Tester.password) {
         res.send({"message": 'valid'});
     } else {
         res.send({"message": "invalid"});
+        console.log({"message": "invalid"});
     }
 })
