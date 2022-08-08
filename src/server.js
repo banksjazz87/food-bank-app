@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 var cors = require('cors');
 const app = express();
@@ -17,24 +18,25 @@ app.listen(port, () => {
 
 })
 
-let userInfo = {};
+//Chapel user credentials
+const Chapel = {
+    user: process.env.CHAPEL_USER,
+    password: process.env.CHAPEL_PASSWORD
+}
 
+//Tester credentials
+const Tester = {
+    user: process.env.TESTING_USER,
+    password: process.env.TESTING_PASSWORD
+}
+//post request for the login
 app.post('/login_attempt', (req, res, next) => {
-    if (req.body.currentUser === 'Miles') {
-        res.send({"message": 'valid'});
-        console.log(req.body);
+    if (req.body.currentUser === Chapel.user && req.body.currentPassword === Chapel.password) {
+        res.send({"message": 'Welcome Chapel'});
+        
+    } else if (req.body.currentUser === Tester.user && req.body.currentPassword === Tester.password) {
+        res.send({"message": 'Welcome Tester'});
     } else {
-        res.send({"message": 'invalid'});
-        console.log(req.body);
+        res.send({"message": "invalid credentials"});
     }
-})
-
-app.get('/login_credentials', (req, res, next) => {
-    
-    if (userInfo.user_name === "Miles") {
-        res.send({"message": "Success"});
-    } else {
-        res.send({"message": "Failure"});
-    }
-    next();
 })
