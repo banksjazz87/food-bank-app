@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import '../assets/styles/login.scss';
+import  {useNavigate } from "react-router-dom";
+
+
 
 export default function Login() {
   
@@ -23,9 +26,24 @@ export default function Login() {
     return response.json();
 
   }
+
+  const redirect = (message, confirmed) => {
+    if (message === confirmed) {
+      useNavigate("../", {replace: true});
+    } else {
+      alert('Invalid Credentials, please try again');
+    }
+  }
+
     return (
       <div id="login_container">
-        <form action="/login_attempt" onSubmit={(e) => {e.preventDefault(); checkCredentials('/login_attempt', {currentUser: userName, currentPassword: password}).then(data=> alert(data.message));}} method="post">
+        <form 
+          action="/login_attempt" 
+          onSubmit={(e) => {
+            e.preventDefault(); 
+            checkCredentials('/login_attempt', {currentUser: userName, currentPassword: password}).then(data=> redirect(data.message, "valid"));
+            }} 
+            method="post">
           <label for="user_name">User Name</label>
           <input 
             type="text" 
