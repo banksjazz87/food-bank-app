@@ -16,6 +16,27 @@ export default function Applicant() {
       {value: 0, type: "number", maxWidth: 6, name: "weeklyIncome", placeHolder: "Weekly Income"}
     ];
 
+    const [field, setField] = useState([
+        {
+          firstName: "", 
+          lastName: "", 
+          phone: "", 
+          address: "", 
+          numOfPeople: "", 
+          numOfChildren: "", 
+          numOfAdults: "", 
+          numOfSeniors: "", 
+          monthlyIncome: "", 
+          annualIncome: "", 
+          weeklyIncome: ""
+        }]);
+
+    const fieldOnChange = (index, e) => {
+      let newArr = [...field];
+      newArr[index] = e.target.value;
+      setField(newArr);
+    }
+
     const returnFields = dataPoints.map((x, y) => {
       if (x.value === null) {
         return (
@@ -27,11 +48,13 @@ export default function Applicant() {
       return (
       <div className="input_pair">
         <label key={`label_${y}`} for={x.name}>{x.placeHolder}</label>
-        <input key={`input_${y}`} type={x.type} id={x.name} name={x.name} />
+        <input key={`input_${y}`} type={x.type} id={x.name} maxlength={x.maxWidth} name={x.name} min={x.type === "number" ? 0 : ""} onChange={(event) => fieldOnChange(y, event)}/>
+        <p>{`The updated value is ${field[y]}`}</p>
       </div>
       )
       }
-    })
+    });
+
     return (
       <div id="new_applicat_wrapper">
         <form action="/new_applicant" method="post">
