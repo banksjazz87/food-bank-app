@@ -1,22 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 
 export default function Applicant() {
   const dataPoints = [
-      {initialValue: "", type:"text", maxWidth: 25, name: "firstName"}, 
-      {initialValue: "", type: "text", maxWidth: 25, name: "lastName"}, 
-      {initialValue: "", type: "tel", maxWidth: 15, name: "phone"},
-      {initialValue: "", type: "text", maxWidth: 25, name: "address"}, 
-      {initialValue: 0, type: "number", maxWidth: 2, name: "Number of People In Household"}, 
-      {initialValue: 0, type: "number", maxWidth: 2, name: "Number of Children"}, 
-      {initialValue: 0, type: "number", maxWidth: 2, name: "Number of Adults"}, 
-      {initialValue: 0, type: "number", maxWidth: 2, name: "Number of Citizens"}, 
-      {initialValue: null, type: null, maxWidth: null, name: "Total Household Income"}, 
-      {initialValue: 0, type: "number", maxWidth: 6, name: "Monthly Income"}, 
-      {initialValue: 0, type: "number", maxWidth: 6, name: "Anual Income"}, 
-      {initialValue: 0, type: "number", maxWidth: 6, name: "Weekly Income"}
+      {value: "", type:"text", maxWidth: 25, name: "firstName", placeHolder: "First Name"}, 
+      {value: "", type: "text", maxWidth: 25, name: "lastName", placeHolder: "Last Name"}, 
+      {value: "", type: "tel", maxWidth: 15, name: "phone", placeHolder: "Phone Number"},
+      {value: "", type: "text", maxWidth: 25, name: "address", placeHolder: "Address"}, 
+      {value: 0, type: "number", maxWidth: 2, name: "numOfPeople", placeHolder: "Number of People In Household"}, 
+      {value: 0, type: "number", maxWidth: 2, name: "numOfChildren", placeHolder: "Number of Children"}, 
+      {value: 0, type: "number", maxWidth: 2, name: "numOfAdults", placeHolder: "Number of Adults"}, 
+      {value: 0, type: "number", maxWidth: 2, name: "numOfSeniors", placeHolder: "Number of Senior Citizens"}, 
+      {value: null, type: null, maxWidth: null, name: "totalIncome", placeHolder: "Total Household Income"}, 
+      {value: 0, type: "number", maxWidth: 6, name: "monthlyIncome", placeHolder: "Monthly Income"}, 
+      {value: 0, type: "number", maxWidth: 6, name: "annualIncome", placeHolder: "Anual Income"}, 
+      {value: 0, type: "number", maxWidth: 6, name: "weeklyIncome", placeHolder: "Weekly Income"}
     ];
+
+    const returnFields = dataPoints.map((x, y) => {
+      if (x.value === null) {
+        return (
+          <div className="input_pair">
+            <label key={`label_${y}`} for={x.name}>{x.placeHolder}</label>
+          </div>
+        )
+      } else {
+      return (
+      <div className="input_pair">
+        <label key={`label_${y}`} for={x.name}>{x.placeHolder}</label>
+        <input key={`input_${y}`} type={x.type} id={x.name} name={x.name} />
+      </div>
+      )
+      }
+    })
     return (
       <div id="new_applicat_wrapper">
+        <form action="/new_applicant" method="post">
+          {returnFields}
+          <input type="submit" value="submit" />
+        </form>
 
       </div>
     );
