@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Applicant() {
-  
+
   //An array of objects that will be displayed as labels and inputs, for the application form.
   const dataPoints = [
     {
