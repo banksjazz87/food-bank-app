@@ -93,13 +93,6 @@ export default function Applicant() {
   //React Hook that will be used to update the state of each input
   const [field, setField] = useState({});
 
-  //On change function that will update the field values
-  /*const fieldOnChange = (index,  e) => {
-    let newArr = [...field];
-    newArr[index] = e.target.value;
-    setField(newArr);
-  };*/
-
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
       return (
