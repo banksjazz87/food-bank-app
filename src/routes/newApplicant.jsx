@@ -91,28 +91,14 @@ export default function Applicant() {
   ];
 
   //React Hook that will be used to update the state of each input
-  const [field, setField] = useState([
-    {
-      firstName: "",
-      lastName: "",
-      phone: "",
-      address: "",
-      numOfPeople: "",
-      numOfChildren: "",
-      numOfAdults: "",
-      numOfSeniors: "",
-      monthlyIncome: "",
-      annualIncome: "",
-      weeklyIncome: "",
-    },
-  ]);
+  const [field, setField] = useState({});
 
   //On change function that will update the field values
-  const fieldOnChange = (index, e) => {
+  /*const fieldOnChange = (index,  e) => {
     let newArr = [...field];
     newArr[index] = e.target.value;
     setField(newArr);
-  };
+  };*/
 
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
@@ -125,20 +111,20 @@ export default function Applicant() {
       );
     } else {
       return (
-        <div className="input_pair">
-          <label key={`label_${y}`} for={x.name}>
+        <div className="input_pair" key={`input_${y}`}>
+          <label key={`label_${y}`} htmlFor={x.name}>
             {x.placeHolder}
           </label>
           <input
             key={`input_${y}`}
             type={x.type}
             id={x.name}
-            maxlength={x.maxWidth}
+            maxLength={x.maxWidth}
             name={x.name}
             min={x.type === "number" ? 0 : ""}
-            onChange={(event) => fieldOnChange(y, event)}
+            onChange = {(e) => setField({...field, [x.name]: e.target.value})}
           />
-          <p>{`The updated value is ${field[y]}`}</p>
+          <p>{`The field is ${y} updated value is ${field[x.name]}`}</p>
         </div>
       );
     }
@@ -146,9 +132,15 @@ export default function Applicant() {
 
   return (
     <div id="new_applicat_wrapper">
-      <form action="/new_applicant" method="post">
+      <form 
+        action="/new_applicant" 
+        method="post"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(field);
+        }}>
         {returnFields}
-        <input type="submit" value="submit" />
+        <input type="submit" value="submit"/>
       </form>
     </div>
   );
