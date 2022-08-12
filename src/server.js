@@ -5,30 +5,6 @@ var cors = require("cors");
 const app = express();
 const port = 4000;
 
-//test data
-/*onst DummyData =  [
-  {
-    firstName: "Greg",
-    lastName: "Coleman",
-    annualIncome: "$20,000",
-  },
-  {
-    firstName: "George",
-    lastName: "Fisher",
-    annualIncome: "$60,000",
-  },
-  {
-    firstName: "Ryan",
-    lastName: "Van",
-    annualIncome: "$30,000",
-  },
-  {
-    firstName: "David",
-    lastName: "Fredricks",
-    annualIncome: "$10,000",
-  },
-];*/
-
 //Middleware instatiation
 app.use(cors());
 app.use(express.json());
@@ -81,7 +57,6 @@ app.post("/new_applicant", (req, res, next) => {
     res.send({ message: "Applicant does not qualify" });
     console.log(req.body);
   }
-
   next();
 });
 
