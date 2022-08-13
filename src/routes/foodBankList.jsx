@@ -6,37 +6,9 @@ export default function FoodBankList() {
   useEffect(() => {
       fetch("/dummy_data")
         .then((response) => response.json())
-        .then((final) => setData(data.push(final)))
+        .then((final) => setData(final))
         .catch((e) => console.log("error", e));
   });
-
-
-  /*const testData = [
-    {
-      firstName: "Greg",
-      lastName: "Coleman",
-      annualIncome: "$20,000",
-      attended: false,
-    },
-    {
-      firstName: "George",
-      lastName: "Fisher",
-      annualIncome: "$60,000",
-      attended: true,
-    },
-    {
-      firstName: "Ryan",
-      lastName: "Van",
-      annualIncome: "$30,000",
-      attended: true,
-    },
-    {
-      firstName: "David",
-      lastName: "Fredricks",
-      annualIncome: "$10,000",
-      attended: false,
-    },
-  ];
 
   const alreadyChecked = (currentMember) => {
     if (currentMember["attended"]) {
@@ -70,8 +42,8 @@ export default function FoodBankList() {
   //Function that will take an array that contains another array, the most recent array will be used.
   const displayList = (array) => {
 
-  /*const currentList = array;
-  /*const renderNames = currentList.map((x, y) => {
+  const currentList = array;
+  const renderNames = currentList.map((x, y) => {
     return (
       <tr id={`row_number_${y}`} key={`rowNum${y}`}>
         <td>{alreadyChecked(x)}</td>
@@ -80,19 +52,16 @@ export default function FoodBankList() {
       </tr>
     );
   });
-  return renderNames;*/
-  //console.log("this is the list", currentList[0]);
-  //console.log(array.length);
-//}
+  return renderNames;
+  }
 
-const returnData = (array) => console.log("data", array[0]);
 
 
   if (data.length === 0) {
     return <h1>Data is Loading</h1>;
   } else {
     return (
-      /*<div id="list_wrapper">
+      <div id="list_wrapper">
         <form action="/foodBank_attendance" method="post">
           <table>
             <tr id="header_row">
@@ -100,13 +69,11 @@ const returnData = (array) => console.log("data", array[0]);
               <th>First Name</th>
               <th>Last Name</th>
             </tr>
+
+            {displayList(data)}
           </table>
         </form>
-      </div>*/
-      <>
-        <h1>Data retrieved</h1>
-        {returnData(data)}
-      </>
+      </div>
     );
   }
 }
