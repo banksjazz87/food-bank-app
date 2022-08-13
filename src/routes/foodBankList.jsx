@@ -8,7 +8,8 @@ export default function FoodBankList() {
         .then((response) => response.json())
         .then((final) => setData(final))
         .catch((e) => console.log("error", e));
-  });
+
+  }, []);
 
   const alreadyChecked = (currentMember) => {
     if (currentMember["attended"]) {
@@ -52,6 +53,7 @@ export default function FoodBankList() {
       </tr>
     );
   });
+  console.log(array);
   return renderNames;
   }
 
