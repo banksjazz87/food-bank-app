@@ -11,6 +11,8 @@ export default function FoodBankList() {
 
   }, []);
 
+  
+
   const alreadyChecked = (currentMember) => {
     if (currentMember["attended"]) {
       return (
@@ -20,7 +22,9 @@ export default function FoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            alert("checkBox Selected");
+            currentMember["atttended"] = false;
+            setData(data) ;
+            console.log("this is the current data", data);
           }}
           checked
         />
@@ -33,7 +37,9 @@ export default function FoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            alert("checkBox Selected");
+            currentMember["attended"] = true;
+            setData(data);
+            console.log("this is the current data", data);
           }}
         />
       );
