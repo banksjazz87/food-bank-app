@@ -22,7 +22,7 @@ export default function FoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            currentMember["atttended"] = false;
+            currentMember["attended"] = false;
             setData(data) ;
             console.log("this is the current data", data);
           }}
