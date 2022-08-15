@@ -11,7 +11,18 @@ export default function FoodBankList() {
 
   }, []);
 
-  
+  const memberClicked = (current) => {
+    let copyOfData = [...data];
+    let index = copyOfData.indexOf(current);
+
+    if (current["attended"]) {
+        copyOfData[index]["attended"] = false;
+        setData(copyOfData);
+    } else {
+        copyOfData[index]["attended"] = true;
+        setData(copyOfData);
+    }
+  }
 
   const alreadyChecked = (currentMember) => {
     if (currentMember["attended"]) {
@@ -22,8 +33,7 @@ export default function FoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            currentMember["attended"] = false;
-            setData(data) ;
+            memberClicked(currentMember);
             console.log("this is the current data", data);
           }}
           checked
@@ -37,8 +47,7 @@ export default function FoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            currentMember["attended"] = true;
-            setData(data);
+            memberClicked(currentMember);
             console.log("this is the current data", data);
           }}
         />
