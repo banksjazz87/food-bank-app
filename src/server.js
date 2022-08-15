@@ -67,3 +67,10 @@ app.get('/dummy_data', (req, res, next) => {    const convertedData = JSON.strin
     console.log(Dummy.variableName);
     next();
 });
+
+//post request for updated foodbank attendence check sheet
+app.post('/foodBank_attendance/check_sheet', (req, res, next) => {
+  res.send(req.body.updatedData);
+  console.log(req.body.updatedData);
+  next();
+})
