@@ -115,7 +115,11 @@ export default function FoodBankList() {
 
             {displayList(data)}
           </table>
-          <div id="input_module" style={clickedBox === true ? { display: "" } : { display: "none" }}>
+          <div 
+            id="submit_module" 
+            style={clickedBox === true ? { display: "" } : { display: "none" }}
+          >
+            <p id="save_text">Please Save Before Continuing</p>
             <input
               id="foodBank_Submit"
               name="foodBank_submit"
