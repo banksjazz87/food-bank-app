@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import postRequest from "../functions/post.js";
+import "../assets/styles/foodBankList.scss";
 
 export default function FoodBankList() {
 
@@ -95,6 +96,7 @@ export default function FoodBankList() {
   } else {
     return (
       <div id="list_wrapper">
+      <h1>Food Bank Attendance Sheet</h1>
         <form
           action='/foodBank_attendance/check_sheet'
           method="post"

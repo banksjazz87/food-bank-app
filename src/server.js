@@ -68,9 +68,19 @@ app.get('/dummy_data', (req, res, next) => {    const convertedData = JSON.strin
     next();
 });
 
+
+let currentFoodBankAttendanceList = [];
+
 //post request for updated foodbank attendence check sheet
 app.post('/foodBank_attendance/check_sheet', (req, res, next) => {
+  currentFoodBankAttendanceList = req.body.updatedData;
   res.send(req.body.updatedData);
-  console.log(req.body.updatedData);
+  console.log(req.body);
+  next();
+});
+
+//get request sends back the updated attendance check sheet
+app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
+  res.send(currentFoodBankAttendanceList);
   next();
 });
