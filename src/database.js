@@ -2,11 +2,14 @@ require("dotenv").config();
 const mysql = require('mysql');
 
 //Connect to the database 
-const testConnection = mysql.createConnection({
+var testConnection = mysql.createConnection({
     host: "localhost", 
     user: "chris",
-    password: "jazz123"
+    password: "jazz123", 
+    database: "my_db"
   });
+  
+  testConnection.connect();
   
   testConnection.connect((error) => {
     if (error) {
