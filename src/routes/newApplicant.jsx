@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import postRequest from "../functions/post.js";
+import "../assets/styles/newApplicant.scss";
 
 export default function Applicant() {
 
@@ -27,23 +28,24 @@ export default function Applicant() {
           <label key={`label_${y}`} htmlFor={x.name}>
             {x.placeHolder}
           </label>
+          <br/>
           <input
             key={`input_${y}`}
             type={x.type}
             id={x.name}
+            className="new_applicant_input"
             maxLength={x.maxWidth}
             name={x.name}
             min={x.type === "number" ? 0 : ""}
             onChange = {(e) => setField({...field, [x.name]: e.target.value})}
           />
-          <p>{`The field is ${y} updated value is ${field[x.name]}`}</p>
         </div>
       );
     }
   });
 
   return (
-    <div id="new_applicat_wrapper">
+    <div id="new_applicant_wrapper">
       <form 
         action="/new_applicant" 
         method="post"
@@ -52,7 +54,7 @@ export default function Applicant() {
           newApplicantConfirmation();
         }}>
         {returnFields}
-        <input type="submit" value="submit"/>
+        <input id="new_applicant_submit" type="submit" value="submit"/>
       </form>
     </div>
   );
