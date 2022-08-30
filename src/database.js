@@ -2,31 +2,22 @@ require("dotenv").config();
 const mysql = require('mysql');
 
 //Connect to the database 
-var testConnection = mysql.createConnection({
-    host: "localhost", 
-    user: "chris",
-    password: "jazz123", 
-    database: "my_db"
+var con= mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "jazz123456",
+    database: "testingFoodBank" 
   });
   
-  testConnection.connect();
-  
-  testConnection.connect((error) => {
-    if (error) {
-      throw error;
-    } else {
-      console.log("Connected");
-    }
-  });
-
-  testConnection.connect(function(err) {
+  con.connect(function(err) {
     if (err) {
       throw err;
     } else {
     console.log("Connected!");
-    testConnection.query("CREATE DATABASE mydb", function (err, result) {
+    let sql = "SELECT * FROM applicant";
+    con.query(sql, function (err, result) {
       if (err) throw err;
-      console.log("Database created");
+      console.log("Current Applicants", result);
     });
   }
   });
