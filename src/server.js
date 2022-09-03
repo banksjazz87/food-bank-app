@@ -87,4 +87,5 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   next();
 });
 
-Data.variableName.allApplicants();
+//Data.variableName.allApplicants();
+console.log(Data.variableName.findApplicant("applicant", "firstName", "Christopher"));
