@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Dummy = require("./variables/dummyData.js");
+const Data = require("./database.js");
 const express = require("express");
 var cors = require("cors");
 const app = express();
@@ -85,3 +86,5 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   res.send(currentFoodBankAttendanceList);
   next();
 });
+
+Data.variableName.allApplicants();
