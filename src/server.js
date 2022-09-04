@@ -88,4 +88,6 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
 });
 
 //Data.variableName.allApplicants();
-console.log(Data.variableName.findApplicant("applicant", "firstName", "Christopher"));
+//console.log(Data.variableName.findApplicant("applicant", "firstName", "Christopher"));
+
+Data.variableName.addApplicant('applicant', ['Bob', 'Reynolds', '814-671-2074', '669 Beechwood Road', 'Falls Creek', 'PA', '15840', '2', '2', '6', '10', '20.00', '80.00', '960.00', '960.00']);

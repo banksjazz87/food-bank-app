@@ -71,7 +71,35 @@ var con= mysql.createConnection({
         })
       }
     })
+  },
+
+  /**
+   * 
+   * @param {*} table 
+   * @param  {...any} args 
+   * @returns adds a new applicant to the applicant table, all fields must be present. 
+   */
+  addApplicant: function(...args) {
+    Database.connection.connect(function(err) {
+      if (err) {
+        throw err;
+      } else {
+        console.log("Connected!");
+
+        let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome) VALUES ?`;
+      
+        Database.connection.query(sql, [args], function(err, result) {
+          if (err) throw err;
+          console.log("This item has been added", result);
+          return result;
+        })
+      }
+    })
   }
+
+  //add method to delete
+
+  //add method to update 
 
   }
 
