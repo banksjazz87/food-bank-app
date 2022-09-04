@@ -90,4 +90,24 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
 //Data.variableName.allApplicants();
 //console.log(Data.variableName.findApplicant("applicant", "firstName", "Christopher"));
 
-Data.variableName.addApplicant('applicant', ['Bob', 'Reynolds', '814-671-2074', '669 Beechwood Road', 'Falls Creek', 'PA', '15840', '2', '2', '6', '10', '20.00', '80.00', '960.00', '960.00']);
+//Data.variableName.addApplicant(['Jen', 'Bartlett', '814-671-2189', '720 Beechwood Road', 'Falls Creek', 'PA', '15840', '1', '2', '0', '3', '70.00', '280.00', '3360.00', '3360.00']);
+
+let testingUpdate = {
+  firstName:'Jennifer', 
+  lastName:'Bartlett', 
+  phone:'814-671-2189', 
+  street: '720 Beechwood Road', 
+  city: 'Falls Creek', 
+  state: 'PA', 
+  zip: '15840', 
+  children: '1', 
+  adults: '2', 
+  seniors: '0', 
+  totalOccupants: '3', 
+  weeklyIncome: '70.00', 
+  monthlyIncome: '280.00', 
+  annualIncome: '3360.00', 
+  totalIncome: '3360.00'
+};
+
+Data.variableName.updateApplicant(testingUpdate, '4');

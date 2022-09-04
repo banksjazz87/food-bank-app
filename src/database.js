@@ -95,11 +95,45 @@ var con= mysql.createConnection({
         })
       }
     })
-  }
-
-  //add method to delete
+  },
 
   //add method to update 
+  updateApplicant: function(object, id) {
+    Database.connection.connect(function(err) { 
+      if (err) {
+        throw err;
+      } else {
+        console.log('Connected!');
+        let sql = `UPDATE applicant SET ? WHERE ApplicantId = "${id}" `;
+        const arrayOfKeys = Object.keys(object);
+        const arrayOfValues = Object.values(object);
+        let updates = [
+          `firstName = "${arrayOfValues[arrayOfKeys.indexOf('firstName')]}"`, 
+          /*`lastName = "${object.lastName}"`, 
+          `phone = "${object.phone}"`, 
+          `street = "${object.street}"`,
+          `city = "${object.city}"`, 
+          `state = "${object.state}"`, 
+          `zip = "${object.zip}"`, 
+          `children = "${object.children}`, 
+          `adults = "${object.adults}"`, 
+          `seniors = "${object.seniors}"`, 
+          `totalOccupants = "${object.totalOccupants}"`, 
+          `weeklyIncome = "${object.weeklyIncome}"`, 
+          `monthlyIncome = "${object.monthlyIncome}"`, 
+          `annualIncome = "${object.annualIncome}"`, 
+          `totalIncome= "${object.totalIncome}"`*/
+        ];
+
+        Database.connection.query(sql, [updates], function(err, result) {
+          if (err) throw err;
+          console.log("This item has been updated", result);
+          return result;
+        })
+      }
+    })
+  }
+  //add method to delete
 
   }
 
