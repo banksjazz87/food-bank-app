@@ -1,29 +1,7 @@
 require("dotenv").config();
 const mysql = require('mysql');
 
-/*
-//Connect to the database 
-var con= mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "jazz123456",
-    database: "testingFoodBank" 
-  });
-  
-  con.connect(function(err) {
-    if (err) {
-      throw err;
-    } else {
-    console.log("Connected!");
-    let sql = "SELECT * FROM applicant";
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("Current Applicants", result);
-    });
-  }
-  });*/
-
-  const Database = {
+const Database = {
 
     //Creates a connection to the mysql database
     connection: mysql.createConnection({
@@ -121,9 +99,32 @@ var con= mysql.createConnection({
         });
       }
     })
-  }
+  },
   //add method to delete
+  /**
+   * 
+   * @param {*} table 
+   * @param {*} first 
+   * @param {*} last 
+   * @param {*} key 
+   * @returns deletes an applicant from the specified table with a matching first name, last name, and applicant ID.
+   */
+  deleteApplicant: function(table, first, last, key) {
+    Database.connection.connect(function (err) {
+      if (err) {
+        throw err;
+      } else {
+        console.log("Connected!")
 
+        let sql = `DELETE FROM ${table} WHERE firstName = "${first}" AND lastName = "${last}" AND ApplicantID = "${key}";` 
+
+        Database.connection.query(sql, function(err, result) {
+          if (err) throw err;
+          console.log("Item has been deleted", result);
+        })
+      }
+    })
+  }
   }
 
   module.exports.variableName = Database;
