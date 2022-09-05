@@ -3,12 +3,27 @@
     flex-direction: column;
     justify-content: center;
     background-color: #333333;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     color: white;
     font-size: 18px;
+
+    #heading {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .section_heading {
+        padding: .5rem 4rem .5rem .5rem;
+        text-align: left;
+        border-style: solid;
+        border-color: white;
+        border-radius: 14px;
+        border-width: .15rem;
+        margin-top: 2rem;
+    }
 
     #new_applicant_submit {
         background-color: #9725bf;
@@ -20,10 +35,15 @@
         font-size: 18px;
         margin-left: 7.5vw;
         margin-top: 2rem;
+
+        &:hover {
+            background-color: #751d94;
+            border-color: #6b1a87;
+        }
     }
 
     form {
-        margin: auto;
+        margin: 2rem auto auto auto;
 
         label{
             margin-bottom: .15rem;

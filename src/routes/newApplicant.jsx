@@ -16,11 +16,9 @@ export default function Applicant() {
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
       return (
-        <div className="input_pair">
-          <label key={`label_${y}`} for={x.name}>
+          <p id={x.name} className="section_heading" key={`label_${y}`} for={x.name}>
             {x.placeHolder}
-          </label>
-        </div>
+          </p>
       );
     } else {
       return (
@@ -46,6 +44,7 @@ export default function Applicant() {
 
   return (
     <div id="new_applicant_wrapper">
+      <h1 id="heading">New Applicant</h1>
       <form 
         action="/new_applicant" 
         method="post"

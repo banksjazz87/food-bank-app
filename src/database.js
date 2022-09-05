@@ -30,18 +30,18 @@ const Database = {
   /**
    * 
    * @param {*} table 
-   * @param {*} field 
-   * @param {*} input 
+   * @param {*} first 
+   * @param {*} last 
    * @returns all data that is found in the database relating to the search criteria.
-   * @example findApplicant(applicant, firstName, Chris)  will return all data found in the applicant table, where the first name = Chris.
+   * @example findApplicant(applicant, Chris, Banks)  will return all data found in the applicant table, where the first name = Chris.
    */
-  findApplicant: function(table,field, input) {
+  findApplicant: function(table, first, last) {
     Database.connection.connect(function(err) {
       if (err) {
         throw err;
       } else {
         console.log("Connected!");
-        let sql = `SELECT * FROM ${table} WHERE ${field} = "${input}"`;
+        let sql = `SELECT * FROM ${table} WHERE firstName = "${first}" AND lastName = "${last}";`;
         Database.connection.query(sql, function (err, result) {
           if (err) throw err;
           console.log("Searched Item = ", result);
