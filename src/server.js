@@ -11,6 +11,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//Connect to the testing database
+Data.variableName.connectToDatabase();
+
 //The static file that will be used on the server
 app.use("/", express.static("build"));
 
@@ -98,9 +101,6 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   res.send(currentFoodBankAttendanceList);
   next();
 });
-
-
-
 
 
 
