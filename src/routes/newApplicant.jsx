@@ -5,11 +5,11 @@ import "../assets/styles/newApplicant.scss";
 
 export default function Applicant() {
 
-  //React Hook that will be used to update the state of each input
+  //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.
   const currentDate = new Date();
-  const [field, setField] = useState({dateRevised: currentDate.toLocaleDateString()});
+  const [field, setField] = useState({dateAltered: currentDate.toLocaleDateString()});
 
- 
+
   const newApplicantConfirmation = () => {
     postRequest("/new_applicant", field)
     .then(data => alert(data.message));

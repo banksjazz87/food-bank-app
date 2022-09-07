@@ -67,7 +67,6 @@ app.post("/new_applicant", (req, res, next) => {
       
     } else {
       Data.variableName.addApplicant(requiredData);
-      res.send({message: `${req.body.firstName} ${req.body.lastName} has been added to the database.`})
     }
     
   } else {
@@ -101,6 +100,7 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   res.send(currentFoodBankAttendanceList);
   next();
 });
+
 
 
 

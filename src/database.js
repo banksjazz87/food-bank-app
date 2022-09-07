@@ -41,9 +41,11 @@ const Database = {
   findApplicant: function (table, first, last) {
     let sql = `SELECT * FROM ${table} WHERE firstName = "${first}" AND lastName = "${last}";`;
     Database.connection.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("Searched Item = ", result);
-      return result;
+      if (err) {
+        throw err;
+      } else {
+        console.log(result);
+      }
     });
   },
 
@@ -57,9 +59,14 @@ const Database = {
     let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES ?`;
 
     Database.connection.query(sql, [args], function (err, result) {
-      if (err) throw err;
-      console.log("This item has been added", result);
-      return result;
+      if (err) {
+        //throw err;
+        return "error: " + err;
+      } else {
+        return "success"
+      }
+      //console.log("This item has been added", result);
+      //return "success";
     });
   },
 
@@ -97,6 +104,7 @@ const Database = {
       console.log("Item has been deleted", result);
     });
   },
+
 };
 
 module.exports.variableName = Database;
