@@ -6,8 +6,10 @@ import "../assets/styles/newApplicant.scss";
 export default function Applicant() {
 
   //React Hook that will be used to update the state of each input
-  const [field, setField] = useState({});
+  const currentDate = new Date();
+  const [field, setField] = useState({dateRevised: currentDate.toLocaleDateString()});
 
+ 
   const newApplicantConfirmation = () => {
     postRequest("/new_applicant", field)
     .then(data => alert(data.message));
@@ -20,6 +22,17 @@ export default function Applicant() {
             {x.placeHolder}
           </p>
       );
+      } else if (x.style === "hidden") {
+        return (
+          <input  
+            key={`input_${y}`}
+            type={x.type}
+            id={x.name}
+            style={{display: "none"}}
+            value={x.value()}
+          />
+        )
+      
     } else {
       return (
         <div className="input_pair" key={`input_${y}`}>

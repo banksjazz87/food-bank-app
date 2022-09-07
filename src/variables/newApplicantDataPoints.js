@@ -133,6 +133,16 @@ const dataPoints = [
       name: "totalIncome",
       placeHolder: "Total Income",
     },
+    {
+      value: function() {
+        const currentDate = new Date();
+        return currentDate.toLocaleDateString();
+      }, 
+      type: "date", 
+      style: "hidden", 
+      name: "dateAltered", 
+      placeHolder: "Revision Date"
+    }
   ];
 
   export default dataPoints;

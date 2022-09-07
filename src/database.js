@@ -54,7 +54,7 @@ const Database = {
    * @returns adds a new applicant to the applicant table, all fields must be present.
    */
   addApplicant: function (...args) {
-    let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome) VALUES ?`;
+    let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateRevised) VALUES ?`;
 
     Database.connection.query(sql, [args], function (err, result) {
       if (err) throw err;

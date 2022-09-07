@@ -58,7 +58,7 @@ app.post("/new_applicant", (req, res, next) => {
 
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
-  const requiredData = [req.body.firstName, req.body.lastName, req.body.phone, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.children, req.body.adults, req.body.seniors, req.body.totalOccupants, req.body.weeklyIncome, req.body.monthlyIncome, req.body.annualIncome, req.body.totalIncome];
+  const requiredData = [req.body.firstName, req.body.lastName, req.body.phone, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.children, req.body.adults, req.body.seniors, req.body.totalOccupants, req.body.weeklyIncome, req.body.monthlyIncome, req.body.annualIncome, req.body.totalIncome, req.body.dateAltered];
 
   if (req.body.annualIncome <= 200000) {
 
@@ -101,6 +101,9 @@ app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   res.send(currentFoodBankAttendanceList);
   next();
 });
+
+
+
 
 
 
