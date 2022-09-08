@@ -42,9 +42,11 @@ const Database = {
     let sql = `SELECT * FROM ${table} WHERE firstName = "${first}" AND lastName = "${last}";`;
     Database.connection.query(sql, function (err, result) {
       if (err) {
-        throw err;
+        return {message: "failure", error: err}
       } else {
-        console.log(result);
+        
+
+        return {message: "succes", data: result};
       }
     });
   },
