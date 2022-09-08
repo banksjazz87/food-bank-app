@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Connect to the testing database
-Data.variableName.connectToDatabase();
+//Data.variableName.connectToDatabase();
 
 //The static file that will be used on the server
 app.use("/", express.static("build"));
@@ -67,7 +67,7 @@ app.post("/new_applicant", (req, res, next) => {
       if (err) {
         res.send({message: "This applicant was not found in the database"});
       } else {
-        res.send({message: "applicant found" + result});
+        res.send({message: "applicant found" + result[0].firstName});
       }
     })
     /*if (Data.variableName.findApplicant("applicant", firstName, lastName)) {
