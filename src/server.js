@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Dummy = require("./variables/dummyData.js");
+const mysql = require("mysql");
 const Data = require("./database.js");
 const express = require("express");
 var cors = require("cors");
@@ -33,6 +34,29 @@ const Tester = {
   user: process.env.TESTING_USER,
   password: process.env.TESTING_PASSWORD,
 };
+
+app.get("/all-applicants", (req, res, next) => {
+  let getData = new Promise((resolve, reject) => {
+  const Db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.TESTING_DATABASE,
+  });
+
+  let sql = "SELECT * FROM applicant";
+  Db.query(sql, (error, results) => {
+    if (error) {
+      return reject(error);
+    } else {
+      return resolve(results);
+    }
+  });
+});
+
+getData.then(data => res.send(data));
+  
+});
 
 //post request for the login
 app.post("/login_attempt", (req, res, next) => {
