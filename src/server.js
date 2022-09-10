@@ -1,11 +1,11 @@
 require("dotenv").config();
 const Dummy = require("./variables/dummyData.js");
-const mysql = require("mysql");
-const Data = require("./database.js");
 const express = require("express");
 var cors = require("cors");
 const app = express();
 const port = 4000;
+
+const allApplicants = require("./routes/findAll.js");
 
 //Middleware instatiation
 app.use(cors());
@@ -35,28 +35,8 @@ const Tester = {
   password: process.env.TESTING_PASSWORD,
 };
 
-app.get("/all-applicants", (req, res, next) => {
-  let getData = new Promise((resolve, reject) => {
-  const Db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.TESTING_DATABASE,
-  });
 
-  let sql = "SELECT * FROM applicant";
-  Db.query(sql, (error, results) => {
-    if (error) {
-      return reject(error);
-    } else {
-      return resolve(results);
-    }
-  });
-});
-
-getData.then(data => res.send(data));
-  
-});
+app.get("/all-applicants", allApplicants.findAll);
 
 //post request for the login
 app.post("/login_attempt", (req, res, next) => {
@@ -78,7 +58,7 @@ app.post("/login_attempt", (req, res, next) => {
 });
 
 //post request for new Applicant
-app.post("/new_applicant", (req, res, next) => {
+/*app.post("/new_applicant", (req, res, next) => {
 
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
@@ -94,7 +74,7 @@ app.post("/new_applicant", (req, res, next) => {
         res.send({message: "applicant found" + result[0].firstName});
       }
     })
-    /*if (Data.variableName.findApplicant("applicant", firstName, lastName)) {
+    if (Data.variableName.findApplicant("applicant", firstName, lastName)) {
       res.send({message: "This applicant already exists in the database."}) 
       
     } else {
@@ -103,10 +83,10 @@ app.post("/new_applicant", (req, res, next) => {
     
   } else {
     res.send({ message: "Applicant does not qualify" });
-    console.log(req.body);*/
+    console.log(req.body);
   }
   next();
-});
+});*/
 
 
 //get request for dummyData

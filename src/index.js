@@ -14,11 +14,11 @@ import {
   Route,
 } from "react-router-dom";
 import App from "./App";
-import Applicant from "./routes/newApplicant.jsx";
-import Login from "./routes/login.jsx";
-import SearchApplicants from "./routes/searchApplicants.jsx";
-import FoodBankList from "./routes/foodBankList.jsx";
-import PastLists from "./routes/pastLists.jsx";
+import Applicant from "./views/newApplicant.jsx";
+import Login from "./views/login.jsx";
+import SearchApplicants from "./views/searchApplicants.jsx";
+import FoodBankList from "./views/foodBankList.jsx";
+import PastLists from "./views/pastLists.jsx";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
