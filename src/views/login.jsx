@@ -9,7 +9,7 @@ export default function Login() {
   let navigate = useNavigate();
 
   const navigateToNew = () => {
-    LoginProcedure.checkCredentials("/login_attempt", {
+    LoginProcedure.checkCredentials("/login-attempt", {
       currentUser: userName,
       currentPassword: password,
     }).then((data) =>
@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <div id="login_container">
       <form
-        action="/login_attempt"
+        action="/login-attempt"
         onSubmit={(e) => {
           e.preventDefault();
           navigateToNew();

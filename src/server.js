@@ -1,19 +1,18 @@
 require("dotenv").config();
-const Dummy = require("./variables/dummyData.js");
 const express = require("express");
 var cors = require("cors");
 const app = express();
 const port = 4000;
 
+const Dummy = require("./variables/dummyData.js");
 const allApplicants = require("./routes/findAll.js");
+const login = require("./routes/login.js");
 
 //Middleware instatiation
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//Connect to the testing database
-//Data.variableName.connectToDatabase();
 
 //The static file that will be used on the server
 app.use("/", express.static("build"));
@@ -23,39 +22,11 @@ app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
 });
 
-//Chapel user credentials
-const Chapel = {
-  user: process.env.CHAPEL_USER,
-  password: process.env.CHAPEL_PASSWORD,
-};
-
-//Tester credentials
-const Tester = {
-  user: process.env.TESTING_USER,
-  password: process.env.TESTING_PASSWORD,
-};
-
 
 app.get("/all-applicants", allApplicants.findAll);
+app.post("/login-attempt", login.loginAttempt);
 
-//post request for the login
-app.post("/login_attempt", (req, res, next) => {
-  if (
-    req.body.currentUser === Chapel.user &&
-    req.body.currentPassword === Chapel.password
-  ) {
-    res.send({ message: "valid" });
-    console.log({ message: "valid" });
-  } else if (
-    req.body.currentUser === Tester.user &&
-    req.body.currentPassword === Tester.password
-  ) {
-    res.send({ message: "valid" });
-  } else {
-    res.send({ message: "invalid" });
-    console.log({ message: "invalid" });
-  }
-});
+console.log(login.Db);
 
 //post request for new Applicant
 /*app.post("/new_applicant", (req, res, next) => {
