@@ -22,13 +22,19 @@ const Database = {
   },
 
   //Creates a connnection to the database, and returns all fo the applicants.
-  allApplicants: function () {
+  allApplicants: () => { 
     let sql = "SELECT * FROM applicant";
-    Database.connection.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("Current Applicants", result);
+
+    Database.connection.query(sql, function(err, result) {
+      if (err) {
+        console.log("error: ", err);
+      } else {
+        console.log(result);
+      }
     });
-  },
+ 
+},
+ 
 
   /**
    *

@@ -5,7 +5,7 @@ const app = express();
 const port = 4000;
 
 const Dummy = require("./variables/dummyData.js");
-const allApplicants = require("./routes/findAll.js");
+const allApplicants = require("./routes/all-applicants.js");
 const login = require("./routes/login.js");
 
 //Middleware instatiation

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mysql = require("mysql");
 
+
 exports.findAll = (req, res, next) => {
     let getData = new Promise((resolve, reject) => {
         const Db = mysql.createConnection({
@@ -9,6 +10,7 @@ exports.findAll = (req, res, next) => {
             password: process.env.MYSQL_PASSWORD,
             database: process.env.TESTING_DATABASE, 
         });
+      
 
         let sql = "SELECT * FROM applicant";
         Db.query(sql, (error, results) => {
