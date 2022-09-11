@@ -1,10 +1,10 @@
-require("dotenv").config();
+//require("dotenv").config();
 const mysql = require("mysql");
 
-
 exports.findAll = (req, res, next) => {
-    let getData = new Promise((resolve, reject) => {
-        const Db = mysql.createConnection({
+   let getData = new Promise((resolve, reject) => {
+        
+    const Db = mysql.createConnection({
             host: "localhost",
             user: "root",
             password: process.env.MYSQL_PASSWORD,

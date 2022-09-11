@@ -1,7 +1,10 @@
 require("dotenv").config();
 const mysql = require("mysql");
 
+
+
 /*exports.createNewApplicant = (req, res, next) => {
+
 
     let checkForApplicant = new Promise((reject, resolve) => {
         const Db = mysql.createConnection({
