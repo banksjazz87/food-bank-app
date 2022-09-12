@@ -3,11 +3,11 @@ const express = require("express");
 var cors = require("cors");
 const app = express();
 const port = 4000;
+const mysql = require('mysql');
 
 
 const Dummy = require("./variables/dummyData.js");
-const allApplicants = require("./routes/all-applicants.js");
-const login = require("./routes/login.js");
+
 
 //Middleware instatiation
 app.use(cors());
@@ -23,44 +23,92 @@ app.listen(port, () => {
   console.log(`App is listening on port ${port}`);
 });
 
+//Database info 
+let Db = {
+  host: "localhost", 
+  user: "root", 
+  password: process.env.MYSQL_PASSWORD,
+  database: ""
 
-app.get("/all-applicants", allApplicants.findAll);
-app.post("/login-attempt", login.loginAttempt);
+};
 
-
-
-console.log(login.Db);
-
-//post request for new Applicant
-/*app.post("/new_applicant", (req, res, next) => {
-
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  //const requiredData = [req.body.firstName, req.body.lastName, req.body.phone, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.children, req.body.adults, req.body.seniors, req.body.totalOccupants, req.body.weeklyIncome, req.body.monthlyIncome, req.body.annualIncome, req.body.totalIncome, req.body.dateAltered];
-
-  if (req.body.annualIncome <= 200000) {
-    let findApplicantSql = `SELECT * FROM applicant WHERE firstName = "${firstName}" AND lastName = "${lastName}";`;
-
-    Data.variableName.connection.query(findApplicantSql, function(req, res, err, result) {
-      if (err) {
-        res.send({message: "This applicant was not found in the database"});
-      } else {
-        res.send({message: "applicant found" + result[0].firstName});
-      }
-    })
-    if (Data.variableName.findApplicant("applicant", firstName, lastName)) {
-      res.send({message: "This applicant already exists in the database."}) 
-      
-    } else {
-      Data.variableName.addApplicant(requiredData);
-    }
+//app.get("/all-applicants", allApplicants.findAll);
+app.post("/login-attempt", (req, res, next) => {
+  if (
+    req.body.currentUser === process.env.CHAPEL_USER &&
+    req.body.currentPassword === process.env.CHAPEL_PASSWORD
+  ) {
     
+    Db.database = "testingFoodBank";
+
+    let selectedDb = mysql.createConnection(Db);
+    selectedDb.connect((err) => {
+        err ? console.log(err) : console.log('you are connected to the database');
+    });
+    res.send({ message: "valid" });
+    
+  } else if (
+    req.body.currentUser === process.env.TESTING_USER &&
+    req.body.currentPassword === process.env.TESTING_PASSWORD
+  ) {
+    console.log({ message: "valid" });
+    res.send({ message: "valid" });
   } else {
-    res.send({ message: "Applicant does not qualify" });
-    console.log(req.body);
+    res.send({ message: "invalid" });
+    console.log({ message: "invalid" });
   }
   next();
-});*/
+});
+
+//return all applicants from the selected database from the login.
+app.get("/all-applicants", (req, res, next) => {
+  let allApplicants = new Promise((resolve, reject) => {
+    
+    let currentDb = mysql.createConnection(Db);
+    let sql = "SELECT * FROM applicant";
+    
+    currentDb.query(sql, (error, results) => {
+      if (error) {
+        return reject(error);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  allApplicants.then(data => res.send(data));
+});
+
+//post request for new Applicant
+app.post("/new-applicant/", (req, res, next) => {
+  
+  const requiredData = [req.body.firstName, req.body.lastName, req.body.phone, req.body.street, req.body.city, req.body.state, req.body.zip, req.body.children, req.body.adults, req.body.seniors, req.body.totalOccupants, req.body.weeklyIncome, req.body.monthlyIncome, req.body.annualIncome, req.body.totalIncome, req.body.dateAltered];
+
+  if (req.body.annualIncome <= 200000) {
+    let createApplicant = new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
+
+      currentDb.query(sql, [requiredData], (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      });
+    });
+
+    createApplicant.then((data) => {
+        console.log(data); 
+        if(data.insertId) { 
+          res.send({message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`}); 
+        } else {
+          res.send({message: `There has been an error.`})
+        }
+        });
+  }
+    
+});
 
 
 //get request for dummyData

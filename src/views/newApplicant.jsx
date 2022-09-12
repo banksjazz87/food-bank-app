@@ -11,7 +11,7 @@ export default function Applicant() {
 
 
   const newApplicantConfirmation = () => {
-    postRequest("/new_applicant", field)
+    postRequest("/new-applicant", field)
     .then(data => alert(data.message));
   }
 
@@ -59,7 +59,7 @@ export default function Applicant() {
     <div id="new_applicant_wrapper">
       <h1 id="heading">New Applicant</h1>
       <form 
-        action="/new_applicant" 
+        action="/new-applicant" 
         method="post"
         onSubmit={(e) => {
           e.preventDefault();
