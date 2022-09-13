@@ -18,8 +18,8 @@ export default function AllApplicantSearchBar() {
         let num = "";
         
         for (let i = 0; i < string.length; i++) {
-            let numCheck = string[i].parseInt();
-            if (numCheck.isNaN()) {
+            let numCheck = parseInt(string[i]);
+            if (!isNaN(numCheck)) {
                 num = num + string[i];
             }
         }
