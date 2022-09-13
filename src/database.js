@@ -5,7 +5,11 @@ const mysql = require("mysql");
 module.exports = class Database {
 
   constructor(dbName) {
+    this.host = "localhost";
+    this.user = "root";
+    this.password = process.env.MYSQL_PASSWORD;
     this.db = dbName;
+
   }
 
 

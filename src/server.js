@@ -8,7 +8,6 @@ const mysql = require('mysql');
 
 const Dummy = require("./variables/dummyData.js");
 
-
 //Middleware instatiation
 app.use(cors());
 app.use(express.json());
@@ -40,7 +39,7 @@ app.post("/login-attempt", (req, res, next) => {
   ) {
     
     Db.database = "testingFoodBank";
-
+    
     let selectedDb = mysql.createConnection(Db);
     selectedDb.connect((err) => {
         err ? console.log(err) : console.log('you are connected to the database');
