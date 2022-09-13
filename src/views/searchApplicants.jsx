@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
 
 export default function SearchApplicants() {
