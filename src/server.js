@@ -109,6 +109,25 @@ app.post("/new-applicant/", (req, res, next) => {
     
 });
 
+app.get('/single-applicant/first/:firstName/last/:lastName/id/:ApplicantID', (req, res) => {
+  res.send(req.params);
+
+  let findApplicant = new Promise((reject, resolve) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT * FROM applicant WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = ${req.params.ApplicantID} ;`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  findApplicant.then(data => res.send(data));
+})
+
 
 //get request for dummyData
 app.get('/dummy_data', (req, res, next) => {    const convertedData = JSON.stringify(Dummy.variableName);
