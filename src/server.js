@@ -110,16 +110,17 @@ app.post("/new-applicant/", (req, res, next) => {
 });
 
 app.get('/single-applicant/first/:firstName/last/:lastName/id/:ApplicantID', (req, res) => {
-  res.send(req.params);
 
-  let findApplicant = new Promise((reject, resolve) => {
+  let findApplicant = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = `SELECT * FROM applicant WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = ${req.params.ApplicantID} ;`;
+    let sql = `SELECT * FROM applicant WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = ${req.params.ApplicantID};`;
 
     currentDb.query(sql, (err, results) => {
       if (err) {
+        console.log(err);
         return reject(err);
       } else {
+        console.log(results);
         return resolve(results);
       }
     });

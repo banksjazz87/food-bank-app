@@ -66,7 +66,10 @@ export default function AllApplicantSearchBar() {
           id="applicantSearch"
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(input);
+            fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
+            .then(res => res.json())
+            .then(final => sessionStorage.setItem('currentApplicant', JSON.stringify(final)))
+            
           }}
         >
           <label for="applicants">Applicants</label>
