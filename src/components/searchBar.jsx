@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 //This component creates a search bar for all of the applicants currently in the database.
 export default function AllApplicantSearchBar() {
@@ -15,6 +16,12 @@ export default function AllApplicantSearchBar() {
       .catch((e) => console.log("error", e));
   }, []);
 
+
+ /**
+  * 
+  * @param {*} string 
+  * @returns all numbers from a string.
+  */
   const returnNums = (string) => {
     let num = "";
 
@@ -28,6 +35,12 @@ export default function AllApplicantSearchBar() {
     return num;
   };
 
+  /**
+   * 
+   * @param {*} index 
+   * @param {*} array 
+   * updates the input object with the key, firstName, and lastName.
+   */
   const selectedItem = (index, array) => {
     const itemIndex = index - 1;
     setInput((input) => ({
@@ -68,7 +81,12 @@ export default function AllApplicantSearchBar() {
             e.preventDefault();
             fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
             .then(res => res.json())
-            .then(final => sessionStorage.setItem('currentApplicant', JSON.stringify(final)))
+            .then(final => {
+              sessionStorage.setItem('currentApplicant', JSON.stringify(final));
+              return (
+                <h1>{`first name = ' ${final[0].firstName}`}</h1>
+              )
+          });
             
           }}
         >
