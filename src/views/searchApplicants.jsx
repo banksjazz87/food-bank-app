@@ -5,7 +5,8 @@ export default function SearchApplicants() {
     return (
         <div>
         <h1>This will be the search all section.</h1>
-        {AllApplicantSearchBar()}
+        <AllApplicantSearchBar />
+        
         </div>
     )
 }

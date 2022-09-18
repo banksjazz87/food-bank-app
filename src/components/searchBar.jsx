@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 //This component creates a search bar for all of the applicants currently in the database.
 export default function AllApplicantSearchBar() {
@@ -106,6 +106,7 @@ export default function AllApplicantSearchBar() {
             value="submit"
             />
         </form>
+
       </div>
     );
   }
