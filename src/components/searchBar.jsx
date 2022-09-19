@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 
 //This component creates a search bar for all of the applicants currently in the database.
-export default function AllApplicantSearchBar() {
+export default function AllApplicantSearchBar(props) {
   //Setting the initial applicant data.
   const [data, setData] = useState([]);
-  const [input, setInput] = useState({});
+  //const [input, setInput] = useState({});
 
   useEffect(() => {
     fetch("/all-applicants")
@@ -22,7 +22,7 @@ export default function AllApplicantSearchBar() {
   * @param {*} string 
   * @returns all numbers from a string.
   */
-  const returnNums = (string) => {
+function returnNums(string){
     let num = "";
 
     for (let i = 0; i < string.length; i++) {
@@ -35,13 +35,18 @@ export default function AllApplicantSearchBar() {
     return num;
   };
 
+ function change(e) {
+    props.change(returnNums(e.target.value), data);
+ }
+
+  
   /**
    * 
    * @param {*} index 
    * @param {*} array 
    * updates the input object with the key, firstName, and lastName.
    */
-  const selectedItem = (index, array) => {
+  /*const selectedItem = (index, array) => {
     const itemIndex = index - 1;
     setInput((input) => ({
       ...input,
@@ -49,7 +54,7 @@ export default function AllApplicantSearchBar() {
       firstName: array[itemIndex].firstName,
       lastName: array[itemIndex].lastName,
     }));
-  };
+  };*/
 
   const allNames = (array) => {
     const renderOptions = array.map((x, y) => {
@@ -79,7 +84,7 @@ export default function AllApplicantSearchBar() {
           id="applicantSearch"
           onSubmit={(e) => {
             e.preventDefault();
-            fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
+            fetch(`/single-applicant/first/${props.first}/last/${props.last}/id/${props.key}`)
             .then(res => res.json())
             .then(final => {
               sessionStorage.setItem('currentApplicant', JSON.stringify(final));
@@ -94,9 +99,7 @@ export default function AllApplicantSearchBar() {
           <select
             name="applicants"
             id="applicants"
-            onChange={(e) => {
-              selectedItem(returnNums(e.target.value), data);
-            }}
+            onChange={change}
           >
             {allNames(data)}
           </select>
