@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 
 
 //This component creates a search bar for all of the applicants currently in the database.
-export default function AllApplicantSearchBar(props) {
+export default function AllApplicantSearchBar() {
   //Setting the initial applicant data.
   const [data, setData] = useState([]);
-  //const [input, setInput] = useState({});
+  const [input, setInput] = useState({});
 
   useEffect(() => {
     fetch("/all-applicants")
@@ -15,6 +15,8 @@ export default function AllApplicantSearchBar(props) {
       })
       .catch((e) => console.log("error", e));
   }, []);
+
+
 
 
  /**
@@ -35,18 +37,14 @@ function returnNums(string){
     return num;
   };
 
- function change(e) {
-    props.change(returnNums(e.target.value), data);
- }
 
-  
   /**
    * 
    * @param {*} index 
    * @param {*} array 
    * updates the input object with the key, firstName, and lastName.
    */
-  /*const selectedItem = (index, array) => {
+  const selectedItem = (index, array) => {
     const itemIndex = index - 1;
     setInput((input) => ({
       ...input,
@@ -54,7 +52,7 @@ function returnNums(string){
       firstName: array[itemIndex].firstName,
       lastName: array[itemIndex].lastName,
     }));
-  };*/
+  };
 
   const allNames = (array) => {
     const renderOptions = array.map((x, y) => {
@@ -84,14 +82,9 @@ function returnNums(string){
           id="applicantSearch"
           onSubmit={(e) => {
             e.preventDefault();
-            fetch(`/single-applicant/first/${props.first}/last/${props.last}/id/${props.key}`)
+            fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
             .then(res => res.json())
-            .then(final => {
-              sessionStorage.setItem('currentApplicant', JSON.stringify(final));
-              return (
-                <h1>{`first name = ' ${final[0].firstName}`}</h1>
-              )
-          });
+            .then(final => console.log(final[0]))
             
           }}
         >
@@ -99,7 +92,7 @@ function returnNums(string){
           <select
             name="applicants"
             id="applicants"
-            onChange={change}
+            onChange={(e) => selectedItem(returnNums(e.target.value), data)}
           >
             {allNames(data)}
           </select>
