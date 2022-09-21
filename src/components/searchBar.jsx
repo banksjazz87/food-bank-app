@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 
 //This component creates a search bar for all of the applicants currently in the database.
-export default function AllApplicantSearchBar() {
+export default function AllApplicantSearchBar(props) {
   //Setting the initial applicant data.
   const [data, setData] = useState([]);
   const [input, setInput] = useState({});
@@ -84,7 +84,7 @@ function returnNums(string){
             e.preventDefault();
             fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
             .then(res => res.json())
-            .then(final => console.log(final[0]))
+            .then(final => props.handleChange(final))
             
           }}
         >
