@@ -1,10 +1,10 @@
-import React, {useState, useEffect } from "react";
+import React, {useState} from "react";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayPastApplicant.jsx";
 
 export default function SearchApplicants() {
 
-    const [applicantInfo, setApplicantInfo] = useState([{firstName: "Bill"}]);
+    const [applicantInfo, setApplicantInfo] = useState([{firstName: "", lastName: "", phone: "", street: "", city: "", state: "", zip: "", children: "", adults: "", seniors: "", totalOccupants: "", weeklyIncome: 0, monthlyIncome: 0, annualIncome: 0, totalIncome: 0, dateAltered: ""}]);
     
 
     const updateApplicant = (array) => {
