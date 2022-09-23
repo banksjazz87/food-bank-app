@@ -15,14 +15,15 @@ export default function DisplayApplicant(props){
         } else {
         return (
         <>
-            <p key={`description_${y}`}>{`${x.placeHolder}: `}</p>
-            <p key={`value_${y}`}>{props.currentApplicant[0][x.name]}</p>
+            <p key={`description_${y}`}>{`${x.placeHolder}: ${props.currentApplicant[0][x.name]} `}</p>
         </>
         )
         }
     });
     return (
-        <div id="display_applicant_wrapper">
+        <div 
+            id="display_applicant_wrapper"
+            style={props.display ? {display: "flex"} : {display: "none"}}>
         {displayFields}
         </div>
     )
