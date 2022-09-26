@@ -26,7 +26,10 @@ export default function SearchApplicants() {
       setShowApplicant(false);
     }
 
-    
+    const updateInfo = (field, value) => {
+      setApplicantInfo({...applicantInfo, [field]: value});
+    }
+
     return (
         <div id="search_applicant_wrapper">
         <h1>This will be the search all section.</h1>
@@ -36,7 +39,10 @@ export default function SearchApplicants() {
           display={showApplicant}
         />
         <EditDeleteButtons editClick={displayEdit}/>
-        <EditPage display={showEditPage} />
+        <EditPage 
+          display={showEditPage}
+          currentApplicant={applicantInfo}
+          handleChange={updateInfo} />
         
         </div>
     )
