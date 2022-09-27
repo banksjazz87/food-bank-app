@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import dataPoints from "../variables/newApplicantDataPoints.js";
 
 export default function EditPage(props) {
-  const returnInputs = props.currentApplicant.map((x, y) => {
-    if (x.type === null) {
+  const returnInputs = dataPoints.map((x, y) => {
+    if (x.name === null) {
       return (
         <p
           id={x.name}
@@ -10,7 +11,7 @@ export default function EditPage(props) {
           key={`label_${y}`}
           for={x.name}
         >
-          {x.placeholder}
+          {x.placeHolder}
         </p>
       );
     } else if (x.name === "dateAltered") {
@@ -36,6 +37,7 @@ export default function EditPage(props) {
             key={`input_${y}`}
             type={x.type}
             id={x.name}
+            value={props.currentApplicant[0][x.name]}
             className="new_applicant_input"
             maxLength={x.maxWidth}
             name={x.name}
@@ -47,8 +49,22 @@ export default function EditPage(props) {
     }
   });
   return (
-    <h1 style={props.display ? { display: "" } : { display: "none" }}>
+   <div style={props.display ? {display: ""} : {display: "none"}}>
+   <h1>
       This Will be the edit page
     </h1>
+    <form 
+      id="edit_form" 
+      method="post"
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(props.currentApplicant)
+      }}
+      >
+       {returnInputs}
+
+       </form>
+    
+   </div>
   );
 }

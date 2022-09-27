@@ -18,6 +18,7 @@ export default function SearchApplicants() {
     const updateApplicant = (array) => {
       setApplicantInfo(array);
       setShowApplicant(true);
+      setShowEditPage(false);
       console.log(applicantInfo); 
     }
 

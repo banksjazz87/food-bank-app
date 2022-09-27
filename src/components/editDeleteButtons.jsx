@@ -5,7 +5,7 @@ export default function EditDeleteButtons(props) {
         <div id="edit_delete_wrapper">
             <button 
                 type="button" 
-                onClick={()=> props.editClick}>
+                onClick={props.editClick}>
                 Edit
             </button>
             <button 
