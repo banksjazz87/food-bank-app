@@ -19,7 +19,6 @@ export default function SearchApplicants() {
       setApplicantInfo(array);
       setShowApplicant(true);
       setShowEditPage(false);
-      console.log(applicantInfo); 
     }
 
     const displayEdit = () => {
@@ -41,7 +40,9 @@ export default function SearchApplicants() {
           currentApplicant={applicantInfo}
           display={showApplicant}
         />
-        <EditDeleteButtons editClick={displayEdit}/>
+        <EditDeleteButtons 
+          display={showApplicant} 
+          editClick={displayEdit}/>
         <EditPage 
           display={showEditPage}
           currentApplicant={applicantInfo}

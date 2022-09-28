@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 
 export default function EditPage(props) {
   const returnInputs = dataPoints.map((x, y) => {
-    if (x.name === null) {
+    if (x.type === null) {
       return (
         <p
           id={x.name}
@@ -61,11 +62,12 @@ export default function EditPage(props) {
       method="post"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(props.currentApplicant)
+        putRequest("/applicant/update", props.currentApplicant[0])
+        .then(data => console.log(data));
       }}
       >
        {returnInputs}
-
+      <input class="input_button" type="submit" value="Submit"/>
        </form>
     
    </div>

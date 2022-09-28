@@ -127,7 +127,7 @@ app.get('/single-applicant/first/:firstName/last/:lastName/id/:ApplicantID', (re
   });
 
   findApplicant.then(data => res.send(data));
-})
+});
 
 
 //get request for dummyData
@@ -152,6 +152,28 @@ app.post('/foodBank_attendance/check_sheet', (req, res, next) => {
 app.get('/foodBank_attendance/check_sheet', (req, res, next) => {
   res.send(currentFoodBankAttendanceList);
   next();
+});
+
+//put request to update an applicant's info
+app.put('/applicant/update', (req, res, next) => {
+
+  let updateApplicant = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `UPDATE applicant SET firstName = "${req.body.firstName}", lastName = "${req.body.lastName}", phone = "${req.body.phone}", street = "${req.body.street}", city = "${req.body.city}", state = "${req.body.state}", zip = "${req.body.zip}", children = "${req.body.children}", adults = "${req.body.adults}", seniors = "${req.body.seniors}", totalOccupants = "${req.body.totalOccupants}", weeklyIncome = "${req.body.weeklyIncome}", monthlyIncome = "${req.body.monthlyIncome}", annualIncome = "${req.body.annualIncome}", totalIncome = "${req.body.totalIncome}", dateAltered = "${req.body.dateAltered}  WHERE ApplicantID = "${req.body.ApplicantID}";`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        console.log(err);
+        return reject(err);
+      } else {
+        console.log(results);
+        return resolve(results);
+      }
+    });
+  });
+
+  updateApplicant.then(data => console.log(data));
+ 
 });
 
 
