@@ -42,7 +42,10 @@ export default function EditPage(props) {
             maxLength={x.maxWidth}
             name={x.name}
             min={x.type === "number" ? 0 : ""}
-            onChange={(e) => props.handleChange([x.name], e.target.value )}
+            onChange={(e) => {
+              props.handleChange([x.name], e.target.value );
+            }
+            }
           />
         </div>
       );

@@ -28,7 +28,9 @@ export default function SearchApplicants() {
     }
 
     const updateInfo = (field, value) => {
-      setApplicantInfo({...applicantInfo, [field]: value});
+      let currentApplicant = applicantInfo.slice();
+      currentApplicant[0][field] = value;
+      setApplicantInfo(currentApplicant);
     }
 
     return (
