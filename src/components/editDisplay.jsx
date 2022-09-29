@@ -3,6 +3,7 @@ import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 
 export default function EditPage(props) {
+ 
   const returnInputs = dataPoints.map((x, y) => {
     if (x.type === null) {
       return (
@@ -63,7 +64,7 @@ export default function EditPage(props) {
       onSubmit={(e) => {
         e.preventDefault();
         putRequest("/applicant/update", props.currentApplicant[0])
-        .then(data => console.log(data));
+        .then(data => alert(data.message));
       }}
       >
        {returnInputs}

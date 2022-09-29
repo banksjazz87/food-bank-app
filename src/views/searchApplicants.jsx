@@ -27,8 +27,13 @@ export default function SearchApplicants() {
     }
 
     const updateInfo = (field, value) => {
+
+      const currentDate = new Date();
       let currentApplicant = applicantInfo.slice();
+     
       currentApplicant[0][field] = value;
+      currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
+
       setApplicantInfo(currentApplicant);
     }
 
