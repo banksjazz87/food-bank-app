@@ -59,7 +59,7 @@ function returnNums(string){
       return (
         <option key={`option_${y}`} id={`option_${array[y].ApplicantID}`}>{`${
           y + 1
-        }. ${array[y].firstName} ${array[y].lastName}`}</option>
+        }. ${array[y].lastName}, ${array[y].firstName}`}</option>
       );
     });
 

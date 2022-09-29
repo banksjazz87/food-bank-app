@@ -64,7 +64,7 @@ app.get("/all-applicants", (req, res, next) => {
   let allApplicants = new Promise((resolve, reject) => {
     
     let currentDb = mysql.createConnection(Db);
-    let sql = "SELECT * FROM applicant";
+    let sql = "SELECT * FROM applicant ORDER BY lastName";
     
     currentDb.query(sql, (error, results) => {
       if (error) {
@@ -109,6 +109,7 @@ app.post("/new-applicant/", (req, res, next) => {
     
 });
 
+//The get method used to return the data about one applicant.
 app.get('/single-applicant/first/:firstName/last/:lastName/id/:ApplicantID', (req, res) => {
 
   let findApplicant = new Promise((resolve, reject) => {

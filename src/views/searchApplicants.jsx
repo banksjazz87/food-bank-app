@@ -3,6 +3,7 @@ import AllApplicantSearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayPastApplicant.jsx";
 import EditDeleteButtons from "../components/editDeleteButtons";
 import EditPage from "../components/editDisplay.jsx";
+import DeleteAlert from "../components/deleteAlert.jsx";
 import "../assets/styles/searchApplicants.scss";
 
 export default function SearchApplicants() {
@@ -13,6 +14,8 @@ export default function SearchApplicants() {
     const [showApplicant, setShowApplicant] = useState(false);
 
     const [showEditPage, setShowEditPage] = useState(false);
+
+    const [deleteAlert, setDeleteAlert] = useState(false);
     
 
     const updateApplicant = (array) => {
@@ -37,6 +40,14 @@ export default function SearchApplicants() {
       setApplicantInfo(currentApplicant);
     }
 
+    const showDeleteAlert = () => {
+      if (deleteAlert) {
+        setDeleteAlert(false);
+      } else {
+        setDeleteAlert(true);
+      }
+    }
+
     return (
         <div id="search_applicant_wrapper">
         <h1>This will be the search all section.</h1>
@@ -52,7 +63,9 @@ export default function SearchApplicants() {
           display={showEditPage}
           currentApplicant={applicantInfo}
           handleChange={updateInfo} />
-        
+        <DeleteAlert
+          display={deleteAlert}
+          handleClick={showDeleteAlert} />
         </div>
     )
 }
