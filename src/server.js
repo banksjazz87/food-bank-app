@@ -182,9 +182,28 @@ app.put('/applicant/update', (req, res, next) => {
  
 });
 
+//Endpoint for removing an applicant from the database.
 app.delete("/remove/applicant", (req, res) => {
-  res.send({message: `${req.body.firstName} ${req.body.lastName} has been removed`});
-  console.log(req.body.firstName);
+
+  let deleteApplicant = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `DELETE FROM applicant WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+    
+    deleteApplicant.then(data => {
+      if (data.protocol41 && data.affectedRows === 1) {
+        res.send({message: `${req.body.firstName} ${req.body.lastName} has been removed from the database`});
+      }
+    })
+   .catch(e => res.send({message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`}));
 });
 
 
