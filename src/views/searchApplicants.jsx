@@ -82,7 +82,11 @@ export default function SearchApplicants() {
         currentApplicant={applicantInfo}
         handleChange={updateInfo}
       />
-      <DeleteAlert display={deleteAlert} handleClick={showDeleteAlert} />
+      <DeleteAlert 
+        display={deleteAlert} 
+        handleClick={showDeleteAlert}
+        currentApplicant={applicantInfo}
+         />
     </div>
   );
 }

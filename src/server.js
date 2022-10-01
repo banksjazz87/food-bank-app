@@ -182,6 +182,11 @@ app.put('/applicant/update', (req, res, next) => {
  
 });
 
+app.delete("/remove/applicant", (req, res) => {
+  res.send({message: `${req.body.firstName} ${req.body.lastName} has been removed`});
+  console.log(req.body.firstName);
+});
+
 
 
 
