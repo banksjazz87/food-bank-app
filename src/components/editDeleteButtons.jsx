@@ -9,7 +9,7 @@ export default function EditDeleteButtons(props) {
       <button type="button" onClick={props.editClick}>
         Edit
       </button>
-      <button type="button" onClick={() => console.log("this will delete")}>
+      <button type="button" onClick={props.deleteClick}>
         Delete
       </button>
     </div>
