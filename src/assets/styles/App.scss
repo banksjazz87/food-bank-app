@@ -1,4 +1,35 @@
+@import "./library.scss";
+
 #homepage_wrapper {
-  background-color: gray;
   color: white;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  top: 0; 
+}
+
+#header_wrapper {
+  background-color: $chapel-purple;
+ @include header-large-bold;
+ padding-top: 2rem;
+ padding-bottom: 2rem;
+ text-align: center;
+}
+
+nav {
+  background-color: $chapel-gray;
+  padding-top: 1rem;
+    padding-bottom: 1rem;
+  text-align: center;
+  a {
+    @include paragraph-medium;
+    margin-left: 1rem;
+    padding-right: 2rem;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      color: $orange;
+    }
+  }
 }
