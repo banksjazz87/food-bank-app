@@ -6,7 +6,7 @@ export default function HamburgerIcon(props) {
     <div 
       id="hamburg_wrapper"
       onClick={props.clickHandler}
-      style={props.display ? {display: ""} : {display: "none"}}>
+      >
       <div class="hamburger_line"></div>
       <div class="hamburger_line"></div>
       <div class="hamburger_line"></div>

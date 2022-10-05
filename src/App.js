@@ -7,25 +7,14 @@ import HamburgerIcon from "./components/mobileHamburger.jsx";
 
 export default function App() {
 
-  const [displayNav, setNavDisplay] = useState(true);
-
-  const [showMobileNav, setMobileNav] = useState(true);
-
+  const [displayNav, setNavDisplay] = useState("standard");
 
   const showNavBar = () => {
-    if (displayNav  && showMobileNav) {
-      return;
-    }else if(displayNav && showMobileNav === false){
-      setNavDisplay(false);
-      setMobileNav(true);
+    if (displayNav === "standard") {
+      setNavDisplay("mobile");
     } else {
-      setNavDisplay(true);
-      setMobileNav(false);
+      setNavDisplay("standard");
     }
-  }
-
-  const showNav = () => {
-    setNavDisplay(true);
   }
 
   
@@ -36,9 +25,7 @@ export default function App() {
       <h1>Food Bank Application</h1>
       </div>
       <nav 
-        id="nav_wrapper"
-        style={displayNav ? {opacity: "1"} :  {opacity: "0"}}
-        onClick={showNavBar}
+        className={displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"}
       >
         <Link to="/login">Login</Link> 
         <Link to="/new_applicant">New Applicant</Link>
@@ -47,7 +34,6 @@ export default function App() {
         <Link to="/past_registered_list">Past Registered List</Link>
       </nav>
       <HamburgerIcon 
-        display={showMobileNav}
         clickHandler={showNavBar} />
     </div>
   );
