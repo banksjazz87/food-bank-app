@@ -49,6 +49,7 @@ export default function App() {
         className={
           displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"
         }
+        
       >
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/login">Login</Link>
