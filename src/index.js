@@ -19,6 +19,7 @@ import Login from "./views/login.jsx";
 import SearchApplicants from "./views/searchApplicants.jsx";
 import FoodBankList from "./views/foodBankList.jsx";
 import PastLists from "./views/pastLists.jsx";
+import Dashboard from "./views/dashBoard.jsx";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +27,7 @@ root.render(
   <BrowserRouter style={{backgroundColor: "purple"}}>
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="dashboard" element={<Dashboard />} />
       <Route path="new_applicant" element={<Applicant />} />
       <Route path="login" element={<Login />} />
       <Route path="search" element={<SearchApplicants />} />

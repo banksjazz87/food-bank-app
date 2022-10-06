@@ -1,15 +1,16 @@
-import "./assets/styles/App.scss";
-import "./assets/styles/root.scss";
-import "./assets/styles/library.scss";
+import "../assets/styles/App.scss";
+import "../assets/styles/root.scss";
+import "../assets/styles/library.scss";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import HamburgerIcon from "./components/mobileHamburger.jsx";
+import HamburgerIcon from "../components/mobileHamburger.jsx";
 
-export default function App() {
+export default function Dashboard() {
 
   //This will be used to update the current state of the navbar, between mobile and non-mobile.
   const [displayNav, setNavDisplay] = useState("standard");
 
+  //This will be used to update if the hamburger mobile icon has been clicked or not and then alternate between the two states.
   const [mobileMenuClick, setMobileClick] = useState(false);
 
 
@@ -27,6 +28,7 @@ export default function App() {
     });
   });
 
+  //This will be the function used on the onClick event for the hamburger icon.
   const showNavBar = () => {
     if (mobileMenuClick) {
       setMobileClick(false); 
