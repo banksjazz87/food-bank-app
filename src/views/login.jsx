@@ -14,7 +14,7 @@ export default function Login() {
       currentPassword: password,
     }).then((data) =>
       LoginProcedure.redirect(data.message, "valid")
-        ? navigate("/", { replace: true })
+        ? navigate("/dashboard", { replace: true })
         : alert("invalid credentials")
     );
   };
