@@ -1,0 +1,67 @@
+@import "./library.scss";
+
+.nav_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: $chapel-gray;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100vw;
+  
+    a {
+      @include paragraph-medium;
+      margin-left: 1rem;
+      padding-right: 2rem;
+      color: white;
+      text-decoration: none;
+  
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+  
+  .mobile_nav_wrapper {
+    display: none;
+  }
+  
+  @media screen and (max-width: 1023px) {
+    .nav_wrapper {
+      display: none;
+  
+      a {
+        display: none;
+      }
+  
+    }
+  
+    .mobile_nav_wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      width: 30%;
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+      border-radius: 0px 12px 12px 0px;
+      box-shadow: 0px 9px 80px rgba(0, 0, 0, .6);
+      background-color: $chapel-gray;
+  
+      a {
+        @include paragraph-medium;
+        margin-top: 1rem;
+        text-decoration: none;
+        margin-left: 1rem;
+        padding-right: 2rem;
+        color: white;
+        text-decoration: none;
+  
+        &:hover {
+          color: $orange;
+        }
+      }
+    }
+  }

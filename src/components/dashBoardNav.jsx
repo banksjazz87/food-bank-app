@@ -1,12 +1,13 @@
-import React, {useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import '../assets/styles/navBar.scss';
 
 
-export default function HomeNavBar(props) {
+export default function DashBoardNavBar(props) {
     return (
         <nav
         className={
-          displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"
+          props.display === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"
         }
         
       >
