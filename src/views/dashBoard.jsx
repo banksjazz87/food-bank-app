@@ -8,7 +8,7 @@ export default function Dashboard() {
   return (
     <div id="homepage_wrapper">
       <div id="header_wrapper">
-        <h1>Food Bank Application</h1>
+        <h1>Dashboard</h1>
       </div>
       <NavBar />
     </div>

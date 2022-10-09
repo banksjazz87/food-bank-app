@@ -1,5 +1,7 @@
+@import "./library.scss";
+
 #login_container {
-    background-color: blue;
+    background-color: $chapel-gray;
     display: flex;
     justify-content: center;
     height: 100vh;
@@ -12,13 +14,35 @@
     form{
         display: flex;
         flex-direction: column;
-        width: 30vw;
-        height: 30vh;
+        width: 40vw;
+        height: 40vh;
         padding: 2rem 8rem 2rem 8rem;
         margin: auto;
-        background-color: gray;
+        background-color: $chapel-gray;
         justify-content: center;
         border-radius: 16px;
+        box-shadow: 0px 9px 80px rgba(151, 37, 191, .5);
+
+        label {
+            @include paragraph-medium;
+            color: white;
+            margin-bottom: .5rem;
+            margin-top: 1rem;
+        }
+        input {
+            @include paragraph-medium;
+        }
+
+        .submit_button {
+            @include btn-large;
+            @include btn-small;
+            @include paragraph-medium;
+            @include btn-gray;
+
+            &:hover {
+                background-color: $purple;
+            }
+        }
     }
 
     #login_submit{
@@ -26,5 +50,6 @@
         margin-right: auto;
         padding: 6px 18px 6px 18px;
         border-radius: 16px;
+        margin-top: 1rem;
     }
 }

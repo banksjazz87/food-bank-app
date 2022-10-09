@@ -71,6 +71,7 @@ $orange:  #FB9400;
     font-weight: 500;
     line-height: 1.55;
     border-radius: 4px;
+    border-style: none;
 }
 
 @mixin btn-large {
@@ -78,6 +79,7 @@ $orange:  #FB9400;
     font-size: 20px;
     line-height: 1.3333333;
     border-radius: 6px;
+    border-style: none; 
 }
 
 @mixin btn-purple {
