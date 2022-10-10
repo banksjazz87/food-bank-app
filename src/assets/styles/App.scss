@@ -10,10 +10,7 @@
 }
 
 #header_wrapper {
-  @include header-large-bold;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  text-align: center;
-  border-bottom: .15rem solid $purple;
+  @include large-header;
+  
 }
 

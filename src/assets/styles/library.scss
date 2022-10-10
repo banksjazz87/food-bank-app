@@ -117,3 +117,16 @@ $orange: #FB9400;
     margin-bottom: .5rem;
     margin-top: 1rem;
 }
+
+@mixin bottom-border {
+    border-bottom: .15rem solid $purple;
+}
+
+@mixin large-header {
+    @include header-large-bold;
+    @include bottom-border;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+

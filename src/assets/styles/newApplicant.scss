@@ -1,3 +1,5 @@
+@import "./library.scss";
+
 #new_applicant_wrapper {
     display: flex;
     flex-direction: column;
@@ -10,9 +12,8 @@
     color: white;
     font-size: 18px;
 
-    #heading {
-        text-align: center;
-        margin-top: 2rem;
+    .heading_wrapper {
+        @include large-header;
     }
 
     .section_heading {

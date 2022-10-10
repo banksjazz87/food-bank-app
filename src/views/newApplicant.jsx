@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import postRequest from "../functions/post.js";
+import NavBar from "../components/navBar.jsx";
 import "../assets/styles/newApplicant.scss";
+
 
 export default function Applicant() {
 
@@ -57,7 +59,8 @@ export default function Applicant() {
 
   return (
     <div id="new_applicant_wrapper">
-      <h1 id="heading">New Applicant</h1>
+      <h1 className="heading_wrapper">New Applicant</h1>
+      <NavBar />
       <form 
         action="/new-applicant" 
         method="post"
