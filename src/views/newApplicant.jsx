@@ -62,6 +62,7 @@ export default function Applicant() {
       <h1 className="heading_wrapper">New Applicant</h1>
       <NavBar />
       <form 
+        className="shadow_form"
         action="/new-applicant" 
         method="post"
         onSubmit={(e) => {

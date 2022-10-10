@@ -10,7 +10,13 @@
     margin: 0;
     padding: 0;
     color: white;
-    font-size: 18px;
+
+    .shadow_form {
+        @include shadow-form;
+        margin-top: 6rem;
+        margin-bottom: 6rem;
+        align-items: center;
+    }
 
     .heading_wrapper {
         @include large-header;
@@ -24,40 +30,25 @@
         border-color: white;
         border-radius: 14px;
         border-width: .15rem;
-        margin-top: 2rem;
+        margin-top: 4rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        @include paragraph-medium;
+    }
+
+    input {
+        width: 100%;
+        @include medium-input;
+    }
+
+    .input_pair {
+        @include medium-label;
+        margin-top: .5rem;
+        width: 100%;
     }
 
     #new_applicant_submit {
-        background-color: #9725bf;
-        color: white;
-        padding: .25rem 4rem;
-        border-radius: 16px;
-        border-style: none;
-        border-color: none;
-        font-size: 18px;
-        margin-left: 7.5vw;
-        margin-top: 2rem;
-
-        &:hover {
-            background-color: #751d94;
-            border-color: #6b1a87;
-        }
-    }
-
-    form {
-        margin: 2rem auto auto auto;
-
-        label{
-            margin-bottom: .15rem;
-        }
-
-        input {
-            margin-bottom: 1rem;
-        }
-
-        .new_applicant_input {
-            width: 30vw;
-        }
-
+        @include btn-small;
+        width: 120px;
     }
 }

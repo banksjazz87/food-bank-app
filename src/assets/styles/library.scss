@@ -128,5 +128,18 @@ $orange: #FB9400;
     padding-top: 2rem;
     padding-bottom: 2rem;
     text-align: center;
+    margin-bottom: 0;
 }
 
+@mixin shadow-form {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    padding: 2rem 8rem 2rem 8rem;
+    margin: auto;
+    background-color: $chapel-gray;
+    justify-content: center;
+    border-radius: 16px;
+    box-shadow: 0px 8px 80px rgba(151, 37, 191, .5);
+    max-width: 560px;
+}
