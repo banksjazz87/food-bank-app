@@ -6,13 +6,14 @@
   margin: 0;
   padding: 0;
   top: 0;
+  background-color: $chapel-gray;
 }
 
 #header_wrapper {
-  background-color: $chapel-purple;
   @include header-large-bold;
   padding-top: 2rem;
   padding-bottom: 2rem;
   text-align: center;
+  border-bottom: .15rem solid $purple;
 }
 

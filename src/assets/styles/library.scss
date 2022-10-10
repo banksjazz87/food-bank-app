@@ -5,7 +5,7 @@ $white: #FFFFFF;
 $light-gray: #808080;
 $dark-gray: #5D5D5D;
 $purple: #996699;
-$orange:  #FB9400;
+$orange: #FB9400;
 
 @mixin header-large-bold {
     font-family: 'Roboto Slab', serif;
@@ -41,7 +41,7 @@ $orange:  #FB9400;
     font-size: 18px;
     font-style: normal;
     line-height: 1.55em;
-    letter-spacing: 0em; 
+    letter-spacing: 0em;
 }
 
 @mixin paragraph-large {
@@ -61,17 +61,7 @@ $orange:  #FB9400;
 @mixin paragraph-small {
     font-family: 'Ubuntu', sans-serif;
     font-size: 15px;
-    line-height: 1.55; 
-}
-
-
-@mixin btn-small {
-    margin-bottom: 0;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 500;
     line-height: 1.55;
-    border-radius: 4px;
-    border-style: none;
 }
 
 @mixin btn-large {
@@ -79,7 +69,7 @@ $orange:  #FB9400;
     font-size: 20px;
     line-height: 1.3333333;
     border-radius: 6px;
-    border-style: none; 
+    border-style: none;
 }
 
 @mixin btn-purple {
@@ -90,4 +80,40 @@ $orange:  #FB9400;
 @mixin btn-gray {
     background-color: $dark-gray;
     color: white;
+}
+
+@mixin btn-small {
+    margin-bottom: 0;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+    line-height: 1.55;
+    border-radius: 16px;
+    background-color: $light-gray;
+    margin-top: 2rem;
+    border-style: none;
+    @include paragraph-medium;
+    padding: .5rem 2rem .5rem 2rem;
+    color: white;
+
+    &:hover {
+        background-color: $purple;
+    }
+}
+
+@mixin medium-input {
+    @include paragraph-medium;
+
+    &:focus {
+        outline: none;
+        border-style: solid;
+        border-width: .15rem;
+        border-color: $orange;
+    }
+}
+
+@mixin medium-label {
+    @include paragraph-medium;
+    color: white;
+    margin-bottom: .5rem;
+    margin-top: 1rem;
 }
