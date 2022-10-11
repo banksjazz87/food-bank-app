@@ -1,6 +1,7 @@
 import "../assets/styles/App.scss";
 import "../assets/styles/root.scss";
 import "../assets/styles/library.scss";
+import "../assets/styles/dashboard.scss";
 import React from "react";
 import NavBar from "../components/navBar.jsx";
 

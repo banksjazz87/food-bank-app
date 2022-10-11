@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-
+import "../assets/styles/searchApplicants.scss";
 
 //This component creates a search bar for all of the applicants currently in the database.
 export default function AllApplicantSearchBar(props) {
   //Setting the initial applicant data.
+  
+  //use for production
   const [data, setData] = useState([]);
   const [input, setInput] = useState({});
 
-  useEffect(() => {
+ useEffect(() => {
     fetch("/all-applicants")
       .then((response) => response.json())
       .then((final) => {

@@ -1,4 +1,16 @@
-#display_applicant_wrapper {
+@import "./library.scss";
+
+#search_applicant_wrapper {
+    color: white;
+    h1 {
+        @include large-header;
+        color: white;
+    }
+}
+
+#applicant_search {
+    display: flex; 
     flex-direction: column;
     margin: auto;
+    color: white;
 }
