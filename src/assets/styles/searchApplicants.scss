@@ -8,9 +8,30 @@
     }
 }
 
-#applicant_search {
-    display: flex; 
-    flex-direction: column;
-    margin: auto;
-    color: white;
+#display_applicant_wrapper {
+    @include shadow-form;
+    justify-content: start;
+    align-items: start;
+
+    h1 {
+        @include header-medium;
+        margin: auto;
+        margin-top: 2rem;
+        padding-bottom: 0;
+        width: 100%;
+    }
+
+    p {
+        @include paragraph-small;
+        display: flex;
+        align-items: start;
+    }
+
+    .field_label {
+        font-style: bold;
+    }
+
 }
+
+
+

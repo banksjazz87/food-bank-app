@@ -15,7 +15,8 @@ export default function DisplayApplicant(props){
         } else {
         return (
         <>
-            <p key={`description_${y}`}>{`${x.placeHolder}: ${props.currentApplicant[0][x.name]} `}</p>
+            <p key={`description_${y}`}
+            >{`${x.placeHolder}: ${props.currentApplicant[0][x.name]} `}</p>
         </>
         )
         }

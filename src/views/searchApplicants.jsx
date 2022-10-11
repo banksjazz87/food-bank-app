@@ -4,6 +4,7 @@ import DisplayApplicant from "../components/displayPastApplicant.jsx";
 import EditDeleteButtons from "../components/editDeleteButtons";
 import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
+import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
 
 export default function SearchApplicants() {
@@ -66,7 +67,8 @@ export default function SearchApplicants() {
 
   return (
     <div id="search_applicant_wrapper">
-      <h1>This will be the search all section.</h1>
+      <h1>Search Applicants</h1>
+      <NavBar />
       <AllApplicantSearchBar handleChange={updateApplicant} />
       <DisplayApplicant
         currentApplicant={applicantInfo}

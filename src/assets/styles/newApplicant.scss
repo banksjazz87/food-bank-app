@@ -13,9 +13,6 @@
 
     .shadow_form {
         @include shadow-form;
-        margin-top: 6rem;
-        margin-bottom: 6rem;
-        align-items: center;
     }
 
     .heading_wrapper {
@@ -23,17 +20,7 @@
     }
 
     .section_heading {
-        padding-top: .5rem;
-        padding-bottom: .5rem;
-        text-align: center;
-        border-style: solid;
-        border-color: white;
-        border-radius: 14px;
-        border-width: .15rem;
-        margin-top: 4rem;
-        margin-bottom: 1rem;
-        width: 100%;
-        @include paragraph-medium;
+        @include medium-section-heading;
     }
 
     input {

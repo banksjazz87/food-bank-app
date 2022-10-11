@@ -1,0 +1,25 @@
+@import "./library.scss";
+
+#applicantSearch {
+    @include shadow-form;
+
+    label {
+        @include medium-section-heading;
+        margin-top: 0;
+    }
+
+    input {
+        @include medium-input;
+        margin-top: 2rem;
+    }
+
+    select {
+        @include medium-input;
+        margin-top: .25rem;
+        width: 70%;
+    }
+
+    #applicantSearchSubmit {
+        @include btn-small;
+    }
+}
