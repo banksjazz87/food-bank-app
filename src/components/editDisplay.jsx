@@ -1,6 +1,7 @@
 import React from "react";
 import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
+import "../assets/styles/editDisplay.scss";
 
 export default function EditPage(props) {
  
@@ -54,7 +55,7 @@ export default function EditPage(props) {
     }
   });
   return (
-   <div style={props.display ? {display: ""} : {display: "none"}}>
+   <div id="edit_applicant_wrapper" style={props.display ? {display: ""} : {display: "none"}}>
    <h1>
       This Will be the edit page
     </h1>

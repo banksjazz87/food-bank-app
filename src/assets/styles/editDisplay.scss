@@ -1,0 +1,20 @@
+@import "./library.scss";
+
+#edit_applicant_wrapper {
+    h1 {
+        @include header-large;
+    }
+
+    form {
+        @include shadow-form;
+    }
+
+    label{
+        @include medium-label;
+    }
+
+    input {
+        @include medium-input;
+    }
+}
+
