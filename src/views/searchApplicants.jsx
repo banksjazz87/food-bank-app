@@ -79,6 +79,7 @@ export default function SearchApplicants() {
         editClick={displayEdit}
         deleteClick={showDeleteAlert}
       />
+      
       <EditPage
         display={showEditPage}
         currentApplicant={applicantInfo}

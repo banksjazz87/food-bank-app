@@ -61,7 +61,7 @@ $orange: #FB9400;
 @mixin paragraph-small {
     font-family: 'Ubuntu', sans-serif;
     font-size: 15px;
-    line-height: 1.55;
+    line-height: .2rem;
 }
 
 @mixin btn-large {
@@ -91,8 +91,8 @@ $orange: #FB9400;
     background-color: $light-gray;
     margin-top: 2rem;
     border-style: none;
-    @include paragraph-medium;
-    padding: .5rem 2rem .5rem 2rem;
+    @include paragraph-small;
+    padding: 1rem 2rem 1rem 2rem;
     color: white;
 
     &:hover {

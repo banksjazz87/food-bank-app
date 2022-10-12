@@ -12,6 +12,7 @@
     @include shadow-form;
     justify-content: start;
     align-items: start;
+    margin-bottom: 1rem;
 
     h1 {
         @include header-medium;
@@ -19,12 +20,13 @@
         margin-top: 2rem;
         padding-bottom: 0;
         width: 100%;
+        margin-bottom: .5rem;
     }
 
     p {
         @include paragraph-small;
-        display: flex;
-        align-items: start;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .field_label {

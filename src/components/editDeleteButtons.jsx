@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/styles/editDeleteButtons.scss";
 
 export default function EditDeleteButtons(props) {
   return (
@@ -6,10 +7,10 @@ export default function EditDeleteButtons(props) {
       id="edit_delete_wrapper"
       style={props.display ? { display: "" } : { display: "none" }}
     >
-      <button type="button" onClick={props.editClick}>
+      <button className="edit_button" type="button" onClick={props.editClick}>
         Edit
       </button>
-      <button type="button" onClick={props.deleteClick}>
+      <button className="delete_button" type="button" onClick={props.deleteClick}>
         Delete
       </button>
     </div>
