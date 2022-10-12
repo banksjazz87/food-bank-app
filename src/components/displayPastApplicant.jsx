@@ -16,7 +16,7 @@ export default function DisplayApplicant(props){
         return (
         <>
             <p key={`description_${y}`}
-            >{`${x.placeHolder}: ${props.currentApplicant[0][x.name]} `}</p>
+            ><span className="field_label">{x.placeHolder + ": "} </span> {props.currentApplicant[0][x.name]}</p>
         </>
         )
         }
