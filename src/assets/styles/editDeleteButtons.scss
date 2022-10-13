@@ -1,20 +1,13 @@
 @import "./library.scss";
 
 #edit_delete_wrapper {
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    column-gap: 2rem;
+    @include btn-multiple;
     margin-bottom: 2rem;
     button {
         @include btn-small;
     }
 
     .delete_button {
-        @include btn-small;
-
-        &:hover {
-            background-color: $orange;
-        }
+        @include btn-small-danger;
     }
 }

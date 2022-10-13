@@ -1,0 +1,39 @@
+@import "./library.scss";
+
+#delete_alert_wrapper {
+    @include shadow-form;
+    position: fixed;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    p {
+        @include paragraph-medium;
+        text-align: center;
+    }
+    #delete_alert_buttons {
+        @include btn-multiple;
+    }
+
+    button {
+        @include btn-small;
+    }
+    .delete_button {
+        @include btn-small-danger;
+    }
+
+}
+
+@media (max-width: 1023px) {
+    #delete_alert_wrapper {
+            @include mobile-shadow-form;
+
+        p {
+            width: 80%;
+        }
+
+        #delete_alert_buttons {
+            width: 80%;
+        }
+    }
+}
