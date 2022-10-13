@@ -13,8 +13,39 @@
         @include medium-label;
     }
 
+    .input_pair {
+        width: 100%;
+        margin-top: .5rem;
+    }
+
     input {
         @include medium-input;
+        width: 100%;
+    }
+
+    .input_button {
+        @include btn-small;
+        width: 120px;
+    }
+
+    .section_heading {
+        @include medium-section-heading;
+    }
+}
+
+@media (max-width: 1023px) {
+    #edit_applicant_wrapper {
+        form {
+            @include mobile-shadow-form;
+        }
+
+        .input_pair {
+            width: 80%;
+        }
+
+        .section_heading {
+            width: 80%;
+        }
     }
 }
 

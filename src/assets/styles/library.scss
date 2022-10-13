@@ -147,6 +147,14 @@ $orange: #FB9400;
     align-items: center;
 }
 
+@mixin mobile-shadow-form {
+    @include shadow-form;
+    width: 100vw;
+    padding-left: 1rem;
+    padding-left: .25rem;
+    padding-right: .25rem;
+}
+
 @mixin medium-section-heading {
     padding-top: .5rem;
     padding-bottom: .5rem;
