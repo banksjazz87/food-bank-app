@@ -2,27 +2,27 @@ import React, { useState, useEffect } from "react";
 import "../assets/styles/searchBar.scss";
 
 //For Development only
-import DummyData from "../variables/dummyData.js";
+//import DummyData from "../variables/dummyData.js";
 
 //This component creates a search bar for all of the applicants currently in the database.
 export default function AllApplicantSearchBar(props) {
   //Setting the initial applicant data.
   //use for production
-  //const [data, setData] = useState([]);
+const [data, setData] = useState([]);
 
   //use for development
-  let data = DummyData;
+  //let data = DummyData;
 
   const [input, setInput] = useState({});
 
- /*useEffect(() => {
+ useEffect(() => {
     fetch("/all-applicants")
       .then((response) => response.json())
       .then((final) => {
         setData(final);
       })
       .catch((e) => console.log("error", e));
-  }, []);*/
+  }, []);
 
 
 
@@ -92,12 +92,12 @@ function returnNums(string){
             e.preventDefault();
 
             //used for production
-           /* fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
+           fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
             .then(res => res.json())
-            .then(final => props.handleChange(final))*/
+            .then(final => props.handleChange(final))
 
             //used for development
-            props.handleChange([data[0]]);
+           // props.handleChange([data[0]]);
             
           }}
         >
