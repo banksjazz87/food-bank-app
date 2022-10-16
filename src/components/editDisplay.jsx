@@ -56,9 +56,6 @@ export default function EditPage(props) {
   });
   return (
    <div id="edit_applicant_wrapper" style={props.display ? {display: ""} : {display: "none"}}>
-   <h1>
-      This Will be the edit page
-    </h1>
     <form 
       id="edit_form" 
       method="post"

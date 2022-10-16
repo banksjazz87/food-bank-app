@@ -107,6 +107,7 @@ function returnNums(string){
             id="applicants"
             onChange={(e) => selectedItem(returnNums(e.target.value), data)}
           >
+            <option>Choose from the following...</option>
             {allNames(data)}
           </select>
           <input 

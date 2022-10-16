@@ -2,6 +2,7 @@
 
 #search_applicant_wrapper {
     color: white;
+    overflow: hidden;
     h1 {
         @include large-header;
         color: white;
