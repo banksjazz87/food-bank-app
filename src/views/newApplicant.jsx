@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import postRequest from "../functions/post.js";
 import NavBar from "../components/navBar.jsx";
@@ -11,11 +12,20 @@ export default function Applicant() {
   const currentDate = new Date();
   const [field, setField] = useState({dateAltered: currentDate.toLocaleDateString()});
 
+  const navigate = useNavigate();
+
 
   const newApplicantConfirmation = () => {
     postRequest("/new-applicant", field)
-    .then(data => alert(data.message));
-  }
+    .then(data => {
+      if (data.status === 'okay') {
+        alert(data.message);
+        navigate("/dashboard", {replace: true});
+      } else {
+        alert(data.message);
+      }
+  });
+}
 
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {

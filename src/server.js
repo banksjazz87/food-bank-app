@@ -100,11 +100,10 @@ app.post("/new-applicant/", (req, res, next) => {
     createApplicant.then((data) => {
         console.log(data); 
         if(data.insertId) { 
-          res.send({message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`}); 
-        } else {
-          res.send({message: `There has been an error.`})
+          res.send({status: 'okay', message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`}); 
         }
-        });
+      })
+        .catch((e) => {res.send({status: 'not good', message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`})});
   }
     
 });
