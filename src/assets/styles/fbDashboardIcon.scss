@@ -1,0 +1,7 @@
+@import "./library.scss";
+
+.fb_dashboard_icon {
+    @include shadow-form;
+    color: $white;
+    width: 20%;
+}

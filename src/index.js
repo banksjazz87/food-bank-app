@@ -20,7 +20,7 @@ import SearchApplicants from "./views/searchApplicants.jsx";
 import DisplayFoodBankList from "./views/displayFoodBankList.jsx";
 import PastLists from "./views/pastLists.jsx";
 import Dashboard from "./views/dashBoard.jsx";
-import FoodBankList from "./views/foodBankList.jsx";
+import FoodBankListDashboard from "./views/foodBankListDashboard.jsx";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,7 +33,7 @@ root.render(
       <Route path="login" element={<Login />} />
       <Route path="search" element={<SearchApplicants />} />
       <Route path="current_registered_list" element={<DisplayFoodBankList />} />
-      <Route path="foodbank-lists" element={<FoodBankList />} />
+      <Route path="foodbank-list-dashboard" element={<FoodBankListDashboard />} />
 
       <Route path="past_registered_list" element={<PastLists />} />
     </Routes>

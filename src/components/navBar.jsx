@@ -70,9 +70,7 @@ export default function NavBar() {
           <Link to="/login">Login</Link>
           <Link to="/new_applicant">New Applicant</Link>
           <Link to="/search">Search Applicants</Link>
-          <Link to="/foodbank-lists">Everything Food Bank List</Link>
-          <Link to="/current_registered_list">Food Bank List</Link>
-          <Link to="/past_registered_list">Past Registered List</Link>
+          <Link to="/foodbank-list-dashboard">Food Bank List Dashboard</Link>
         </nav>
 
         <HamburgerIcon clickHandler={showNavBar} />
