@@ -38,6 +38,7 @@ export default function NavBar() {
       "search",
       "current_registered_list",
       "past_registered_list",
+      "create-foodbank-list"
     ];
 
     for (let i = 0; i < fullNavUrls.length; i++) {

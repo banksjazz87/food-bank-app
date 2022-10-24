@@ -21,6 +21,7 @@ import DisplayFoodBankList from "./views/displayFoodBankList.jsx";
 import PastLists from "./views/pastLists.jsx";
 import Dashboard from "./views/dashBoard.jsx";
 import FoodBankListDashboard from "./views/foodBankListDashboard.jsx";
+import CreateFoodBankList from "./views/createFoodBankList.jsx";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -34,6 +35,8 @@ root.render(
       <Route path="search" element={<SearchApplicants />} />
       <Route path="current_registered_list" element={<DisplayFoodBankList />} />
       <Route path="foodbank-list-dashboard" element={<FoodBankListDashboard />} />
+      <Route path="create-foodbank-list" element={<CreateFoodBankList />} />
+
 
       <Route path="past_registered_list" element={<PastLists />} />
     </Routes>
