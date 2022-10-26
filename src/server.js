@@ -31,6 +31,11 @@ let Db = {
 
 };
 
+//Error message if something doesn't work in the sql query.
+let sqlError = (obj) => {
+  return {message: `The following error has occurred mySql code: ${obj.code} with sqlMessage: ${obj.sqlMessage}`}
+};
+
 //app.get("/all-applicants", allApplicants.findAll);
 app.post("/login-attempt", (req, res, next) => {
   if (
@@ -209,9 +214,28 @@ app.delete("/remove/applicant", (req, res) => {
 app.post('/new_foodbank_list', (req, res, next) => {
   const data = req.body;
   console.log(data);
+  let requiredData = [req.body.title];
 
-  res.send(data);
-  next();
+
+    let createNewTable = new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `INSERT INTO FoodBankList (title) VALUES (?);`
+
+      currentDb.query(sql, [requiredData], (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      })
+    })
+  
+    createNewTable.then(data => {
+      if (data.protocol41 && data.affectedRows === 1) {
+        res.send({message: `success`, title: req.body.title})
+      }
+    })
+    .catch(e => res.send(`message: ${sqlError(e)}`))
 });
 
 
