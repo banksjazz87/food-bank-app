@@ -205,6 +205,15 @@ app.delete("/remove/applicant", (req, res) => {
    .catch(e => res.send({message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`}));
 });
 
+//Post request for handling a new foodbank list
+app.post('/new_foodbank_list', (req, res, next) => {
+  const data = req.body;
+  console.log(data);
+
+  res.send(data);
+  next();
+});
+
 
 
 
