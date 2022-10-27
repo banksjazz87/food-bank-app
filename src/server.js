@@ -182,7 +182,7 @@ app.put('/applicant/update', (req, res, next) => {
       res.send({message: `${req.body.firstName} ${req.body.lastName} has been updated`});
     } 
   })
-  .catch(e => res.send({message: `Error has occured code: ${e.code} sqlMessage: ${e.sqlMessage}`}));
+  .catch(e => res.send(sqlError(e)));
  
 });
 
@@ -207,13 +207,11 @@ app.delete("/remove/applicant", (req, res) => {
         res.send({message: `${req.body.firstName} ${req.body.lastName} has been removed from the database`});
       }
     })
-   .catch(e => res.send({message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`}));
+   .catch(e => res.send(sqlError(e)));
 });
 
 //Post request for handling a new foodbank list
 app.post('/new_foodbank_list', (req, res, next) => {
-  const data = req.body;
-  console.log(data);
   let requiredData = [req.body.title];
 
 
@@ -233,9 +231,13 @@ app.post('/new_foodbank_list', (req, res, next) => {
     createNewTable.then(data => {
       if (data.protocol41 && data.affectedRows === 1) {
         res.send({message: `success`, title: req.body.title})
+        console.log(data);
       }
     })
-    .catch(e => res.send(`message: ${sqlError(e)}`))
+    .catch(e => {
+      res.send(sqlError(e));
+      console.log('error', e );
+   })
 });
 
 

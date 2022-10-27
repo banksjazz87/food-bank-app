@@ -7,6 +7,16 @@ export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({title: ""});
   const [listData, setListData] = useState({title: "", attendants: []});
 
+  const submitListTitle = () => {
+    postRequest('/new_foodbank_list', listName).then(data => {
+      if (data.message === 'success') {
+        setListData({...listData, title: data.title});
+      } else {
+        alert(data.message);
+      }
+    })
+  }
+
   return (
     <div id="create_list_wrapper">
       <div class="header_wrapper">
@@ -16,15 +26,10 @@ export default function CreateFoodBankList(props) {
       <form
         action="/new_foodbank_list"
         method="post"
-        onSubmit={(e) => { e.preventDefault(); 
-        postRequest('/new_foodbank_list', listName).then(data => { if (data.message === 'success') {
-          setListData({...listData, title: data.title})
-        } else {
-          alert(data.message)
-        }
-        }
-          )}
-        }
+        onSubmit={(e) => { 
+          e.preventDefault(); 
+          submitListTitle();
+        }}
       >
         <label for="food_bank_list_name">New List Name</label>
         <input
