@@ -69,7 +69,9 @@ export default function SearchApplicants() {
     <div id="search_applicant_wrapper">
       <h1>Search Applicants</h1>
       <NavBar />
-      <AllApplicantSearchBar handleChange={updateApplicant} />
+      <AllApplicantSearchBar 
+        handleChange={updateApplicant}
+        value="Submit" />
       <DisplayApplicant
         currentApplicant={applicantInfo}
         display={showApplicant}

@@ -113,7 +113,7 @@ function returnNums(string){
           <input 
             id="applicantSearchSubmit" 
             type="submit" 
-            value="submit"
+            value={props.value}
             />
         </form>
 

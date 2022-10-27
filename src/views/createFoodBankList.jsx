@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
+import AllApplicantSearchBar from "../components/searchBar.jsx";
 
 export default function CreateFoodBankList(props) {
 
   const [listName, setListName] = useState({title: ""});
-  const [listData, setListData] = useState({title: "", attendants: []});
+  const [listData, setListData] = useState({title: "", attendants: [{name: "bob", age: "22"}]});
 
+  //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
     postRequest('/new_foodbank_list', listName).then(data => {
       if (data.message === 'success') {
@@ -16,6 +18,14 @@ export default function CreateFoodBankList(props) {
       }
     })
   }
+
+  //Function used to add a new attendant to the foodbank list.
+  const addNewAttendant = (array) => {
+    const previousAttendants = listData.attendants.slice();
+    setListData({...listData, attendants: previousAttendants.concat(array)});
+  }
+
+ 
 
   return (
     <div id="create_list_wrapper">
@@ -42,6 +52,7 @@ export default function CreateFoodBankList(props) {
         <input type="submit" value="Submit" />
       </form>
       <h1>{listData.title}</h1>
+      <AllApplicantSearchBar handleChange={addNewAttendant} value="Add To List" />
     </div>
   );
 }
