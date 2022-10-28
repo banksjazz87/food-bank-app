@@ -6,7 +6,7 @@ import AllApplicantSearchBar from "../components/searchBar.jsx";
 export default function CreateFoodBankList(props) {
 
   const [listName, setListName] = useState({title: ""});
-  const [listData, setListData] = useState({title: "", attendants: [{name: "bob", age: "22"}]});
+  const [listData, setListData] = useState({title: "", attendants: []});
 
   //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
@@ -24,6 +24,22 @@ export default function CreateFoodBankList(props) {
     const previousAttendants = listData.attendants.slice();
     setListData({...listData, attendants: previousAttendants.concat(array)});
   }
+
+  const displayApplicants = (array) => {
+  
+    const layOutApplicants = array.map((x, y) => {
+      return (
+        <div key={`applciant_y`}>
+          <p>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
+        </div>
+      )
+    });
+
+    if (array.length > 0) {
+    return layOutApplicants;
+    }
+  }
+
 
  
 
@@ -53,6 +69,8 @@ export default function CreateFoodBankList(props) {
       </form>
       <h1>{listData.title}</h1>
       <AllApplicantSearchBar handleChange={addNewAttendant} value="Add To List" />
+        {displayApplicants(listData.attendants)}
+      
     </div>
   );
 }
