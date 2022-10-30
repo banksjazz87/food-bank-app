@@ -231,7 +231,7 @@ app.post('/new_foodbank_list', (req, res, next) => {
 
     let createNewTable = new Promise((resolve, reject) => {
       let currentDb = mysql.createConnection(Db);
-      let sql = `CREATE TABLE ${req.body.title} (firstName VARCHAR(20), lastName VARCHAR(20), phone VARCHAR(15), present VARCHAR(10));`;
+      let sql = `CREATE TABLE "${req.body.title}" (firstName VARCHAR(20), lastName VARCHAR(20), phone VARCHAR(15), present VARCHAR(10));`;
 
       currentDb.query(sql, (err, results) => {
         if (err) {
@@ -243,16 +243,18 @@ app.post('/new_foodbank_list', (req, res, next) => {
     })
   
     saveNewTableName.then(createNewTable).then(data => {
-          if (data.protocol41 && data.affectedRows === 1) {
-            res.send({message: `success`, title: req.body.title})
-            console.log(data);
-          }
-        })
+              if (data.protocol41 && data.affectedRows === 1) {
+                res.send({message: `success`, title: req.body.title})
+                console.log(data)
+              } else {
+                console.log('fail!!!!!!!')
+              }
+             })
     .catch(e => {
       res.send(sqlError(e));
       console.log('error', e );
    })
-});
+  });
 
 
 
