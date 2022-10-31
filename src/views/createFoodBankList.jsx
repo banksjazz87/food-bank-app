@@ -5,7 +5,7 @@ import AllApplicantSearchBar from "../components/searchBar.jsx";
 
 export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
-  const [listData, setListData] = useState({ title: "", attendants: [] });
+  const [listData, setListData] = useState({ title: "", id: "",  attendants: [] });
 
   //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
@@ -24,6 +24,10 @@ export default function CreateFoodBankList(props) {
     setListData({ ...listData, attendants: previousAttendants.concat(array) });
   };
 
+  //Function to save the list in the database.
+  const saveList = () => {
+    fetch(`get-past-list/list-name/${listData.title}/listID/${listData.id}`);
+  }
 
   const displayApplicants = (array) => {
     const layOutApplicants = array.map((x, y) => {
@@ -72,7 +76,8 @@ export default function CreateFoodBankList(props) {
       {displayApplicants(listData.attendants)}
       <button 
         class="save_button" 
-        type="button">
+        type="button"
+        onClick={saveList}>
         Save</button>
     </div>
   );

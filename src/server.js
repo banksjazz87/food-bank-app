@@ -250,6 +250,29 @@ app.post('/new_foodbank_list', (req, res, next) => {
     console.log('error', e );
  })
 });
+
+app.get('get-past-list/list-name/:listName/list-id/:listID', (req, res) => {
+  
+  let retrieveTable = new Promise((reject, resolve) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT * FROM FoodBankList WHERE title = ${req.params.listName} AND Table_ID = ${req.params.listID};`;
+      
+
+      currentDb.query(sql, (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      });
+    });
+
+    retrieveTable.then(data => {
+      res.send(data);
+    })
+  })
+
+//app.post('/save-list', (req, res) => {})
    
     
 
