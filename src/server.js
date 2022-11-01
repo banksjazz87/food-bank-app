@@ -274,7 +274,7 @@ app.post("/new_foodbank_list", (req, res, next) => {
 
 //This will be used to return a specific list from the database.
 app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
-  let retrieveTable = new Promise((reject, resolve) => {
+  let retrieveTable = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `SELECT * FROM ${req.params.listName};`;
 
@@ -304,7 +304,7 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     ];
   });
 
-  let insertApplicants = new Promise((reject, resolve) => {
+  let insertApplicants = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `INSERT INTO ${req.params.listName} (firstName, lastName, phone, present, ApplicantID) VALUES ?;`;
 
@@ -318,9 +318,8 @@ app.post("/save-list/list-name/:listName", (req, res) => {
   });
 
   insertApplicants.then((data) => {
-    if (data.protocol41) {
-      console.log({message: `Table ${req.params.listName} has been successfully saved`});
-      res.send({message: `Table ${req.params.listName} has been successfully saved`});
+    if (data.protocol41 === true) {
+      res.send({message: `Table ${req.params.listName} has been saved.`})
     }
-  }).catch(e => console.log('error', e));
+  }).catch((e) => console.log("ERROR", e))
 });

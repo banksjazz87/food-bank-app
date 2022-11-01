@@ -7,7 +7,6 @@ export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
   const [listData, setListData] = useState({
     title: "",
-    id: "",
     attendants: [],
   });
 
