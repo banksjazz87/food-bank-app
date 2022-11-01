@@ -317,8 +317,10 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     });
   });
 
-  insertApplicants.then(() => res.send({ message: "success"})).catch((e) => {
-    res.send(sqlError(e));
-    console.log("error", e);
-  });
+  insertApplicants.then((data) => {
+    if (data.protocol41) {
+      console.log({message: `Table ${req.params.listName} has been successfully saved`});
+      res.send({message: `Table ${req.params.listName} has been successfully saved`});
+    }
+  }).catch(e => console.log('error', e));
 });
