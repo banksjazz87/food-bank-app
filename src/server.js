@@ -251,13 +251,13 @@ app.post('/new_foodbank_list', (req, res, next) => {
  })
 });
 
+//This will be used to return a specific list from the database.
 app.get('get-past-list/list-name/:listName/list-id/:listID', (req, res) => {
   
   let retrieveTable = new Promise((reject, resolve) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = `SELECT * FROM FoodBankList WHERE title = ${req.params.listName} AND Table_ID = ${req.params.listID};`;
+    let sql = `SELECT * FROM ${req.params.listName};`;
       
-
       currentDb.query(sql, (err, results) => {
         if (err) {
           return reject(err);
@@ -272,7 +272,28 @@ app.get('get-past-list/list-name/:listName/list-id/:listID', (req, res) => {
     })
   })
 
-//app.post('/save-list', (req, res) => {})
+//This will create an insert method when a new list is saved.
+app.post('/save-list/list-name/:listName', (req, res) => {
+
+  let requestData = [req.body.attendants];
+
+  let insertApplicants = new Promise((reject, resolve) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `INSERT INTO ${req.params.listName} (firstName, lastName, phone) VALUES ?;`;
+    
+    currentDb.query(sql, [requestData.map(x => [x.firstName, x.lastName, x.phone])], (err, results) => {
+      if (err) {
+        console.log(err);
+        return reject(err);
+      } else {
+        console.log(results);
+        return resolve(results);
+      }
+    });
+  });
+
+  insertApplicants.then(data => res.send({message: "success", dataFields: data})).catch(e => console.log(e));
+})
    
     
 

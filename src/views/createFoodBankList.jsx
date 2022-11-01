@@ -21,12 +21,14 @@ export default function CreateFoodBankList(props) {
   //Function used to add a new attendant to the foodbank list.
   const addNewAttendant = (array) => {
     const previousAttendants = listData.attendants.slice();
-    setListData({ ...listData, attendants: previousAttendants.concat(array) });
+    
+    setListData({ ...listData, attendants: previousAttendants.concat(array)});
+    console.log(listData.attendants);
   };
 
   //Function to save the list in the database.
-  const saveList = () => {
-    fetch(`get-past-list/list-name/${listData.title}/listID/${listData.id}`);
+ const saveList = () => {
+    postRequest(`/save-list/list-name/${listData.title}`, listData).then(data => alert(data.message));
   }
 
   const displayApplicants = (array) => {
@@ -77,7 +79,8 @@ export default function CreateFoodBankList(props) {
       <button 
         class="save_button" 
         type="button"
-        onClick={saveList}>
+        onClick={saveList}
+        >
         Save</button>
     </div>
   );
