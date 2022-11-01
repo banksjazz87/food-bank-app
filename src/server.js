@@ -310,18 +310,15 @@ app.post("/save-list/list-name/:listName", (req, res) => {
 
     currentDb.query(sql, [requestDataValues], (err, results) => {
       if (err) {
-        console.log(err);
         return reject(err);
       } else {
-        console.log(results);
         return resolve(results);
       }
     });
   });
 
-  insertApplicants
-    .then(() => {
-      res.send({message: `Table ${req.params.listName} has been successfully saved.`});
-    })
-    .catch((e) => res.send(sqlError(e)));
+  insertApplicants.then(() => res.send({ message: "success"})).catch((e) => {
+    res.send(sqlError(e));
+    console.log("error", e);
+  });
 });
