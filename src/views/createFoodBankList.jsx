@@ -5,7 +5,11 @@ import AllApplicantSearchBar from "../components/searchBar.jsx";
 
 export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
-  const [listData, setListData] = useState({ title: "", id: "",  attendants: [] });
+  const [listData, setListData] = useState({
+    title: "",
+    id: "",
+    attendants: [],
+  });
 
   //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
@@ -21,15 +25,14 @@ export default function CreateFoodBankList(props) {
   //Function used to add a new attendant to the foodbank list.
   const addNewAttendant = (array) => {
     const previousAttendants = listData.attendants.slice();
-    
-    setListData({ ...listData, attendants: previousAttendants.concat(array)});
-    console.log(listData.attendants);
+    setListData({ ...listData, attendants: previousAttendants.concat(array) });
   };
 
   //Function to save the list in the database.
- const saveList = () => {
-    postRequest(`/save-list/list-name/${listData.title}`, listData).then(data => alert(data.message));
-  }
+  const saveList = () => {
+    postRequest(`/save-list/list-name/${listData.title}`, listData).then((data) => alert(data.message)
+    );
+  };
 
   const displayApplicants = (array) => {
     const layOutApplicants = array.map((x, y) => {
@@ -46,7 +49,6 @@ export default function CreateFoodBankList(props) {
 
   return (
     <div id="create_list_wrapper">
-
       <div class="header_wrapper">
         <h1>Create Foodbank List</h1>
       </div>
@@ -76,12 +78,9 @@ export default function CreateFoodBankList(props) {
       />
       <h1>{listData.title}</h1>
       {displayApplicants(listData.attendants)}
-      <button 
-        class="save_button" 
-        type="button"
-        onClick={saveList}
-        >
-        Save</button>
+      <button class="save_button" type="button" onClick={saveList}>
+        Save
+      </button>
     </div>
   );
 }
