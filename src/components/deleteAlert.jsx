@@ -15,7 +15,7 @@ export default function DeleteAlert(props) {
         <button 
         className="delete_button"
         onClick={() => {
-            postRequest("/remove/applicant", props.currentApplicant[0])
+            postRequest(props.routePath, props.selected)
             .then(data => alert(data.message))
             .then(props.handleClick)
             .catch(e => console.log("error has occurred", e));

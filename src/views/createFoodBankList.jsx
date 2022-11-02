@@ -3,12 +3,16 @@ import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
 
+
 export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
   const [listData, setListData] = useState({
     title: "",
     attendants: [],
   });
+  const [editMode, setEditMode] = useState(false);
+
+
 
   //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
@@ -33,11 +37,24 @@ export default function CreateFoodBankList(props) {
     );
   };
 
+ 
+
   const displayApplicants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
         <div key={`applciant_y`}>
-          <p>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
+          <p applicantNumber={y}>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
+          <button 
+            id={y} 
+            style={editMode ? {display: ""} : {display: "none"}} 
+            onClick={(e) => {
+              const previousAttendants = listData.attendants.slice();
+              previousAttendants.splice(parseInt(e.target.id), 1);
+               setListData({...listData, attendants: previousAttendants})
+               }
+            }
+            >
+            Delete</button>
         </div>
       );
     });
@@ -80,6 +97,11 @@ export default function CreateFoodBankList(props) {
       <button class="save_button" type="button" onClick={saveList}>
         Save
       </button>
+      <button 
+        class="edit_button" 
+        type="button" 
+        onClick={() => setEditMode(true)}
+        >Edit</button>
     </div>
   );
 }

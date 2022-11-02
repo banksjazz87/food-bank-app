@@ -90,8 +90,9 @@ export default function SearchApplicants() {
       <DeleteAlert 
         display={deleteAlert} 
         handleClick={showDeleteAlert}
-        currentApplicant={applicantInfo}
-         />
+        selected={applicantInfo[0]}
+        routePath="/remove/applicant"
+        />
     </div>
   );
 }
