@@ -94,12 +94,17 @@ export default function CreateFoodBankList(props) {
       />
       <h1>{listData.title}</h1>
       {displayApplicants(listData.attendants)}
-      <button class="save_button" type="button" onClick={saveList}>
+      <button 
+        class="save_button" 
+        type="button" 
+        style={listData.attendants > 0 ? {display: ""} : {display: "none"}}
+        onClick={saveList}>
         Save
       </button>
       <button 
         class="edit_button" 
         type="button" 
+        style={listData.attendants > 0 ? {display: ""} : {display: "none"}}
         onClick={() => setEditMode(true)}
         >Edit</button>
     </div>
