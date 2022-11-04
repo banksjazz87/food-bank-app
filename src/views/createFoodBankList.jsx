@@ -9,7 +9,9 @@ export default function CreateFoodBankList(props) {
   const [listData, setListData] = useState({
     title: "",
     attendants: [],
+    firstLast: []
   });
+  const [displaySaveEdit, setDisplaySaveEdit] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
 
@@ -25,10 +27,27 @@ export default function CreateFoodBankList(props) {
     });
   };
 
+  //Function to display the save and edit buttons.
+  const showSaveEdit = () => {
+    if (!displaySaveEdit) {
+      setDisplaySaveEdit(true);
+    }
+  }
   //Function used to add a new attendant to the foodbank list.
   const addNewAttendant = (array) => {
+    showSaveEdit();
+    let previousFirstLast = listData.firstLast.slice();
+    let currentFirstLast = `${array[0].firstName}${array[0].lastName}`;
+    console.log('current first last', currentFirstLast);
+
+    if (previousFirstLast.indexOf(currentFirstLast) === -1) {
     const previousAttendants = listData.attendants.slice();
-    setListData({ ...listData, attendants: previousAttendants.concat(array) });
+    setListData({ ...listData, attendants: previousAttendants.concat(array), 
+    firstLast: previousFirstLast.concat([currentFirstLast]) });
+
+    } else {
+      alert (`${array[0].firstName} ${array[0].lastName} is already included in the current list.`)
+    }
   };
 
   //Function to save the list in the database.
@@ -97,14 +116,14 @@ export default function CreateFoodBankList(props) {
       <button 
         class="save_button" 
         type="button" 
-        style={listData.attendants > 0 ? {display: ""} : {display: "none"}}
+        style={displaySaveEdit ? {display: ""} : {display: "none"}}
         onClick={saveList}>
         Save
       </button>
       <button 
         class="edit_button" 
         type="button" 
-        style={listData.attendants > 0 ? {display: ""} : {display: "none"}}
+        style={displaySaveEdit ? {display: ""} : {display: "none"}}
         onClick={() => setEditMode(true)}
         >Edit</button>
     </div>
