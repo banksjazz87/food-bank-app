@@ -3,18 +3,15 @@ import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
 
-
 export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
   const [listData, setListData] = useState({
     title: "",
     attendants: [],
-    firstLast: []
+    firstLast: [],
   });
   const [displaySaveEdit, setDisplaySaveEdit] = useState(false);
   const [editMode, setEditMode] = useState(false);
-
-
 
   //Function that is used when the submit button is pushed after creating the title.
   const submitListTitle = () => {
@@ -32,48 +29,56 @@ export default function CreateFoodBankList(props) {
     if (!displaySaveEdit) {
       setDisplaySaveEdit(true);
     }
-  }
-  //Function used to add a new attendant to the foodbank list.
+  };
+
+  /**
+   *
+   * @param {*} array
+   * @description this function will check and make sure that their isn't already an attendant with the same first and last name in the list.  If there is a duplicate, an alert will be displayed notifying the user.  Otherwise, the name will be added to the list and all of the attendant data will be stored in the listData.attendants array.  The showSaveEdit function is also called to determine if the save and edit buttons should be displayed.
+   */
   const addNewAttendant = (array) => {
     showSaveEdit();
+
     let previousFirstLast = listData.firstLast.slice();
     let currentFirstLast = `${array[0].firstName}${array[0].lastName}`;
-    console.log('current first last', currentFirstLast);
 
     if (previousFirstLast.indexOf(currentFirstLast) === -1) {
-    const previousAttendants = listData.attendants.slice();
-    setListData({ ...listData, attendants: previousAttendants.concat(array), 
-    firstLast: previousFirstLast.concat([currentFirstLast]) });
-
+      const previousAttendants = listData.attendants.slice();
+      setListData({
+        ...listData,
+        attendants: previousAttendants.concat(array),
+        firstLast: previousFirstLast.concat([currentFirstLast]),
+      });
     } else {
-      alert (`${array[0].firstName} ${array[0].lastName} is already included in the current list.`)
+      alert(
+        `${array[0].firstName} ${array[0].lastName} is already included in the current list.`
+      );
     }
   };
 
   //Function to save the list in the database.
   const saveList = () => {
-    postRequest(`/save-list/list-name/${listData.title}`, listData).then((data) => alert(data.message)
+    postRequest(`/save-list/list-name/${listData.title}`, listData).then(
+      (data) => alert(data.message)
     );
   };
-
- 
 
   const displayApplicants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
         <div key={`applciant_y`}>
           <p applicantNumber={y}>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
-          <button 
-            id={y} 
-            style={editMode ? {display: ""} : {display: "none"}} 
+          <button
+            id={y}
+            style={editMode ? { display: "" } : { display: "none" }}
             onClick={(e) => {
               const previousAttendants = listData.attendants.slice();
               previousAttendants.splice(parseInt(e.target.id), 1);
-               setListData({...listData, attendants: previousAttendants})
-               }
-            }
-            >
-            Delete</button>
+              setListData({ ...listData, attendants: previousAttendants });
+            }}
+          >
+            Delete
+          </button>
         </div>
       );
     });
@@ -113,19 +118,22 @@ export default function CreateFoodBankList(props) {
       />
       <h1>{listData.title}</h1>
       {displayApplicants(listData.attendants)}
-      <button 
-        class="save_button" 
-        type="button" 
-        style={displaySaveEdit ? {display: ""} : {display: "none"}}
-        onClick={saveList}>
+      <button
+        class="save_button"
+        type="button"
+        style={displaySaveEdit ? { display: "" } : { display: "none" }}
+        onClick={saveList}
+      >
         Save
       </button>
-      <button 
-        class="edit_button" 
-        type="button" 
-        style={displaySaveEdit ? {display: ""} : {display: "none"}}
+      <button
+        class="edit_button"
+        type="button"
+        style={displaySaveEdit ? { display: "" } : { display: "none" }}
         onClick={() => setEditMode(true)}
-        >Edit</button>
+      >
+        Edit
+      </button>
     </div>
   );
 }
