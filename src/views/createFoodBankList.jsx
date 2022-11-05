@@ -49,8 +49,6 @@ export default function CreateFoodBankList(props) {
         attendants: previousAttendants.concat(array),
         firstLast: previousFirstLast.concat([currentFirstLast]),
       });
-
-      console.log(array[0]);
       saveList(listData.title, array[0]);
       
     } else {
@@ -60,10 +58,16 @@ export default function CreateFoodBankList(props) {
     }
   };
 
+  
+
   //Function to save the list in the database.
   const saveList = (table, obj) => {
     postRequest(`/save-list/list-name/${table}`, obj).then(
-      (data) => alert(data.message)
+      (data) => {
+        if (data.message !== "success") {
+        alert(data.message);
+        }
+      }
     );
   };
 
@@ -122,14 +126,6 @@ export default function CreateFoodBankList(props) {
       />
       <h1>{listData.title}</h1>
       {displayApplicants(listData.attendants)}
-      <button
-        class="save_button"
-        type="button"
-        style={displaySaveEdit ? { display: "" } : { display: "none" }}
-        onClick={saveList}
-      >
-        Save
-      </button>
       <button
         class="edit_button"
         type="button"

@@ -321,7 +321,7 @@ app.post("/save-list/list-name/:listName", (req, res) => {
 
   insertApplicants.then((data) => {
     if (data.protocol41 === true) {
-      res.send({message: `Table ${req.params.listName} has been saved.`})
+      res.send({message: "success"})
     }
   }).catch((e) => {
     res.send(sqlError(e));
