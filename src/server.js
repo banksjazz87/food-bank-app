@@ -294,7 +294,7 @@ app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
 
 //This will create an insert method when a new list is saved.
 app.post("/save-list/list-name/:listName", (req, res) => {
-  let requestDataValues = req.body.attendants.map((x) => {
+  /*let requestDataValues = req.body.attendants.map((x) => {
     return [
       x.firstName,
       x.lastName,
@@ -302,11 +302,13 @@ app.post("/save-list/list-name/:listName", (req, res) => {
       (x["present"] = "false"),
       x.ApplicantID,
     ];
-  });
+  });*/
+
+  let requestDataValues = [req.body.firstName, req.body.lastName, req.body.phone, "false", req.body.ApplicantID];
 
   let insertApplicants = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = `INSERT INTO ${req.params.listName} (firstName, lastName, phone, present, ApplicantID) VALUES ?;`;
+    let sql = `INSERT INTO ${req.params.listName} (firstName, lastName, phone, present, ApplicantID) VALUES (?);`;
 
     currentDb.query(sql, [requestDataValues], (err, results) => {
       if (err) {
@@ -321,5 +323,8 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     if (data.protocol41 === true) {
       res.send({message: `Table ${req.params.listName} has been saved.`})
     }
-  }).catch((e) => console.log("ERROR", e))
+  }).catch((e) => {
+    res.send(sqlError(e));
+    console.log('error', e);
+  })
 });

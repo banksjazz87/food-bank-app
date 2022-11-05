@@ -49,6 +49,10 @@ export default function CreateFoodBankList(props) {
         attendants: previousAttendants.concat(array),
         firstLast: previousFirstLast.concat([currentFirstLast]),
       });
+
+      console.log(array[0]);
+      saveList(listData.title, array[0]);
+      
     } else {
       alert(
         `${array[0].firstName} ${array[0].lastName} is already included in the current list.`
@@ -57,8 +61,8 @@ export default function CreateFoodBankList(props) {
   };
 
   //Function to save the list in the database.
-  const saveList = () => {
-    postRequest(`/save-list/list-name/${listData.title}`, listData).then(
+  const saveList = (table, obj) => {
+    postRequest(`/save-list/list-name/${table}`, obj).then(
       (data) => alert(data.message)
     );
   };
