@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
+import deleteRequest from "../functions/deleteRequest.js";
 
 export default function CreateFoodBankList(props) {
   const [listName, setListName] = useState({ title: "" });
@@ -71,6 +72,20 @@ export default function CreateFoodBankList(props) {
     );
   };
 
+  //function to handle the delete event 
+  const deleteAttendantFromList = (index) => {
+    const previousAttendants = listData.attendants.slice();
+    previousAttendants.splice(parseInt(index), 1);
+    setListData({ ...listData, attendants: previousAttendants });
+  }
+
+  //Remove attendant from the database
+  const deleteAttendantFromDatabase = (array,index, table) => {
+    const indexOfSelected = parseInt(index);
+    deleteRequest(`/remove-attendant/table/${table}`, array[indexOfSelected]).then(data => console.log(data));
+
+  }
+
   const displayApplicants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
@@ -80,10 +95,10 @@ export default function CreateFoodBankList(props) {
             id={y}
             style={editMode ? { display: "" } : { display: "none" }}
             onClick={(e) => {
-              const previousAttendants = listData.attendants.slice();
-              previousAttendants.splice(parseInt(e.target.id), 1);
-              setListData({ ...listData, attendants: previousAttendants });
-            }}
+              deleteAttendantFromList(e.target.id);
+              deleteAttendantFromDatabase(listData.attendants, e.target.id, listData.title);
+             }
+            }
           >
             Delete
           </button>

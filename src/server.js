@@ -294,16 +294,6 @@ app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
 
 //This will create an insert method when a new list is saved.
 app.post("/save-list/list-name/:listName", (req, res) => {
-  /*let requestDataValues = req.body.attendants.map((x) => {
-    return [
-      x.firstName,
-      x.lastName,
-      x.phone,
-      (x["present"] = "false"),
-      x.ApplicantID,
-    ];
-  });*/
-
   let requestDataValues = [req.body.firstName, req.body.lastName, req.body.phone, "false", req.body.ApplicantID];
 
   let insertApplicants = new Promise((resolve, reject) => {
@@ -327,4 +317,28 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     res.send(sqlError(e));
     console.log('error', e);
   })
+});
+
+app.delete('/remove-attendant/table/:tableName', (req, res) => {
+  let firstName = req.body.firstName;
+  let lastName = req.body.lastName;
+  let id = req.body.ApplicantID;
+  let table = req.params.tableName;
+
+  let removeAttendant = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `DELETE FROM ${table} WHERE firstName = "${firstName}" AND lastName = "${lastName}" AND ApplicantID = "${id}";`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  removeAttendant
+    .then(data => console.log("Success", data))
+    .catch(err => console.log('failure', err))
 });
