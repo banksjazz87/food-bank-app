@@ -272,26 +272,6 @@ app.post("/new_foodbank_list", (req, res, next) => {
     });
 });
 
-//This will be used to return a specific list from the database.
-app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
-  let retrieveTable = new Promise((resolve, reject) => {
-    let currentDb = mysql.createConnection(Db);
-    let sql = `SELECT * FROM ${req.params.listName};`;
-
-    currentDb.query(sql, (err, results) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(results);
-      }
-    });
-  });
-
-  retrieveTable.then((data) => {
-    res.send(data);
-  });
-});
-
 //This will create an insert method when a new list is saved.
 app.post("/save-list/list-name/:listName", (req, res) => {
   let requestDataValues = [req.body.firstName, req.body.lastName, req.body.phone, "false", req.body.ApplicantID];
@@ -319,6 +299,7 @@ app.post("/save-list/list-name/:listName", (req, res) => {
   })
 });
 
+//Method used to remove an attendant from a foodbank list.
 app.delete('/remove-attendant/table/:tableName', (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
@@ -342,3 +323,51 @@ app.delete('/remove-attendant/table/:tableName', (req, res) => {
     .then(data => console.log("Success", data))
     .catch(err => console.log('failure', err))
 });
+
+
+//This will be use to return all tables from the database.
+app.get("/all/food-bank-lists", (req, res) => {
+
+  let retrieveAllLists = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT * FROM FoodBankList`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  retrieveAllLists.then((data) => {
+    console.log('success');
+    res.send({message: "success", allData: data});
+  }).catch((err) => {
+    console.log('error', err);
+    res.send(sqlError(err));
+  });
+});
+
+
+//This will be used to return a specific list from the database.
+app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
+  let retrieveTable = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT * FROM ${req.params.listName};`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  retrieveTable.then((data) => {
+    res.send(data);
+  });
+});
+

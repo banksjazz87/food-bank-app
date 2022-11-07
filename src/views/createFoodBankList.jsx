@@ -85,10 +85,10 @@ export default function CreateFoodBankList() {
     ).then((data) => console.log(data));
   };
 
-  const displayApplicants = (array) => {
+  const displayAttendants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
-        <div key={`applciant_y`}>
+        <div key={`attendant_y`}>
           <p applicantNumber={y}>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
           <button
             id={y}
@@ -147,7 +147,7 @@ export default function CreateFoodBankList() {
           value="Add To List"
         />
         <h1>{listData.title}</h1>
-        {displayApplicants(listData.attendants)}
+        {displayAttendants(listData.attendants)}
         <button
           class="edit_button"
           type="button"

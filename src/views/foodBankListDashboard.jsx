@@ -17,7 +17,8 @@ export default function FoodBankListDashboard() {
 
       <div id="icon_wrapper">
         <FBDashboardIcon title="Create List" clickHandler={() => navigate("/create-foodbank-list")} />
-        <FBDashboardIcon title="Search Lists" />
+        <FBDashboardIcon title="Past Lists" clickHandler={() => navigate("/past-registered-list")} />
+        <FBDashboardIcon title="Current Lists" clickHandler={() => navigate("/current-registered-list")} />
       </div>
     </div>
   );

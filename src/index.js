@@ -33,12 +33,12 @@ root.render(
       <Route path="new_applicant" element={<Applicant />} />
       <Route path="login" element={<Login />} />
       <Route path="search" element={<SearchApplicants />} />
-      <Route path="current_registered_list" element={<DisplayFoodBankList />} />
+      <Route path="current-registered-list" element={<DisplayFoodBankList />} />
       <Route path="foodbank-list-dashboard" element={<FoodBankListDashboard />} />
       <Route path="create-foodbank-list" element={<CreateFoodBankList />} />
 
 
-      <Route path="past_registered_list" element={<PastLists />} />
+      <Route path="past-registered-list" element={<PastLists />} />
     </Routes>
   </BrowserRouter>
 );
