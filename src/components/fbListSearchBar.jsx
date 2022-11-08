@@ -37,14 +37,23 @@ export default function FbListSearchBar(props) {
         method="get"
         onSubmit={(e) => {
           e.preventDefault();
+          fetch(`/get-past-list/list-name/${props.selectedItem.title}`)
+            .then(res => res.json())
+            .then((tableData) => {
+                if (tableData.allData.length > 0) {
+                    alert('this table has data');
+                } else {
+                    alert('delete this, no data')
+                }
+            });
+
         }}
       >
         <select 
             id="table_select"
             onChange={(e) => {
-                let indexValue = MathFunctions.returnFirstNumbers(e.target.value);
+                let indexValue = MathFunctions.returnFirstNumbers(e.target.value) - 1;
                 props.changeHandler(data, indexValue);
-                console.log(data[indexValue]);
             }}>
           <option>Select one...</option>
           {selectValues(data)}

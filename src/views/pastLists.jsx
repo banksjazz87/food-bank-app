@@ -16,7 +16,8 @@ export default function PastLists() {
         <div>
             <h1>All Past Lists</h1>
             <FbListSearchBar
-            changeHandler={selectedList} 
+            changeHandler={selectedList}
+            selectedItem={list} 
             />
 
             <p>{`Current Selected List is ${list.title}`} </p>

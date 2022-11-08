@@ -352,7 +352,8 @@ app.get("/all/food-bank-lists", (req, res) => {
 
 
 //This will be used to return a specific list from the database.
-app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
+app.get("/get-past-list/list-name/:listName/", (req, res) => {
+
   let retrieveTable = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `SELECT * FROM ${req.params.listName};`;
@@ -367,7 +368,16 @@ app.get("get-past-list/list-name/:listName/list-id/:listID", (req, res) => {
   });
 
   retrieveTable.then((data) => {
-    res.send(data);
-  });
+    res.send({message: "Success", allData: data});
+    console.log('success', data);
+  }).catch((e) => {
+    res.send(sqlError(e));
+    console.log('error', e);
+  })
 });
+
+//
+//app.delete('delete-list/list-name/:listName', (req, res))
+
+
 
