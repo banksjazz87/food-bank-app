@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import MathFunctions from "../functions/mathFunctions.js";
 
-export default function FbListSearchBar() {
+export default function FbListSearchBar(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -13,13 +14,15 @@ export default function FbListSearchBar() {
       .catch((error) => alert(`error, ${error} has occured`));
   }, []);
 
+  
+
+  //Display the options.
   const selectValues = (array) => {
     const returnValues = array.map((x, y) => {
       return (
         <option
           key={`foodBankList_${y}`}
           value={`${y + 1}. ${x.title}`}
-          number={y}
         >{`${y + 1}. ${x.title}`}</option>
       );
     });
@@ -36,7 +39,13 @@ export default function FbListSearchBar() {
           e.preventDefault();
         }}
       >
-        <select id="table_select">
+        <select 
+            id="table_select"
+            onChange={(e) => {
+                let indexValue = MathFunctions.returnFirstNumbers(e.target.value);
+                props.changeHandler(data, indexValue);
+                console.log(data[indexValue]);
+            }}>
           <option>Select one...</option>
           {selectValues(data)}
         </select>

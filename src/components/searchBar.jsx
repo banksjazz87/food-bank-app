@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/searchBar.scss";
+import MathFunctions from "../functions/mathFunctions.js";
 
 //For Development only
 //import DummyData from "../variables/dummyData.js";
@@ -8,14 +9,14 @@ import "../assets/styles/searchBar.scss";
 export default function AllApplicantSearchBar(props) {
   //Setting the initial applicant data.
   //use for production
-const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   //use for development
   //let data = DummyData;
 
   const [input, setInput] = useState({});
 
- useEffect(() => {
+  useEffect(() => {
     fetch("/all-applicants")
       .then((response) => response.json())
       .then((final) => {
@@ -24,32 +25,10 @@ const [data, setData] = useState([]);
       .catch((e) => console.log("error", e));
   }, []);
 
-
-
-
- /**
-  * 
-  * @param {*} string 
-  * @returns all numbers from a string.
-  */
-function returnNums(string){
-    let num = "";
-
-    for (let i = 0; i < string.length; i++) {
-      let numCheck = parseInt(string[i]);
-      if (!isNaN(numCheck)) {
-        num = num + string[i];
-      }
-    }
-
-    return num;
-  };
-
-
   /**
-   * 
-   * @param {*} index 
-   * @param {*} array 
+   *
+   * @param {*} index
+   * @param {*} array
    * updates the input object with the key, firstName, and lastName.
    */
   const selectedItem = (index, array) => {
@@ -92,31 +71,29 @@ function returnNums(string){
             e.preventDefault();
 
             //used for production
-           fetch(`/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`)
-            .then(res => res.json())
-            .then(final => props.handleChange(final))
+            fetch(
+              `/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`
+            )
+              .then((res) => res.json())
+              .then((final) => props.handleChange(final));
 
             //used for development
-           // props.handleChange([data[0]]);
-            
+            // props.handleChange([data[0]]);
           }}
         >
           <label for="applicants">Applicants</label>
           <select
             name="applicants"
             id="applicants"
-            onChange={(e) => selectedItem(returnNums(e.target.value), data)}
+            onChange={(e) =>
+              selectedItem(MathFunctions.returnNums(e.target.value), data)
+            }
           >
             <option>Choose from the following...</option>
             {allNames(data)}
           </select>
-          <input 
-            id="applicantSearchSubmit" 
-            type="submit" 
-            value={props.value}
-            />
+          <input id="applicantSearchSubmit" type="submit" value={props.value} />
         </form>
-
       </div>
     );
   }
