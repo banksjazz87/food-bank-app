@@ -376,8 +376,43 @@ app.get("/get-past-list/list-name/:listName/", (req, res) => {
   })
 });
 
-//
-//app.delete('delete-list/list-name/:listName', (req, res))
+//this function will be used to delete a list from the database and it also removes the list from the table that holds all of the list names.
+app.delete('/delete-list/', (req, res) => {
+
+ let removeFromList = new Promise((resolve, reject) => {
+  let currentDb = mysql.createConnection(Db);
+  let sql = `DELETE FROM FoodBankList WHERE Table_ID = ${req.body.Table_ID} AND title = "${req.body.title}";`;
+
+  currentDb.query(sql, (err, result) => {
+    if (err) {
+      return reject(err);
+    } else {
+      return resolve(result);
+    }
+  });
+ });
+
+
+ let removeTable = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `DROP TABLE ${req.body.title};`;
+
+    currentDb.query(sql, (err, result) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(result);
+      }
+    });
+  })
+
+  Promise.all([removeFromList, removeTable]).then((data) => {
+    res.send({message: `${req.body.title} has been successfully removed from the database`});
+  }).catch((e) => {
+    res.send(sqlError(e));
+  });
+
+});
 
 
 

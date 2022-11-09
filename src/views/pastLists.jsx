@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import FbListSearchBar from "../components/fbListSearchBar.jsx";
+import deleteRequest from "../functions/deleteRequest.js";
 
 export default function PastLists() {
     const [list, setList] = useState({Table_ID: "", title: "testing", DateCreated: ""});
@@ -21,6 +22,10 @@ export default function PastLists() {
             />
 
             <p>{`Current Selected List is ${list.title}`} </p>
+            <button onClick={() => {
+                deleteRequest('/delete-list', list)
+                .then(data => alert(data.message));
+            }}>Delete Table</button>
         </div>
     )
 }
