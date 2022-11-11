@@ -37,7 +37,7 @@ export default function NavBar() {
       "new_applicant",
       "search",
       "current_registered_list",
-      "past_registered_list",
+      "past-registered-list",
       "create-foodbank-list"
     ];
 
