@@ -5,12 +5,12 @@ import NavBar from "../components/navBar.jsx";
 import DisplayList from "../components/displayFbList.jsx";
 
 export default function PastLists() {
+
   const [list, setList] = useState({
     Table_ID: "",
-    title: "testing",
+    title: "",
     DateCreated: "",
   });
-
   const selectedList = (array, index) => {
     setList({
       ...list,
@@ -21,10 +21,23 @@ export default function PastLists() {
   };
 
   const [listAttendants, setListAttendants] = useState([]);
-
   const updateAttendants = (array) => {
     setListAttendants(array);
   };
+  const removeAttendant = (array, index) => {
+    const copyOfArr = array.slice();
+    copyOfArr.splice(index, 1);
+    setListAttendants(copyOfArr);
+  }
+
+
+  const [showList, setShowList] = useState(false);
+  const displayList = () => {
+    if (showList === false) {
+        setShowList(true);
+    }
+  }
+
   return (
     <div id="past_lists-wrapper">
       <h1>All Past Lists</h1>
@@ -33,6 +46,7 @@ export default function PastLists() {
         changeHandler={selectedList}
         selectedItem={list}
         updateAttendants={updateAttendants}
+        displayListHandler={displayList}
       />
 
       <p>{`Current Selected List is ${list.title}`} </p>
@@ -49,6 +63,9 @@ export default function PastLists() {
         allAttendants={listAttendants}
         title={list.title}
         dateModified={list.DateCreated}
+        displayList={showList}
+        removeAttendantRoute={`/remove-attendant/table/${list.title}`}
+        removeHandler={removeAttendant}
       />
 
     <button

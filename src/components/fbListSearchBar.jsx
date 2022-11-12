@@ -39,6 +39,7 @@ export default function FbListSearchBar(props) {
             .then((tableData) => {
               if (tableData.allData.length > 0) {
                 props.updateAttendants(tableData.allData);
+                props.displayListHandler();
               } else {
                 alert("This table has no data");
               }
