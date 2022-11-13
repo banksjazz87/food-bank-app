@@ -10,7 +10,7 @@ export default function EditDeleteButtons(props) {
       <button className="edit_button" type="button" onClick={props.editClick}>
         Edit
       </button>
-      <button className="print_button" type="button" onClick={props.deleteClick}>
+      <button className="print_button" type="button" onClick={props.printClick}>
         Print
       </button>
       <button className="delete_button" type="button" onClick={props.deleteClick}>

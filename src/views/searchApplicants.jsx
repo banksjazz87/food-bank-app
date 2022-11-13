@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayPastApplicant.jsx";
-import EditDeleteButtons from "../components/editDeleteButtons";
+import EditDeleteButtons from "../components/editDeleteButtons.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
+//import postRequest from "../functions/post.js";
 
 export default function SearchApplicants() {
   //Will be used to update the current information about the applicant.
@@ -68,28 +69,28 @@ export default function SearchApplicants() {
   return (
     <div id="search_applicant_wrapper">
       <h1>Search Applicants</h1>
-      <NavBar />
-      <AllApplicantSearchBar 
+     <NavBar />
+     <AllApplicantSearchBar 
         handleChange={updateApplicant}
         value="Submit" />
       <DisplayApplicant
         currentApplicant={applicantInfo}
         display={showApplicant}
       />
-      <EditDeleteButtons
+     <EditDeleteButtons
         display={showApplicant}
         editClick={displayEdit}
-        deleteClick={showDeleteAlert}
+        printClick={() => {alert('print has been selected')}}
+        deleteClick={() => {setDeleteAlert(true)}}
       />
-      
-      <EditPage
+     <EditPage
         display={showEditPage}
         currentApplicant={applicantInfo}
         handleChange={updateInfo}
       />
       <DeleteAlert 
         display={deleteAlert} 
-        handleClick={showDeleteAlert}
+        noClickHandler={showDeleteAlert}
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
         />

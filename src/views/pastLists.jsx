@@ -3,6 +3,7 @@ import FbListSearchBar from "../components/fbListSearchBar.jsx";
 import deleteRequest from "../functions/deleteRequest.js";
 import NavBar from "../components/navBar.jsx";
 import DisplayList from "../components/displayFbList.jsx";
+import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function PastLists() {
 
@@ -33,6 +34,8 @@ export default function PastLists() {
     }
   }
 
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+
   return (
     <div id="past_lists-wrapper">
       <h1>All Past Lists</h1>
@@ -53,13 +56,18 @@ export default function PastLists() {
 
     <button
         onClick={() => {
-          deleteRequest("/delete-list", list).then((data) =>
-            alert(data.message)
-          );
+          setShowDeleteAlert(true);
         }}
       >
         Delete Table
       </button>
+
+      <DeleteAlert 
+        noClickHandler={() => {setShowDeleteAlert(false)}}
+        display={showDeleteAlert}
+        routePath={"/delete-list"}
+        selected={list}
+    />
     </div>
   );
 }
