@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import FbListSearchBar from "../components/fbListSearchBar.jsx";
-import deleteRequest from "../functions/deleteRequest.js";
 import NavBar from "../components/navBar.jsx";
 import DisplayList from "../components/displayFbList.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function PastLists() {
-
   const [list, setList] = useState({
     Table_ID: "",
     title: "",
@@ -25,14 +23,13 @@ export default function PastLists() {
   const updateAttendants = (array) => {
     setListAttendants(array);
   };
-  
 
   const [showList, setShowList] = useState(false);
   const displayList = () => {
     if (showList === false) {
-        setShowList(true);
+      setShowList(true);
     }
-  }
+  };
 
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
@@ -46,7 +43,7 @@ export default function PastLists() {
         updateAttendants={updateAttendants}
         displayListHandler={displayList}
       />
-     
+
       <DisplayList
         allAttendants={listAttendants}
         title={list.title}
@@ -54,7 +51,7 @@ export default function PastLists() {
         displayList={showList}
       />
 
-    <button
+      <button
         onClick={() => {
           setShowDeleteAlert(true);
         }}
@@ -62,12 +59,14 @@ export default function PastLists() {
         Delete Table
       </button>
 
-      <DeleteAlert 
-        noClickHandler={() => {setShowDeleteAlert(false)}}
+      <DeleteAlert
+        noClickHandler={() => {
+          setShowDeleteAlert(false);
+        }}
         display={showDeleteAlert}
         routePath={"/delete-list"}
         selected={list}
-    />
+      />
     </div>
   );
 }

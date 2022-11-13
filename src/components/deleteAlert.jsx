@@ -12,21 +12,18 @@ export default function DeleteAlert(props) {
         Are you sure that you would like to permanently delete this applicant?
       </p>
       <div id="delete_alert_buttons">
-        <button 
-        className="delete_button"
-        onClick={() => {
+        <button
+          className="delete_button"
+          onClick={() => {
             deleteRequest(props.routePath, props.selected)
-            .then(data => alert(data.message))
-            .then(props.noClickHandler)
-            .catch(e => console.log("error has occurred", e));
-
-        }
-            }>
+              .then((data) => alert(data.message))
+              .then(props.noClickHandler)
+              .catch((e) => console.log("error has occurred", e));
+          }}
+        >
           Yes
         </button>
-        <button  onClick={props.noClickHandler}>
-          No
-        </button>
+        <button onClick={props.noClickHandler}>No</button>
       </div>
     </div>
   );
