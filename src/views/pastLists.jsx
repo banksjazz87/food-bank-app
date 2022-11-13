@@ -24,12 +24,7 @@ export default function PastLists() {
   const updateAttendants = (array) => {
     setListAttendants(array);
   };
-  const removeAttendant = (array, index) => {
-    const copyOfArr = array.slice();
-    copyOfArr.splice(index, 1);
-    setListAttendants(copyOfArr);
-  }
-
+  
 
   const [showList, setShowList] = useState(false);
   const displayList = () => {
@@ -48,24 +43,12 @@ export default function PastLists() {
         updateAttendants={updateAttendants}
         displayListHandler={displayList}
       />
-
-      <p>{`Current Selected List is ${list.title}`} </p>
-      <button
-        onClick={() => {
-          deleteRequest("/delete-list", list).then((data) =>
-            alert(data.message)
-          );
-        }}
-      >
-        Delete Table
-      </button>
+     
       <DisplayList
         allAttendants={listAttendants}
         title={list.title}
         dateModified={list.DateCreated}
         displayList={showList}
-        removeAttendantRoute={`/remove-attendant/table/${list.title}`}
-        removeHandler={removeAttendant}
       />
 
     <button
