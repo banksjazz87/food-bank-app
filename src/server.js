@@ -414,5 +414,29 @@ app.delete('/delete-list/', (req, res) => {
 
 });
 
+app.get('/most-recent-fb-list', (req, res) => {
+
+  let getFoodBankLists = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = "SELECT * FROM FoodBankList ORDER BY DateCreated DESC";
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  getFoodBankLists.then((data) => {
+    res.send({message: "success", allData: data[0]})
+    console.log("Success in getting data");
+  }).catch((error) => {
+    res.send(sqlError(error));
+    console.log("Failure in getting data");
+  });
+})
+
 
 

@@ -17,7 +17,7 @@ import App from "./App";
 import Applicant from "./views/newApplicant.jsx";
 import Login from "./views/login.jsx";
 import SearchApplicants from "./views/searchApplicants.jsx";
-import DisplayFoodBankList from "./views/displayFoodBankList.jsx";
+import DisplayCurrentFoodBankList from "./views/currentFoodBankList.jsx";
 import PastLists from "./views/pastLists.jsx";
 import Dashboard from "./views/dashBoard.jsx";
 import FoodBankListDashboard from "./views/foodBankListDashboard.jsx";
@@ -33,11 +33,9 @@ root.render(
       <Route path="new_applicant" element={<Applicant />} />
       <Route path="login" element={<Login />} />
       <Route path="search" element={<SearchApplicants />} />
-      <Route path="current-registered-list" element={<DisplayFoodBankList />} />
+      <Route path="current-registered-list" element={<DisplayCurrentFoodBankList />} />
       <Route path="foodbank-list-dashboard" element={<FoodBankListDashboard />} />
       <Route path="create-foodbank-list" element={<CreateFoodBankList />} />
-
-
       <Route path="past-registered-list" element={<PastLists />} />
     </Routes>
   </BrowserRouter>
