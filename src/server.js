@@ -414,6 +414,7 @@ app.delete('/delete-list/', (req, res) => {
 
 });
 
+//Retrieve the most recent food bank list title.
 app.get('/most-recent-fb-list', (req, res) => {
 
   let getFoodBankLists = new Promise((resolve, reject) => {

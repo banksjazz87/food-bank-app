@@ -2,26 +2,17 @@ import React, { useState, useEffect } from "react";
 import postRequest from "../functions/post.js";
 import "../assets/styles/displayFoodBankList.scss";
 
-export default function DisplayFoodBankList() {
-
-  //This hook will be updating the state of the current attendance for the people already enrolled in the food bank.
-  const [data, setData] = useState([]);
+export default function DisplayCurrentFoodBankList(props) {
 
   //This hook will be keeping track of when the user clicks a check box and will also trigger a module with a submit button to appear.
   const [clickedBox, setClickedBox] = useState(false);
 
-  //Get the current food bank list and update the data state.
-  useEffect(() => {
-    fetch("/dummy_data")
-      .then((response) => response.json())
-      .then((final) => setData(final))
-      .catch((e) => console.log("error", e));
-  }, []);
-
+  
   //A function just to execute two functions when a checkbox is selected.
   const clicked = (array) => {
-    setData(array);
-    setClickedBox(true);
+    //setData(props.tableData);
+    //setClickedBox(true);
+    console.log('clicked');
   };
 
   /**
@@ -31,7 +22,7 @@ export default function DisplayFoodBankList() {
    * @returns updates both the data and the clickedBox states
    */
   const memberClicked = (current) => {
-    let copyOfData = [...data];
+    let copyOfData = [...props.tableData];
     let index = copyOfData.indexOf(current);
 
     if (current["attended"]) {
@@ -54,7 +45,7 @@ export default function DisplayFoodBankList() {
           value={true}
           onClick={() => {
             memberClicked(currentMember);
-            console.log("this is the current data", data);
+            //console.log("this is the current data", data);
           }}
           checked
         />
@@ -68,7 +59,7 @@ export default function DisplayFoodBankList() {
           value={true}
           onClick={() => {
             memberClicked(currentMember);
-            console.log("this is the current data", data);
+            //console.log("this is the current data", data);
           }}
         />
       );
@@ -81,9 +72,9 @@ export default function DisplayFoodBankList() {
     const renderNames = currentList.map((x, y) => {
       return (
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
-          <td>{alreadyChecked(x)}</td>
-          <td id="firstName">{x.firstName}</td>
           <td id="lastName">{x.lastName}</td>
+          <td id="firstName">{x.firstName}</td>
+          <td>{alreadyChecked(x)}</td>
         </tr>
       );
     });
@@ -91,29 +82,30 @@ export default function DisplayFoodBankList() {
   };
 
   //The main return section for this page.
-  if (data.length === 0) {
+  if (props.tableData.length === 0) {
     return <h1>Data is Loading</h1>;
   } else {
     return (
       <div id="list_wrapper">
-      <h1>Food Bank Attendance Sheet</h1>
+      <h1>{`${props.title}`}</h1>
+      <h1>Attendance Sheet</h1>
         <form
           action='/foodBank_attendance/check_sheet'
           method="post"
           onSubmit={(e) => {
             e.preventDefault();
             setClickedBox(false);
-            postRequest("/foodBank_attendance/check_sheet", {updatedData: data});
+            postRequest("/foodBank_attendance/check_sheet", {updatedData: props.tableData});
           }}
         >
           <table>
             <tr id="header_row">
-              <th>Present</th>
-              <th>First Name</th>
               <th>Last Name</th>
+              <th>First Name</th>
+              <th>Present</th>
             </tr>
 
-            {displayList(data)}
+            {displayList(props.tableData)}
           </table>
           <div 
             id="submit_module" 
