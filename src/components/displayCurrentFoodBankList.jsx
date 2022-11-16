@@ -2,37 +2,48 @@ import React, { useState, useEffect } from "react";
 import postRequest from "../functions/post.js";
 import "../assets/styles/displayFoodBankList.scss";
 
-export default function DisplayCurrentFoodBankList(props) {
+export default function DisplayCurrentFoodBankList() {
 
-  //This hook will be keeping track of when the user clicks a check box and will also trigger a module with a submit button to appear.
-  const [clickedBox, setClickedBox] = useState(false);
+   //This will hold the value for the table title and date created.
+   const [tableInfo, setTableInfo] = useState({});
 
-  
-  //A function just to execute two functions when a checkbox is selected.
-  const clicked = (array) => {
-    //setData(props.tableData);
-    //setClickedBox(true);
-    console.log('clicked');
-  };
-
-  /**
-   *
-   * @param {*} current
-   * @description makes a copy of the current data and then updates the index of the 'current' clicked value.
-   * @returns updates both the data and the clickedBox states
-   */
-  const memberClicked = (current) => {
-    let copyOfData = [...props.tableData];
-    let index = copyOfData.indexOf(current);
-
-    if (current["attended"]) {
-      copyOfData[index]["attended"] = false;
-      return clicked(copyOfData);
-    } else {
-      copyOfData[index]["attended"] = true;
-      return clicked(copyOfData);
-    }
-  };
+   //This will hold all of the values of the most recent table.
+   const [table, setTable] = useState([]);
+ 
+   //Setting the tableInfo as well as the table data on the initial render.
+   useEffect(() => {
+     fetch("/most-recent-fb-list")
+       .then((data) => data.json())
+       .then((final) => {
+         if (final.message === "success") {
+           setTableInfo({
+             ...tableInfo,
+             title: final.allData.title,
+             dateCreated: final.allData.dateCreated,
+           });
+           fetch(`/get-past-list/list-name/${final.allData.title}`)
+             .then((data) => data.json())
+             .then((result) => setTable(result.allData));
+         } else {
+           alert(final.message);
+         }
+       });
+   }, []);
+ 
+   const attendantPresent = (arr, index) => {
+     const updatedArr = arr.map((x, y) => {
+       if (y === index) {
+         if (arr[index].present === false) {
+           return { ...x, present: "true" };
+         } else {
+           return { ...x, present: "true" };
+         }
+       } else {
+         return x;
+       }
+     });
+     setTable(updatedArr);
+   };
 
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember) => {
@@ -44,8 +55,7 @@ export default function DisplayCurrentFoodBankList(props) {
           name="checkBox"
           value={true}
           onClick={() => {
-            memberClicked(currentMember);
-            //console.log("this is the current data", data);
+            attendantPresent(table, currentMember);
           }}
           checked
         />
@@ -56,10 +66,9 @@ export default function DisplayCurrentFoodBankList(props) {
           type="checkbox"
           id="attended"
           name="checkBox"
-          value={true}
+          value={false}
           onClick={() => {
-            memberClicked(currentMember);
-            //console.log("this is the current data", data);
+            attendantPresent(table, currentMember);
           }}
         />
       );
@@ -74,7 +83,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
           <td id="lastName">{x.lastName}</td>
           <td id="firstName">{x.firstName}</td>
-          <td>{alreadyChecked(x)}</td>
+          <td>{alreadyChecked(y)}</td>
         </tr>
       );
     });
@@ -82,20 +91,19 @@ export default function DisplayCurrentFoodBankList(props) {
   };
 
   //The main return section for this page.
-  if (props.tableData.length === 0) {
+  if (table.length === 0) {
     return <h1>Data is Loading</h1>;
   } else {
     return (
       <div id="list_wrapper">
-      <h1>{`${props.title}`}</h1>
+      <h1>{`${tableInfo.title}`}</h1>
       <h1>Attendance Sheet</h1>
         <form
           action='/foodBank_attendance/check_sheet'
           method="post"
           onSubmit={(e) => {
             e.preventDefault();
-            setClickedBox(false);
-            postRequest("/foodBank_attendance/check_sheet", {updatedData: props.tableData});
+            postRequest("/foodBank_attendance/check_sheet", {updatedData: table});
           }}
         >
           <table>
@@ -105,20 +113,8 @@ export default function DisplayCurrentFoodBankList(props) {
               <th>Present</th>
             </tr>
 
-            {displayList(props.tableData)}
+            {displayList(table)}
           </table>
-          <div 
-            id="submit_module" 
-            style={clickedBox === true ? { display: "" } : { display: "none" }}
-          >
-            <p id="save_text">Please Save Before Continuing</p>
-            <input
-              id="foodBank_Submit"
-              name="foodBank_submit"
-              type="submit"
-              value="Save"
-            />
-          </div>
         </form>
       </div>
     );
