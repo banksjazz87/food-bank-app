@@ -274,7 +274,13 @@ app.post("/new_foodbank_list", (req, res, next) => {
 
 //This will create an insert method when a new list is saved.
 app.post("/save-list/list-name/:listName", (req, res) => {
-  let requestDataValues = [req.body.firstName, req.body.lastName, req.body.phone, "false", req.body.ApplicantID];
+  let requestDataValues = [
+    req.body.firstName,
+    req.body.lastName,
+    req.body.phone,
+    "false",
+    req.body.ApplicantID,
+  ];
 
   let insertApplicants = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
@@ -289,18 +295,20 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     });
   });
 
-  insertApplicants.then((data) => {
-    if (data.protocol41 === true) {
-      res.send({message: "success"})
-    }
-  }).catch((e) => {
-    res.send(sqlError(e));
-    console.log('error', e);
-  })
+  insertApplicants
+    .then((data) => {
+      if (data.protocol41 === true) {
+        res.send({ message: "success" });
+      }
+    })
+    .catch((e) => {
+      res.send(sqlError(e));
+      console.log("error", e);
+    });
 });
 
 //Method used to remove an attendant from a foodbank list.
-app.delete('/remove-attendant/table/:tableName', (req, res) => {
+app.delete("/remove-attendant/table/:tableName", (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let id = req.body.ApplicantID;
@@ -320,14 +328,12 @@ app.delete('/remove-attendant/table/:tableName', (req, res) => {
   });
 
   removeAttendant
-    .then(data => console.log("Success", data))
-    .catch(err => console.log('failure', err))
+    .then((data) => console.log("Success", data))
+    .catch((err) => console.log("failure", err));
 });
-
 
 //This will be use to return all tables from the database.
 app.get("/all/food-bank-lists", (req, res) => {
-
   let retrieveAllLists = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `SELECT * FROM FoodBankList`;
@@ -341,19 +347,19 @@ app.get("/all/food-bank-lists", (req, res) => {
     });
   });
 
-  retrieveAllLists.then((data) => {
-    console.log('success');
-    res.send({message: "success", allData: data});
-  }).catch((err) => {
-    console.log('error', err);
-    res.send(sqlError(err));
-  });
+  retrieveAllLists
+    .then((data) => {
+      console.log("success");
+      res.send({ message: "success", allData: data });
+    })
+    .catch((err) => {
+      console.log("error", err);
+      res.send(sqlError(err));
+    });
 });
-
 
 //This will be used to return a specific list from the database.
 app.get("/get-past-list/list-name/:listName/", (req, res) => {
-
   let retrieveTable = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `SELECT * FROM ${req.params.listName};`;
@@ -367,33 +373,33 @@ app.get("/get-past-list/list-name/:listName/", (req, res) => {
     });
   });
 
-  retrieveTable.then((data) => {
-    res.send({message: "Success", allData: data});
-    console.log('success', data);
-  }).catch((e) => {
-    res.send(sqlError(e));
-    console.log('error', e);
-  })
+  retrieveTable
+    .then((data) => {
+      res.send({ message: "Success", allData: data });
+      console.log("success", data);
+    })
+    .catch((e) => {
+      res.send(sqlError(e));
+      console.log("error", e);
+    });
 });
 
 //this function will be used to delete a list from the database and it also removes the list from the table that holds all of the list names.
-app.delete('/delete-list/', (req, res) => {
+app.delete("/delete-list/", (req, res) => {
+  let removeFromList = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `DELETE FROM FoodBankList WHERE Table_ID = ${req.body.Table_ID} AND title = "${req.body.title}";`;
 
- let removeFromList = new Promise((resolve, reject) => {
-  let currentDb = mysql.createConnection(Db);
-  let sql = `DELETE FROM FoodBankList WHERE Table_ID = ${req.body.Table_ID} AND title = "${req.body.title}";`;
-
-  currentDb.query(sql, (err, result) => {
-    if (err) {
-      return reject(err);
-    } else {
-      return resolve(result);
-    }
+    currentDb.query(sql, (err, result) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(result);
+      }
+    });
   });
- });
 
-
- let removeTable = new Promise((resolve, reject) => {
+  let removeTable = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `DROP TABLE ${req.body.title};`;
 
@@ -404,19 +410,21 @@ app.delete('/delete-list/', (req, res) => {
         return resolve(result);
       }
     });
-  })
-
-  Promise.all([removeFromList, removeTable]).then((data) => {
-    res.send({message: `${req.body.title} has been successfully removed from the database`});
-  }).catch((e) => {
-    res.send(sqlError(e));
   });
 
+  Promise.all([removeFromList, removeTable])
+    .then((data) => {
+      res.send({
+        message: `${req.body.title} has been successfully removed from the database`,
+      });
+    })
+    .catch((e) => {
+      res.send(sqlError(e));
+    });
 });
 
 //Retrieve the most recent food bank list title.
-app.get('/most-recent-fb-list', (req, res) => {
-
+app.get("/most-recent-fb-list", (req, res) => {
   let getFoodBankLists = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = "SELECT * FROM FoodBankList ORDER BY DateCreated DESC";
@@ -430,24 +438,23 @@ app.get('/most-recent-fb-list', (req, res) => {
     });
   });
 
-  getFoodBankLists.then((data) => {
-    res.send({message: "success", allData: data[0]})
-    console.log("Success in getting data");
-  }).catch((error) => {
-    res.send(sqlError(error));
-    console.log("Failure in getting data");
-  });
+  getFoodBankLists
+    .then((data) => {
+      res.send({ message: "success", allData: data[0] });
+      console.log("Success in getting data");
+    })
+    .catch((error) => {
+      res.send(sqlError(error));
+      console.log("Failure in getting data");
+    });
 });
 
-
 //This is going to be the api endpoint used to update an attendant's status of being present or not present.
-app.put('/update-attendant-status', (req, res) => {
-
+app.put("/update-attendant-status", (req, res) => {
   let currentDb = mysql.createConnection(Db);
-  let sql =`UPDATE ${req.body.title} SET present = "${req.body.present}" WHERE firstName = "${req.body.firstName} AND lastName = "${req.body.lastName} AND ApplicantID = "${req.body.ApplicantID};`;
+  let sql = `UPDATE ${req.body.title} SET present = "${req.body.present}" WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
 
   let updateAttendantPresent = new Promise((resolve, reject) => {
-
     currentDb.query(sql, (err, results) => {
       if (err) {
         return reject(err);
@@ -459,16 +466,13 @@ app.put('/update-attendant-status', (req, res) => {
 
   updateAttendantPresent
     .then((data) => {
-      res.send({message: `success, ${req.body.firstName} ${req.body.lastName} has been updated to the status of ${req.body.present} in the ${req.body.title} table.`});
-      console.log('Success!!!', data);
+      res.send({
+        status: "success",
+        message: `success, ${req.body.firstName} ${req.body.lastName} has been updated to the status of ${req.body.present} in the ${req.body.title} table.`,
+      });
     })
     .catch((err) => {
-      res.send({message: "An error has occured"});
-      console.log('error!!!!!', err);
-    })
-})
-
-
-
-
-
+      res.send(sqlError(err));
+      console.log("error!!!!!", err);
+    });
+});
