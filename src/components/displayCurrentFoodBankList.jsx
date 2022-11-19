@@ -45,6 +45,14 @@ export default function DisplayCurrentFoodBankList() {
      setTable(updatedArr);
    };
 
+   /*const updateAttendantDb = (arr, index) => {
+    const changedAttendant = arr[index];
+
+    if (arr[index].present === false) {
+
+    }
+   }*/
+
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember) => {
     if (currentMember["attended"]) {
@@ -56,6 +64,7 @@ export default function DisplayCurrentFoodBankList() {
           value={true}
           onClick={() => {
             attendantPresent(table, currentMember);
+            alert(Object.values(table[currentMember]));
           }}
           checked
         />
@@ -69,6 +78,7 @@ export default function DisplayCurrentFoodBankList() {
           value={false}
           onClick={() => {
             attendantPresent(table, currentMember);
+            alert(Object.values(table[currentMember]));
           }}
         />
       );

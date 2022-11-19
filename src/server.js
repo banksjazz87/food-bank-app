@@ -440,6 +440,35 @@ app.get('/most-recent-fb-list', (req, res) => {
 });
 
 
+//This is going to be the api endpoint used to update an attendant's status of being present or not present.
+app.put('/update-attendant-status', (req, res) => {
+
+  let currentDb = mysql.createConnection(Db);
+  let sql =`UPDATE ${req.body.title} SET present = "${req.body.present}" WHERE firstName = "${req.body.firstName} AND lastName = "${req.body.lastName} AND ApplicantID = "${req.body.ApplicantID};`;
+
+  let updateAttendantPresent = new Promise((resolve, reject) => {
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  updateAttendantPresent
+    .then((data) => {
+      res.send({message: `success, ${req.body.firstName} ${req.body.lastName} has been updated to the status of ${req.body.present} in the ${req.body.title} table.`});
+      console.log('Success!!!', data);
+    })
+    .catch((err) => {
+      res.send({message: "An error has occured"});
+      console.log('error!!!!!', err);
+    })
+})
+
+
 
 
 
