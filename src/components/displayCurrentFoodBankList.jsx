@@ -46,6 +46,20 @@ export default function DisplayCurrentFoodBankList() {
     setTable(updatedArr);
   };
 
+  //The actual put request for updating whether the attendant is present or not.
+  const requestAttendantPresence = (tableName, firstName, lastName, id, presence) => {
+    let requestObj = {
+      title: tableName, 
+      firstName: firstName, 
+      lastName: lastName, 
+      ApplicantID: id, 
+      present: presence
+    }
+
+    putRequest('/update-attendant-status', requestObj)
+      .then(data => alert(data.message));
+  }
+
   //Update the attendant Present status in the database.
   const updateAttendantPresentInDb = (arr, index) => {
     let currentTable = tableInfo.title;
@@ -55,29 +69,9 @@ export default function DisplayCurrentFoodBankList() {
     let present = arr[index].present;
 
     if (present === "false") {
-      putRequest("/update-attendant-status", {
-        firstName: first,
-        lastName: last,
-        title: currentTable,
-        ApplicantID: id,
-        present: "true",
-      }).then((data) => {
-        if (data.status !== "success") {
-          alert(data.message);
-        }
-      });
+      requestAttendantPresence(currentTable, first, last, id, "true");
     } else {
-      putRequest("/update-attendant-status", {
-        firstName: first,
-        lastName: last,
-        title: currentTable,
-        ApplicantID: id,
-        present: "false",
-      }).then((data) => {
-        if (data.status !== "success") {
-          alert(data.message);
-        }
-    });
+      requestAttendantPresence(currentTable, first, last, id, "false");
   }
   };
 
