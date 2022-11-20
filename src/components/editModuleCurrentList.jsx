@@ -3,6 +3,7 @@ import AllApplicantSearchBar from "../components/searchBar.jsx";
 
 export default function EditModuleForCurrentList(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [showAddNewPerson, setShowAddNewPerson] = useState(false);
 
   return (
     <div
@@ -27,6 +28,19 @@ export default function EditModuleForCurrentList(props) {
       >
         <AllApplicantSearchBar />
       </div>
+
+      <div
+        id="cl_edit_module_addNew"
+        style={showAddNewPerson ? {display: ""} : {display: "none"}}
+    >
+        <form 
+            id="add_new_person"
+        >
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" />
+
+        </form>
+    </div>
     </div>
   );
 }
