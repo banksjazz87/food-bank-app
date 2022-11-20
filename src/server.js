@@ -468,7 +468,11 @@ app.put("/update-attendant-status", (req, res) => {
     .then((data) => {
       res.send({
         status: "success",
-        message: `success, ${req.body.firstName} ${req.body.lastName} has been updated to the status of ${req.body.present === "true" ? "Present" : "Not Present"} in the ${req.body.title} table.`,
+        message: `success, ${req.body.firstName} ${
+          req.body.lastName
+        } has been updated to the status of ${
+          req.body.present === "true" ? "Present" : "Not Present"
+        } in the ${req.body.title} table.`,
       });
     })
     .catch((err) => {
