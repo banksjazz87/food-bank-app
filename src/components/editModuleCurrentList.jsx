@@ -12,13 +12,12 @@ export default function EditModuleForCurrentList(props) {
     >
       <div id="cl_edit_module_questions">
         <h3>Would you like to: </h3>
-        <button 
-            type="button" 
-            onClick={() => setShowSearchBar(true)}
-        >
+        <button type="button" onClick={() => setShowSearchBar(true)}>
           Add an already exisiting applicant?
         </button>
-        <button> Add someone who has yet to apply?</button>
+        <button type="button" onClick={() => setShowAddNewPerson(true)}>
+          Add someone who has yet to apply?
+        </button>
         <button>Remove someone from the current list?</button>
         <button>Cancel</button>
       </div>
@@ -31,16 +30,23 @@ export default function EditModuleForCurrentList(props) {
 
       <div
         id="cl_edit_module_addNew"
-        style={showAddNewPerson ? {display: ""} : {display: "none"}}
-    >
-        <form 
-            id="add_new_person"
+        style={showAddNewPerson ? { display: "" } : { display: "none" }}
+      >
+        <form
+          id="add_new_person"
+          method="post"
+          action="/add-new/current-list"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
         >
-            <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" />
-
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" />
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" />
+          <input type="submit" value="submit" />
         </form>
-    </div>
+      </div>
     </div>
   );
 }

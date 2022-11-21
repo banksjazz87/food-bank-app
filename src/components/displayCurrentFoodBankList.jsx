@@ -3,9 +3,9 @@ import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayFoodBankList.scss";
 
-export default function DisplayCurrentFoodBankList() {
+export default function DisplayCurrentFoodBankList(props) {
   //This will hold the value for the table title and date created.
-  const [tableInfo, setTableInfo] = useState({});
+ /* const [tableInfo, setTableInfo] = useState({});
 
   //This will hold all of the values of the most recent table.
   const [table, setTable] = useState([]);
@@ -28,7 +28,7 @@ export default function DisplayCurrentFoodBankList() {
           alert(final.message);
         }
       });
-  }, []);
+  }, []);*/
 
   //Update the attendant present status in the array that is holding the state.
   const attendantPresent = (arr, index) => {
@@ -43,7 +43,7 @@ export default function DisplayCurrentFoodBankList() {
         return x;
       }
     });
-    setTable(updatedArr);
+    props.updateTableHandler(updatedArr);
   };
 
   //The actual put request for updating whether the attendant is present or not.
@@ -68,7 +68,7 @@ export default function DisplayCurrentFoodBankList() {
   };
 
   //Update the attendant Present status in the database.
-  const updateAttendantPresentInDb = (arr, index) => {
+ /* const updateAttendantPresentInDb = (arr, index) => {
     let currentTable = tableInfo.title;
     let first = arr[index].firstName;
     let last = arr[index].lastName;
@@ -80,7 +80,7 @@ export default function DisplayCurrentFoodBankList() {
     } else {
       requestAttendantPresence(currentTable, first, last, id, "false");
     }
-  };
+  };*/
 
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember, index) => {
@@ -92,7 +92,7 @@ export default function DisplayCurrentFoodBankList() {
           name="checkBox"
           value={true}
           onClick={() => {
-            attendantPresent(table, index);
+            attendantPresent(props.currentData, index);
             updateAttendantPresentInDb(table, index);
           }}
           checked
