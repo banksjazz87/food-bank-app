@@ -272,7 +272,7 @@ app.post("/new_foodbank_list", (req, res, next) => {
     });
 });
 
-//This will create an insert method when a new list is saved.
+//This will create an insert method for a new attendant for the list.
 app.post("/save-list/list-name/:listName", (req, res) => {
   let requestDataValues = [
     req.body.firstName,
@@ -332,7 +332,7 @@ app.delete("/remove-attendant/table/:tableName", (req, res) => {
     .catch((err) => console.log("failure", err));
 });
 
-//This will be use to return all tables from the database.
+//This will be used to return all tables from the database.
 app.get("/all/food-bank-lists", (req, res) => {
   let retrieveAllLists = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);

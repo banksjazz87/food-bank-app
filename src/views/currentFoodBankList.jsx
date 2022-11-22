@@ -31,8 +31,28 @@ export default function CurrentFoodBankList() {
       });
   }, []);
 
+  //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
     setTable(arr);
+  }
+
+  //This function will add an already existing applicant to the current foodbank list.
+  const addApplicant = (arr, chosenName) => {
+    let copyOfArr = arr.slice();
+    let selectedName = chosenName.firstName + chosenName.lastName;
+    
+  
+    let firstLast = copyOfArr.map((x, y) => {
+      let first = x.firstName;
+      let last = x.lastName;
+      return first + last;
+    });
+
+    if (firstLast.indexOf(selectedName) > -1) {
+      alert("This person is already included in this table");
+    } else {
+      alert('this person can be added to this table.')
+    }
   }
 
   
@@ -60,6 +80,7 @@ export default function CurrentFoodBankList() {
       />
       <EditModuleForCurrentList
       display={showEditModule}
+      searchBarClick={addApplicant}
 
       />
 
@@ -67,7 +88,8 @@ export default function CurrentFoodBankList() {
       <button 
         class="edit_button"
         type="button" 
-        onClick={showEditHandler}>Edit</button>
+        onClick={showEditHandler
+        }>Edit</button>
     </div>
   );
 }

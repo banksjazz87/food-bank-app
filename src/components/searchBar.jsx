@@ -69,7 +69,6 @@ export default function AllApplicantSearchBar(props) {
           id="applicantSearch"
           onSubmit={(e) => {
             e.preventDefault();
-
             //used for production
             fetch(
               `/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`

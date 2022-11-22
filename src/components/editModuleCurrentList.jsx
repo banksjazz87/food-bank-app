@@ -5,6 +5,8 @@ export default function EditModuleForCurrentList(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showAddNewPerson, setShowAddNewPerson] = useState(false);
 
+
+
   return (
     <div
       id="cl_edit_module_wrapper"
@@ -25,7 +27,9 @@ export default function EditModuleForCurrentList(props) {
         id="cl_edit_module_searchBar"
         style={showSearchBar ? { display: "" } : { display: "none" }}
       >
-        <AllApplicantSearchBar />
+        <AllApplicantSearchBar 
+          handleChange={props.searchBarClick}
+        />
       </div>
 
       <div
