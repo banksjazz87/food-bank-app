@@ -480,3 +480,30 @@ app.put("/update-attendant-status", (req, res) => {
       console.log("error!!!!!", err);
     });
 });
+
+//This is going to be a get request that will return the current status of an applicant on the current list
+app.get('/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID', (req, res) => {
+
+  let currentDb = mysql.createConnection(Db);
+  let sql = `SELECT * FROM ${req.params.tableName} WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = "${req.params.ApplicantID}";`
+
+  let findApplicantPresentStatus = new Promise((resolve, reject) => {
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  findApplicantPresentStatus
+    .then((data) => {
+    res.send({status: "Success", allData: data[0]});
+    console.log("Success!!!!", data);
+  })
+    .catch((err) => {
+      res.send({status: "Failure", allData: err});
+      console.log('Failure', err);
+    });
+});

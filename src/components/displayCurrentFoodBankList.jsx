@@ -1,40 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayFoodBankList.scss";
 
 export default function DisplayCurrentFoodBankList(props) {
-  //This will hold the value for the table title and date created.
- /* const [tableInfo, setTableInfo] = useState({});
-
-  //This will hold all of the values of the most recent table.
-  const [table, setTable] = useState([]);
-
-  //Setting the tableInfo as well as the table data on the initial render.
-  useEffect(() => {
-    fetch("/most-recent-fb-list")
-      .then((data) => data.json())
-      .then((final) => {
-        if (final.message === "success") {
-          setTableInfo({
-            ...tableInfo,
-            title: final.allData.title,
-            dateCreated: final.allData.dateCreated,
-          });
-          fetch(`/get-past-list/list-name/${final.allData.title}`)
-            .then((data) => data.json())
-            .then((result) => setTable(result.allData));
-        } else {
-          alert(final.message);
-        }
-      });
-  }, []);*/
-
+ 
   //Update the attendant present status in the array that is holding the state.
   const attendantPresent = (arr, index) => {
-    const updatedArr = arr.map((x, y) => {
+    const copyOfArr = arr.slice();
+    const updatedArr = copyOfArr.map((x, y) => {
       if (y === index) {
-        if (arr[index].present === false) {
+        if (copyOfArr[index].present === false) {
           return { ...x, present: "true" };
         } else {
           return { ...x, present: "false" };
@@ -67,20 +43,24 @@ export default function DisplayCurrentFoodBankList(props) {
     );
   };
 
-  //Update the attendant Present status in the database.
- /* const updateAttendantPresentInDb = (arr, index) => {
-    let currentTable = tableInfo.title;
-    let first = arr[index].firstName;
-    let last = arr[index].lastName;
-    let id = arr[index].ApplicantID;
-    let present = arr[index].present;
+  //Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
+ const updateAttendantPresentInDb = (arr, index, table) => {
+  let tableName = table.title;
+  let first = arr[index].firstName;
+  let last = arr[index].lastName;
+  let id = arr[index].ApplicantID;
 
-    if (present === "false") {
-      requestAttendantPresence(currentTable, first, last, id, "true");
+    fetch(`/applicant-present-status/${tableName}/${first}/${last}/${id}`)
+      .then(data => data.json())
+      .then(final => {
+
+    if (final.allData.present === "false") {
+      requestAttendantPresence(tableName, first, last, id, "true");
     } else {
-      requestAttendantPresence(currentTable, first, last, id, "false");
+      requestAttendantPresence(tableName, first, last, id, "false");
     }
-  };*/
+  })
+  };
 
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember, index) => {
@@ -92,8 +72,8 @@ export default function DisplayCurrentFoodBankList(props) {
           name="checkBox"
           value={true}
           onClick={() => {
-            attendantPresent(props.currentData, index);
-            updateAttendantPresentInDb(table, index);
+            attendantPresent(props.currentTableData, index);
+            updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
           }}
           checked
         />
@@ -106,8 +86,8 @@ export default function DisplayCurrentFoodBankList(props) {
           name="checkBox"
           value={false}
           onClick={() => {
-            attendantPresent(table, index);
-            updateAttendantPresentInDb(table, index);
+            attendantPresent(props.currentTableData, index);
+            updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
           }}
         />
       );
@@ -130,12 +110,12 @@ export default function DisplayCurrentFoodBankList(props) {
   };
 
   //The main return section for this page.
-  if (table.length === 0) {
+  if (props.currentTableData.length === 0) {
     return <h1>Data is Loading</h1>;
   } else {
     return (
       <div id="list_wrapper">
-        <h1>{`${tableInfo.title}`}</h1>
+        <h1>{`${props.tableDetails.title}`}</h1>
         <h1>Attendance Sheet</h1>
         <form
           action="/foodBank_attendance/check_sheet"
@@ -143,7 +123,7 @@ export default function DisplayCurrentFoodBankList(props) {
           onSubmit={(e) => {
             e.preventDefault();
             postRequest("/foodBank_attendance/check_sheet", {
-              updatedData: table,
+              updatedData: props.currentTableData,
             });
           }}
         >
@@ -154,7 +134,7 @@ export default function DisplayCurrentFoodBankList(props) {
               <th>Present</th>
             </tr>
 
-            {displayList(table)}
+            {displayList(props.currentTableData)}
           </table>
         </form>
       </div>
