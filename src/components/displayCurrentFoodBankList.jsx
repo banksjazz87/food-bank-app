@@ -4,7 +4,6 @@ import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayFoodBankList.scss";
 
 export default function DisplayCurrentFoodBankList(props) {
- 
   //Update the attendant present status in the array that is holding the state.
   const attendantPresent = (arr, index) => {
     const copyOfArr = arr.slice();
@@ -44,22 +43,21 @@ export default function DisplayCurrentFoodBankList(props) {
   };
 
   //Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
- const updateAttendantPresentInDb = (arr, index, table) => {
-  let tableName = table.title;
-  let first = arr[index].firstName;
-  let last = arr[index].lastName;
-  let id = arr[index].ApplicantID;
+  const updateAttendantPresentInDb = (arr, index, table) => {
+    let tableName = table.title;
+    let first = arr[index].firstName;
+    let last = arr[index].lastName;
+    let id = arr[index].ApplicantID;
 
     fetch(`/applicant-present-status/${tableName}/${first}/${last}/${id}`)
-      .then(data => data.json())
-      .then(final => {
-
-    if (final.allData.present === "false") {
-      requestAttendantPresence(tableName, first, last, id, "true");
-    } else {
-      requestAttendantPresence(tableName, first, last, id, "false");
-    }
-  })
+      .then((data) => data.json())
+      .then((final) => {
+        if (final.allData.present === "false") {
+          requestAttendantPresence(tableName, first, last, id, "true");
+        } else {
+          requestAttendantPresence(tableName, first, last, id, "false");
+        }
+      });
   };
 
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
@@ -73,7 +71,11 @@ export default function DisplayCurrentFoodBankList(props) {
           value={true}
           onClick={() => {
             attendantPresent(props.currentTableData, index);
-            updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
+            updateAttendantPresentInDb(
+              props.currentTableData,
+              index,
+              props.tableDetails
+            );
           }}
           checked
         />
@@ -87,7 +89,11 @@ export default function DisplayCurrentFoodBankList(props) {
           value={false}
           onClick={() => {
             attendantPresent(props.currentTableData, index);
-            updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
+            updateAttendantPresentInDb(
+              props.currentTableData,
+              index,
+              props.tableDetails
+            );
           }}
         />
       );
@@ -102,7 +108,15 @@ export default function DisplayCurrentFoodBankList(props) {
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
           <td id="lastName">{x.lastName}</td>
           <td id="firstName">{x.firstName}</td>
+          <td id="phone">
+            <a href={`tel: ${x.phone}`}>{x.phone}</a>
+          </td>
           <td>{alreadyChecked(x, y)}</td>
+          <td>
+            <button id={`remove_attendant_y`} type="button">
+              Remove
+            </button>
+          </td>
         </tr>
       );
     });
@@ -131,6 +145,7 @@ export default function DisplayCurrentFoodBankList(props) {
             <tr id="header_row">
               <th>Last Name</th>
               <th>First Name</th>
+              <th>Phone Number</th>
               <th>Present</th>
             </tr>
 
