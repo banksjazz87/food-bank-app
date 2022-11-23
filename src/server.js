@@ -299,6 +299,7 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     .then((data) => {
       if (data.protocol41 === true) {
         res.send({ message: "success" });
+        console.log("Success", data)
       }
     })
     .catch((e) => {

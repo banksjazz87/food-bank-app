@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import NavBar from "../components/navBar.jsx";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
+import postRequest from "../functions/post.js";
 
 export default function CurrentFoodBankList() {
 
@@ -36,6 +37,23 @@ export default function CurrentFoodBankList() {
     setTable(arr);
   }
 
+  //Inserts an already existing applicant into the most recent table.
+  const insertAlreadyExistingIntoTable = (arr) => {
+    let applicantObj = {
+      firstName: arr[0].firstName,
+      lastName: arr[0].lastName,
+      phone: arr[0].phone,
+      ApplicantID: arr[0].ApplicantID
+    }
+    
+    postRequest(`/save-list/list-name/${tableInfo.title}`, applicantObj)
+      .then((data) => {
+        if (data.message !== "success") {
+          alert(data.message);
+        }
+      });
+  }
+
   //This function will add an already existing applicant to the current foodbank list.
   const addApplicant = (chosenNameArr) => {
     let copyOfArr = table.slice();
@@ -52,6 +70,7 @@ export default function CurrentFoodBankList() {
       alert("This person is already included in this table");
     } else {
       setTable(copyOfArr.concat(chosenNameArr));
+      insertAlreadyExistingIntoTable(chosenNameArr);
       console.log(table);
     }
   }
