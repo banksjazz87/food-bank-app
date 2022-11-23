@@ -37,9 +37,9 @@ export default function CurrentFoodBankList() {
   }
 
   //This function will add an already existing applicant to the current foodbank list.
-  const addApplicant = (arr, chosenName) => {
-    let copyOfArr = arr.slice();
-    let selectedName = chosenName.firstName + chosenName.lastName;
+  const addApplicant = (chosenNameArr) => {
+    let copyOfArr = table.slice();
+    let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
     
   
     let firstLast = copyOfArr.map((x, y) => {
@@ -51,7 +51,8 @@ export default function CurrentFoodBankList() {
     if (firstLast.indexOf(selectedName) > -1) {
       alert("This person is already included in this table");
     } else {
-      alert('this person can be added to this table.')
+      setTable(copyOfArr.concat(chosenNameArr));
+      console.log(table);
     }
   }
 
@@ -81,6 +82,7 @@ export default function CurrentFoodBankList() {
       <EditModuleForCurrentList
       display={showEditModule}
       searchBarClick={addApplicant}
+      allTableData={table}
 
       />
 
