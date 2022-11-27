@@ -3,6 +3,7 @@ import NavBar from "../components/navBar.jsx";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
+import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function CurrentFoodBankList() {
 
@@ -11,6 +12,13 @@ export default function CurrentFoodBankList() {
 
   //This will hold all of the values of the most recent table.
   const [table, setTable] = useState([]);
+
+  const [showRemoveButtons, setShowRemoveButtons] = useState(false);
+
+  const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
+
+  const [selectedAttendant, setSelectedAttendant] = useState([]);
+
 
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
@@ -86,6 +94,13 @@ export default function CurrentFoodBankList() {
     }
   }
 
+  const selectedForRemoval = (index, arr) => {
+    const copyOfArr = arr.slice();
+    const chosenFromArr = copyOfArr.slice(index, index + 1);
+    setSelectedAttendant(chosenFromArr);
+  }
+
+
   return (
     <div id="current_fb_list">
       <h1>
@@ -97,12 +112,26 @@ export default function CurrentFoodBankList() {
         currentTableData={table}
         tableDetails={tableInfo}
         updateTableHandler={updateTable}
+        showRemoveBtns={showRemoveButtons}
+        selectedRemovalHandler={selectedForRemoval}
       />
       <EditModuleForCurrentList
       display={showEditModule}
       searchBarClick={addApplicant}
       allTableData={table}
+      showRemoveHandler={() => {
+        setShowRemoveButtons(true);
+        setShowEditModule(false);
+      }}
+      />
 
+      <DeleteAlert
+        display={displayDeleteAlert}
+        routePath={`/remove-attendant/table/${tableInfo.title}`}
+        selected={selectedAttendant}
+        noClickHandler={() => {
+          setDisplayDeleteAlert(false)
+        }}
       />
 
 
@@ -111,6 +140,15 @@ export default function CurrentFoodBankList() {
         type="button" 
         onClick={showEditHandler
         }>Edit</button>
+
+      <button 
+        class="cancel_button"
+        type="button"
+        style={showRemoveButtons ? {display: ""} : {display: "none"}}
+        onClick={() => setShowRemoveButtons(false)}
+      >
+        Cancel
+      </button>
     </div>
   );
 }

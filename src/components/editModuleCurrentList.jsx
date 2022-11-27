@@ -20,7 +20,7 @@ export default function EditModuleForCurrentList(props) {
         <button type="button" onClick={() => setShowAddNewPerson(true)}>
           Add someone who has yet to apply?
         </button>
-        <button>Remove someone from the current list?</button>
+        <button type="button" onClick={props.showRemoveHandler}>Remove someone from the current list?</button>
         <button>Cancel</button>
       </div>
       <div

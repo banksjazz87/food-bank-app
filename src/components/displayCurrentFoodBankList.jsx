@@ -2,6 +2,7 @@ import React from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayFoodBankList.scss";
+import MathFunctions from "../functions/mathFunctions.js";
 
 export default function DisplayCurrentFoodBankList(props) {
   //Update the attendant present status in the array that is holding the state.
@@ -113,7 +114,14 @@ export default function DisplayCurrentFoodBankList(props) {
           </td>
           <td>{alreadyChecked(x, y)}</td>
           <td>
-            <button id={`remove_attendant_y`} type="button">
+            <button 
+              style={props.showRemoveBtns ? {display: ""} : {display: "none"}} 
+              id={`remove_attendant_${y}`} 
+              type="button"
+              onClick={(e) => {
+                props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData)
+              }}
+            >
               Remove
             </button>
           </td>
