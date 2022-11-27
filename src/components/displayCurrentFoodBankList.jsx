@@ -119,7 +119,9 @@ export default function DisplayCurrentFoodBankList(props) {
               id={`remove_attendant_${y}`} 
               type="button"
               onClick={(e) => {
-                props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData)
+                props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData);
+
+                props.showDeleteAlertHandler();
               }}
             >
               Remove

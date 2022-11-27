@@ -91,6 +91,7 @@ export default function SearchApplicants() {
       <DeleteAlert 
         display={deleteAlert} 
         noClickHandler={showDeleteAlert}
+        yesClickHandler={showDeleteAlert}
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
         />

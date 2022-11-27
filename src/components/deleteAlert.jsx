@@ -15,12 +15,12 @@ export default function DeleteAlert(props) {
         <button
           className="delete_button"
           onClick={() => {
-            deleteRequest(props.routePath, props.selected)
+              deleteRequest(props.routePath, props.selected)
               .then((data) => alert(data.message))
-              .then(props.noClickHandler)
+              .then(props.yesClickHandler())
               .catch((e) => console.log("error has occurred", e));
-          }}
-        >
+          }
+          }>
           Yes
         </button>
         <button onClick={props.noClickHandler}>No</button>

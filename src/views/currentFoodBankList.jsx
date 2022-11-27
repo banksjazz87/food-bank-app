@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar.jsx";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
@@ -6,9 +6,8 @@ import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function CurrentFoodBankList() {
-
   //This will hold the value for the table title and date created.
-  const [tableInfo, setTableInfo] = useState({});
+  const [tableInfo, setTableInfo] = useState({title: "", dateCreated: ""});
 
   //This will hold all of the values of the most recent table.
   const [table, setTable] = useState([]);
@@ -18,7 +17,6 @@ export default function CurrentFoodBankList() {
   const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
 
   const [selectedAttendant, setSelectedAttendant] = useState([]);
-
 
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function CurrentFoodBankList() {
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
     setTable(arr);
-  }
+  };
 
   //Inserts an already existing applicant into the most recent table.
   const insertAlreadyExistingIntoTable = (arr) => {
@@ -51,23 +49,23 @@ export default function CurrentFoodBankList() {
       firstName: arr[0].firstName,
       lastName: arr[0].lastName,
       phone: arr[0].phone,
-      ApplicantID: arr[0].ApplicantID
-    }
-    
-    postRequest(`/save-list/list-name/${tableInfo.title}`, applicantObj)
-      .then((data) => {
+      ApplicantID: arr[0].ApplicantID,
+    };
+
+    postRequest(`/save-list/list-name/${tableInfo.title}`, applicantObj).then(
+      (data) => {
         if (data.message !== "success") {
           alert(data.message);
         }
-      });
-  }
+      }
+    );
+  };
 
   //This function will add an already existing applicant to the current foodbank list.
   const addApplicant = (chosenNameArr) => {
     let copyOfArr = table.slice();
     let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
-    
-  
+
     let firstLast = copyOfArr.map((x, y) => {
       let first = x.firstName;
       let last = x.lastName;
@@ -81,9 +79,8 @@ export default function CurrentFoodBankList() {
       insertAlreadyExistingIntoTable(chosenNameArr);
       console.log(table);
     }
-  }
+  };
 
-  
   const [showEditModule, setShowEditModule] = useState(false);
 
   const showEditHandler = () => {
@@ -92,20 +89,32 @@ export default function CurrentFoodBankList() {
     } else {
       setShowEditModule(true);
     }
-  }
+  };
 
   const selectedForRemoval = (index, arr) => {
     const copyOfArr = arr.slice();
     const chosenFromArr = copyOfArr.slice(index, index + 1);
     setSelectedAttendant(chosenFromArr);
-  }
+  };
 
+  const removeFromArray = (fullArr, selectedArr) => {
+    const allFirstLast = fullArr.map((x, y) => {
+      let fullName = `${x.firstName}${x.lastName}`;
+      return fullName;
+    });
+
+    const selectedFirstLast = `${selectedArr[0].firstName}${selectedArr[0].lastName}`;
+
+    if (allFirstLast.indexOf(selectedFirstLast) > -1) {
+      const copyOfFull = fullArr.slice();
+      copyOfFull.splice(allFirstLast.indexOf(selectedFirstLast), 1);
+      return setTable(copyOfFull);
+    } 
+  };
 
   return (
     <div id="current_fb_list">
-      <h1>
-        This will be the current foodbank list
-      </h1>
+      <h1>This will be the current foodbank list</h1>
 
       <NavBar />
       <DisplayCurrentFoodBankList
@@ -114,37 +123,39 @@ export default function CurrentFoodBankList() {
         updateTableHandler={updateTable}
         showRemoveBtns={showRemoveButtons}
         selectedRemovalHandler={selectedForRemoval}
+        showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
       />
       <EditModuleForCurrentList
-      display={showEditModule}
-      searchBarClick={addApplicant}
-      allTableData={table}
-      showRemoveHandler={() => {
-        setShowRemoveButtons(true);
-        setShowEditModule(false);
-      }}
+        display={showEditModule}
+        searchBarClick={addApplicant}
+        allTableData={table}
+        showRemoveHandler={() => {
+          setShowRemoveButtons(true);
+          setShowEditModule(false);
+        }}
       />
 
       <DeleteAlert
         display={displayDeleteAlert}
         routePath={`/remove-attendant/table/${tableInfo.title}`}
-        selected={selectedAttendant}
+        selected={selectedAttendant[0]}
         noClickHandler={() => {
-          setDisplayDeleteAlert(false)
+          setDisplayDeleteAlert(false);
+        }}
+        yesClickHandler={() => {
+          removeFromArray(table, selectedAttendant);
+          setDisplayDeleteAlert(false);
         }}
       />
 
+      <button class="edit_button" type="button" onClick={showEditHandler}>
+        Edit
+      </button>
 
-      <button 
-        class="edit_button"
-        type="button" 
-        onClick={showEditHandler
-        }>Edit</button>
-
-      <button 
+      <button
         class="cancel_button"
         type="button"
-        style={showRemoveButtons ? {display: ""} : {display: "none"}}
+        style={showRemoveButtons ? { display: "" } : { display: "none" }}
         onClick={() => setShowRemoveButtons(false)}
       >
         Cancel

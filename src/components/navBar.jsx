@@ -19,10 +19,8 @@ export default function NavBar() {
       let currentWidth = window.innerWidth;
       if ((currentWidth <= 1023) & mobileMenuClick) {
         setNavDisplay("mobile");
-        console.log("mobile");
       } else {
         setNavDisplay("standard");
-        console.log("standard");
       }
     });
   });
