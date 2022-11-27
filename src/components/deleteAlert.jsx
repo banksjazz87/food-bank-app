@@ -9,7 +9,7 @@ export default function DeleteAlert(props) {
       style={props.display ? { display: "" } : { display: "none" }}
     >
       <p>
-        Are you sure that you would like to permanently delete this applicant?
+        {props.warningMessage}
       </p>
       <div id="delete_alert_buttons">
         <button

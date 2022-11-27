@@ -89,7 +89,8 @@ export default function SearchApplicants() {
         handleChange={updateInfo}
       />
       <DeleteAlert 
-        display={deleteAlert} 
+        display={deleteAlert}
+        warningMessage={"Are you sure that you would like to permanently delete this applicant?"} 
         noClickHandler={showDeleteAlert}
         yesClickHandler={showDeleteAlert}
         selected={applicantInfo[0]}

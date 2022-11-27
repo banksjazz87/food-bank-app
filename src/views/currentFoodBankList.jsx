@@ -139,6 +139,7 @@ export default function CurrentFoodBankList() {
         display={displayDeleteAlert}
         routePath={`/remove-attendant/table/${tableInfo.title}`}
         selected={selectedAttendant[0]}
+        warningMessage={selectedAttendant.length > 0 ? `Are you sure that you would like to remove ${selectedAttendant[0].firstName} ${selectedAttendant[0].lastName} from the current foodbank list?` : ""}
         noClickHandler={() => {
           setDisplayDeleteAlert(false);
         }}
