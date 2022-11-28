@@ -4,19 +4,16 @@ import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
+import { prependOnceListener } from "process";
 
 export default function CurrentFoodBankList() {
-  //This will hold the value for the table title and date created.
-  const [tableInfo, setTableInfo] = useState({title: "", dateCreated: ""});
-
-  //This will hold all of the values of the most recent table.
+  const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
   const [table, setTable] = useState([]);
-
   const [showRemoveButtons, setShowRemoveButtons] = useState(false);
-
   const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
-
   const [selectedAttendant, setSelectedAttendant] = useState([]);
+  const [showEditModule, setShowEditModule] = useState(false);
+  const [newApplicant, setNewApplicant] = useState({firstName: "", lastName: ""});
 
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
@@ -81,8 +78,6 @@ export default function CurrentFoodBankList() {
     }
   };
 
-  const [showEditModule, setShowEditModule] = useState(false);
-
   const showEditHandler = () => {
     if (showEditModule) {
       setShowEditModule(false);
@@ -109,8 +104,15 @@ export default function CurrentFoodBankList() {
       const copyOfFull = fullArr.slice();
       copyOfFull.splice(allFirstLast.indexOf(selectedFirstLast), 1);
       return setTable(copyOfFull);
-    } 
+    }
   };
+
+  const createNewApplicant = (field, value) => {
+    setNewApplicant({...newApplicant, 
+      [field]: value});
+
+      console.log(newApplicant);
+  }
 
   return (
     <div id="current_fb_list">
@@ -133,13 +135,19 @@ export default function CurrentFoodBankList() {
           setShowRemoveButtons(true);
           setShowEditModule(false);
         }}
+        newApplicantData={newApplicant}
+        newApplicantHandler={createNewApplicant}
       />
 
       <DeleteAlert
         display={displayDeleteAlert}
         routePath={`/remove-attendant/table/${tableInfo.title}`}
         selected={selectedAttendant[0]}
-        warningMessage={selectedAttendant.length > 0 ? `Are you sure that you would like to remove ${selectedAttendant[0].firstName} ${selectedAttendant[0].lastName} from the current foodbank list?` : ""}
+        warningMessage={
+          selectedAttendant.length > 0
+            ? `Are you sure that you would like to remove ${selectedAttendant[0].firstName} ${selectedAttendant[0].lastName} from the current foodbank list?`
+            : ""
+        }
         noClickHandler={() => {
           setDisplayDeleteAlert(false);
         }}
@@ -149,7 +157,11 @@ export default function CurrentFoodBankList() {
         }}
       />
 
-      <button class="edit_button" type="button" onClick={showEditHandler}>
+      <button 
+        class="edit_button" 
+        type="button" 
+        onClick={showEditHandler}
+      >
         Edit
       </button>
 
@@ -161,6 +173,7 @@ export default function CurrentFoodBankList() {
       >
         Cancel
       </button>
+
     </div>
   );
 }

@@ -14,14 +14,29 @@ export default function EditModuleForCurrentList(props) {
     >
       <div id="cl_edit_module_questions">
         <h3>Would you like to: </h3>
-        <button type="button" onClick={() => setShowSearchBar(true)}>
+        <button 
+          type="button" 
+          onClick={() => setShowSearchBar(true)}
+        >
           Add an already exisiting applicant?
         </button>
-        <button type="button" onClick={() => setShowAddNewPerson(true)}>
+
+        <button 
+          type="button" 
+          onClick={() => setShowAddNewPerson(true)}
+        >
           Add someone who has yet to apply?
         </button>
-        <button type="button" onClick={props.showRemoveHandler}>Remove someone from the current list?</button>
+
+        <button 
+          type="button" 
+          onClick={props.showRemoveHandler}
+        >
+        Remove someone from the current list?
+        </button>
+
         <button>Cancel</button>
+
       </div>
       <div
         id="cl_edit_module_searchBar"
@@ -45,9 +60,22 @@ export default function EditModuleForCurrentList(props) {
           }}
         >
           <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" name="firstName" />
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            onChange={(e) => {
+              props.newApplicantHandler("firstName", e.target.value);
+            }}
+            />
           <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" />
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName"
+            onChange={(e) => {
+              props.newApplicantHandler("lastName", e.target.value)
+            }} />
           <input type="submit" value="submit" />
         </form>
       </div>
