@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
+import AddNewApplicantForm from "../components/addNewApplicantForm.jsx";
 
 export default function EditModuleForCurrentList(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -46,39 +47,10 @@ export default function EditModuleForCurrentList(props) {
           handleChange={props.searchBarClick}
         />
       </div>
-
-      <div
-        id="cl_edit_module_addNew"
-        style={showAddNewPerson ? { display: "" } : { display: "none" }}
-      >
-        <form
-          id="add_new_person"
-          method="post"
-          action="/add-new/current-list"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <label for="firstName">First Name:</label>
-          <input 
-            type="text" 
-            id="firstName" 
-            name="firstName" 
-            onChange={(e) => {
-              props.newApplicantHandler("firstName", e.target.value);
-            }}
-            />
-          <label for="lastName">Last Name:</label>
-          <input 
-            type="text" 
-            id="lastName" 
-            name="lastName"
-            onChange={(e) => {
-              props.newApplicantHandler("lastName", e.target.value)
-            }} />
-          <input type="submit" value="submit" />
-        </form>
-      </div>
+      <AddNewApplicantForm 
+        showForm={showAddNewPerson}
+        nameHandler={props.newApplicantHandler}
+      />
     </div>
   );
 }

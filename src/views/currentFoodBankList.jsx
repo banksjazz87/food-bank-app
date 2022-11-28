@@ -4,7 +4,7 @@ import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
-import { prependOnceListener } from "process";
+
 
 export default function CurrentFoodBankList() {
   const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
@@ -74,7 +74,6 @@ export default function CurrentFoodBankList() {
     } else {
       setTable(copyOfArr.concat(chosenNameArr));
       insertAlreadyExistingIntoTable(chosenNameArr);
-      console.log(table);
     }
   };
 
@@ -110,8 +109,6 @@ export default function CurrentFoodBankList() {
   const createNewApplicant = (field, value) => {
     setNewApplicant({...newApplicant, 
       [field]: value});
-
-      console.log(newApplicant);
   }
 
   return (
