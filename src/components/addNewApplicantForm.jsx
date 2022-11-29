@@ -1,8 +1,27 @@
 import React, { useState } from "react";
+import postRequest from "../functions/post.js";
 
 export default function AddNewApplicantForm (props) {
 
-  const [newApplicant, setNewApplicant] = useState({firstName: "", lastName: ""});
+  const [newApplicant, setNewApplicant] = 
+    useState({
+    firstName: "", 
+    lastName: "", 
+    phone: null, 
+    street: null, 
+    city: null, 
+    state: null, 
+    zip: null, 
+    children: null, 
+    adults: null, 
+    seniors: null,
+    totalOccupants: null, 
+    weeklyIncome: null, 
+    monthlyIncome: null, 
+    annualIncome: null,
+    totalIncome: null, 
+    dateAltered: null 
+  });
 
   const createNewApplicant = (field, value) => {
     setNewApplicant({...newApplicant, 
@@ -12,21 +31,25 @@ export default function AddNewApplicantForm (props) {
   }
 
   const submitHandler = (newApplicantObj) => {
-    const applicantSearch = fetch("/all-applicants")
-                          .then(data => data.json())
-                          .then(final => {
-                            return final;
-                          }
-                            );
-    const currentFirstLast = `${newApplicant.firstName}${newApplicant.lastName}`;
+      fetch("/all-applicants")
+          .then(data => data.json())
+          .then(final => {
+             const currentFirstLast = `${newApplicantObj.firstName}${newApplicantObj.lastName}`;
 
-    const firstLastOfAll = applicantSearch.map((x, y) => {
-      return `${x.firstName}${x.lastName}`;
-  });
+            const firstLastOfAll = final.map((x, y) => {
+              return `${x.firstName}${x.lastName}`;
+          });
 
-    if (firstLastOfAll.indexOf(currentFirstLast) > -1 ) {
-      alert("this person is alreday a current registered applicant");
-    }
+          if (firstLastOfAll.indexOf(currentFirstLast) > -1) {
+            alert("This person is already in the database");
+          } else {
+            postRequest("/new-applicant/", newApplicantObj).then(data => {
+              alert(data.message);
+            });
+          }
+
+        });
+                
 
 }
 
@@ -65,7 +88,7 @@ export default function AddNewApplicantForm (props) {
             value="submit" 
             onClick={(e) => {
               e.preventDefault();
-              submitHandler();
+              submitHandler(newApplicant);
             }} 
             />
         </form>
