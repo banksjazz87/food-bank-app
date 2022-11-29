@@ -13,7 +13,6 @@ export default function CurrentFoodBankList() {
   const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
   const [selectedAttendant, setSelectedAttendant] = useState([]);
   const [showEditModule, setShowEditModule] = useState(false);
-  const [newApplicant, setNewApplicant] = useState({firstName: "", lastName: ""});
 
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
@@ -106,11 +105,6 @@ export default function CurrentFoodBankList() {
     }
   };
 
-  const createNewApplicant = (field, value) => {
-    setNewApplicant({...newApplicant, 
-      [field]: value});
-  }
-
   return (
     <div id="current_fb_list">
       <h1>This will be the current foodbank list</h1>
@@ -132,8 +126,6 @@ export default function CurrentFoodBankList() {
           setShowRemoveButtons(true);
           setShowEditModule(false);
         }}
-        newApplicantData={newApplicant}
-        newApplicantHandler={createNewApplicant}
       />
 
       <DeleteAlert

@@ -1,6 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function AddNewApplicantForm (props) {
+
+  const [newApplicant, setNewApplicant] = useState({firstName: "", lastName: ""});
+
+  const createNewApplicant = (field, value) => {
+    setNewApplicant({...newApplicant, 
+      [field]: value});
+
+      console.log(newApplicant);
+  }
+
+  const submitHandler = (newApplicantObj) => {
+    const applicantSearch = fetch("/all-applicants")
+                          .then(data => data.json())
+                          .then(final => {
+                            return final;
+                          }
+                            );
+    const currentFirstLast = `${newApplicant.firstName}${newApplicant.lastName}`;
+
+    const firstLastOfAll = applicantSearch.map((x, y) => {
+      return `${x.firstName}${x.lastName}`;
+  });
+
+    if (firstLastOfAll.indexOf(currentFirstLast) > -1 ) {
+      alert("this person is alreday a current registered applicant");
+    }
+
+}
 
     return (
         <div
@@ -21,7 +49,7 @@ export default function AddNewApplicantForm (props) {
             id="firstName" 
             name="firstName" 
             onChange={(e) => {
-              props.nameHandler("firstName", e.target.value);
+              createNewApplicant("firstName", e.target.value);
             }}
             />
           <label for="lastName">Last Name:</label>
@@ -30,14 +58,14 @@ export default function AddNewApplicantForm (props) {
             id="lastName" 
             name="lastName"
             onChange={(e) => {
-              props.nameHandler("lastName", e.target.value)
+              createNewApplicant("lastName", e.target.value)
             }} />
           <input 
             type="submit" 
             value="submit" 
             onClick={(e) => {
               e.preventDefault();
-              
+              submitHandler();
             }} 
             />
         </form>
