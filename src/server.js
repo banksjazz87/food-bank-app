@@ -508,3 +508,44 @@ app.get('/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID'
       console.log('Failure', err);
     });
 });
+
+//This is going to handle updating the UnregisteredApplicant table.
+app.post('/unregistered-applicant', (req, res) => {
+
+  let retrieveId = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT ApplicantID FROM applicant WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}"`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  let addApplicantToUnregistered = (firstName, lastName, id) => {
+    return new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `INSERT INTO UnregisteredApplicants (firstName, lastName, ApplicantID) Values("${firstName}", "${lastName}", "${id}");`;
+
+      currentDb.query(sql, (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      });
+    });
+  }
+
+
+  retrieveId
+    .then(data => {
+      addApplicantToUnregistered(req.body.firstName, req.body.lastName, data[0].ApplicantID)
+        .then(data => console.log("success", data))
+        .catch(err => console.log("failure", err)); 
+    })
+    .catch(err => console.log("Error", err));
+});

@@ -43,8 +43,14 @@ export default function AddNewApplicantForm (props) {
           if (firstLastOfAll.indexOf(currentFirstLast) > -1) {
             alert("This person is already in the database");
           } else {
-            postRequest("/new-applicant/", newApplicantObj).then(data => {
-              alert(data.message);
+            postRequest("/new-applicant/", newApplicantObj)
+              .then(data => {
+              if (data.status === "okay") {
+                postRequest('/unregistered-applicant', newApplicantObj)
+                .then(data => alert(data[0].ApplicantID))
+              } else {
+                alert(data.messages);
+              }
             });
           }
 
