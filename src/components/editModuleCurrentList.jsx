@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AllApplicantSearchBar from "../components/searchBar.jsx";
-import AddNewApplicantForm from "../components/addNewApplicantForm.jsx";
+import AddPartialApplicantForm from "./addPartialApplicantForm.jsx";
 
 export default function EditModuleForCurrentList(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -47,7 +47,7 @@ export default function EditModuleForCurrentList(props) {
           handleChange={props.searchBarClick}
         />
       </div>
-      <AddNewApplicantForm 
+      <AddPartialApplicantForm 
         showForm={showAddNewPerson}
         nameHandler={props.newApplicantHandler}
       />

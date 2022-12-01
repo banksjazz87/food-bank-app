@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
+import "../assets/styles/newApplicantForm.scss";
 
 export default function NewApplicantForm(props) {
   //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.

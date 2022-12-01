@@ -1,0 +1,47 @@
+@import "./library.scss";
+
+.shadow_form {
+    @include shadow-form;
+}
+
+.heading_wrapper {
+    @include large-header;
+}
+
+.section_heading {
+    @include medium-section-heading;
+    color: white;
+}
+
+input {
+    width: 100%;
+    @include medium-input;
+}
+
+.input_pair {
+    @include medium-label;
+    margin-top: .5rem;
+    width: 100%;
+}
+
+#new_applicant_submit {
+    @include btn-small;
+    width: 120px;
+}
+
+
+
+@media (max-width: 1023px) {
+
+    .shadow_form {
+        @include mobile-shadow-form;
+    }
+
+    .input_pair {
+        width: 80%;
+    }
+
+    .section_heading {
+        width: 80%;
+    }
+}

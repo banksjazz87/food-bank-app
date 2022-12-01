@@ -4,7 +4,8 @@ import './assets/styles/App.scss';
 import './assets/styles/index.scss';
 import './assets/styles/displayFoodBankList.scss';
 import './assets/styles/login.scss';
-import './assets/styles/newApplicant.scss';
+import './assets/styles/newApplicantPage.scss';
+import './assets/styles/newApplicantForm.scss';
 import './assets/styles/pastLists.scss';
 import './assets/styles/searchApplicants.scss';
 
