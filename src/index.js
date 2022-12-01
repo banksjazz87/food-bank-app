@@ -14,7 +14,7 @@ import {
   Route,
 } from "react-router-dom";
 import App from "./App";
-import Applicant from "./views/newApplicant.jsx";
+import Applicant from "./views/newApplicantPage.jsx";
 import Login from "./views/login.jsx";
 import SearchApplicants from "./views/searchApplicants.jsx";
 import DisplayCurrentFoodBankList from "./views/currentFoodBankList.jsx";

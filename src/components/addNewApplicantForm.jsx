@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import postRequest from "../functions/post.js";
+import dataPoints from "../variables/newApplicantDataPoints.js";
 
 export default function AddNewApplicantForm (props) {
 
