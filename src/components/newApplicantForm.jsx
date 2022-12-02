@@ -6,6 +6,21 @@ export default function NewApplicantForm(props) {
   //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.
   const currentDate = new Date();
   const [field, setField] = useState({
+    firstName: "", 
+    lastName: "", 
+    phone: null, 
+    street: null,
+    city: null,
+    state: null, 
+    zip: null,
+    children: null,
+    adults: null,
+    seniors: null,
+    totalOccupants: null,
+    weeklyIncome: null,
+    monthlyIncome: null,
+    annualIncome: null,
+    totalIncome: null,
     dateAltered: currentDate.toLocaleDateString(),
   });
 

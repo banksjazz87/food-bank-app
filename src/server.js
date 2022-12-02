@@ -100,7 +100,6 @@ app.post("/new-applicant/", (req, res, next) => {
     req.body.dateAltered,
   ];
 
-  if (req.body.annualIncome <= 200000) {
     let createApplicant = new Promise((resolve, reject) => {
       let currentDb = mysql.createConnection(Db);
       let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
@@ -117,21 +116,20 @@ app.post("/new-applicant/", (req, res, next) => {
     createApplicant
       .then((data) => {
         console.log(data);
-        if (data.insertId) {
-          res.send({
+        res.send({
             status: "okay",
             message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
           });
-        }
+        
       })
       .catch((e) => {
+        console.log('error', e);
         res.send({
           status: "not good",
           message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`,
         });
       });
-  }
-});
+  });
 
 //The get method used to return the data about one applicant.
 app.get(

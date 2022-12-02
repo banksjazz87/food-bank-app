@@ -18,7 +18,7 @@ export default function AddPartialApplicantForm (props) {
           if (firstLastOfAll.indexOf(currentFirstLast) > -1) {
             alert("This person is already in the database");
           } else {
-            postRequest("/new-applicant", newApplicantObj)
+            postRequest("/new-applicant/", newApplicantObj)
               .then(data => {
               if (data.status === "okay") {
                 alert(data.message);
@@ -26,6 +26,7 @@ export default function AddPartialApplicantForm (props) {
                 alert(data.message);
               }
             });
+            console.log(newApplicantObj);
           }
 
         });
