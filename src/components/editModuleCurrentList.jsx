@@ -50,6 +50,8 @@ export default function EditModuleForCurrentList(props) {
       <AddPartialApplicantForm 
         showForm={showAddNewPerson}
         nameHandler={props.newApplicantHandler}
+        tableInfo={props.tableDetails}
+        addToTable={props.addNewHandler}
       />
     </div>
   );

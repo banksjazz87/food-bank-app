@@ -119,6 +119,7 @@ app.post("/new-applicant/", (req, res, next) => {
         res.send({
             status: "okay",
             message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
+            id: `${data.insertId}`
           });
         
       })

@@ -105,6 +105,20 @@ export default function CurrentFoodBankList() {
     }
   };
 
+  //This will be use to add a brand new applicant to the table.
+  const addNewToTable = (obj) => {
+    const currentTable = table.slice();
+    const arrayOfNeededFields = [{
+      firstName: obj.firstName,
+      lastName: obj.lastName, 
+      phone: obj.phone,
+      present: obj.present,
+      ApplicantID: obj.ApplicantID
+    }];
+
+    setTable(currentTable.concat(arrayOfNeededFields));
+  }
+
   return (
     <div id="current_fb_list">
       <h1>This will be the current foodbank list</h1>
@@ -121,11 +135,13 @@ export default function CurrentFoodBankList() {
       <EditModuleForCurrentList
         display={showEditModule}
         searchBarClick={addApplicant}
+        tableDetails={tableInfo}
         allTableData={table}
         showRemoveHandler={() => {
           setShowRemoveButtons(true);
           setShowEditModule(false);
         }}
+        addNewHandler={addNewToTable}
       />
 
       <DeleteAlert
