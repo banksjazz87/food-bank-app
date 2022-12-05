@@ -74,6 +74,15 @@ export default function SearchApplicants() {
         handleChange={updateApplicant}
         value="Submit"
         route="/all-applicants"
+        title="All Applicants"
+        description="all-applicants"
+      />
+      <SearchBar 
+        handleChange={updateApplicant}
+        value="Submit"
+        route="/all-applicants/partial-forms"
+        title="Partial Forms"
+        description="all-partial-forms"
       />
       <DisplayApplicant
         currentApplicant={applicantInfo}

@@ -146,6 +146,8 @@ export default function CreateFoodBankList() {
           handleChange={addNewAttendant}
           value="Add To List"
           route="/all-applicants"
+          title="All Applicants"
+          description="all-applicants"
         />
         <h1>{listData.title}</h1>
         {displayAttendants(listData.attendants)}

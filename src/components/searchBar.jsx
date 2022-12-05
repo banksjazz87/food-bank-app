@@ -56,8 +56,8 @@ export default function SearchBar(props) {
   if (data.length === 0) {
     return (
       <div>
-        <label for="applicants">Applicants</label>
-        <select name="applicants" id="applicants">
+        <label for={props.description}>{props.title}</label>
+        <select name={props.description} id="applicants">
           <option id="fetching">Fetching...</option>
         </select>
       </div>
@@ -80,10 +80,10 @@ export default function SearchBar(props) {
             // props.handleChange([data[0]]);
           }}
         >
-          <label for="applicants">Applicants</label>
+          <label for={props.description}>{props.title}</label>
           <select
-            name="applicants"
-            id="applicants"
+            name={props.description}
+            id={props.description}
             onChange={(e) =>
               selectedItem(MathFunctions.returnNums(e.target.value), data)
             }
