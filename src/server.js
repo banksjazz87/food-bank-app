@@ -548,3 +548,24 @@ app.post('/unregistered-applicant', (req, res) => {
     })
     .catch(err => console.log("Error", err));
 });
+
+//Retrieve all applicants who have incomplete application forms
+app.get("/all-applicants/partial-forms", (req, res) => {
+
+  let getPartialForms = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = "SELECT * FROM applicant WHERE totalIncome IS NULL" ;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  getPartialForms
+    .then(data => res.send(data))
+    .catch(err => res.send(err));
+});

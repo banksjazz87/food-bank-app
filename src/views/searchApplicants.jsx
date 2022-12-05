@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AllApplicantSearchBar from "../components/searchBar.jsx";
+import SearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayPastApplicant.jsx";
 import EditDeleteButtons from "../components/editDeleteButtons.jsx";
 import EditPage from "../components/editDisplay.jsx";
@@ -69,33 +69,41 @@ export default function SearchApplicants() {
   return (
     <div id="search_applicant_wrapper">
       <h1>Search Applicants</h1>
-     <NavBar />
-     <AllApplicantSearchBar 
+      <NavBar />
+      <SearchBar
         handleChange={updateApplicant}
-        value="Submit" />
+        value="Submit"
+        route="/all-applicants"
+      />
       <DisplayApplicant
         currentApplicant={applicantInfo}
         display={showApplicant}
       />
-     <EditDeleteButtons
+      <EditDeleteButtons
         display={showApplicant}
         editClick={displayEdit}
-        printClick={() => {alert('print has been selected')}}
-        deleteClick={() => {setDeleteAlert(true)}}
+        printClick={() => {
+          alert("print has been selected");
+        }}
+        deleteClick={() => {
+          setDeleteAlert(true);
+        }}
       />
-     <EditPage
+      <EditPage
         display={showEditPage}
         currentApplicant={applicantInfo}
         handleChange={updateInfo}
       />
-      <DeleteAlert 
+      <DeleteAlert
         display={deleteAlert}
-        warningMessage={"Are you sure that you would like to permanently delete this applicant?"} 
+        warningMessage={
+          "Are you sure that you would like to permanently delete this applicant?"
+        }
         noClickHandler={showDeleteAlert}
         yesClickHandler={showDeleteAlert}
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
-        />
+      />
     </div>
   );
 }

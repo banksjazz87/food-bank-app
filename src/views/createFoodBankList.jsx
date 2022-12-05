@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
-import AllApplicantSearchBar from "../components/searchBar.jsx";
+import SearchBar from "../components/searchBar.jsx";
 import deleteRequest from "../functions/deleteRequest.js";
 
 export default function CreateFoodBankList() {
@@ -142,9 +142,10 @@ export default function CreateFoodBankList() {
         id="applicant_search_and_list"
         style={showApplicantBar ? { display: "" } : { display: "none" }}
       >
-        <AllApplicantSearchBar
+        <SearchBar
           handleChange={addNewAttendant}
           value="Add To List"
+          route="/all-applicants"
         />
         <h1>{listData.title}</h1>
         {displayAttendants(listData.attendants)}

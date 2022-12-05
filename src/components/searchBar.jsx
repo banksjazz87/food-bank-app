@@ -6,7 +6,7 @@ import MathFunctions from "../functions/mathFunctions.js";
 //import DummyData from "../variables/dummyData.js";
 
 //This component creates a search bar for all of the applicants currently in the database.
-export default function AllApplicantSearchBar(props) {
+export default function SearchBar(props) {
   //Setting the initial applicant data.
   //use for production
   const [data, setData] = useState([]);
@@ -17,7 +17,7 @@ export default function AllApplicantSearchBar(props) {
   const [input, setInput] = useState({});
 
   useEffect(() => {
-    fetch("/all-applicants")
+    fetch(props.route)
       .then((response) => response.json())
       .then((final) => {
         setData(final);

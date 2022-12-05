@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AllApplicantSearchBar from "../components/searchBar.jsx";
+import SearchBar from "../components/searchBar.jsx";
 import AddPartialApplicantForm from "./addPartialApplicantForm.jsx";
 
 export default function EditModuleForCurrentList(props) {
@@ -43,8 +43,9 @@ export default function EditModuleForCurrentList(props) {
         id="cl_edit_module_searchBar"
         style={showSearchBar ? { display: "" } : { display: "none" }}
       >
-        <AllApplicantSearchBar 
+        <SearchBar 
           handleChange={props.searchBarClick}
+          route="/all-applicants"
         />
       </div>
       <AddPartialApplicantForm 
