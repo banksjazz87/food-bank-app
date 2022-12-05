@@ -554,7 +554,7 @@ app.get("/all-applicants/partial-forms", (req, res) => {
 
   let getPartialForms = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = "SELECT * FROM applicant WHERE totalIncome IS NULL" ;
+    let sql = "SELECT * FROM applicant WHERE firstName IS NULL OR lastName IS NULL OR phone IS NULL OR street IS NULL OR city IS NULL OR state is NULL OR zip IS NULL OR children IS NULL OR  adults IS NULL OR seniors IS NULL OR totalOccupants IS NULL OR weeklyIncome IS NULL OR monthlyIncome IS NULL OR annualIncome IS NULL OR totalIncome IS NULL";
 
     currentDb.query(sql, (err, results) => {
       if (err) {
