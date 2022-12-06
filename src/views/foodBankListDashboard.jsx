@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import FBDashboardIcon from "../components/dashboardIcon.jsx";
+import DashboardIcon from "../components/dashboardIcon.jsx";
 import NavBar from "../components/navBar.jsx";
 
 
@@ -16,9 +16,9 @@ export default function FoodBankListDashboard() {
       <NavBar />
 
       <div id="icon_wrapper">
-        <FBDashboardIcon title="Create List" clickHandler={() => navigate("/create-foodbank-list")} />
-        <FBDashboardIcon title="Past Lists" clickHandler={() => navigate("/past-registered-list")} />
-        <FBDashboardIcon title="Current Lists" clickHandler={() => navigate("/current-registered-list")} />
+        <DashboardIcon title="Create List" clickHandler={() => navigate("/create-foodbank-list")} />
+        <DashboardIcon title="Past Lists" clickHandler={() => navigate("/past-registered-list")} />
+        <DashboardIcon title="Current Lists" clickHandler={() => navigate("/current-registered-list")} />
       </div>
     </div>
   );

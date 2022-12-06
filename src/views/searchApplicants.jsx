@@ -6,7 +6,8 @@ import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
-//import postRequest from "../functions/post.js";
+import DashboardIcon from "../components/DashboardIcon.jsx";
+
 
 export default function SearchApplicants() {
   //Will be used to update the current information about the applicant.
@@ -36,6 +37,8 @@ export default function SearchApplicants() {
   const [showEditPage, setShowEditPage] = useState(false);
 
   const [deleteAlert, setDeleteAlert] = useState(false);
+  const [showApplicants, setShowApplicants] = useState(false);
+  const [showPartialForms, setShowPartialForms] = useState(false);
 
   const updateApplicant = (array) => {
     setApplicantInfo(array);
@@ -66,16 +69,46 @@ export default function SearchApplicants() {
     }
   };
 
+  const showPartialFormsHandler = () => {
+    if (showApplicants) {
+      setShowApplicants(false);
+      setShowPartialForms(true);
+    } else {
+    setShowPartialForms(true);
+  }
+}
+
+  const showApplicantsHandler = () => {
+    if (showPartialForms) {
+      setShowPartialForms(false);
+      setShowApplicants(true);
+    } else {
+    setShowApplicants(true);
+    }
+  }
+  
+
   return (
     <div id="search_applicant_wrapper">
       <h1>Search Applicants</h1>
       <NavBar />
+      
+      <DashboardIcon 
+        title="All Applicants"
+        clickHandler={showApplicantsHandler}
+      />
+
+      <DashboardIcon 
+        title="Partial Forms"
+        clickHandler={showPartialFormsHandler}
+      />
       <SearchBar
         handleChange={updateApplicant}
         value="Submit"
         route="/all-applicants"
         title="All Applicants"
         description="all-applicants"
+        show={showApplicants}
       />
       <SearchBar 
         handleChange={updateApplicant}
@@ -83,6 +116,7 @@ export default function SearchApplicants() {
         route="/all-applicants/partial-forms"
         title="Partial Forms"
         description="all-partial-forms"
+        show={showPartialForms}
       />
       <DisplayApplicant
         currentApplicant={applicantInfo}

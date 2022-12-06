@@ -148,6 +148,7 @@ export default function CreateFoodBankList() {
           route="/all-applicants"
           title="All Applicants"
           description="all-applicants"
+          show={true}
         />
         <h1>{listData.title}</h1>
         {displayAttendants(listData.attendants)}

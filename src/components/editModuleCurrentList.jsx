@@ -46,6 +46,7 @@ export default function EditModuleForCurrentList(props) {
         <SearchBar 
           handleChange={props.searchBarClick}
           route="/all-applicants"
+          show={true}
         />
       </div>
       <AddPartialApplicantForm 

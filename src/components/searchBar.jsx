@@ -55,7 +55,7 @@ export default function SearchBar(props) {
 
   if (data.length === 0) {
     return (
-      <div>
+      <div style={props.show ? {display: ""} : {display: "none"}}>
         <label for={props.description}>{props.title}</label>
         <select name={props.description} id="applicants">
           <option id="fetching">Fetching...</option>
@@ -64,7 +64,7 @@ export default function SearchBar(props) {
     );
   } else {
     return (
-      <div>
+      <div style={props.show ? {display: ""} : {display: "none"}}>
         <form
           id="applicantSearch"
           onSubmit={(e) => {

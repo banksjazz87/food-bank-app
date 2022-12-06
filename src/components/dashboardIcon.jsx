@@ -1,9 +1,9 @@
 import React from 'react';
-import "../assets/styles/fbDashboardIcon.scss";
+import "../assets/styles/dashboardIcon.scss";
 
-export default function FBDashboardIcon(props) {
+export default function DashboardIcon(props) {
     return (
-        <button className="fb_dashboard_icon"
+        <button className="dashboard_icon"
             onClick={props.clickHandler}>
             {props.title}
         </button>
