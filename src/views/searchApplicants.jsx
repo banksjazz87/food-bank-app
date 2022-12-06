@@ -6,7 +6,6 @@ import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
-import DashboardIcon from "../components/DashboardIcon.jsx";
 
 
 export default function SearchApplicants() {
@@ -33,24 +32,24 @@ export default function SearchApplicants() {
   ]);
 
   const [showApplicant, setShowApplicant] = useState(false);
-
   const [showEditPage, setShowEditPage] = useState(false);
-
   const [deleteAlert, setDeleteAlert] = useState(false);
-  const [showApplicants, setShowApplicants] = useState(false);
-  const [showPartialForms, setShowPartialForms] = useState(false);
+  const [searchBy, setSearchBy] = useState("");
 
+  //This is called when the user selects an option from a SearchBar.
   const updateApplicant = (array) => {
     setApplicantInfo(array);
     setShowApplicant(true);
     setShowEditPage(false);
   };
 
+  //Used to display the edit page.
   const displayEdit = () => {
     setShowEditPage(true);
     setShowApplicant(false);
   };
 
+  //Updates the applicant's info when a revision is made.
   const updateInfo = (field, value) => {
     const currentDate = new Date();
     let currentApplicant = applicantInfo.slice();
@@ -61,6 +60,7 @@ export default function SearchApplicants() {
     setApplicantInfo(currentApplicant);
   };
 
+  //Used to control if the DeleteAlert should be shown.
   const showDeleteAlert = () => {
     if (deleteAlert) {
       setDeleteAlert(false);
@@ -69,59 +69,60 @@ export default function SearchApplicants() {
     }
   };
 
-  const showPartialFormsHandler = () => {
-    if (showApplicants) {
-      setShowApplicants(false);
-      setShowPartialForms(true);
-    } else {
-    setShowPartialForms(true);
-  }
-}
+  //This is used on the select field to determine what the user is currently searching for.
+  const updateSearchHandler = (selected) => {
+    setSearchBy(selected);
+  };
 
-  const showApplicantsHandler = () => {
-    if (showPartialForms) {
-      setShowPartialForms(false);
-      setShowApplicants(true);
+  //This is used to determine which searchbar should be displayed.
+  const checkForSearching = (str) => {
+    if (searchBy === str) {
+      return true;
     } else {
-    setShowApplicants(true);
+      return false;
     }
-  }
-  
+  };
 
   return (
     <div id="search_applicant_wrapper">
       <h1>Search Applicants</h1>
       <NavBar />
-      
-      <DashboardIcon 
-        title="All Applicants"
-        clickHandler={showApplicantsHandler}
-      />
 
-      <DashboardIcon 
-        title="Partial Forms"
-        clickHandler={showPartialFormsHandler}
-      />
+      <h2>What would you like to search for?</h2>
+      <select
+        onChange={(e) => {
+          e.preventDefault();
+          updateSearchHandler(e.target.value);
+        }}
+      >
+        <option>Choose from the following</option>
+        <option>All Applicants</option>
+        <option>Partial Forms</option>
+      </select>
+
       <SearchBar
         handleChange={updateApplicant}
         value="Submit"
         route="/all-applicants"
         title="All Applicants"
         description="all-applicants"
-        show={showApplicants}
+        show={checkForSearching("All Applicants")}
       />
-      <SearchBar 
+
+      <SearchBar
         handleChange={updateApplicant}
         value="Submit"
         route="/all-applicants/partial-forms"
         title="Partial Forms"
         description="all-partial-forms"
-        show={showPartialForms}
+        show={checkForSearching("Partial Forms")}
       />
+
       <DisplayApplicant
         currentApplicant={applicantInfo}
         display={showApplicant}
       />
+
       <EditDeleteButtons
         display={showApplicant}
         editClick={displayEdit}
@@ -132,11 +133,13 @@ export default function SearchApplicants() {
           setDeleteAlert(true);
         }}
       />
+
       <EditPage
         display={showEditPage}
         currentApplicant={applicantInfo}
         handleChange={updateInfo}
       />
+
       <DeleteAlert
         display={deleteAlert}
         warningMessage={
@@ -147,6 +150,7 @@ export default function SearchApplicants() {
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
       />
+
     </div>
   );
 }
