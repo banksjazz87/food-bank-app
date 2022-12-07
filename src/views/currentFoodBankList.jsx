@@ -4,6 +4,10 @@ import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
+import "../assets/styles/currentFoodBankList.scss";
+
+//for development mode
+import DummyData from "../variables/dummyData.js";
 
 
 export default function CurrentFoodBankList() {
@@ -14,6 +18,8 @@ export default function CurrentFoodBankList() {
   const [selectedAttendant, setSelectedAttendant] = useState([]);
   const [showEditModule, setShowEditModule] = useState(false);
 
+
+  /*Commented out for development
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
     fetch("/most-recent-fb-list")
@@ -33,6 +39,7 @@ export default function CurrentFoodBankList() {
         }
       });
   }, []);
+  */
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
@@ -121,11 +128,14 @@ export default function CurrentFoodBankList() {
 
   return (
     <div id="current_fb_list">
-      <h1>This will be the current foodbank list</h1>
+      <h1 className="header">Current Food Bank List</h1>
 
       <NavBar />
       <DisplayCurrentFoodBankList
-        currentTableData={table}
+
+        //Conditional is only for developement
+        currentTableData={table.length > 0 ? table : DummyData}
+
         tableDetails={tableInfo}
         updateTableHandler={updateTable}
         showRemoveBtns={showRemoveButtons}

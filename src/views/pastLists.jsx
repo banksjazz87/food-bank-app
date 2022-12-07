@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FbListSearchBar from "../components/fbListSearchBar.jsx";
 import NavBar from "../components/navBar.jsx";
-import DisplayList from "../components/displayFbList.jsx";
+import DisplayFbList from "../components/displayFbList.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function PastLists() {
@@ -44,7 +44,7 @@ export default function PastLists() {
         displayListHandler={displayList}
       />
 
-      <DisplayList
+      <DisplayFbList
         allAttendants={listAttendants}
         title={list.title}
         dateModified={list.DateCreated}

@@ -1,0 +1,19 @@
+@import "./library.scss";
+
+#current_fb_list {
+    display: flex;
+    flex-direction: column;
+    align-content: center; 
+
+    .header {
+        @include header-large-bold;
+        color: white;
+        text-align: center;
+    }
+
+    .edit_button {
+        @include btn-small;
+        margin: auto;
+        margin-top: 2rem;
+    }
+}

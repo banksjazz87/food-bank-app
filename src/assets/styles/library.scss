@@ -6,6 +6,7 @@ $light-gray: #808080;
 $dark-gray: #5D5D5D;
 $purple: #996699;
 $orange: #FB9400;
+$form-border-color: rgba(153, 102, 153, .5); 
 
 @mixin header-large-bold {
     font-family: 'Roboto Slab', serif;
@@ -94,6 +95,7 @@ $orange: #FB9400;
     @include paragraph-small;
     padding: 1rem 2rem 1rem 2rem;
     color: white;
+    cursor: pointer;
 
     &:hover {
         background-color: $purple;
@@ -184,3 +186,4 @@ $orange: #FB9400;
     column-gap: 2rem;
     margin-bottom: 2rem;
 }
+

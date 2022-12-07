@@ -1,7 +1,8 @@
 import React from "react";
 
 
-export default function DisplayList(props) {
+
+export default function DisplayFbList(props) {
   const displayAttendants = props.allAttendants.map((x, y) => {
     return (
         <tr key={`attendant_${y}`}>

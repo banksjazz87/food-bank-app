@@ -1,7 +1,7 @@
 import React from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
-import "../assets/styles/displayFoodBankList.scss";
+import "../assets/styles/displayFbList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 
 export default function DisplayCurrentFoodBankList(props) {
