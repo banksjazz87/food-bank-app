@@ -113,9 +113,8 @@ export default function DisplayCurrentFoodBankList(props) {
             <a href={`tel: ${x.phone}`}>{x.phone}</a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
-          <td>
-            <button 
-              style={props.showRemoveBtns ? {display: ""} : {display: "none"}} 
+          <td style={props.showRemoveBtns ? {display: ""} : {display: "none"}}>
+            <button  
               id={`remove_attendant_${y}`} 
               type="button"
               onClick={(e) => {
