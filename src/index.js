@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/styles/App.scss';
 import './assets/styles/index.scss';
-import './assets/styles/displayFbList.scss';
+import './assets/styles/displayCurrentFoodBankList.scss';
 import './assets/styles/login.scss';
 import './assets/styles/newApplicantPage.scss';
 import './assets/styles/newApplicantForm.scss';

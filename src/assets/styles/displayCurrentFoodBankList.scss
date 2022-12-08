@@ -60,35 +60,17 @@
                 color: $chapel-purple;
             }
         
+            .remove_button {
+                @include btn-small;
+                padding: .25rem 1rem .25rem 1rem;
+                margin-top: 0;
+            }
     }
     }
 
 }
 
-#submit_module {
-    padding: 1rem 4rem;
-    position: fixed;
-    top: 45vh;
-    left: 35vw;
-    background-color: orange;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    z-index: 2;
 
-    #save_text {
-        font-size: 1.5rem;
-    }
-
-    #foodBank_Submit {
-        background-color: #9725bf;
-        padding: 1rem 4rem;
-        color: white;
-        text-align: center;
-        border-radius: 16px;
-        font-size: 1.25rem;
-    }
-}
 
 
 

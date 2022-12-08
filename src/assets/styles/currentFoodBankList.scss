@@ -16,4 +16,11 @@
         margin: auto;
         margin-top: 2rem;
     }
+
+    .cancel_button {
+        @include btn-small;
+        width: 250px;
+        margin: auto;
+        margin-top: 2rem;
+    }
 }

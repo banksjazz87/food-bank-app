@@ -99,6 +99,7 @@ $form-border-color: rgba(153, 102, 153, .5);
 
     &:hover {
         box-shadow: 0 1px 4px $light-gray;
+        background-color: $form-border-color;
     }
 }
 

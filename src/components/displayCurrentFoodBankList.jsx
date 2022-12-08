@@ -1,7 +1,7 @@
 import React from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
-import "../assets/styles/displayFbList.scss";
+import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 
 export default function DisplayCurrentFoodBankList(props) {
@@ -116,6 +116,7 @@ export default function DisplayCurrentFoodBankList(props) {
           <td style={props.showRemoveBtns ? {display: ""} : {display: "none"}}>
             <button  
               id={`remove_attendant_${y}`} 
+              className="remove_button"
               type="button"
               onClick={(e) => {
                 props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData);
