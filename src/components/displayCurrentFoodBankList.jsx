@@ -152,6 +152,7 @@ export default function DisplayCurrentFoodBankList(props) {
           }}
         >
           <table>
+          <tbody>
             <tr id="header_row">
               <th>Last Name</th>
               <th>First Name</th>
@@ -160,6 +161,7 @@ export default function DisplayCurrentFoodBankList(props) {
             </tr>
 
             {displayList(props.currentTableData)}
+          </tbody>
           </table>
         </form>
       </div>

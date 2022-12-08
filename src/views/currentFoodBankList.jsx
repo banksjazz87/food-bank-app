@@ -151,6 +151,7 @@ export default function CurrentFoodBankList() {
           setShowRemoveButtons(true);
           setShowEditModule(false);
         }}
+        hideModuleHandler={() => setShowEditModule(false)}
         addNewHandler={addNewToTable}
       />
 
@@ -184,7 +185,9 @@ export default function CurrentFoodBankList() {
         class="cancel_button"
         type="button"
         style={showRemoveButtons ? { display: "" } : { display: "none" }}
-        onClick={() => setShowRemoveButtons(false)}
+        onClick={() =>
+          setShowRemoveButtons(false)
+        }
       >
         Cancel
       </button>
