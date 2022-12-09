@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 
 export default function DisplayCurrentFoodBankList(props) {
+  const [mobileView, setMobileView] = useState(false);
+
+  //Check if the user is on a mobile device, when the page loads.
+  useEffect(() => {
+    let currentScreenWidth = window.innerWidth;
+    if (currentScreenWidth <= 1024) {
+      setMobileView(true);
+      console.log('mobile');
+    } else {
+      console.log('not-mobile');
+    }
+  }, []);
+
+  //Add eventlistener to check for mobile.
+  window.addEventListener('resize', () => {
+    let currentScreenWidth = window.innerWidth; 
+    if (currentScreenWidth <= 1024) {
+      setMobileView(true);
+      console.log('mobile');
+    } else {
+      setMobileView(false);
+    }
+  })
+
   //Update the attendant present status in the array that is holding the state.
   const attendantPresent = (arr, index) => {
     const copyOfArr = arr.slice();
@@ -102,7 +126,7 @@ export default function DisplayCurrentFoodBankList(props) {
   };
 
   //Function that takes an array and creates the data fields.
-  const displayList = (array) => {
+  const displayLargeScreenList = (array) => {
     const currentList = array;
     const renderNames = currentList.map((x, y) => {
       return (
@@ -113,13 +137,54 @@ export default function DisplayCurrentFoodBankList(props) {
             <a href={`tel: ${x.phone}`}>{x.phone}</a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
-          <td style={props.showRemoveBtns ? {display: ""} : {display: "none"}}>
-            <button  
-              id={`remove_attendant_${y}`} 
+          <td
+            style={props.showRemoveBtns ? { display: "" } : { display: "none" }}
+          >
+            <button
+              id={`remove_attendant_${y}`}
               className="remove_button"
               type="button"
               onClick={(e) => {
-                props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData);
+                props.selectedRemovalHandler(
+                  parseInt(MathFunctions.returnNums(e.target.id)),
+                  props.currentTableData
+                );
+
+                props.showDeleteAlertHandler();
+              }}
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      );
+    });
+    return renderNames;
+  };
+
+  //This will be the display for mobile devices.
+  const displayMobileList = (array) => {
+    const currentList = array;
+    const renderNames = currentList.map((x, y) => {
+      return (
+        <tr id={`row_number_${y}`} key={`rowNum${y}`}>
+          <td id="name">{x.lastName}<br></br>{x.firstName}</td>
+          <td id="phone">
+            <a href={`tel: ${x.phone}`}>{x.phone}</a>
+          </td>
+          <td>{alreadyChecked(x, y)}</td>
+          <td
+            style={props.showRemoveBtns ? { display: "" } : { display: "none" }}
+          >
+            <button
+              id={`remove_attendant_${y}`}
+              className="remove_button"
+              type="button"
+              onClick={(e) => {
+                props.selectedRemovalHandler(
+                  parseInt(MathFunctions.returnNums(e.target.id)),
+                  props.currentTableData
+                );
 
                 props.showDeleteAlertHandler();
               }}
@@ -151,17 +216,29 @@ export default function DisplayCurrentFoodBankList(props) {
             });
           }}
         >
-          <table>
-          <tbody>
-            <tr id="header_row">
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Phone Number</th>
-              <th>Present</th>
-            </tr>
+          <table style={mobileView ? {display: "none"} : {display: ""}}>
+            <tbody>
+              <tr id="header_row">
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Phone Number</th>
+                <th>Present</th>
+              </tr>
 
-            {displayList(props.currentTableData)}
-          </tbody>
+              {displayLargeScreenList(props.currentTableData)}
+            </tbody>
+          </table>
+
+          <table style={mobileView ? {display: ""} : {display: "none"}}>
+            <tbody>
+              <tr id="header_row">
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Present</th>
+              </tr>
+
+              {displayMobileList(props.currentTableData)}
+            </tbody>
           </table>
         </form>
       </div>
