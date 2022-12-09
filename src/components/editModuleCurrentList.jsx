@@ -16,15 +16,15 @@ export default function EditModuleForCurrentList(props) {
         <h3>Would you like to: </h3>
         <div id="button_wrapper">
           <button type="button" onClick={() => setShowSearchBar(true)}>
-            Add an already exisiting applicant?
+            Add Existing
           </button>
 
           <button type="button" onClick={() => setShowAddNewPerson(true)}>
-            Add someone who has yet to apply?
+            Add New 
           </button>
 
           <button type="button" onClick={props.showRemoveHandler}>
-            Remove someone from the current list?
+            Remove 
           </button>
 
           <button onClick={props.hideModuleHandler}>Cancel</button>

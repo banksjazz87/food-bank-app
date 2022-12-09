@@ -33,3 +33,12 @@
     }
 
 }
+
+@media (max-width: 1024px) {
+    #cl_edit_module_wrapper {
+        @include mobile-shadow-form;
+        width: 90%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
