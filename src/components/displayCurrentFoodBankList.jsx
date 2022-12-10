@@ -34,7 +34,7 @@ export default function DisplayCurrentFoodBankList(props) {
     const copyOfArr = arr.slice();
     const updatedArr = copyOfArr.map((x, y) => {
       if (y === index) {
-        if (copyOfArr[index].present === false) {
+        if (copyOfArr[index].present === "false") {
           return { ...x, present: "true" };
         } else {
           return { ...x, present: "false" };
@@ -43,6 +43,7 @@ export default function DisplayCurrentFoodBankList(props) {
         return x;
       }
     });
+    console.log(updatedArr);
     props.updateTableHandler(updatedArr);
   };
 
@@ -89,10 +90,9 @@ export default function DisplayCurrentFoodBankList(props) {
   const alreadyChecked = (currentMember, index) => {
     if (currentMember["present"] === "true") {
       return (
-        <input
-          type="checkbox"
-          id="attended"
-          name="checkBox"
+        <button
+          id="present"
+          className="present_button"
           value={true}
           onClick={() => {
             attendantPresent(props.currentTableData, index);
@@ -101,15 +101,16 @@ export default function DisplayCurrentFoodBankList(props) {
               index,
               props.tableDetails
             );
-          }}
-          checked
-        />
+          }}>
+          √
+          </button>
+        
       );
     } else {
       return (
-        <input
-          type="checkbox"
+        <button
           id="attended"
+          className="not_present_button"
           name="checkBox"
           value={false}
           onClick={() => {
@@ -120,7 +121,10 @@ export default function DisplayCurrentFoodBankList(props) {
               props.tableDetails
             );
           }}
-        />
+          >
+          -
+          </button>
+        
       );
     }
   };
@@ -170,7 +174,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
           <td id="name">{x.lastName}<br></br>{x.firstName}</td>
           <td id="phone">
-            <a href={`tel: ${x.phone}`}>{x.phone}</a>
+            <a className="call_button" href={`tel: ${x.phone}`}>Call</a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
           <td
@@ -189,7 +193,7 @@ export default function DisplayCurrentFoodBankList(props) {
                 props.showDeleteAlertHandler();
               }}
             >
-              Remove
+              X
             </button>
           </td>
         </tr>
@@ -233,7 +237,7 @@ export default function DisplayCurrentFoodBankList(props) {
             <tbody>
               <tr id="header_row">
                 <th>Name</th>
-                <th>Phone Number</th>
+                <th>Phone</th>
                 <th>Present</th>
               </tr>
 

@@ -19,7 +19,7 @@ export default function CurrentFoodBankList() {
   const [showEditModule, setShowEditModule] = useState(false);
 
 
-  /*Commented out for development
+  ///Commented out for development
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
     fetch("/most-recent-fb-list")
@@ -39,7 +39,7 @@ export default function CurrentFoodBankList() {
         }
       });
   }, []);
-  */
+  
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
@@ -134,7 +134,7 @@ export default function CurrentFoodBankList() {
       <DisplayCurrentFoodBankList
 
         //Conditional is only for developement
-        currentTableData={table.length > 0 ? table : DummyData}
+        currentTableData={table}
 
         tableDetails={tableInfo}
         updateTableHandler={updateTable}
