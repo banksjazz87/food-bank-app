@@ -138,7 +138,7 @@ export default function DisplayCurrentFoodBankList(props) {
           <td id="lastName">{x.lastName}</td>
           <td id="firstName">{x.firstName}</td>
           <td id="phone">
-            <a href={`tel: ${x.phone}`}>{x.phone}</a>
+            <a className="call_button" href={`tel: ${x.phone}`}>Call</a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
           <td

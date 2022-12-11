@@ -1,7 +1,7 @@
 @import "./library.scss";
 
 .nav_wrapper {
-  @include bottom-border;
+  //@include bottom-border;
     display: flex;
     flex-direction: row;
     justify-content: center;
