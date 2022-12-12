@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    z-index: 1;
 
     form {
         width: 960px;
@@ -18,15 +17,11 @@
         border-radius: 4px;
         box-shadow: 0 4px 12px $form-border-color;
 
-
         table {
             width: 100%;
             margin: auto;
             border-collapse: collapse;
             border-radius: 16px;
-
-            
-            
 
             th {
                 padding-bottom: .5rem;
@@ -39,13 +34,13 @@
 
             td {
                 padding-bottom: .5rem;
-                text-align: left; 
+                text-align: left;
                 padding-left: 2rem;
                 padding-top: 1rem;
                 border-right: 1px solid $form-border-color;
                 @include paragraph-medium;
-                
-                
+
+
             }
 
             tr {
@@ -53,13 +48,13 @@
             }
 
             #attended {
-               width: auto;
+                width: auto;
             }
 
             a {
                 color: $chapel-purple;
             }
-        
+
             .remove_button {
                 @include btn-small;
                 margin-top: 0;
@@ -88,55 +83,50 @@
                 width: 75px;
                 @include paragraph-large;
             }
-    }
+        }
     }
 
 }
 
 @media (max-width: 1024px) {
 
-    #list_wrapper{
-    form {
-        width: 95%;
-        margin: auto;
+    #list_wrapper {
+        form {
+            width: 95%;
+            margin: auto;
 
-        table {
-            width: 100%;
+            table {
+                width: 100%;
 
-            th {
-                @include paragraph-small;
-                border: none;
-            }
+                th {
+                    @include paragraph-small;
+                    border: none;
+                }
 
-            td {
-                @include paragraph-small;
-                border: none;
-            }
+                td {
+                    @include paragraph-small;
+                    border: none;
+                }
 
-            .remove_button {
-                min-width: 30px;
-                padding: .25rem .5rem .25rem .5rem;
-                font-size: 24;
-                background-color: $orange;
-            }
+                .remove_button {
+                    min-width: 30px;
+                    padding: .25rem .5rem .25rem .5rem;
+                    font-size: 24;
+                    background-color: $orange;
+                }
 
-            .present_button {
-                @include btn_small;
-                margin-top: 0;
-                min-width: 10px;
-                padding: .15rem .3rem;
-                @include paragraph-large;
-            }
+                .present_button {
+                    @include btn_small;
+                    margin-top: 0;
+                    min-width: 10px;
+                    padding: .15rem .3rem;
+                    @include paragraph-large;
+                }
 
-            #attended {
-                width: 40px;
+                #attended {
+                    width: 40px;
+                }
             }
         }
     }
 }
-}
-
-
-
-
-

@@ -81,9 +81,11 @@ export default function CurrentFoodBankList() {
 
     if (firstLast.indexOf(selectedName) > -1) {
       alert("This person is already included in this table");
+      setShowEditModule(false);
     } else {
       setTable(copyOfArr.concat(copyOfChosen));
       insertAlreadyExistingIntoTable(chosenNameArr);
+      setShowEditModule(false);
     }
   };
 

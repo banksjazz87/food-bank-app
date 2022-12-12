@@ -90,6 +90,7 @@ export default function SearchApplicants() {
 
       <h2>What would you like to search for?</h2>
       <select
+        id="choose_applicant_type"
         onChange={(e) => {
           e.preventDefault();
           updateSearchHandler(e.target.value);

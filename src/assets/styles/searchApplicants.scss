@@ -3,9 +3,21 @@
 #search_applicant_wrapper {
     color: white;
     overflow: hidden;
+    text-align: center;
+   
     h1 {
         @include large-header;
         color: white;
+    }
+
+    #choose_applicant_type {
+        width: 300px;
+        @include paragraph-medium;
+        padding: .05rem;
+
+        &:focus {
+            outline-color: $orange;
+        }
     }
 }
 
