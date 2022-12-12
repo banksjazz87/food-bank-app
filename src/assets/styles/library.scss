@@ -1,4 +1,5 @@
 $chapel-gray: #333333;
+$chapel-light-gray: #3f3f3f; 
 $chapel-purple: #9725bf;
 
 $white: #FFFFFF;
@@ -16,6 +17,8 @@ $form-border-color: rgba(153, 102, 153, .5);
     color: inherit;
     font-style: inherit;
     text-transform: uppercase;
+    background-color: $form-border-color;
+    
 }
 
 @mixin header-large {

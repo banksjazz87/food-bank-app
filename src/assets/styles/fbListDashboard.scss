@@ -1,9 +1,9 @@
 @import './library.scss';
 
-#fb_list_dashboard{
-    h1{
-    @include large-header;
-    color: $white;
+#fb_list_dashboard {
+    h1 {
+        @include large-header;
+        color: $white;
     }
 
     #icon_wrapper {

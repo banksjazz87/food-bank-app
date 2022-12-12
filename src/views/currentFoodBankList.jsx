@@ -69,6 +69,10 @@ export default function CurrentFoodBankList() {
     let copyOfArr = table.slice();
     let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
 
+    //Make a copy of the chosenNameArr and then add the present field of false to it.
+    let copyOfChosen = chosenNameArr.slice();
+    copyOfChosen[0].present = "false";
+
     let firstLast = copyOfArr.map((x, y) => {
       let first = x.firstName;
       let last = x.lastName;
@@ -78,7 +82,7 @@ export default function CurrentFoodBankList() {
     if (firstLast.indexOf(selectedName) > -1) {
       alert("This person is already included in this table");
     } else {
-      setTable(copyOfArr.concat(chosenNameArr));
+      setTable(copyOfArr.concat(copyOfChosen));
       insertAlreadyExistingIntoTable(chosenNameArr);
     }
   };
