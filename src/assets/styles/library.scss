@@ -51,6 +51,7 @@ $form-border-color: rgba(153, 102, 153, .5);
 @mixin paragraph-large {
     font-family: 'Ubuntu', sans-serif;
     font-size: 22.5px;
+    font-weight: 400;
 }
 
 @mixin paragraph-medium {
@@ -131,7 +132,6 @@ $form-border-color: rgba(153, 102, 153, .5);
 
 @mixin large-header {
     @include header-large-bold;
-    //@include bottom-border;
     padding-top: 2rem;
     padding-bottom: 2rem;
     text-align: center;

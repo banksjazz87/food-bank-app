@@ -20,7 +20,9 @@ export default function Applicant() {
 
   return (
     <div id="new_applicant_wrapper">
-      <h1 className="heading_wrapper">New Applicant</h1>
+      <div className="header_wrapper">
+        <h1 className="heading_wrapper">New Applicant</h1>
+      </div>
       <NavBar />
       <NewApplicantForm
         submissionHandler={newApplicantConfirmation}

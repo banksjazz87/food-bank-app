@@ -7,7 +7,6 @@ import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
 
-
 export default function SearchApplicants() {
   //Will be used to update the current information about the applicant.
   const [applicantInfo, setApplicantInfo] = useState([
@@ -85,7 +84,9 @@ export default function SearchApplicants() {
 
   return (
     <div id="search_applicant_wrapper">
-      <h1>Search Applicants</h1>
+      <div className="header_wrapper">
+        <h1>Search Applicants</h1>
+      </div>
       <NavBar />
 
       <h2>What would you like to search for?</h2>
@@ -151,7 +152,6 @@ export default function SearchApplicants() {
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
       />
-
     </div>
   );
 }

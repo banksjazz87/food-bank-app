@@ -4,10 +4,17 @@
     color: white;
     overflow: hidden;
     text-align: center;
-   
-    h1 {
+
+    .header_wrapper {
         @include large-header;
         color: white;
+    }
+
+    h2 {
+        @include paragraph-large;
+        margin-top: 4rem;
+        margin-bottom: 1rem;
+
     }
 
     #choose_applicant_type {
@@ -28,12 +35,14 @@
     margin-bottom: 1rem;
 
     h1 {
-        @include header-medium;
+        @include paragraph-large;
         margin: auto;
         margin-top: 2rem;
-        padding-bottom: 0;
         width: 100%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
         margin-bottom: .5rem;
+        border-radius: 16px;
     }
 
     p {
@@ -47,11 +56,6 @@
 @media (max-width: 1023px) {
     #display_applicant_wrapper {
         @include mobile-shadow-form;
-        
+
     }
 }
-
-
-
-
-

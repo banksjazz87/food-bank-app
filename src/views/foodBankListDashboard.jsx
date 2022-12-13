@@ -12,7 +12,9 @@ export default function FoodBankListDashboard() {
 
   return (
     <div id="fb_list_dashboard">
+    <div className="header_wrapper">
       <h1>FB List Dashboard</h1>
+    </div>
       <NavBar />
 
       <div id="icon_wrapper">

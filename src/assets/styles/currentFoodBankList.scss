@@ -6,7 +6,7 @@
     align-content: center; 
 
     .header {
-        @include header-large-bold;
+        @include large-header;
         color: white;
         text-align: center;
     }

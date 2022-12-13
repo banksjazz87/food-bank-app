@@ -4,15 +4,6 @@
     @include shadow-form;
 }
 
-.heading_wrapper {
-    @include large-header;
-}
-
-.section_heading {
-    @include medium-section-heading;
-    color: white;
-}
-
 input {
     width: 100%;
     @include medium-input;

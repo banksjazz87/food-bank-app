@@ -35,7 +35,9 @@ export default function PastLists() {
 
   return (
     <div id="past_lists-wrapper">
-      <h1>All Past Lists</h1>
+      <div className="header_wrapper">
+        <h1>All Past Lists</h1>
+      </div>
       <NavBar />
       <FbListSearchBar
         changeHandler={selectedList}

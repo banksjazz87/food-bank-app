@@ -1,0 +1,8 @@
+@import "./library.scss";
+
+#past_lists-wrapper {
+    .header_wrapper {
+        @include large-header;
+        color: white;
+    }
+}
