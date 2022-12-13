@@ -7,6 +7,11 @@ export default function EditModuleForCurrentList(props) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showAddNewPerson, setShowAddNewPerson] = useState(false);
 
+  const hidePreviousSelected = () => {
+    setShowSearchBar(false);
+    setShowAddNewPerson(false);
+  }
+
   return (
     <div
       id="cl_edit_module_wrapper"
@@ -27,7 +32,12 @@ export default function EditModuleForCurrentList(props) {
             Remove 
           </button>
 
-          <button onClick={props.hideModuleHandler}>Cancel</button>
+          <button 
+            onClick={() => {
+                props.hideModuleHandler();
+                hidePreviousSelected();
+          }
+          }>Cancel</button>
         </div>
       </div>
       <div

@@ -134,7 +134,9 @@ export default function CurrentFoodBankList() {
 
   return (
     <div id="current_fb_list">
+    <div className="header_wrapper">
       <h1 className="header">Current Food Bank List</h1>
+    </div>
 
       <NavBar />
       <DisplayCurrentFoodBankList

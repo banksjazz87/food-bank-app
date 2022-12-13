@@ -4,12 +4,10 @@
     display: flex;
     flex-direction: column;
     align-content: center; 
+    overflow: hidden;
+    padding-bottom: 6rem;
 
-    .header {
-        @include large-header;
-        color: white;
-        text-align: center;
-    }
+    
 
     .edit_button {
         @include btn-small;

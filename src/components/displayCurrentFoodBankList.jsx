@@ -208,7 +208,7 @@ export default function DisplayCurrentFoodBankList(props) {
   } else {
     return (
       <div id="list_wrapper">
-        <h1>{`${props.tableDetails.title}`}</h1>
+        <h1 id="list_title">{`${props.tableDetails.title}`}</h1>
         <h1>Attendance Sheet</h1>
         <form
           action="/foodBank_attendance/check_sheet"
