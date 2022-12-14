@@ -49,7 +49,7 @@ export default function NewApplicantForm(props) {
     } else {
       return (
         <div className="input_pair" key={`input_${y}`}>
-          <label key={`label_${y}`} htmlFor={x.name}>
+          <label className="new_applicant_label" key={`label_${y}`} htmlFor={x.name}>
             {x.placeHolder}
           </label>
           <br />

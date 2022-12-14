@@ -12,10 +12,15 @@ export default function EditModuleForCurrentList(props) {
     setShowAddNewPerson(false);
   }
 
+
   return (
+    <div 
+      id="cl_edit_module_overlay"
+      style={props.display ? { display: "" } : { display: "none" }}
+    >
     <div
       id="cl_edit_module_wrapper"
-      style={props.display ? { display: "" } : { display: "none" }}
+      
     >
       <div id="cl_edit_module_questions">
         <h3>Would you like to: </h3>
@@ -57,6 +62,7 @@ export default function EditModuleForCurrentList(props) {
         tableInfo={props.tableDetails}
         addToTable={props.addNewHandler}
       />
+    </div>
     </div>
   );
 }

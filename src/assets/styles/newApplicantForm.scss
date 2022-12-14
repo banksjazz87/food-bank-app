@@ -20,7 +20,14 @@ input {
     width: 120px;
 }
 
+.new_applicant_label {
+    @include medium-label;
+}
 
+.section_heading {
+    @include medium-section-heading;
+    color: white;
+}
 
 @media (max-width: 1023px) {
 
