@@ -157,7 +157,7 @@ export default function DisplayCurrentFoodBankList(props) {
                 props.showDeleteAlertHandler();
               }}
             >
-              Remove
+              X
             </button>
           </td>
         </tr>

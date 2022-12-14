@@ -181,6 +181,7 @@ export default function CurrentFoodBankList() {
         }}
       />
 
+      <div id="edit_cancel_button_wrapper">
       <button 
         class="edit_button" 
         type="button" 
@@ -199,6 +200,7 @@ export default function CurrentFoodBankList() {
       >
         Cancel
       </button>
+      </div>
 
     </div>
   );

@@ -7,6 +7,7 @@ $light-gray: #808080;
 $dark-gray: #5D5D5D;
 $purple: #996699;
 $orange: #FB9400;
+$faded-orange: rgba(251, 148, 0, .6);
 $form-border-color: rgba(153, 102, 153, .5); 
 
 @mixin header-large-bold {
@@ -108,6 +109,22 @@ $form-border-color: rgba(153, 102, 153, .5);
     }
 }
 
+@mixin orange-cancel-button {
+    min-width: 30px;
+    padding: .25rem .5rem .25rem .5rem;
+    font-size: 18px;
+    background-color: $orange;
+    color: white;
+    border-style: none;
+    border-radius: 50%;
+
+    &:hover {
+        background-color: $faded-orange;
+        box-shadow: 0 1px 4px $light-gray;
+        cursor: pointer;
+    }
+}
+
 @mixin medium-input {
     @include paragraph-medium;
 
@@ -192,5 +209,15 @@ $form-border-color: rgba(153, 102, 153, .5);
     justify-content: center;
     column-gap: 2rem;
     margin-bottom: 2rem;
+}
+
+@mixin dark-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .9);
+    z-index: 10;
 }
 

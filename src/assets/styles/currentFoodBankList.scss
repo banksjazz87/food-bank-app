@@ -3,22 +3,23 @@
 #current_fb_list {
     display: flex;
     flex-direction: column;
-    align-content: center; 
+    align-content: center;
     overflow: hidden;
     padding-bottom: 6rem;
 
-    
 
-    .edit_button {
-        @include btn-small;
-        margin: auto;
-        margin-top: 2rem;
-    }
+    #edit_cancel_button_wrapper {
+        @include btn-multiple;
+        margin-top: 4rem;
 
-    .cancel_button {
-        @include btn-small;
-        width: 250px;
-        margin: auto;
-        margin-top: 2rem;
+        .edit_button {
+            @include btn-small;
+            margin: auto;
+        }
+
+        .cancel_button {
+            @include btn-small;
+            margin: auto;
+        }
     }
 }

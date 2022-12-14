@@ -4,9 +4,12 @@ import "../assets/styles/deleteAlert.scss";
 
 export default function DeleteAlert(props) {
   return (
+    <div 
+      id="delete_alert_overlay"
+      style={props.display ? { display: "" } : { display: "none" }}
+    >
     <div
       id="delete_alert_wrapper"
-      style={props.display ? { display: "" } : { display: "none" }}
     >
       <p>
         {props.warningMessage}
@@ -26,5 +29,6 @@ export default function DeleteAlert(props) {
         <button onClick={props.noClickHandler}>No</button>
       </div>
     </div>
+  </div>
   );
 }

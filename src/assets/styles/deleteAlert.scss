@@ -1,15 +1,21 @@
 @import "./library.scss";
 
+#delete_alert_overlay {
+    @include dark-overlay;
+}
+
 #delete_alert_wrapper {
     @include shadow-form;
     position: fixed;
     bottom: 30%;
     left: 50%;
     transform: translate(-50%, 0);
+    z-index: 11;
 
     p {
         @include paragraph-medium;
         text-align: center;
+        color: white;
     }
     #delete_alert_buttons {
         @include btn-multiple;
