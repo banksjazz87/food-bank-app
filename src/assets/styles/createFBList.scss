@@ -1,0 +1,39 @@
+@import "./library.scss";
+
+#create_list_wrapper {
+    form {
+        @include shadow-form;
+
+        input {
+            width: 70%;
+            @include medium-input;
+        }
+
+        .new_list_submit {
+            @include btn-small;
+            width: 120px;
+        }
+
+        label {
+            @include medium-label;
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+
+    #create_list_wrapper {
+        form {
+            @include mobile-shadow-form;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+        }
+
+        label {
+            width: 80%;
+        }
+    }
+}

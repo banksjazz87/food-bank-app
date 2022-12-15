@@ -127,6 +127,7 @@ $form-border-color: rgba(153, 102, 153, .5);
 
 @mixin medium-input {
     @include paragraph-medium;
+    padding-left: .5rem;
 
     &:focus {
         outline: none;
@@ -175,7 +176,7 @@ $form-border-color: rgba(153, 102, 153, .5);
 
 @mixin mobile-shadow-form {
     @include shadow-form;
-    width: 100vw;
+    width: 90vw;
     padding-left: 1rem;
     padding-left: .25rem;
     padding-right: .25rem;

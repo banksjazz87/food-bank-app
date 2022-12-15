@@ -3,6 +3,7 @@ import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
 import SearchBar from "../components/searchBar.jsx";
 import deleteRequest from "../functions/deleteRequest.js";
+import "../assets/styles/createFBList.scss";
 
 export default function CreateFoodBankList() {
   const [listName, setListName] = useState({ title: "" });
@@ -133,10 +134,10 @@ export default function CreateFoodBankList() {
           id="food_bank_list_name"
           name="food_bank_list_name"
           type="text"
-          placeHolder="new name"
+          placeHolder="MonthYear"
           onChange={(e) => setListName({ ...listName, title: e.target.value })}
         />
-        <input type="submit" value="Submit" />
+        <input class="new_list_submit" type="submit" value="Submit" />
       </form>
       <div
         id="applicant_search_and_list"
