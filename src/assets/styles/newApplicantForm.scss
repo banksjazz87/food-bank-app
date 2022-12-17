@@ -2,6 +2,7 @@
 
 .shadow_form {
     @include shadow-form;
+    overflow: hidden;
 }
 
 input {
