@@ -1,6 +1,9 @@
 @import "./library.scss";
 
 #create_list_wrapper {
+
+    overflow: hidden;
+
     form {
         @include shadow-form;
 
@@ -16,6 +19,46 @@
 
         label {
             @include medium-label;
+        }
+    }
+
+    #fb_list_wrapper {
+        @include shadow-form;
+        border: none;
+        box-shadow: none;
+        padding-top: 0;
+        color: white;
+        justify-content: start;
+
+        .applicant_pair {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: baseline;
+            column-gap: 2rem;
+
+        }
+
+        h1 {
+            @include paragraph-large;
+            text-align: center;
+        }
+
+        p {
+            @include paragraph-medium;
+        }
+
+        .delete_button {
+            @include orange-cancel-button;
+        }
+
+    }
+
+    #button_wrapper {
+        @include btn-multiple;
+
+        button {
+            @include btn-small;
         }
     }
 }
@@ -35,5 +78,12 @@
         label {
             width: 80%;
         }
+    }
+
+    #fb_list_wrapper {
+        @include mobile-shadow-form;
+        border: none;
+        box-shadow: none;
+        padding-top: 0;
     }
 }

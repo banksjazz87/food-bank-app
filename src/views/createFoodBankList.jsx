@@ -12,6 +12,7 @@ export default function CreateFoodBankList() {
     attendants: [],
     firstLast: [],
   });
+  const [showListInput, setShowListInput] = useState(true);
   const [displayEdit, setDisplayEdit] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [showApplicantBar, setShowApplicantBar] = useState(false);
@@ -22,6 +23,7 @@ export default function CreateFoodBankList() {
       if (data.message === "success") {
         setListData({ ...listData, title: data.title });
         setShowApplicantBar(true);
+        setShowListInput(false);
       } else {
         alert(data.message);
       }
@@ -89,10 +91,11 @@ export default function CreateFoodBankList() {
   const displayAttendants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
-        <div key={`attendant_y`}>
+        <div className="applicant_pair" key={`attendant_y`}>
           <p applicantNumber={y}>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
           <button
             id={y}
+            class="delete_button"
             style={editMode ? { display: "" } : { display: "none" }}
             onClick={(e) => {
               deleteAttendantFromList(e.target.id);
@@ -104,7 +107,7 @@ export default function CreateFoodBankList() {
               setEditMode(false);
             }}
           >
-            Delete
+            X
           </button>
         </div>
       );
@@ -124,6 +127,7 @@ export default function CreateFoodBankList() {
       <form
         action="/new_foodbank_list"
         method="post"
+        style={showListInput ? {display: ""} : {display: "none"}}
         onSubmit={(e) => {
           e.preventDefault();
           submitListTitle();
@@ -151,16 +155,30 @@ export default function CreateFoodBankList() {
           description="all-applicants"
           show={true}
         />
+        <div id="fb_list_wrapper">
         <h1>{listData.title}</h1>
+        
         {displayAttendants(listData.attendants)}
+        <div 
+          id="button_wrapper"
+          style={displayEdit ? { display: "" } : { display: "none" }}
+        >
         <button
           class="edit_button"
           type="button"
-          style={displayEdit ? { display: "" } : { display: "none" }}
           onClick={() => setEditMode(true)}
         >
           Edit
         </button>
+        <button
+          class="cancel_button"
+          type="button"
+          onClick={() => setEditMode(false)}
+        >
+          Cancel
+        </button>
+        </div>
+        </div>
       </div>
     </div>
   );
