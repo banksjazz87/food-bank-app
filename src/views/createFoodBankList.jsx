@@ -19,7 +19,7 @@ export default function CreateFoodBankList() {
 
   //For Production
   //Function that is used when the submit button is pushed after creating the title.
- /* const submitListTitle = () => {
+  /* const submitListTitle = () => {
     postRequest("/new_foodbank_list", listName).then((data) => {
       if (data.message === "success") {
         setListData({ ...listData, title: data.title });
@@ -33,16 +33,16 @@ export default function CreateFoodBankList() {
 
   //for development
   const submitListTitle = () => {
-    setListData({...listData, title: listName.title});
+    setListData({ ...listData, title: listName.title });
     setShowApplicantBar(true);
     setShowListInput(false);
-  }
+  };
 
   //Function to display the save and edit buttons.
   const showEdit = () => {
     if (!displayEdit) {
       setDisplayEdit(true);
-    } 
+    }
   };
 
   //Function to save the list in the database.
@@ -64,10 +64,10 @@ export default function CreateFoodBankList() {
 
     //for development
     const previousAttendants = listData.attendants.slice();
-      setListData({
-        ...listData,
-        attendants: previousAttendants.concat(array),
-      });
+    setListData({
+      ...listData,
+      attendants: previousAttendants.concat(array),
+    });
 
     //For production
     /*let previousFirstLast = listData.firstLast.slice();
@@ -109,26 +109,28 @@ export default function CreateFoodBankList() {
   const displayAttendants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
-        <tr className="applicant_pair" key={`attendant_y`}>
-          <td applicantNumber={y}>{`${y + 1}. ${x.lastName}`}</td>
-          <td applicantNumber={y}>{`${x.firstName}`}</td>
-          <td><button
-            id={y}
-            class="delete_button"
-            style={editMode ? { display: "" } : { display: "none" }}
-            onClick={(e) => {
-              //For Production
-              /*deleteAttendantFromList(e.target.id);
+        <tr applicantNumber={y} className="applicant_pair" key={`attendant_y`}>
+          <td>{`${y + 1}.`}</td>
+          <td>{`${x.lastName}`}</td>
+          <td>{`${x.firstName}`}</td>
+          <td>
+            <button
+              id={y}
+              class="delete_button"
+              style={editMode ? { display: "" } : { display: "none" }}
+              onClick={(e) => {
+                //For Production
+                /*deleteAttendantFromList(e.target.id);
               deleteAttendantFromDatabase(
                 listData.attendants,
                 e.target.id,
                 listData.title
               );*/
-              setEditMode(false);
-            }}
-          >
-            X
-          </button>
+                setEditMode(false);
+              }}
+            >
+              X
+            </button>
           </td>
         </tr>
       );
@@ -148,7 +150,7 @@ export default function CreateFoodBankList() {
       <form
         action="/new_foodbank_list"
         method="post"
-        style={showListInput ? {display: ""} : {display: "none"}}
+        style={showListInput ? { display: "" } : { display: "none" }}
         onSubmit={(e) => {
           e.preventDefault();
           submitListTitle();
@@ -177,34 +179,36 @@ export default function CreateFoodBankList() {
           show={true}
         />
         <div id="fb_list_wrapper">
-        <h1 className="table_heading">{listData.title}</h1>
-        <table>
-        <tr>
-          <th>Last Name</th>
-          <th>First Name</th>
-        </tr>
-        
-        {displayAttendants(listData.attendants)}
-        </table>
-        <div 
-          id="button_wrapper"
-          style={displayEdit ? { display: "" } : { display: "none" }}
-        >
-        <button
-          class="edit_button"
-          type="button"
-          onClick={() => setEditMode(true)}
-        >
-          Edit
-        </button>
-        <button
-          class="cancel_button"
-          type="button"
-          onClick={() => setEditMode(false)}
-        >
-          Cancel
-        </button>
-        </div>
+          <h1 className="table_heading">{listData.title}</h1>
+          <table>
+            <tr>
+              <th>ID</th>
+              <th>Last Name</th>
+              <th>First Name</th>
+              <th></th>
+            </tr>
+
+            {displayAttendants(listData.attendants)}
+          </table>
+          <div
+            id="button_wrapper"
+            style={displayEdit ? { display: "" } : { display: "none" }}
+          >
+            <button
+              class="edit_button"
+              type="button"
+              onClick={() => setEditMode(true)}
+            >
+              Edit
+            </button>
+            <button
+              class="cancel_button"
+              type="button"
+              onClick={() => setEditMode(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -24,8 +24,8 @@
 
     #fb_list_wrapper {
         @include shadow-form;
-        background-color: rgba(0, 0, 0, .5);
-        height: 60vh;
+        background-color: rgba(0, 0, 0, .3);
+        height: 30vh;
         overflow-y: scroll;
         overflow-x: hidden;
         border: none;
@@ -34,23 +34,19 @@
         color: white;
         justify-content: start;
 
-        /*.applicant_pair {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: baseline;
-            column-gap: 2rem;
-
-        }*/
-
         .table_heading {
             @include paragraph-large;
             text-align: center;
         }
 
-        p {
-            @include paragraph-medium;
-        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 16px;
+            border-style: solid;
+            border-color: $form-border-color;
+            border-width: 1px 0 1px 0 1px;
+
 
         .delete_button {
             @include orange-cancel-button;
@@ -58,10 +54,26 @@
 
         th {
             text-align: left;
+            padding-bottom: 1rem;
+            @include paragraph-medium;
+            padding-left: 1rem;
+            border-right: 1px solid $form-border-color;
         }
+
         td {
-            text-align: right;
+            text-align: left;
+            @include paragraph-small;
+            border-right: 1px solid $form-border-color;
+            padding: .5rem;
+            padding-left: 1rem;
+            
         }
+
+        tr {
+            border-bottom: 1px solid $form-border-color;
+        }
+
+    }
 
     }
 
