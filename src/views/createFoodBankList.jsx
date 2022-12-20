@@ -17,8 +17,9 @@ export default function CreateFoodBankList() {
   const [editMode, setEditMode] = useState(false);
   const [showApplicantBar, setShowApplicantBar] = useState(false);
 
+  //For Production
   //Function that is used when the submit button is pushed after creating the title.
-  const submitListTitle = () => {
+ /* const submitListTitle = () => {
     postRequest("/new_foodbank_list", listName).then((data) => {
       if (data.message === "success") {
         setListData({ ...listData, title: data.title });
@@ -28,7 +29,14 @@ export default function CreateFoodBankList() {
         alert(data.message);
       }
     });
-  };
+  };*/
+
+  //for development
+  const submitListTitle = () => {
+    setListData({...listData, title: listName.title});
+    setShowApplicantBar(true);
+    setShowListInput(false);
+  }
 
   //Function to display the save and edit buttons.
   const showEdit = () => {
@@ -54,8 +62,17 @@ export default function CreateFoodBankList() {
   const addNewAttendant = (array) => {
     showEdit();
 
-    let previousFirstLast = listData.firstLast.slice();
+    //for development
+    const previousAttendants = listData.attendants.slice();
+      setListData({
+        ...listData,
+        attendants: previousAttendants.concat(array),
+      });
+
+    //For production
+    /*let previousFirstLast = listData.firstLast.slice();
     let currentFirstLast = `${array[0].firstName}${array[0].lastName}`;
+
 
     if (previousFirstLast.indexOf(currentFirstLast) === -1) {
       const previousAttendants = listData.attendants.slice();
@@ -64,12 +81,13 @@ export default function CreateFoodBankList() {
         attendants: previousAttendants.concat(array),
         firstLast: previousFirstLast.concat([currentFirstLast]),
       });
-      saveList(listData.title, array[0]);
+      //production
+      //saveList(listData.title, array[0]);
     } else {
       alert(
         `${array[0].firstName} ${array[0].lastName} is already included in the current list.`
       );
-    }
+    }*/
   };
 
   //function to handle the delete event
@@ -91,25 +109,28 @@ export default function CreateFoodBankList() {
   const displayAttendants = (array) => {
     const layOutApplicants = array.map((x, y) => {
       return (
-        <div className="applicant_pair" key={`attendant_y`}>
-          <p applicantNumber={y}>{`${y + 1}. ${x.lastName}, ${x.firstName}`}</p>
-          <button
+        <tr className="applicant_pair" key={`attendant_y`}>
+          <td applicantNumber={y}>{`${y + 1}. ${x.lastName}`}</td>
+          <td applicantNumber={y}>{`${x.firstName}`}</td>
+          <td><button
             id={y}
             class="delete_button"
             style={editMode ? { display: "" } : { display: "none" }}
             onClick={(e) => {
-              deleteAttendantFromList(e.target.id);
+              //For Production
+              /*deleteAttendantFromList(e.target.id);
               deleteAttendantFromDatabase(
                 listData.attendants,
                 e.target.id,
                 listData.title
-              );
+              );*/
               setEditMode(false);
             }}
           >
             X
           </button>
-        </div>
+          </td>
+        </tr>
       );
     });
     if (array.length > 0) {
@@ -156,9 +177,15 @@ export default function CreateFoodBankList() {
           show={true}
         />
         <div id="fb_list_wrapper">
-        <h1>{listData.title}</h1>
+        <h1 className="table_heading">{listData.title}</h1>
+        <table>
+        <tr>
+          <th>Last Name</th>
+          <th>First Name</th>
+        </tr>
         
         {displayAttendants(listData.attendants)}
+        </table>
         <div 
           id="button_wrapper"
           style={displayEdit ? { display: "" } : { display: "none" }}
