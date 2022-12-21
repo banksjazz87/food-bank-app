@@ -48,41 +48,53 @@
             padding-bottom: 1rem;
 
 
-        .delete_button {
-            @include orange-cancel-button;
-        }
+            .delete_button {
+                @include orange-cancel-button;
+            }
 
-        th {
-            text-align: left;
-            padding: .5rem;
-            @include paragraph-medium;
-            padding-left: 1rem;
-            padding-bottom: 0;
-            //border-right: 1px solid $form-border-color;
-        }
+            th {
+                text-align: left;
+                padding: .5rem;
+                @include paragraph-medium;
+                padding-left: 1rem;
+                padding-bottom: 0;
+            }
 
-        #header_row {
-            border-style: solid;
-            border-color: $form-border-color;
-            border-width: 0 0 1px 0;
-        }
+            #header_row {
+                border-style: solid;
+                border-color: $form-border-color;
+                border-width: 0 0 1px 0;
+            }
 
-        td {
-            text-align: left;
-            @include paragraph-small;
-            //border-right: 1px solid $form-border-color;
-            padding: .5rem .5rem .5rem 1rem;
-            
-        }
+            td {
+                text-align: left;
+                @include paragraph-small;
+                padding: .5rem .5rem .5rem 1rem;
 
-        tr {
-            //border-bottom: 1px solid $form-border-color;
-            padding-bottom: 1rem;
+            }
+
+            tr {
+                //border-bottom: 1px solid $form-border-color;
+                padding-bottom: 1rem;
+            }
+
         }
 
     }
 
+    #icon_count_wrapper {
+        width: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    
+    #person_icon {
+        width: 48px;
+        fill: $orange;
+        padding-left: 2rem;
     }
+
+}
 
     #button_wrapper {
         @include btn-multiple;
