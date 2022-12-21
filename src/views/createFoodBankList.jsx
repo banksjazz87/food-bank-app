@@ -181,7 +181,7 @@ export default function CreateFoodBankList() {
         <div id="fb_list_wrapper">
           <h1 className="table_heading">{listData.title}</h1>
           <table>
-            <tr>
+            <tr id="header_row">
               <th>ID</th>
               <th>Last Name</th>
               <th>First Name</th>

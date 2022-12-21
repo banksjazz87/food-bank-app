@@ -1,7 +1,6 @@
 @import "./library.scss";
 
 #create_list_wrapper {
-
     overflow: hidden;
 
     form {
@@ -37,15 +36,16 @@
         .table_heading {
             @include paragraph-large;
             text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             border-radius: 16px;
-            border-style: solid;
-            border-color: $form-border-color;
-            border-width: 1px 0 1px 0 1px;
+            box-shadow: 0 2px 8px $form-border-color;
+            padding-bottom: 1rem;
 
 
         .delete_button {
@@ -54,23 +54,30 @@
 
         th {
             text-align: left;
-            padding-bottom: 1rem;
+            padding: .5rem;
             @include paragraph-medium;
             padding-left: 1rem;
-            border-right: 1px solid $form-border-color;
+            padding-bottom: 0;
+            //border-right: 1px solid $form-border-color;
+        }
+
+        #header_row {
+            border-style: solid;
+            border-color: $form-border-color;
+            border-width: 0 0 1px 0;
         }
 
         td {
             text-align: left;
             @include paragraph-small;
-            border-right: 1px solid $form-border-color;
-            padding: .5rem;
-            padding-left: 1rem;
+            //border-right: 1px solid $form-border-color;
+            padding: .5rem .5rem .5rem 1rem;
             
         }
 
         tr {
-            border-bottom: 1px solid $form-border-color;
+            //border-bottom: 1px solid $form-border-color;
+            padding-bottom: 1rem;
         }
 
     }
@@ -79,6 +86,7 @@
 
     #button_wrapper {
         @include btn-multiple;
+        margin-top: 1rem;
 
         button {
             @include btn-small;
