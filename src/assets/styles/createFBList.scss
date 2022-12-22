@@ -21,17 +21,33 @@
         }
     }
 
+    #applicant_search_and_list {
+        @include shadow-form;
+        width: 50%;
+        background-color: rgba(0, 0, 0, .3);
+        box-shadow: none;
+        padding-top: -1rem;
+
+    #applicantSearch {
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, .0);
+        margin-top: 1rem;
+    }
+    
     #fb_list_wrapper {
         @include shadow-form;
-        background-color: rgba(0, 0, 0, .3);
-        height: 30vh;
+        background-color: rgba(0, 0, 0, .0);
+        height: 40vh;
         overflow-y: scroll;
         overflow-x: hidden;
         border: none;
         box-shadow: none;
         padding-top: 0;
         color: white;
-        justify-content: start;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-top: 1rem;
+        padding-top: 6rem;
 
         .table_heading {
             @include paragraph-large;
@@ -60,11 +76,6 @@
                 padding-bottom: 0;
             }
 
-            #header_row {
-                border-style: solid;
-                border-color: $form-border-color;
-                border-width: 0 0 1px 0;
-            }
 
             td {
                 text-align: left;
@@ -74,13 +85,13 @@
             }
 
             tr {
-                //border-bottom: 1px solid $form-border-color;
                 padding-bottom: 1rem;
             }
 
         }
-
     }
+}
+
 
     #icon_count_wrapper {
         width: auto;
@@ -92,6 +103,10 @@
         width: 48px;
         fill: $orange;
         padding-left: 2rem;
+    }
+
+    p {
+        margin-top: 1.5rem;
     }
 
 }

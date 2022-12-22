@@ -195,6 +195,7 @@ export default function CreateFoodBankList() {
 
             {displayAttendants(listData.attendants)}
           </table>
+          </div>
           <div
             id="button_wrapper"
             style={displayEdit ? { display: "" } : { display: "none" }}
@@ -213,7 +214,6 @@ export default function CreateFoodBankList() {
             >
               Cancel
             </button>
-          </div>
         </div>
       </div>
     </div>
