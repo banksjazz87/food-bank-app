@@ -65,7 +65,7 @@ export default function SearchBar(props) {
     );
   } else {
     return (
-      <div style={props.show ? {display: ""} : {display: "none"}}>
+      <div id="search_bar" style={props.show ? {display: ""} : {display: "none"}}>
         <form
           id="applicantSearch"
           onSubmit={(e) => {

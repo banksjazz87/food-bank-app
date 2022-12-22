@@ -32,29 +32,28 @@
         box-shadow: none;
         background-color: rgba(0, 0, 0, .0);
         margin-top: 1rem;
+        padding-bottom: 0;
+        margin-bottom: 2rem;
+    }
+
+    .table_heading {
+        @include paragraph-large;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        color: white;
     }
     
     #fb_list_wrapper {
         @include shadow-form;
         background-color: rgba(0, 0, 0, .0);
-        height: 40vh;
-        overflow-y: scroll;
-        overflow-x: hidden;
         border: none;
         box-shadow: none;
-        padding-top: 0;
         color: white;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        margin-top: 1rem;
-        padding-top: 6rem;
+        padding: 0 2rem 0 2rem;
+        margin: 0 auto 0rem auto;
 
-        .table_heading {
-            @include paragraph-large;
-            text-align: center;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
+
 
         table {
             width: 100%;
@@ -62,6 +61,8 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px $form-border-color;
             padding-bottom: 1rem;
+            padding-top: 2rem;
+            margin: 0 2rem 0 2rem;
 
 
             .delete_button {
@@ -93,11 +94,16 @@
 }
 
 
+::-webkit-scrollbar {
+    display: none;
+}
+
     #icon_count_wrapper {
         width: auto;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+        color: white;
     
     #person_icon {
         width: 48px;
@@ -113,7 +119,7 @@
 
     #button_wrapper {
         @include btn-multiple;
-        margin-top: 1rem;
+        margin-top: 2rem;
 
         button {
             @include btn-small;
@@ -124,24 +130,27 @@
 @media (max-width: 1023px) {
 
     #create_list_wrapper {
+        margin: auto;
+    
         form {
             @include mobile-shadow-form;
-            text-align: center;
-        }
+    
+            input {
+                width: 90%;
+            }
+    
+            .new_list_submit {
+                @include btn-small;
+                width: 120px;
+            }
+    
+            label {
+                @include medium-label;
+            }
+        } 
 
-        input {
-            width: 100%;
+        #applicant_search_and_list {
+            @include mobile-shadow-form;
         }
-
-        label {
-            width: 80%;
-        }
-    }
-
-    #fb_list_wrapper {
-        @include mobile-shadow-form;
-        border: none;
-        box-shadow: none;
-        padding-top: 0;
     }
 }

@@ -179,12 +179,14 @@ export default function CreateFoodBankList() {
           description="all-applicants"
           show={true}
         />
+        
         <div id="fb_list_wrapper">
         <div id="icon_count_wrapper">
           <h1 className="table_heading">{listData.title}</h1>
           <img id="person_icon" src={PersonIcon} alt="person icon"></img>
           <p id="current_attendant_count">{listData.attendants.length}</p>
           </div>
+      
           <table>
             <tr id="header_row">
               <th>ID</th>
