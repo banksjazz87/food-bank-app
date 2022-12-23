@@ -26,5 +26,5 @@ const DummyData =  [
   },
 ];
 
-export default DummyData;
-//module.exports.variableName = DummyData;
+//export default DummyData;
+module.exports.variableName = DummyData;

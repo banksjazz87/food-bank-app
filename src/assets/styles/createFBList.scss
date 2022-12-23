@@ -23,80 +23,79 @@
 
     #applicant_search_and_list {
         @include shadow-form;
-        width: 50%;
-        background-color: rgba(0, 0, 0, .3);
-        box-shadow: none;
-        padding-top: -1rem;
+        background-color: $chapel-gray;
+        padding-top: 1rem;
+        padding-bottom: 4rem;
 
-    #applicantSearch {
-        box-shadow: none;
-        background-color: rgba(0, 0, 0, .0);
-        margin-top: 1rem;
-        padding-bottom: 0;
-        margin-bottom: 2rem;
-    }
+        #applicantSearch {
+            box-shadow: none;
+            background-color: rgba(0, 0, 0, .0);
+            margin-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 2rem;
+        }
 
-    .table_heading {
-        @include paragraph-large;
-        text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        color: white;
-    }
-    
-    #fb_list_wrapper {
-        @include shadow-form;
-        background-color: rgba(0, 0, 0, .0);
-        border: none;
-        box-shadow: none;
-        color: white;
-        padding: 0 2rem 0 2rem;
-        margin: 0 auto 0rem auto;
+        .table_heading {
+            @include paragraph-large;
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
 
+        #fb_list_wrapper {
+            @include shadow-form;
+            background-color: rgba(0, 0, 0, .0);
+            border: none;
+            box-shadow: none;
+            color: white;
+            padding: 0 2rem 0 2rem;
+            margin: 0 auto 0rem auto;
 
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px $form-border-color;
-            padding-bottom: 1rem;
-            padding-top: 2rem;
-            margin: 0 2rem 0 2rem;
 
-
-            .delete_button {
-                @include orange-cancel-button;
-            }
-
-            th {
-                text-align: left;
-                padding: .5rem;
-                @include paragraph-medium;
-                padding-left: 1rem;
-                padding-bottom: 0;
-            }
-
-
-            td {
-                text-align: left;
-                @include paragraph-small;
-                padding: .5rem .5rem .5rem 1rem;
-
-            }
-
-            tr {
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                border-radius: 16px;
+                box-shadow: 0 2px 8px $form-border-color;
                 padding-bottom: 1rem;
-            }
+                padding-top: 2rem;
+                margin: 0 2rem 0 2rem;
 
+
+                .delete_button {
+                    @include orange-cancel-button;
+                }
+
+                th {
+                    text-align: left;
+                    padding: .5rem;
+                    @include paragraph-medium;
+                    padding-left: 1rem;
+                    padding-bottom: 0;
+                }
+
+
+                td {
+                    text-align: left;
+                    @include paragraph-small;
+                    padding: .5rem .5rem .5rem 1rem;
+
+                }
+
+                tr {
+                    padding-bottom: 1rem;
+                }
+
+            }
         }
     }
-}
 
 
-::-webkit-scrollbar {
-    display: none;
-}
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
     #icon_count_wrapper {
         width: auto;
@@ -104,18 +103,18 @@
         justify-content: center;
         flex-wrap: wrap;
         color: white;
-    
-    #person_icon {
-        width: 48px;
-        fill: $orange;
-        padding-left: 2rem;
-    }
 
-    p {
-        margin-top: 1.5rem;
-    }
+        #person_icon {
+            width: 48px;
+            fill: $orange;
+            padding-left: 2rem;
+        }
 
-}
+        p {
+            margin-top: 1.5rem;
+        }
+
+    }
 
     #button_wrapper {
         @include btn-multiple;
@@ -125,32 +124,38 @@
             @include btn-small;
         }
     }
+
 }
 
 @media (max-width: 1023px) {
 
     #create_list_wrapper {
         margin: auto;
-    
+
         form {
             @include mobile-shadow-form;
-    
+
             input {
                 width: 90%;
             }
-    
+
             .new_list_submit {
                 @include btn-small;
                 width: 120px;
             }
-    
+
             label {
                 @include medium-label;
             }
-        } 
+        }
 
         #applicant_search_and_list {
             @include mobile-shadow-form;
+        }
+
+        #fb_list_wrapper {
+            max-width: 100%;
+
         }
     }
 }

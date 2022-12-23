@@ -20,7 +20,7 @@ export default function CreateFoodBankList() {
 
   //For Production
   //Function that is used when the submit button is pushed after creating the title.
-  /* const submitListTitle = () => {
+  const submitListTitle = () => {
     postRequest("/new_foodbank_list", listName).then((data) => {
       if (data.message === "success") {
         setListData({ ...listData, title: data.title });
@@ -30,14 +30,14 @@ export default function CreateFoodBankList() {
         alert(data.message);
       }
     });
-  };*/
+  };
 
   //for development
-  const submitListTitle = () => {
+ /* const submitListTitle = () => {
     setListData({ ...listData, title: listName.title });
     setShowApplicantBar(true);
     setShowListInput(false);
-  };
+  };*/
 
   //Function to display the save and edit buttons.
   const showEdit = () => {
@@ -64,14 +64,14 @@ export default function CreateFoodBankList() {
     showEdit();
 
     //for development
-    const previousAttendants = listData.attendants.slice();
+    /*const previousAttendants = listData.attendants.slice();
     setListData({
       ...listData,
       attendants: previousAttendants.concat(array),
-    });
+    });*/
 
     //For production
-    /*let previousFirstLast = listData.firstLast.slice();
+    let previousFirstLast = listData.firstLast.slice();
     let currentFirstLast = `${array[0].firstName}${array[0].lastName}`;
 
 
@@ -83,12 +83,12 @@ export default function CreateFoodBankList() {
         firstLast: previousFirstLast.concat([currentFirstLast]),
       });
       //production
-      //saveList(listData.title, array[0]);
+      saveList(listData.title, array[0]);
     } else {
       alert(
         `${array[0].firstName} ${array[0].lastName} is already included in the current list.`
       );
-    }*/
+    }
   };
 
   //function to handle the delete event
@@ -120,13 +120,13 @@ export default function CreateFoodBankList() {
               class="delete_button"
               style={editMode ? { display: "" } : { display: "none" }}
               onClick={(e) => {
-                //For Production
-                /*deleteAttendantFromList(e.target.id);
+              //For Production
+              deleteAttendantFromList(e.target.id);
               deleteAttendantFromDatabase(
                 listData.attendants,
                 e.target.id,
                 listData.title
-              );*/
+              );
                 setEditMode(false);
               }}
             >
@@ -179,14 +179,14 @@ export default function CreateFoodBankList() {
           description="all-applicants"
           show={true}
         />
-        
+
         <div id="fb_list_wrapper">
-        <div id="icon_count_wrapper">
-          <h1 className="table_heading">{listData.title}</h1>
-          <img id="person_icon" src={PersonIcon} alt="person icon"></img>
-          <p id="current_attendant_count">{listData.attendants.length}</p>
+          <div id="icon_count_wrapper">
+            <h1 className="table_heading">{listData.title}</h1>
+            <img id="person_icon" src={PersonIcon} alt="person icon"></img>
+            <p id="current_attendant_count">{listData.attendants.length}</p>
           </div>
-      
+
           <table>
             <tr id="header_row">
               <th>ID</th>
@@ -197,25 +197,25 @@ export default function CreateFoodBankList() {
 
             {displayAttendants(listData.attendants)}
           </table>
-          </div>
-          <div
-            id="button_wrapper"
-            style={displayEdit ? { display: "" } : { display: "none" }}
+        </div>
+        <div
+          id="button_wrapper"
+          style={displayEdit ? { display: "" } : { display: "none" }}
+        >
+          <button
+            class="edit_button"
+            type="button"
+            onClick={() => setEditMode(true)}
           >
-            <button
-              class="edit_button"
-              type="button"
-              onClick={() => setEditMode(true)}
-            >
-              Edit
-            </button>
-            <button
-              class="cancel_button"
-              type="button"
-              onClick={() => setEditMode(false)}
-            >
-              Cancel
-            </button>
+            Edit
+          </button>
+          <button
+            class="cancel_button"
+            type="button"
+            onClick={() => setEditMode(false)}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

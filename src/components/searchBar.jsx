@@ -3,28 +3,28 @@ import "../assets/styles/searchBar.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 
 //For Development only
-import DummyData from "../variables/dummyData.js";
+//import DummyData from "../variables/dummyData.js";
 
 //This component creates a search bar for all of the applicants currently in the database.
 export default function SearchBar(props) {
   //Setting the initial applicant data.
   //use for production
-  //const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   //use for development
-  let data = DummyData;
+  //let data = DummyData;
 
   const [input, setInput] = useState({});
 
   //for production 
-  /*useEffect(() => {
+  useEffect(() => {
     fetch(props.route)
       .then((response) => response.json())
       .then((final) => {
         setData(final);
       })
       .catch((e) => console.log("error", e));
-  }, []);*/
+  }, []);
 
   /**
    *
@@ -71,14 +71,14 @@ export default function SearchBar(props) {
           onSubmit={(e) => {
             e.preventDefault();
             //used for production
-           /* fetch(
+            fetch(
               `/single-applicant/first/${input.firstName}/last/${input.lastName}/id/${input.key}`
             )
               .then((res) => res.json())
               .then((final) => props.handleChange(final));
-*/
+
             //used for development
-             props.handleChange([data[0]]);
+             //props.handleChange([data[0]]);
           }}
         >
           <label for={props.description}>{props.title}</label>
