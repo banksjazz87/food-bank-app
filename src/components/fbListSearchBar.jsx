@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MathFunctions from "../functions/mathFunctions.js";
+import "../assets/styles/fbListSearchBar.scss";
 
 export default function FbListSearchBar(props) {
   const [data, setData] = useState([]);
@@ -30,6 +31,7 @@ export default function FbListSearchBar(props) {
   if (data.length > 0) {
     return (
       <form
+        id="past_list_form"
         action="/table/selected"
         method="get"
         onSubmit={(e) => {
@@ -57,7 +59,7 @@ export default function FbListSearchBar(props) {
           <option>Select one...</option>
           {selectValues(data)}
         </select>
-        <input id="table_select_submit" type="submit" value="submit"></input>
+        <input id="table_select_submit" type="submit" value="Submit"></input>
       </form>
     );
   } else {

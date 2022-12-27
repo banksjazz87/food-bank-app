@@ -5,4 +5,10 @@
         @include large-header;
         color: white;
     }
+
+    #delete_table_button {
+        @include btn-small;
+        width: 150px;
+        margin: auto;
+    }
 }

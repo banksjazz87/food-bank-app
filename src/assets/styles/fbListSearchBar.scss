@@ -1,0 +1,36 @@
+@import "./library.scss";
+
+#past_list_form {
+    @include shadow-form;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+
+    label {
+        @include medium-section-heading;
+    }
+
+    select {
+        @include medium-input;
+        margin-top: 1rem;
+        width: 70%;
+    }
+
+    #table_select_submit {
+        @include btn-small;
+        width: 150px;
+    }
+}
+
+@media (max-width: 1023px) {
+    #past_list_form {
+        @include mobile-shadow-form;
+
+        label {
+            width: 80%;
+        }
+
+        select {
+            width: 80%;
+        }
+    }
+}
