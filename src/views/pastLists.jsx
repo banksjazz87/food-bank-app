@@ -24,12 +24,11 @@ export default function PastLists() {
     setListAttendants(array);
   };
 
-  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  
   const [showList, setShowList] = useState(false);
   const displayList = () => {
     if (showList === false) {
       setShowList(true);
-      setShowDeleteButton(true);
     }
   };
 
@@ -48,7 +47,10 @@ export default function PastLists() {
         displayListHandler={displayList}
       />
 
-    <div id="display_list">
+    <div 
+      id="display_list"
+      style={showList ? {display: ""} : {display: "none"}}
+      >
       <DisplayFbList
         allAttendants={listAttendants}
         title={list.title}
@@ -58,7 +60,6 @@ export default function PastLists() {
 
       <button
         id="delete_table_button" 
-        style={showDeleteButton ? {display: ""} : {display: "none"}}
         onClick={() => {
           setShowDeleteAlert(true);
         }}

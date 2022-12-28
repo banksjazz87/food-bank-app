@@ -18,6 +18,10 @@
             @include list-table;
             color: white;
 
+            #table_heading {
+                text-align: center;
+            }
+
             th {
                 @include list-table-header;
             }
@@ -28,6 +32,25 @@
 
             tr {
                 @include list-table-row;
+            }
+
+            .phone_link {
+                @include btn-small;
+                text-decoration: none;
+            }
+
+            .positive_symbol {
+                @include paragraph-large;
+                padding: .25rem 2rem;
+                background-color: $chapel-purple;
+                text-align: center;
+            }
+
+            .negative_symbol {
+                @include paragraph-large;
+                padding: .25rem 2rem;
+                background-color: $orange;
+                text-align: center;
             }
         }
 

@@ -8,15 +8,16 @@ export default function DisplayFbList(props) {
         <tr key={`attendant_${y}`}>
           <td>{x.lastName}</td>
           <td>{x.firstName}</td>
-          <td>{x.phone}</td>
-          <td>{x.present}</td>
+          <td><a className="phone_link" href={`tel:${x.phone}`}>Call</a></td>
+          <td><p className={x.present === "true" ? "positive_symbol" : "negative_symbol"}>{x.present === "true" ? "√" : "-"}</p></td>
         </tr>   
     );
   });
   return (
+
     <table style={props.displayList ? { display: "" } : { display: "none" }}>
       <tr>
-        <th>{props.title}</th>
+        <th id="table_heading" colspan="4">{props.title}</th>
       </tr>
       <tr>
         <th>{`This table was modified on ${props.dateModified}`}</th>
