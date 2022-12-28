@@ -6,6 +6,33 @@
         color: white;
     }
 
+    #display_list {
+        @include table-container;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 2rem;
+        padding-bottom: 6rem;
+
+        table {
+            @include list-table;
+            color: white;
+
+            th {
+                @include list-table-header;
+            }
+
+            td {
+                @include list-table-data;
+            }
+
+            tr {
+                @include list-table-row;
+            }
+        }
+
+
+    }
     #delete_table_button {
         @include btn-small;
         width: 150px;

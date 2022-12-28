@@ -48,6 +48,7 @@ export default function PastLists() {
         displayListHandler={displayList}
       />
 
+    <div id="display_list">
       <DisplayFbList
         allAttendants={listAttendants}
         title={list.title}
@@ -64,6 +65,7 @@ export default function PastLists() {
       >
         Delete Table
       </button>
+      </div>
 
       <DeleteAlert
         noClickHandler={() => {
