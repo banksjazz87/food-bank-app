@@ -45,6 +45,7 @@ export default function PastLists() {
         selectedItem={list}
         updateAttendants={updateAttendants}
         displayListHandler={displayList}
+        title="Past Lists"
       />
 
     <div 

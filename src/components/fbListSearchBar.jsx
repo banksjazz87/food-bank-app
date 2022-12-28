@@ -48,6 +48,7 @@ export default function FbListSearchBar(props) {
             });
         }}
       >
+        <p id="title_text">{props.title}</p>
         <select
           id="table_select"
           onChange={(e) => {

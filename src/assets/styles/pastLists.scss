@@ -7,27 +7,34 @@
     }
 
     #display_list {
-        @include table-container;
+        width: 960px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         row-gap: 2rem;
         padding-bottom: 6rem;
+        margin: auto;
+
+        #table_heading {
+            text-align: center;
+            @include paragraph-large;
+            color: white;
+        }
 
         table {
+            @include table-container;
             @include list-table;
             color: white;
 
-            #table_heading {
-                text-align: center;
-            }
-
             th {
                 @include list-table-header;
+
             }
 
             td {
                 @include list-table-data;
+                padding-top: 0;
+                padding-bottom: 0;
             }
 
             tr {
@@ -41,14 +48,20 @@
 
             .positive_symbol {
                 @include paragraph-large;
-                padding: .25rem 2rem;
+                width: 75px;
+                border-radius: 16px;
+                padding-top: .15rem;
+                padding-bottom: .15rem;
                 background-color: $chapel-purple;
                 text-align: center;
             }
 
             .negative_symbol {
                 @include paragraph-large;
-                padding: .25rem 2rem;
+                width: 75px;
+                padding-top: .15rem;
+                padding-bottom: .15rem;
+                border-radius: 16px;
                 background-color: $orange;
                 text-align: center;
             }
@@ -59,6 +72,6 @@
     #delete_table_button {
         @include btn-small;
         width: 150px;
-        margin: auto;
+        margin: 2rem auto auto auto;
     }
 }

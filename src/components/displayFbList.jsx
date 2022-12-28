@@ -14,14 +14,9 @@ export default function DisplayFbList(props) {
     );
   });
   return (
-
+    <div>
+    <h2 id="table_heading">{props.title}</h2>
     <table style={props.displayList ? { display: "" } : { display: "none" }}>
-      <tr>
-        <th id="table_heading" colspan="4">{props.title}</th>
-      </tr>
-      <tr>
-        <th>{`This table was modified on ${props.dateModified}`}</th>
-      </tr>
       <tr>
         <th>Last Name</th>
         <th>First Name</th>
@@ -30,6 +25,7 @@ export default function DisplayFbList(props) {
       </tr>
       {displayAttendants}
     </table>
+    </div>
   );
 
 }

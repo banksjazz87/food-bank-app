@@ -2,7 +2,7 @@
 
 #past_list_form {
     @include shadow-form;
-    padding-top: 4rem;
+    padding-top: 2rem;
     padding-bottom: 4rem;
 
     label {
@@ -18,6 +18,12 @@
     #table_select_submit {
         @include btn-small;
         width: 150px;
+    }
+
+    #title_text {
+        text-align: center;
+        color: white;
+        @include paragraph-large;
     }
 }
 
