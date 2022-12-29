@@ -6,6 +6,8 @@
         color: white;
     }
 
+    overflow: hidden;
+
     #display_list {
         width: 960px;
         display: flex;
@@ -39,6 +41,18 @@
 
             tr {
                 @include list-table-row;
+            }
+
+            td:last-of-type {
+                border-right: none;
+            }
+
+            th:last-of-type {
+                border-right: none;
+            }
+
+            tr:last-of-type {
+                border-bottom: none;
             }
 
             .phone_link {

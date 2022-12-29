@@ -71,6 +71,23 @@
                 width: 75px;
                 @include paragraph-large;
             }
+
+            td:last-of-type {
+                border-right: none;
+            }
+
+            td:nth-last-child(2) {
+                border-right: none;
+            }
+
+            th:last-of-type {
+                border-right: none;
+            }
+
+            tr:last-of-type {
+                border-bottom: none;
+            }
+
         }
     }
 
