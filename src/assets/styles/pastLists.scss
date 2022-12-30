@@ -80,12 +80,34 @@
                 text-align: center;
             }
         }
-
-
     }
+
     #delete_table_button {
         @include btn-small;
         width: 150px;
         margin: 2rem auto auto auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    #past_lists-wrapper {
+        #display_list {
+            width: 95%;
+            margin: auto;
+
+            table {
+                width: 100%;
+
+                th {
+                    @include paragraph-small;
+                    border: none;
+                }
+
+                td {
+                    @include paragraph-small;
+                    border: none;
+                }
+            }
+        }
     }
 }

@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FbListSearchBar from "../components/fbListSearchBar.jsx";
 import NavBar from "../components/navBar.jsx";
 import DisplayFbList from "../components/displayFbList.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 
 export default function PastLists() {
+  const [mobileScreen, setMobileScreen] = useState(false);
+  const [listAttendants, setListAttendants] = useState([]);
+  const [showList, setShowList] = useState(false);
   const [list, setList] = useState({
     Table_ID: "",
     title: "",
     DateCreated: "",
   });
+
+  useEffect(() => {
+    if (window.innerWidth <= 1024) {
+      setMobileScreen(true);
+    }
+  }, []);
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1024) {
+      setMobileScreen(true);
+    } else {
+      setMobileScreen(false);
+    }
+  });
+
   const selectedList = (array, index) => {
     setList({
       ...list,
@@ -17,20 +35,24 @@ export default function PastLists() {
       title: array[index].title,
       DateCreated: array[index].DateCreated,
     });
+    hideList();
   };
 
-  const [listAttendants, setListAttendants] = useState([]);
   const updateAttendants = (array) => {
     setListAttendants(array);
   };
 
-  
-  const [showList, setShowList] = useState(false);
   const displayList = () => {
     if (showList === false) {
       setShowList(true);
     }
   };
+
+  const hideList = () => {
+    if (showList) {
+      setShowList(false);
+    }
+  }
 
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
@@ -57,6 +79,7 @@ export default function PastLists() {
         title={list.title}
         dateModified={list.DateCreated}
         displayList={showList}
+        mobileDevice={mobileScreen}
       />
 
       <button
