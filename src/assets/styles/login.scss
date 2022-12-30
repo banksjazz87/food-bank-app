@@ -12,18 +12,15 @@
     bottom: 0;
 
     form {
-        display: flex;
+       display: flex;
         flex-direction: column;
         width: 40vw;
         padding: 2rem 8rem 2rem 8rem;
         margin: auto;
         background-color: $chapel-gray;
         justify-content: center;
-        //border-radius: 16px;
-        //box-shadow: 0px 8px 80px rgba(151, 37, 191, .5);
         box-shadow: 0 4px 12px $form-border-color;
         border-radius: 4px;
-       // border: solid 1px $form-border-color;
         max-width: 560px;
 
         label {
@@ -52,7 +49,7 @@
         }
 
         input {
-            width: 100%;
+            width: 95%;
             margin: auto;
         }
 

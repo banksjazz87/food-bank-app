@@ -79,7 +79,7 @@ export default function NewApplicantForm(props) {
       }}
     >
       {returnFields}
-      <input id="new_applicant_submit" type="submit" value="submit" />
+      <input id="new_applicant_submit" type="submit" value="Submit" />
     </form>
   );
 }

@@ -6,7 +6,7 @@ export default function DisplayApplicant(props){
     const displayFields = dataPoints.map((x, y) => {
         if (x.name === "dateAltered") {
             return (
-                <p key={`date`}>{props.currentApplicant[0][x.name]}</p>
+                <p key={`date`} className="date_altered">{`Date Altered: ${props.currentApplicant[0][x.name]}`}</p>
             )
         } else if (x.value === null) {
             return (
@@ -15,16 +15,18 @@ export default function DisplayApplicant(props){
         } else {
         return (
         <>
-            <p key={`description_${y}`}
-            >{`${x.placeHolder}: ${props.currentApplicant[0][x.name]}`}</p>
+            <p key={`description_${y}`}>{`${x.placeHolder}: ${props.currentApplicant[0][x.name]}`}</p>
         </>
         )
         }
     });
+
+
     return (
         <div 
             id="display_applicant_wrapper"
-            style={props.display ? {display: "flex"} : {display: "none"}}>
+            style={props.display ? {display: "flex"} : {display: "none"}}
+        >
         {displayFields}
         </div>
     )

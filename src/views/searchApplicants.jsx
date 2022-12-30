@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "../components/searchBar.jsx";
-import DisplayApplicant from "../components/displayPastApplicant.jsx";
+import DisplayApplicant from "../components/displayApplicant.jsx";
 import EditDeleteButtons from "../components/editDeleteButtons.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";

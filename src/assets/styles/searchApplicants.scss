@@ -51,6 +51,11 @@
         margin-right: auto;
     }
 
+    .date_altered {
+        @include paragraph-medium;
+        color: $orange;
+    }
+
 }
 
 @media (max-width: 1023px) {
