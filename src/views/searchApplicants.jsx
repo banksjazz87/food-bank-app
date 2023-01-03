@@ -40,6 +40,7 @@ export default function SearchApplicants() {
     setApplicantInfo(array);
     setShowApplicant(true);
     setShowEditPage(false);
+    scrollToData();
   };
 
   //Used to display the edit page.
@@ -81,6 +82,14 @@ export default function SearchApplicants() {
       return false;
     }
   };
+
+  //Scroll into view after selecting an applicant name.
+  const scrollToData = () => {
+    const applicantData = document.getElementById('display_applicant_wrapper');
+    console.log('scrolling, should happen');
+    
+    setTimeout(() => applicantData.scrollIntoView({behavior: "smooth"}), 500);
+  }
 
   return (
     <div id="search_applicant_wrapper">
