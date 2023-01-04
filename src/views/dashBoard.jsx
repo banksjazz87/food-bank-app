@@ -36,12 +36,12 @@ export default function Dashboard() {
           title="Create List"
         />
         <DashboardIcon
-          clickHandler={() => navigate('/past-rigestered-list', {replace: true})}
+          clickHandler={() => navigate('/past-registered-list', {replace: true})}
           title="Past Lists"
         />
 
         <DashboardIcon
-          clickHandler={() => navigate('/current-rigestered-list', {replace: true})}
+          clickHandler={() => navigate('/current-registered-list', {replace: true})}
           title="Current List"
         />
         </div>

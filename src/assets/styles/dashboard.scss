@@ -6,6 +6,9 @@
 }
 
 #content_wrapper {
+    max-width: 560px;
+    margin: auto auto 6rem auto;
+
     h1{
         @include paragraph-large;
         color: white;
@@ -31,6 +34,11 @@
 
 @media (max-width: 1024px) {
     #content_wrapper {
+        max-width: 100%;
+        width: 100%;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        
         .icon_wrapper {
             flex-direction: column;
             align-items:center;

@@ -3,6 +3,7 @@ import "./assets/styles/root.scss";
 import "./assets/styles/library.scss";
 import React from "react";
 import NavBar from "./components/navBar.jsx";
+import Footer from "./components/footer.jsx";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <h1>Food Bank Application</h1>
       </div>
       <NavBar />
+      <Footer />
     </div>
   );
 }
