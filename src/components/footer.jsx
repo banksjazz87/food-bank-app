@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import "../assets/styles/footer.scss";
 
 export default function Footer() {
 
@@ -11,20 +12,17 @@ export default function Footer() {
     return (
         <div id="footer_wrapper">
         <div id="top_footer">
-            <div id="applicants_menu">
-                <h3>Applicants</h3>
-                <h4 onClick={linkClick('/new_applicant')}>New Applicant</h4>
-                <h4 onClick={linkClick('/search')}>Search and Edit</h4>
-            </div>
-            <div id="fb_lists_menu">
-                <h3>Foodbank Lists</h3>
-                <h4 onClick={linkClick('/create-foodbank-list')}>Create List</h4>
-                <h4 onClick={linkClick('/past-registered-list')}>Past List</h4>
-                <h4 onClick={linkClick('current-registered-list')}>Current List</h4>
+            <div className="menu_items">
+                <a href="/new_applicant">New Applicant</a>
+                <a href='/search'>Search and Edit</a>
+                <a href='/create-foodbank-list'>Create List</a>
+                <a href='/past-registered-list'>Past List</a>
+                <a href='current-registered-list'>Current List</a>
             </div>
         </div>
         <div id="bottom_footer">
-            <h5>This Application was created by Chris Banks</h5>
+            <p>This Application was created</p>
+            <p>by Chris Banks</p>
         </div>
         </div>
     )
