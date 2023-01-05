@@ -6,6 +6,7 @@ import React from "react";
 import NavBar from "../components/navBar.jsx";
 import {useNavigate} from "react-router-dom";
 import DashboardIcon from "../components/dashboardIcon.jsx";
+import Footer from "../components/footer.jsx";
 
 export default function Dashboard() {
 
@@ -46,6 +47,7 @@ export default function Dashboard() {
         />
         </div>
         </div>
+      <Footer />
     </div>
   );
 }

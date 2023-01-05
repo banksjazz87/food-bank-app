@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import postRequest from "../functions/post.js";
 import NavBar from "../components/navBar.jsx";
 import NewApplicantForm from "../components/newApplicantForm.jsx";
+import Footer from "../components/footer.jsx";
 import "../assets/styles/newApplicantPage.scss";
 
 export default function Applicant() {
@@ -28,6 +29,7 @@ export default function Applicant() {
         submissionHandler={newApplicantConfirmation}
         route="/new-applicant"
       />
+    <Footer />
     </div>
   );
 }

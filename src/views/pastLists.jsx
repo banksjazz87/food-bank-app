@@ -3,6 +3,7 @@ import FbListSearchBar from "../components/fbListSearchBar.jsx";
 import NavBar from "../components/navBar.jsx";
 import DisplayFbList from "../components/displayFbList.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
+import Footer from "../components/footer.jsx";
 
 export default function PastLists() {
   const [mobileScreen, setMobileScreen] = useState(false);
@@ -100,6 +101,7 @@ export default function PastLists() {
         routePath={"/delete-list"}
         selected={list}
       />
+      <Footer />
     </div>
   );
 }

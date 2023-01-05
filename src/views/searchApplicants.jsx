@@ -5,6 +5,7 @@ import EditDeleteButtons from "../components/editDeleteButtons.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
+import Footer from "../components/footer.jsx";
 import "../assets/styles/searchApplicants.scss";
 
 export default function SearchApplicants() {
@@ -161,6 +162,7 @@ export default function SearchApplicants() {
         selected={applicantInfo[0]}
         routePath="/remove/applicant"
       />
+      <Footer />
     </div>
   );
 }

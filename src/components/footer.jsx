@@ -14,9 +14,9 @@ export default function Footer() {
         <div id="top_footer">
             <div className="menu_items">
                 <a href="/new_applicant">New Applicant</a>
-                <a href='/search'>Search and Edit</a>
+                <a href='/search'>Applicants</a>
                 <a href='/create-foodbank-list'>Create List</a>
-                <a href='/past-registered-list'>Past List</a>
+                <a href='/past-registered-list'>Past Lists</a>
                 <a href='current-registered-list'>Current List</a>
             </div>
         </div>
