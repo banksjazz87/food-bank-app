@@ -4,7 +4,6 @@ import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
-import Footer from "../components/footer.jsx";
 import "../assets/styles/currentFoodBankList.scss";
 
 //for development mode
@@ -202,8 +201,6 @@ export default function CurrentFoodBankList() {
         Cancel
       </button>
       </div>
-    
-    <Footer />
     </div>
   );
 }

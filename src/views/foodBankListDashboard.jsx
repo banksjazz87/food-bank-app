@@ -2,8 +2,6 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import DashboardIcon from "../components/dashboardIcon.jsx";
 import NavBar from "../components/navBar.jsx";
-import Footer from "../components/footer.jsx";
-
 
 import "../assets/styles/fbListDashboard.scss";
 
@@ -23,7 +21,6 @@ export default function FoodBankListDashboard() {
         <DashboardIcon title="Past Lists" clickHandler={() => navigate("/past-registered-list")} />
         <DashboardIcon title="Current Lists" clickHandler={() => navigate("/current-registered-list")} />
       </div>
-    <Footer />
     </div>
   );
 }

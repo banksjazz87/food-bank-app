@@ -1,62 +1,17 @@
 @import "./library.scss";
 
 #footer_wrapper {
-    position: absolute;
-    bottom: 0;
     margin-top: 2rem;
     width: 100vw;
-    background-color: $chapel-light-gray;
+    background-color: $form-border-color;
     display: flex;
     flex-direction: column;
-
-
-    .menu_items {
-        display: flex;
-        flex-direction: row;
-        column-gap: 12px;
-        align-items: baseline;
-
-        a {
-            text-decoration: none;
-            color: white;
-            border-right: solid 1px white;
-            padding-right: 12px;
-            @include paragraph-small;
-            &:hover {
-                color: $orange;
-            }
-        }
-
-        a:last-child {
-            border-right: none;
-        }
-
-        h3 {
-            margin-bottom: 0;
-            border-bottom: solid 1px white;
-            width: auto;
-        }
-
-    }
-
-    #top_footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        column-gap: 4rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-
-
-
-    #bottom_footer {
-        text-align: center;
-        @include paragraph-small;
-        line-height: 10px;
-        padding-bottom: 6px;
-        background-color: $form-border-color;
-        color: $white;
-    }
+    justify-content: center;
+    align-items: center;
+    @include paragraph-small;
+    line-height: 6px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    color: $white;
 
 }

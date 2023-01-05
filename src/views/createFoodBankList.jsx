@@ -3,7 +3,6 @@ import NavBar from "../components/navBar.jsx";
 import postRequest from "../functions/post.js";
 import SearchBar from "../components/searchBar.jsx";
 import deleteRequest from "../functions/deleteRequest.js";
-import Footer from "../components/footer.jsx";
 import "../assets/styles/createFBList.scss";
 import PersonIcon from "../assets/images/newApplicant-Icon-by-Raj-Dev-on-freeicons.io.svg";
 
@@ -219,7 +218,6 @@ export default function CreateFoodBankList() {
           </button>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
