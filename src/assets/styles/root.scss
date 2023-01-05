@@ -8,10 +8,11 @@ body {
     height: 100%;
     padding: 0;
     background-color: $chapel-gray;
+    overflow-x: hidden;
 }
 
 #root {
-    margin: 0;
+    margin: 0;  
     top: 0;
     bottom: 0;
     width: 100%;

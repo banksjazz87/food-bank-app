@@ -4,6 +4,7 @@
     color: white;
     overflow: hidden;
     text-align: center;
+    padding-bottom: 5rem;
 
     .header_wrapper {
         @include large-header;
