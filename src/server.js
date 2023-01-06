@@ -509,7 +509,7 @@ app.get('/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID'
 });
 
 //This is going to handle updating the UnregisteredApplicant table.
-app.post('/unregistered-applicant', (req, res) => {
+/*app.post('/unregistered-applicant', (req, res) => {
 
   let retrieveId = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
@@ -547,7 +547,7 @@ app.post('/unregistered-applicant', (req, res) => {
         .catch(err => console.log("failure", err)); 
     })
     .catch(err => console.log("Error", err));
-});
+});*/
 
 //Retrieve all applicants who have incomplete application forms
 app.get("/all-applicants/partial-forms", (req, res) => {
