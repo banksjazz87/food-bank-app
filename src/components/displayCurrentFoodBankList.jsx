@@ -12,10 +12,7 @@ export default function DisplayCurrentFoodBankList(props) {
     let currentScreenWidth = window.innerWidth;
     if (currentScreenWidth <= 1024) {
       setMobileView(true);
-      console.log('mobile');
-    } else {
-      console.log('not-mobile');
-    }
+    } 
   }, []);
 
   //Add eventlistener to check for mobile.
@@ -23,7 +20,6 @@ export default function DisplayCurrentFoodBankList(props) {
     let currentScreenWidth = window.innerWidth; 
     if (currentScreenWidth <= 1024) {
       setMobileView(true);
-      console.log('mobile');
     } else {
       setMobileView(false);
     }
@@ -43,7 +39,6 @@ export default function DisplayCurrentFoodBankList(props) {
         return x;
       }
     });
-    console.log(updatedArr);
     props.updateTableHandler(updatedArr);
   };
 

@@ -10,7 +10,6 @@ export default function FbListSearchBar(props) {
       .then((response) => response.json())
       .then((data) => {
         setData(data.allData);
-        console.log(data);
       })
       .catch((error) => alert(`error, ${error} has occured`));
   }, []);

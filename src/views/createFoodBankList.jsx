@@ -104,7 +104,7 @@ export default function CreateFoodBankList() {
     deleteRequest(
       `/remove-attendant/table/${table}`,
       array[indexOfSelected]
-    ).then((data) => console.log(data));
+    );
   };
 
   const displayAttendants = (array) => {

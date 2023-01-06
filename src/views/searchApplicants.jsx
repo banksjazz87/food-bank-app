@@ -86,8 +86,6 @@ export default function SearchApplicants() {
   //Scroll into view after selecting an applicant name.
   const scrollToData = () => {
     const applicantData = document.getElementById('display_applicant_wrapper');
-    console.log('scrolling, should happen');
-    
     setTimeout(() => applicantData.scrollIntoView({behavior: "smooth"}), 500);
   }
 

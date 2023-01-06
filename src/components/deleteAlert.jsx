@@ -21,7 +21,7 @@ export default function DeleteAlert(props) {
               deleteRequest(props.routePath, props.selected)
               .then((data) => alert(data.message))
               .then(props.yesClickHandler())
-              .catch((e) => console.log("error has occurred", e));
+              .catch((e) => alert("error has occurred", e));
           }
           }>
           Yes

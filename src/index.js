@@ -8,6 +8,7 @@ import './assets/styles/newApplicantPage.scss';
 import './assets/styles/newApplicantForm.scss';
 import './assets/styles/pastLists.scss';
 import './assets/styles/searchApplicants.scss';
+import './assets/styles/root.scss';
 
 import {
   BrowserRouter,

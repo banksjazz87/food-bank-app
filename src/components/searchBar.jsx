@@ -23,7 +23,7 @@ export default function SearchBar(props) {
       .then((final) => {
         setData(final);
       })
-      .catch((e) => console.log("error", e));
+      .catch((e) => alert("error", e));
   }, []);
 
   /**
