@@ -104,51 +104,50 @@ app.post("/new-applicant/", (req, res, next) => {
     if (occupants === 1) {
       return 25142;
     } else {
-      let income = 25142 + ((occupants - 1) * 8732);
+      let income = 25142 + (occupants - 1) * 8732;
       return income;
     }
   }
 
+  if (req.body.totalIncome <= targetIncome(req.body.totalOccupants)) {
+    return new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
 
-    
-    if (req.body.totalIncome <= targetIncome(req.body.totalOccupants)) {
-      return new Promise((resolve, reject) => {
-      
-        let currentDb = mysql.createConnection(Db);
-        let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
-  
-        currentDb.query(sql, [requiredData], (err, results) => {
-          if (err) {
-            return reject(err);
-          } else {
-            return resolve(results);
-          }
-        });
-      }).then((data) => {
+      currentDb.query(sql, [requiredData], (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      });
+    })
+      .then((data) => {
         console.log(data);
         res.send({
-            status: "okay",
-            message: `This applicant qualifies for assistance and ${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
-            id: `${data.insertId}`
-          });
-        
+          status: "okay",
+          message: `This applicant qualifies for assistance and ${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
+          id: `${data.insertId}`,
+        });
       })
       .catch((e) => {
-        console.log('error', e);
+        console.log("error", e);
         res.send({
           status: "not good",
           message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`,
         });
       });
-  
-    } else {
-      console.log(`Not approved,  the appliacants target income ($${req.body.totalIncome}) is more than the qualifying income ($${targetIncome(req.body.totalOccupants)}.00)`);
-      res.send({
-        status: "not good", 
-        message: `The applicant's target income ($${req.body.totalIncome}) is more than the qualifying income ($${targetIncome(req.body.totalOccupants)}.00)`
-      });
-    }
-  });
+  } else {
+    res.send({
+      status: "not good",
+      message: `The applicant's target income ($${
+        req.body.totalIncome
+      }) is more than the qualifying income ($${targetIncome(
+        req.body.totalOccupants
+      )}.00)`,
+    });
+  }
+});
 
 //The get method used to return the data about one applicant.
 app.get(
@@ -316,7 +315,7 @@ app.post("/save-list/list-name/:listName", (req, res) => {
     .then((data) => {
       if (data.protocol41 === true) {
         res.send({ message: "success" });
-        console.log("Success", data)
+        console.log("Success", data);
       }
     })
     .catch((e) => {
@@ -500,53 +499,13 @@ app.put("/update-attendant-status", (req, res) => {
 });
 
 //This is going to be a get request that will return the current status of an applicant on the current list
-app.get('/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID', (req, res) => {
-
-  let currentDb = mysql.createConnection(Db);
-  let sql = `SELECT * FROM ${req.params.tableName} WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = "${req.params.ApplicantID}";`
-
-  let findApplicantPresentStatus = new Promise((resolve, reject) => {
-    currentDb.query(sql, (err, results) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(results);
-      }
-    });
-  });
-
-  findApplicantPresentStatus
-    .then((data) => {
-    res.send({status: "Success", allData: data[0]});
-    console.log("Success!!!!", data);
-  })
-    .catch((err) => {
-      res.send({status: "Failure", allData: err});
-      console.log('Failure', err);
-    });
-});
-
-//This is going to handle updating the UnregisteredApplicant table.
-/*app.post('/unregistered-applicant', (req, res) => {
-
-  let retrieveId = new Promise((resolve, reject) => {
+app.get(
+  "/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID",
+  (req, res) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = `SELECT ApplicantID FROM applicant WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}"`;
+    let sql = `SELECT * FROM ${req.params.tableName} WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = "${req.params.ApplicantID}";`;
 
-    currentDb.query(sql, (err, results) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(results);
-      }
-    });
-  });
-
-  let addApplicantToUnregistered = (firstName, lastName, id) => {
-    return new Promise((resolve, reject) => {
-      let currentDb = mysql.createConnection(Db);
-      let sql = `INSERT INTO UnregisteredApplicants (firstName, lastName, ApplicantID) Values("${firstName}", "${lastName}", "${id}");`;
-
+    let findApplicantPresentStatus = new Promise((resolve, reject) => {
       currentDb.query(sql, (err, results) => {
         if (err) {
           return reject(err);
@@ -555,24 +514,25 @@ app.get('/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID'
         }
       });
     });
+
+    findApplicantPresentStatus
+      .then((data) => {
+        res.send({ status: "Success", allData: data[0] });
+        console.log("Success!!!!", data);
+      })
+      .catch((err) => {
+        res.send({ status: "Failure", allData: err });
+        console.log("Failure", err);
+      });
   }
-
-
-  retrieveId
-    .then(data => {
-      addApplicantToUnregistered(req.body.firstName, req.body.lastName, data[0].ApplicantID)
-        .then(data => console.log("success", data))
-        .catch(err => console.log("failure", err)); 
-    })
-    .catch(err => console.log("Error", err));
-});*/
+);
 
 //Retrieve all applicants who have incomplete application forms
 app.get("/all-applicants/partial-forms", (req, res) => {
-
   let getPartialForms = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = "SELECT * FROM applicant WHERE firstName IS NULL OR lastName IS NULL OR phone IS NULL OR street IS NULL OR city IS NULL OR state is NULL OR zip IS NULL OR children IS NULL OR  adults IS NULL OR seniors IS NULL OR totalOccupants IS NULL OR weeklyIncome IS NULL OR monthlyIncome IS NULL OR annualIncome IS NULL OR totalIncome IS NULL";
+    let sql =
+      "SELECT * FROM applicant WHERE firstName IS NULL OR lastName IS NULL OR phone IS NULL OR street IS NULL OR city IS NULL OR state is NULL OR zip IS NULL OR children IS NULL OR  adults IS NULL OR seniors IS NULL OR totalOccupants IS NULL OR weeklyIncome IS NULL OR monthlyIncome IS NULL OR annualIncome IS NULL OR totalIncome IS NULL;";
 
     currentDb.query(sql, (err, results) => {
       if (err) {
@@ -583,7 +543,29 @@ app.get("/all-applicants/partial-forms", (req, res) => {
     });
   });
 
-  getPartialForms
-    .then(data => res.send(data))
-    .catch(err => res.send(err));
+  getPartialForms.then((data) => res.send(data)).catch((err) => res.send(err));
+});
+
+//Retrieve all of the most recent information for the dashboard.
+app.get("/most-recent-dashboard-statistics", (req, res) => {
+ 
+  let getMostRecentList = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = "SELECT * FROM FoodBankList ORDER BY DateCreated DESC;";
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  getMostRecentList
+    .then((data) => {
+      res.send(data[0]);
+      console.log(data);
+    })
+    .catch((err) => console.log("error", err));
 });
