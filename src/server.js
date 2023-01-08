@@ -100,25 +100,35 @@ app.post("/new-applicant/", (req, res, next) => {
     req.body.dateAltered,
   ];
 
-    let createApplicant = new Promise((resolve, reject) => {
-      let currentDb = mysql.createConnection(Db);
-      let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
+  function targetIncome(occupants) {
+    if (occupants === 1) {
+      return 25142;
+    } else {
+      let income = 25142 + ((occupants - 1) * 8732);
+      return income;
+    }
+  }
 
-      currentDb.query(sql, [requiredData], (err, results) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve(results);
-        }
-      });
-    });
 
-    createApplicant
-      .then((data) => {
+    
+    if (req.body.totalIncome <= targetIncome(req.body.totalOccupants)) {
+      return new Promise((resolve, reject) => {
+      
+        let currentDb = mysql.createConnection(Db);
+        let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
+  
+        currentDb.query(sql, [requiredData], (err, results) => {
+          if (err) {
+            return reject(err);
+          } else {
+            return resolve(results);
+          }
+        });
+      }).then((data) => {
         console.log(data);
         res.send({
             status: "okay",
-            message: `${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
+            message: `This applicant qualifies for assistance and ${req.body.firstName} ${req.body.lastName} has been entered into the database.`,
             id: `${data.insertId}`
           });
         
@@ -130,6 +140,14 @@ app.post("/new-applicant/", (req, res, next) => {
           message: `The following error has occurred mySql code: ${e.code} with sqlMessage: ${e.sqlMessage}`,
         });
       });
+  
+    } else {
+      console.log(`Not approved,  the appliacants target income ($${req.body.totalIncome}) is more than the qualifying income ($${targetIncome(req.body.totalOccupants)}.00)`);
+      res.send({
+        status: "not good", 
+        message: `The applicant's target income ($${req.body.totalIncome}) is more than the qualifying income ($${targetIncome(req.body.totalOccupants)}.00)`
+      });
+    }
   });
 
 //The get method used to return the data about one applicant.
