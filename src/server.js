@@ -546,26 +546,29 @@ app.get("/all-applicants/partial-forms", (req, res) => {
   getPartialForms.then((data) => res.send(data)).catch((err) => res.send(err));
 });
 
-//Retrieve all of the most recent information for the dashboard.
-app.get("/most-recent-dashboard-statistics", (req, res) => {
+//Retrieve all of seniors.
+app.get("/dashboard-statistics/:table", (req, res) => {
  
-  let getMostRecentList = new Promise((resolve, reject) => {
-    let currentDb = mysql.createConnection(Db);
-    let sql = "SELECT * FROM FoodBankList ORDER BY DateCreated DESC;";
+  let retrieveAll =  new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalCounts FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID;`;
 
-    currentDb.query(sql, (err, results) => {
-      if (err) {
-        return reject(err);
-      } else {
-        return resolve(results);
-      }
+      currentDb.query(sql, (err, results) => {
+        if (err) {
+          return reject(err);
+        } else {
+          return resolve(results);
+        }
+      });
     });
-  });
 
-  getMostRecentList
-    .then((data) => {
-      res.send(data[0]);
-      console.log(data);
-    })
-    .catch((err) => console.log("error", err));
+    retrieveAll
+      .then((data) => {
+        res.send({
+          message: "success", 
+          allData: data
+        });
+        console.log(data);
+      })
+      .catch(err => res.send(sqlError(err)))
 });
