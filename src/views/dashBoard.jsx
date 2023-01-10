@@ -13,8 +13,12 @@ const [currentStats, setStats] = useState({
   totalSeniors: 0,
   totalAdults: 0,
   totalChildren: 0,
+  totalFamilies: 0,
+  totalUniqueFamilies: 0,
+  totalUniquePersons: 0,
   tableName: 'testing',
-  allRetrieved: false,
+  uniqueRetrieved: false,
+  generalRetrived: false
 });
 
 useEffect(() => {
@@ -27,9 +31,25 @@ useEffect(() => {
       fetch(`/dashboard-statistics/${result.allData.title}`)
         .then(data => data.json())
         .then(final => {
-          console.log(final);
+          setStats({...currentStats, 
+            totalServed: final.allData.totalPeople,
+            totalSeniors: final.allData.totalSeniors,
+            totalAdults: final.allData.totalAdults,
+            totalChildren: final.allData.totalChildren,
+            totalFamilies: final.allData.totalFamilies, 
+            generalRetrieved: true
+          });
         })
-      
+
+      fetch(`/dashboard-statistics-unique/${result.allData.title}`)
+        .then(data => data.json())
+        .then(final => {
+          setStats({...currentStats,
+            totalUniqueFamilies: final.allData.totalFamilies,
+            totalUniquePersons: final.allData.totalFamilies, 
+            uniqueRetrieved: true 
+          })
+        }) 
     });
 }, []);
 
@@ -40,6 +60,7 @@ useEffect(() => {
       </div>
       <NavBar />
     <h1>{currentStats.tableName}</h1>
+    <p>{`Total people served ${currentStats.totalServed}`}</p>
 
       <Footer />
     </div>

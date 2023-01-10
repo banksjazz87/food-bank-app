@@ -551,7 +551,7 @@ app.get("/dashboard-statistics/:table", (req, res) => {
  
   let retrieveAll =  new Promise((resolve, reject) => {
       let currentDb = mysql.createConnection(Db);
-      let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalCounts FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID;`;
+      let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true";`;
 
       currentDb.query(sql, (err, results) => {
         if (err) {
@@ -566,9 +566,34 @@ app.get("/dashboard-statistics/:table", (req, res) => {
       .then((data) => {
         res.send({
           message: "success", 
-          allData: data
+          allData: data[0]
         });
-        console.log(data);
       })
       .catch(err => res.send(sqlError(err)))
 });
+
+//This query will be used to return all families who have registered this month.
+app.get('/dashboard-statistics-unique/:table', (req, res) => {
+
+  let retrieveUnique = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true" AND MONTH(sqlDate) = MONTH(SYSDATE());`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+  
+    } else {
+      return resolve(results)
+    }
+  });
+});
+  retrieveUnique
+    .then(data => {
+      res.send({
+        message: "success", 
+        allData: data[0]
+      });
+    })
+    .catch(err => res.send(sqlError(err)))
+})
