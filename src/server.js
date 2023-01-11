@@ -568,6 +568,8 @@ app.get("/dashboard-statistics/:table", (req, res) => {
           message: "success", 
           allData: data[0]
         });
+
+        console.log('general', data);
       })
       .catch(err => res.send(sqlError(err)))
 });

@@ -256,3 +256,13 @@ $form-border-color: rgba(153, 102, 153, .5);
 @mixin list-table-row {
     border-bottom: 1px solid $form-border-color;
 }
+
+@mixin dashboard_icon {
+    @include shadow-form;
+    border-style: none;
+    color: $white;
+    width: 20%;
+    @include paragraph-medium;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
