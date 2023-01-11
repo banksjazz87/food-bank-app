@@ -2,10 +2,21 @@ import React from "react";
 import "../assets/styles/statisticCard.scss";
 
 export default function StatisticCard(props) {
+
+    const returnStats = props.dataArray.map((x, y) => {
+        return (
+            <div key={`statistic_card_${y}`} className="statistic_card">
+                <h3 className="statistic_title">{x.title}</h3>
+                <p className="statistic_data">{x.data}</p>
+            </div>
+        )
+    })
     return (
-        <div className="statistic_card">
-            <h3 className="statistic_title">{props.title}</h3>
-            <p className="statistic_data">{props.data}</p>
-        </div>
+       <div className="content_wrapper">
+            <h2 className="statistic_type_header">{props.heading}</h2>
+          <div className="statistic_wrapper">
+            {returnStats}
+          </div>
+       </div>
     )
 }

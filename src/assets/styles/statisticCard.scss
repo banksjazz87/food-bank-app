@@ -1,21 +1,48 @@
 @import './library.scss';
 
-.statistic_card {
-    @include dashboard_icon;
-    color: white;
-    padding: .5rem .5rem 1rem .5rem;
-    text-align: center;
-    margin: 0;
+.content_wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    flex-wrap: wrap;
 
-    .statistic_title {
-        @include paragraph-medium;
-        margin-top: 0;
+    .statistic_type_header {
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 
-    .statistic_data {
-        @include paragraph-large;
-        font-size: 48px;
-        margin-top: .25rem;
-        margin-bottom: 0rem;
+    .statistic_wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 2rem;
+        row-gap: 2rem;
+
+
+        .statistic_card {
+            @include dashboard_icon;
+            color: white;
+            padding: .5rem .5rem 1rem .5rem;
+            text-align: center;
+            margin: 0;
+
+            .statistic_title {
+                @include paragraph-medium;
+                margin-top: 0;
+                text-align: center;
+            }
+
+            .statistic_data {
+                @include paragraph-large;
+                font-size: 48px;
+                margin-top: .25rem;
+                margin-bottom: 0rem;
+            }
+        }
     }
 }

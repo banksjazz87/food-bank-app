@@ -36,8 +36,8 @@ export default function Dashboard() {
           .then((final) => {
             setUniqueStats({
               ...uniqueStats,
-              totalUniqueFamilies: final.allData.totalFamilies,
-              totalUniquePersons: final.allData.totalFamilies,
+              totalFamilies: final.allData.totalFamilies,
+              totalPersons: final.allData.totalPeople,
               uniqueRetrieved: true,
             });
           });
@@ -52,14 +52,25 @@ export default function Dashboard() {
         </div>
         <NavBar />
         <div id="content_wrapper">
-        <h2 id="table_name">{`Statistics for ${tableName}`}</h2>
-        <div id="general_statistics">
-          <StatisticCard title="Total Served" data={currentStats.totalServed} />
-          <StatisticCard title="Total Families" data={currentStats.totalFamilies} />
-          <StatisticCard title="Total Seniors" data={currentStats.totalSeniors} />
-          <StatisticCard title="Total Adults" data={currentStats.totalAdults} />
-          <StatisticCard title="Total Children" data={currentStats.totalChildren} />
-          </div>
+        <h2 id="table_name">{tableName}</h2>
+          <StatisticCard
+              heading="General Statistics"
+              dataArray={[
+                {title: "Total Served", data: currentStats.totalServed}, 
+                {title: "Total Families", data: currentStats.totalFamilies}, 
+                {title: "Total Seniors", data: currentStats.totalSeniors},
+                {title: "Total Adults", data: currentStats.totalAdults}, 
+                {title: "Total Children", data: currentStats.totalChildren}
+                ]}
+            />
+            <StatisticCard 
+              heading="Unique Statistcs"
+              dataArray={[
+                {title: "Total Families", data: uniqueStats.totalFamilies}, 
+                {title: "Total People", data: uniqueStats.totalPersons}
+              ]}
+            />
+           
         </div>
 
         <Footer />
