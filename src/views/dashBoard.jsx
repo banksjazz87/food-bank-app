@@ -8,7 +8,7 @@ import Footer from "../components/footer.jsx";
 import StatisticCard from "../components/statisticCard";
 
 export default function Dashboard() {
-  const[tableName, setTableName] = useState("");
+  const[tableName, setTableName] = useState(null);
   const [currentStats, setStats] = useState({});
   const [uniqueStats, setUniqueStats] = useState({});
 
@@ -16,6 +16,7 @@ export default function Dashboard() {
     fetch("/most-recent-fb-list")
       .then((data) => data.json())
       .then((result) => {
+        if (result.message === "success") {
         setTableName(result.allData.title);
         fetch(`/dashboard-statistics/${result.allData.title}`)
           .then((data) => data.json())
@@ -41,10 +42,14 @@ export default function Dashboard() {
               uniqueRetrieved: true,
             });
           });
+
+        } else {
+          alert(result.message)
+        }
       });
   },[]);
 
- 
+  if (tableName) {
     return (
       <div>
         <div class="header_wrapper">
@@ -78,4 +83,23 @@ export default function Dashboard() {
         <Footer />
       </div>
     );
+
+  } else {
+    
+  
+    return (
+      <div>
+        <div class="header_wrapper">
+          <h1>Dashboard</h1>
+        </div>
+        <NavBar />
+        <div id="content_wrapper">
+        <div class="header_wrapper">
+        <h2 id="table_name">No Current Table</h2>
+        </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 }
