@@ -13,7 +13,9 @@ export default function StatisticCard(props) {
     })
     return (
        <div className="content_wrapper">
+            <div className="statistic_header_wrapper">
             <h2 className="statistic_type_header">{props.heading}</h2>
+            </div>
           <div className="statistic_wrapper">
             {returnStats}
           </div>

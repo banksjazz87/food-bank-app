@@ -6,14 +6,29 @@
     width: 100%;
     justify-content: center;
     column-gap: 2rem;
-    row-gap: 2rem;
+    row-gap: .25rem;
     flex-wrap: wrap;
+
+    hr {
+        height: 2px;
+        width: 100%;
+        background-color: $chapel-light-gray;
+        border-style: none;
+    }
+
+    .statistic_header_wrapper{
+        width: 100%;
+        background-color: $chapel-light-gray;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
 
     .statistic_type_header {
         text-align: center;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
+        margin-top: 0;
+        margin-bottom: .5rem; 
+        @include paragraph-large;
     }
+}
 
     .statistic_wrapper {
         display: flex;
@@ -21,15 +36,18 @@
         flex-wrap: wrap;
         justify-content: center;
         column-gap: 2rem;
-        row-gap: 2rem;
+        row-gap: .5rem;
+        margin-bottom: 2rem;
 
 
         .statistic_card {
             @include dashboard_icon;
+            border-style: none;
             color: white;
             padding: .5rem .5rem 1rem .5rem;
             text-align: center;
             margin: 0;
+            box-shadow: none;
 
             .statistic_title {
                 @include paragraph-medium;

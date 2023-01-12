@@ -52,7 +52,9 @@ export default function Dashboard() {
         </div>
         <NavBar />
         <div id="content_wrapper">
+        <div class="header_wrapper">
         <h2 id="table_name">{tableName}</h2>
+        </div>
           <StatisticCard
               heading="General Statistics"
               dataArray={[
