@@ -1,0 +1,9 @@
+@import './library.scss';
+
+#printed_form_wrapper {
+    h1 {
+        @include paragraph-small;
+    }
+
+    
+}

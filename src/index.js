@@ -9,6 +9,8 @@ import './assets/styles/newApplicantForm.scss';
 import './assets/styles/pastLists.scss';
 import './assets/styles/searchApplicants.scss';
 import './assets/styles/root.scss';
+import './assets/styles/printedApplicantForm.scss';
+
 
 
 import {
@@ -25,6 +27,7 @@ import PastLists from "./views/pastLists.jsx";
 import Dashboard from "./views/dashBoard.jsx";
 import FoodBankListDashboard from "./views/foodBankListDashboard.jsx";
 import CreateFoodBankList from "./views/createFoodBankList.jsx";
+import PrintedApplicantForm from "./views/printedApplicantForm.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -39,6 +42,8 @@ root.render(
       <Route path="foodbank-list-dashboard" element={<FoodBankListDashboard />} />
       <Route path="create-foodbank-list" element={<CreateFoodBankList />} />
       <Route path="past-registered-list" element={<PastLists />} />
+      <Route path="printed-applicant-form" element={<PrintedApplicantForm />} />
+
     </Routes>
   </BrowserRouter>
 );

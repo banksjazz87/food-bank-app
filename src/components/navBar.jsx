@@ -36,7 +36,8 @@ export default function NavBar() {
       "search",
       "current-registered-list",
       "past-registered-list",
-      "create-foodbank-list"
+      "create-foodbank-list", 
+      "printed-applicant-form"
     ];
 
     for (let i = 0; i < fullNavUrls.length; i++) {
