@@ -10,6 +10,7 @@ import './assets/styles/pastLists.scss';
 import './assets/styles/searchApplicants.scss';
 import './assets/styles/root.scss';
 
+
 import {
   BrowserRouter,
   Routes,
@@ -24,7 +25,6 @@ import PastLists from "./views/pastLists.jsx";
 import Dashboard from "./views/dashBoard.jsx";
 import FoodBankListDashboard from "./views/foodBankListDashboard.jsx";
 import CreateFoodBankList from "./views/createFoodBankList.jsx";
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
