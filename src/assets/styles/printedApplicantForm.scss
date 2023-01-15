@@ -5,5 +5,27 @@
         @include paragraph-small;
     }
 
+    #logo_individuals_wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #person_count_wrapper {
+        display: flex; 
+        flex-direction: row;
+
+        #title_wrapper {
+            display: flex;
+            flex-direction: column;
+            
+        }
+    }
+
+    #top_heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     
 }

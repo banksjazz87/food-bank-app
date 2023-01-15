@@ -1,0 +1,16 @@
+@import "./library.scss";
+
+#person_count_table{
+
+
+    .title {
+        text-align: right;
+    }
+    .count{
+        border-bottom: solid 1px white;
+        width: 120px;
+        padding-bottom: .25rem;
+        text-align: center;
+    }
+
+}

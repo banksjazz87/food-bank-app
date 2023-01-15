@@ -1,12 +1,24 @@
 import React from "react";
+import "../assets/styles/printedPersonCount.scss";
 
-export default function PrintedPersonCount(props){
+export default function PrintedPersonCount(props) {
+  const tableData = props.tableContents.map((x, y) => {
     return (
-        <div className="person_count">
-            <p>{props.title}</p>
-            <div className="person_quantity">
-                {props.count}
-            </div>
-        </div>
-    )
+      <tr key={`person_count_${y}`}>
+        <td className="title">{x.title}</td>
+        <td>
+          <p className="count">{x.count}</p>
+        </td>
+      </tr>
+    );
+  });
+  return (
+    <table id="person_count_table">
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      {tableData}
+    </table>
+  );
 }
