@@ -1,0 +1,22 @@
+@import "./library.scss";
+
+.input_pair {
+    display: flex;
+    flex-direction: column;
+
+    .all_values {
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-between;
+        line-height: 1px;
+    }
+
+    .all_labels {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-top: solid 1px white;
+        width: 350px;
+    }
+
+}

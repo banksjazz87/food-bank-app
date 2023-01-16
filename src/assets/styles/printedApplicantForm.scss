@@ -22,6 +22,14 @@
         }
     }
 
+    #fields{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+  
+
     #top_heading {
         display: flex;
         flex-direction: column;
