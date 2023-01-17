@@ -235,6 +235,53 @@ export default function PrintedApplicantForm() {
         <div className="paragraph_text">
           <p>This institution is an equal opportunity provider.</p>
         </div>
+
+        <div id="bottom_box_container">
+          <div className="paragraph_text bold">
+            <p>
+              The Emergency Food Assistance Program <br />
+              Pennsylvania Tefap Proxy Form
+            </p>
+          </div>
+
+          <div className="paragraph_text bottom">
+            <p>Date</p>
+            <p id="date_line"></p>
+          </div>
+
+          <div className="paragraph_text bottom">
+            <p>
+              I <span id="i_line"></span>
+              hereby authorize
+              <span id="authorize_line"></span>
+              to pick up my <br />
+              TEFAP Food Package and deliver it to me.
+            </p>
+          </div>
+
+          <div className="paragraph_text bottom">
+            <div className="line_bottom_text">
+              <p className="line"></p>
+              <p>Client Signature</p>
+            </div>
+            <div id="checkbox"></div>
+            <div className="line_bottom_text">
+              <p className="line"></p>
+              <p>Proxy Signature</p>
+            </div>
+          </div>
+
+          <div className="paragraph_text bottom">
+            <div className="line_bottom_text">
+              <p className="line"></p>
+              <p>Pantry Representative</p>
+            </div>
+            <div id="box_text">
+              <div id="small_box"></div>
+              <p>Proxy ID Verified</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

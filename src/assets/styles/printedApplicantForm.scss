@@ -1,6 +1,9 @@
 @import './library.scss';
 
 #printed_form_wrapper {
+    background-color: white;
+    color: black;
+    
     h1 {
         @include paragraph-small;
     }

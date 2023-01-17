@@ -1,13 +1,12 @@
 @import "./library.scss";
 
 #person_count_table{
-
-
+    color: black;
     .title {
         text-align: right;
     }
     .count{
-        border-bottom: solid 1px white;
+        border-bottom: solid 1px black;
         width: 120px;
         padding-bottom: .25rem;
         text-align: center;
