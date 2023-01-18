@@ -27,6 +27,7 @@ export default function PrintedApplicantForm() {
                 { title: "Seniors (60 and up)", count: 1 },
               ]}
             />
+            
           </div>
         </div>
         <div id="top_heading">

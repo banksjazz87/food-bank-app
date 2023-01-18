@@ -2,14 +2,20 @@
 
 #person_count_table{
     color: black;
+
+    tr {
+        line-height: 1px;
+    }
     .title {
         text-align: right;
     }
     .count{
         border-bottom: solid 1px black;
-        width: 120px;
+        width: 70px;
         padding-bottom: .25rem;
         text-align: center;
     }
+
+    
 
 }
