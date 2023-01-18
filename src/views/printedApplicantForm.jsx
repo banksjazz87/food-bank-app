@@ -32,7 +32,7 @@ export default function PrintedApplicantForm() {
         </div>
         <div id="top_heading">
           <h2>Bureau of Food Assistance</h2>
-          <h2>The Emergency Food Assistance Program (TEFAP)</h2>
+          <h2 className="tefap_text">The Emergency Food Assistance Program (TEFAP)</h2>
           <h4>"Self Declaration of Need"</h4>
           <h3>Effective July 1, 2022 to June 30, 2023</h3>
         </div>

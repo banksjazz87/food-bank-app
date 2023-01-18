@@ -3,8 +3,9 @@
 #printed_form_wrapper {
     background-color: white;
     color: black;
-    max-width: 1250px;
+    max-width: 816px;
     margin: auto;
+    font-family: arial;
     
     h1 {
         @include paragraph-small;
@@ -17,13 +18,13 @@
 
         #person_count_wrapper {
             position: absolute;
-            right: 325px;
+            right: 430px;
             font-size: 12px;
         }
 
         #pa_logo {
-            width: 250px;
-            height: 120px;
+            width: 245px;
+            height: 100px;
         }
     }
 
@@ -41,8 +42,13 @@
     #fields{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
+        margin-top: 2px;
+        padding-left: 95px;
+        padding-right: 95px;
+
     }
+
 
   
 
@@ -50,6 +56,37 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: -10px;
+        
+        h2 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        h4 {
+            margin-top: 4px;
+            font-size: 10px;
+        }
+
+        h3 {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 300;
+            margin-top: 0;
+            font-size: 12px;
+        }
+
+        .tefap_text {
+            margin-top: 8px;
+            line-height: 0;
+            padding-top: 0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+    }
+
+    .paragraph_wrapper {
+        padding-left: 95px;
+        padding-right: 95px;
     }
     
 }

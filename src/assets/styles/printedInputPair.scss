@@ -4,12 +4,19 @@
     display: flex;
     flex-direction: column;
     color: black;
+    font-size: 12px;
+    margin-top: -12px;
 
     .all_values {
         display: flex; 
         flex-direction: row;
         justify-content: space-between;
         line-height: 1px;
+        padding-bottom: 0;
+    }
+
+    .value {
+        margin-bottom: 6px;
     }
 
     .all_labels {
@@ -17,11 +24,12 @@
         flex-direction: row;
         justify-content: space-between;
         border-top: solid 1px black;
-        width: 350px;
+        width: 275px;
     }
 
     .label {
-        line-height: 1px;
+        line-height: 14px;
+        margin-top: 0;
     }
 
 }
