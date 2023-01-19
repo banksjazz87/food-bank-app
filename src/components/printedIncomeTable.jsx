@@ -44,7 +44,7 @@ export default function PrintedIncomeTable(props) {
   });
 
   return (
-    <table>
+    <table id="household_income_table">
       <caption>Total Household Income (based on 185% of Poverty)</caption>
       <tbody>
         <tr id="headings_top_row">
