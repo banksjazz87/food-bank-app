@@ -84,7 +84,7 @@ export default function PrintedApplicantForm() {
             United States Department of Agriculture (USDA) policy, which
             prohibits discrimination on the basis of race, color, national
             origin, sex, age or disability. Eligibility is based upon the income
-            guidelines listed below. The recipient circles the entire line that
+            guidelines listed below. The recipient circles the <u>entire line</u> that
             applies to their Household Size, understanding they must be at, or
             below, the income level indicated to be eligible for program
             benefits.
@@ -101,6 +101,7 @@ export default function PrintedApplicantForm() {
               "Monthly",
               "",
               "Weekly",
+              ""
             ]}
             data={[
               { size: 1, annual: "25,142", monthly: "2,095", weekly: "484" },

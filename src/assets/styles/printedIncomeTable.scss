@@ -1,0 +1,37 @@
+@import './library.scss';
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+
+    caption {
+        font-size: 12px;
+        background-color: rgb(255, 204, 153);
+    }
+
+    #headings_top_row {
+        background-color: rgb(255, 204, 153);
+        font-size: 12px;
+    }
+
+    #headings_row {
+        background-color: rgb(255, 204, 153);
+
+
+        th {
+            font-size: 12px;
+            padding-bottom: 4px;
+        }
+    }
+
+    td {
+        width: 20px;
+    }
+
+    .small_table_text {
+        font-size: 8px;
+        font-style: italic;
+        font-family: times;
+    }
+}
