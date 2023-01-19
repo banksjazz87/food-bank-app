@@ -18,7 +18,7 @@
 
         #person_count_wrapper {
             position: absolute;
-            right: 430px;
+            right: 30%;
             font-size: 12px;
         }
 
@@ -87,7 +87,11 @@
     .paragraph_wrapper {
         padding-left: 95px;
         padding-right: 95px;
-        font-size: 12px;
+        font-size: 11px;
+
+        .all_caps {
+            font-weight: 600;
+        }
     }
 
     #house_hold_income_wrapper {
@@ -96,6 +100,42 @@
         font-size: 10px;
         font-weight: 600;
         border: solid 1px;
+    }
+
+    #recipient_signature {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-right: 95px;
+        margin-left: 95px;
+        border-top: solid 1px black;
+        padding-top: 6px;
+        
+        .paragraph_wrapper {
+            padding: 0;
+            font-weight: 550;
+            margin-top: -6px;
+            
+            p{
+                line-height: 1px;
+            }
+        }
+    }
+
+    #arrow_text {
+        margin-right: 95px;
+        margin-left: 95px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 12px;
+        #red_arrow {
+            width: 50px;
+            height: 25px;
+        }
+        p {
+            font-size: 11px;
+        }
     }
     
 }

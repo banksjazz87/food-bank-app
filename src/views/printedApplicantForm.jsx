@@ -4,6 +4,7 @@ import PrintedInputPair from "../components/printedInputPair.jsx";
 import PrintedIncomeTable from "../components/printedIncomeTable.jsx";
 import Navbar from "../components/navBar.jsx";
 import paLogo from "../assets/images/pa-logo.jpeg";
+import redArrow from "../assets/images/red-arrow.png";
 
 export default function PrintedApplicantForm() {
   return (
@@ -134,7 +135,7 @@ export default function PrintedApplicantForm() {
         </div>
 
         <div className="paragraph_wrapper">
-          <p>
+          <p className="all_caps">
             I UNDERSTAND THAT MAKING A FALSE STATEMENT MAY RESULT IN MY HAVING
             TO PAY FOR THE VALUE OF THE FOOD IMPROPERLY ISSUED TO ME AND MAY
             SUBJECT ME TO CRIMINAL PROSECUTION UNDER STATE AND FEDERAL LAW.
@@ -151,10 +152,10 @@ export default function PrintedApplicantForm() {
         </div>
 
         <div id="arrow_text">
-          <img alt="Red arrow pointing to the right" src={paLogo}></img>
+          <img id="red_arrow" alt="Red arrow pointing to the right" src={redArrow}></img>
           <p>
             Return completed form to your designated county agency. If you are
-            unsure of the correct agency, please call the Bureau at
+            unsure of the correct agency,<br></br> please call the Bureau at
             1-800-468-2433.
           </p>
         </div>
