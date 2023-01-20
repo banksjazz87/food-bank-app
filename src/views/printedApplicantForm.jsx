@@ -160,22 +160,22 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div id="red_text">
+        <div id="red_text" className="paragraph_wrapper">
           <p>THIS FORM IS NOT TO BE ALTERED OR CHANGED IN ANY WAY.</p>
         </div>
 
-        <div id="boxed_text">
+        <div id="boxed_text" className="paragraph_wrapper">
           <p>
             PLEASE REFER TO THE REVERSE SIDE OF THIS DOCUMENT FOR AN IMPORTANT
             USDA NON-DISCRIMINATION STATEMENT
           </p>
         </div>
 
-        <div className="paragraph_text">
-          <p>USDA Nondiscrimination Statement</p>
+        <div className="paragraph_wrapper second_page_text">
+          <center><p>USDA Nondiscrimination Statement</p></center>
         </div>
 
-        <div className="paragraph_text">
+        <div className="paragraph_wrapper second_page_text">
           <p>
             In accordance with federal civil rights law and U.S. Department of
             Agriculture (USDA) civil rights regulations and policies, this
@@ -186,7 +186,7 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div className="paragraph_text">
+        <div className="paragraph_wrapper second_page_text">
           <p>
             Program information may be made available in languages other than
             English. Persons with disabilities who require alternative means of
@@ -198,7 +198,7 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div className="paragraph_text">
+        <div className="paragraph_wrapper second_page_text">
           <p>
             To file a program discrimination complaint, a Complainant should
             complete a Form AD-3027, USDA Program Discrimination Complaint Form
@@ -215,7 +215,7 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div id="contact_info">
+        <div id="contact_info" className="paragraph_wrapper second_page_text">
           <p>
             <span className="bold_p">1. mail:</span>
             <br />
@@ -235,24 +235,24 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div className="paragraph_text">
+        <div className="paragraph_wrapper second_page_text">
           <p>This institution is an equal opportunity provider.</p>
         </div>
 
         <div id="bottom_box_container">
-          <div className="paragraph_text bold">
+          <div id="tefap_box" className="paragraph_wrapper bold">
             <p>
               The Emergency Food Assistance Program <br />
               Pennsylvania Tefap Proxy Form
             </p>
           </div>
 
-          <div className="paragraph_text bottom">
+          <div className="paragraph_wrapper bottom">
             <p>Date</p>
             <p id="date_line"></p>
           </div>
 
-          <div className="paragraph_text bottom">
+          <div className="paragraph_wrapper bottom">
             <p>
               I <span id="i_line"></span>
               hereby authorize
@@ -262,7 +262,7 @@ export default function PrintedApplicantForm() {
             </p>
           </div>
 
-          <div className="paragraph_text bottom">
+          <div className="paragraph_wrapper second_page_text bottom">
             <div className="line_bottom_text">
               <p className="line"></p>
               <p>Client Signature</p>
@@ -274,7 +274,7 @@ export default function PrintedApplicantForm() {
             </div>
           </div>
 
-          <div className="paragraph_text bottom">
+          <div className="paragraph_wrapper second_page_text bottom">
             <div className="line_bottom_text">
               <p className="line"></p>
               <p>Pantry Representative</p>

@@ -6,6 +6,7 @@
     max-width: 816px;
     margin: auto;
     font-family: arial;
+    padding-bottom: 125px;
     
     h1 {
         @include paragraph-small;
@@ -135,6 +136,51 @@
         }
         p {
             font-size: 11px;
+        }
+    }
+
+    #red_text {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 550;
+        color: red;
+    }
+
+    #boxed_text {
+        margin-right: 95px;
+        margin-left: 95px; 
+        border: solid 1px black;
+        padding: 0;
+
+        p {
+            font-size: 10px;
+            margin-left: 4px;
+        }
+    }
+
+    .second_page_text {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    .bold_p {
+        font-weight: 600;
+    }
+
+    #bottom_box_container {
+        border: solid 1px black;
+        margin-left: 95px; 
+        margin-right: 95px;
+        
+        .paragraph_wrapper {
+            padding: 0;
+        }
+
+        #tefap_box {
+            border: solid 1px black;
+            text-align: center; 
+            border-bottom: solid 2px black;
+            font-weight: 550;
         }
     }
     
