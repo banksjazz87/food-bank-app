@@ -275,7 +275,7 @@ export default function PrintedApplicantForm() {
           <div id="signatures_wrapper" className="paragraph_wrapper second_page_text bottom">
             <div id="client_sig" className="line_bottom_text">
               <p className="line"></p>
-              <p className="signature">Client Signature</p>
+              <p className="signature marg_left">Client Signature</p>
             </div>
             <div id="checkbox"></div>
             <div className="line_bottom_text">
@@ -287,11 +287,11 @@ export default function PrintedApplicantForm() {
           <div id="final_signatures_wrapper" className="paragraph_wrapper second_page_text bottom">
             <div className="line_bottom_text">
               <p className="line"></p>
-              <p>Pantry Representative</p>
+              <p className="signature marg_left">Pantry Representative</p>
             </div>
             <div id="box_text">
               <div id="small_box"></div>
-              <p>Proxy ID Verified</p>
+              <p className="signature">Proxy ID Verified</p>
             </div>
           </div>
         </div>
