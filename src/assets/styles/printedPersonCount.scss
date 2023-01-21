@@ -4,9 +4,11 @@
     color: black;
     font-size: 8px;
     border-collapse: collapse;
+    table-layout: fixed;
 
         tr {
             line-height: 2px;
+            padding: 1px;
         }
 
         .title {
@@ -18,5 +20,4 @@
             padding-bottom: .25rem;
             text-align: center;
         }
-
 }

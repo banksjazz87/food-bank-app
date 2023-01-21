@@ -2,7 +2,7 @@
 
 #printed_form_wrapper {
     background-color: white;
-    color: black;
+    color: #002579;
     max-width: 816px;
     margin: auto;
     font-family: arial;
@@ -21,6 +21,7 @@
             position: absolute;
             margin-left: 475px;
             font-size: 12px;
+            
         }
 
         #pa_logo {
@@ -71,7 +72,7 @@
 
         h3 {
             font-family: 'Times New Roman', Times, serif;
-            font-weight: 300;
+            font-weight: 520;
             margin-top: 0;
             font-size: 12px;
         }
@@ -89,10 +90,16 @@
         padding-left: 95px;
         padding-right: 95px;
         font-size: 11px;
+        margin-top: 27px;
 
         .all_caps {
-            font-weight: 600;
+            font-weight: 900;
+            font-size: 10px;
         }
+    }
+
+    #all_caps_wrapper {
+        margin-bottom: 28px;
     }
 
     #house_hold_income_wrapper {
@@ -100,7 +107,8 @@
         margin-right: 95px;
         font-size: 10px;
         font-weight: 600;
-        border: solid 1px;
+        border: solid 1px #002579;
+        margin-top: -5px;
     }
 
     #recipient_signature {
@@ -109,7 +117,7 @@
         justify-content: space-between;
         margin-right: 95px;
         margin-left: 95px;
-        border-top: solid 1px black;
+        border-top: solid 2px black;
         padding-top: 6px;
 
         .paragraph_wrapper {
@@ -151,32 +159,40 @@
     #boxed_text {
         margin-right: 95px;
         margin-left: 95px;
-        border: solid 1px black;
+        border: solid 2px black;
         padding: 0;
 
         p {
             font-size: 10px;
             margin-left: 4px;
+            color: black;
         }
     }
 
     .second_page_text {
         font-size: 13px;
         line-height: 18px;
+        margin-top: 20px;
+        color: black;
     }
 
     .bold_p {
         font-weight: 600;
     }
 
+    #institution_wrapper {
+        margin-bottom: 70px;
+    }
+
     #bottom_box_container {
         border: solid 1px black;
         margin-left: 95px;
         margin-right: 95px;
-        margin-top: 85px;
 
         .paragraph_wrapper {
             padding: 0;
+            color: #002579;
+            margin-top: 0;
         }
 
         #tefap_box {
@@ -205,6 +221,7 @@
         align-items: flex-start;
         margin-left: 2px;
         margin-top: 6px;
+        margin-bottom: 45px;
 
         .auth_row {
             display: flex;
@@ -214,7 +231,7 @@
 
             .authorize_line {
                 width: 180px;
-                border-bottom: solid 1px black;
+                border-bottom: solid 1px #002579;
                 margin-right: .25rem;
             }
         }
@@ -246,6 +263,7 @@
             height: 12px;
             border: solid 1px black;
             margin-top: .75rem;
+            margin-left: -20px;
         }
 
         #proxy_sig_line {

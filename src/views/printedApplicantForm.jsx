@@ -135,7 +135,7 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div className="paragraph_wrapper">
+        <div id="all_caps_wrapper" className="paragraph_wrapper">
           <p className="all_caps">
             I UNDERSTAND THAT MAKING A FALSE STATEMENT MAY RESULT IN MY HAVING
             TO PAY FOR THE VALUE OF THE FOOD IMPROPERLY ISSUED TO ME AND MAY
@@ -242,7 +242,7 @@ export default function PrintedApplicantForm() {
           </p>
         </div>
 
-        <div className="paragraph_wrapper second_page_text">
+        <div id="institution_wrapper" className="paragraph_wrapper second_page_text">
           <p>This institution is an equal opportunity provider.</p>
         </div>
 
