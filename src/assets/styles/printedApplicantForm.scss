@@ -7,7 +7,7 @@
     margin: auto;
     font-family: arial;
     padding-bottom: 125px;
-    
+
     h1 {
         @include paragraph-small;
     }
@@ -30,17 +30,17 @@
     }
 
     #person_count_wrapper {
-        display: flex; 
+        display: flex;
         flex-direction: row;
 
         #title_wrapper {
             display: flex;
             flex-direction: column;
-            
+
         }
     }
 
-    #fields{
+    #fields {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -51,14 +51,14 @@
     }
 
 
-  
+
 
     #top_heading {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: -10px;
-        
+
         h2 {
             font-size: 14px;
             font-weight: 700;
@@ -111,13 +111,13 @@
         margin-left: 95px;
         border-top: solid 1px black;
         padding-top: 6px;
-        
+
         .paragraph_wrapper {
             padding: 0;
             font-weight: 550;
             margin-top: -6px;
-            
-            p{
+
+            p {
                 line-height: 1px;
             }
         }
@@ -130,10 +130,12 @@
         flex-direction: row;
         align-items: center;
         column-gap: 12px;
+
         #red_arrow {
             width: 50px;
             height: 25px;
         }
+
         p {
             font-size: 11px;
         }
@@ -148,7 +150,7 @@
 
     #boxed_text {
         margin-right: 95px;
-        margin-left: 95px; 
+        margin-left: 95px;
         border: solid 1px black;
         padding: 0;
 
@@ -169,19 +171,118 @@
 
     #bottom_box_container {
         border: solid 1px black;
-        margin-left: 95px; 
+        margin-left: 95px;
         margin-right: 95px;
-        
+
         .paragraph_wrapper {
             padding: 0;
         }
 
         #tefap_box {
             border: solid 1px black;
-            text-align: center; 
+            text-align: center;
             border-bottom: solid 2px black;
             font-weight: 550;
         }
     }
-    
+
+    #bottom_date {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        #date_line {
+            width: 180px;
+            border-bottom: solid 1px black;
+            margin-left: 1rem;
+        }
+    }
+
+    #authorize_bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 2px;
+        margin-top: 6px;
+
+        .auth_row {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-bottom: -1rem;
+
+            .authorize_line {
+                width: 180px;
+                border-bottom: solid 1px black;
+                margin-right: .25rem;
+            }
+        }
+    }
+
+    #signatures_wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 45px;
+
+
+        .line_bottom_text {
+            display: flex;
+            flex-direction: column;
+
+            .line {
+                width: 275px;
+                border-bottom: solid 1px black;
+            }
+
+            .signature {
+                margin-top: -.75rem;
+            }
+        }
+
+        #checkbox {
+            width: 10px;
+            height: 12px;
+            border: solid 1px black;
+            margin-top: .75rem;
+        }
+
+        #proxy_sig_line {
+            width: 220px;
+        }
+    }
+
+    #final_signatures_wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 0;
+
+        .line_bottom_text {
+            display: flex;
+            flex-direction: column;
+
+            .line {
+                width: 275px;
+                border-bottom: solid 1px black;
+                margin-bottom: -.75rem;
+            }
+        }
+
+        #box_text {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 12px;
+            padding-right: 100px; 
+            margin-top: -2rem;
+
+            #small_box {
+                width: 10px;
+                height: 14px;
+                border: solid 2px black;
+            }
+        }
+    }
+
 }

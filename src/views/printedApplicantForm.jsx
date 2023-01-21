@@ -28,12 +28,13 @@ export default function PrintedApplicantForm() {
                 { title: "Seniors (60 and up)", count: 1 },
               ]}
             />
-            
           </div>
         </div>
         <div id="top_heading">
           <h2>Bureau of Food Assistance</h2>
-          <h2 className="tefap_text">The Emergency Food Assistance Program (TEFAP)</h2>
+          <h2 className="tefap_text">
+            The Emergency Food Assistance Program (TEFAP)
+          </h2>
           <h4>"Self Declaration of Need"</h4>
           <h3>Effective July 1, 2022 to June 30, 2023</h3>
         </div>
@@ -85,10 +86,10 @@ export default function PrintedApplicantForm() {
             United States Department of Agriculture (USDA) policy, which
             prohibits discrimination on the basis of race, color, national
             origin, sex, age or disability. Eligibility is based upon the income
-            guidelines listed below. The recipient circles the <u>entire line</u> that
-            applies to their Household Size, understanding they must be at, or
-            below, the income level indicated to be eligible for program
-            benefits.
+            guidelines listed below. The recipient circles the{" "}
+            <u>entire line</u> that applies to their Household Size,
+            understanding they must be at, or below, the income level indicated
+            to be eligible for program benefits.
           </p>
         </div>
 
@@ -102,7 +103,7 @@ export default function PrintedApplicantForm() {
               "Monthly",
               "",
               "Weekly",
-              ""
+              "",
             ]}
             data={[
               { size: 1, annual: "25,142", monthly: "2,095", weekly: "484" },
@@ -152,7 +153,11 @@ export default function PrintedApplicantForm() {
         </div>
 
         <div id="arrow_text">
-          <img id="red_arrow" alt="Red arrow pointing to the right" src={redArrow}></img>
+          <img
+            id="red_arrow"
+            alt="Red arrow pointing to the right"
+            src={redArrow}
+          ></img>
           <p>
             Return completed form to your designated county agency. If you are
             unsure of the correct agency,<br></br> please call the Bureau at
@@ -172,7 +177,9 @@ export default function PrintedApplicantForm() {
         </div>
 
         <div className="paragraph_wrapper second_page_text">
-          <center><p>USDA Nondiscrimination Statement</p></center>
+          <center>
+            <p>USDA Nondiscrimination Statement</p>
+          </center>
         </div>
 
         <div className="paragraph_wrapper second_page_text">
@@ -247,34 +254,37 @@ export default function PrintedApplicantForm() {
             </p>
           </div>
 
-          <div className="paragraph_wrapper bottom">
+          <div id="bottom_date" className="paragraph_wrapper bottom">
             <p>Date</p>
             <p id="date_line"></p>
           </div>
 
-          <div className="paragraph_wrapper bottom">
-            <p>
-              I <span id="i_line"></span>
-              hereby authorize
-              <span id="authorize_line"></span>
-              to pick up my <br />
-              TEFAP Food Package and deliver it to me.
-            </p>
+          <div id="authorize_bottom" className="paragraph_wrapper bottom">
+            <div id="i_authorize" className="auth_row">
+              <p>I</p>
+              <p className="authorize_line"></p>
+              <p>hereby authorize</p>
+              <p className="authorize_line"></p>
+              <p>to pick up my</p>
+            </div>
+            <div id="tefap_package" className="auth_row">
+              <p>TEFAP Food Package and deliver it to me.</p>
+            </div>
           </div>
 
-          <div className="paragraph_wrapper second_page_text bottom">
-            <div className="line_bottom_text">
+          <div id="signatures_wrapper" className="paragraph_wrapper second_page_text bottom">
+            <div id="client_sig" className="line_bottom_text">
               <p className="line"></p>
-              <p>Client Signature</p>
+              <p className="signature">Client Signature</p>
             </div>
             <div id="checkbox"></div>
             <div className="line_bottom_text">
-              <p className="line"></p>
-              <p>Proxy Signature</p>
+              <p id="proxy_sig_line" className="line"></p>
+              <p className="signature">Proxy Signature</p>
             </div>
           </div>
 
-          <div className="paragraph_wrapper second_page_text bottom">
+          <div id="final_signatures_wrapper" className="paragraph_wrapper second_page_text bottom">
             <div className="line_bottom_text">
               <p className="line"></p>
               <p>Pantry Representative</p>
