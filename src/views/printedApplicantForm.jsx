@@ -11,15 +11,17 @@ export default function PrintedApplicantForm() {
   const [userData, setUserData] = useState([]);
   
   useEffect(() => {
+    
     let applicant = JSON.parse(sessionStorage.getItem('currentApplicant'));
-    console.log(applicant.id);
-    console.log(applicant.first);
-    console.log(applicant.last);
+
     fetch(`/single-applicant/first/${applicant.first}/last/${applicant.last}/id/${applicant.id}`)
       .then(data => data.json())
-      .then(final => setUserData(final[0]))
+      .then(final => {
+        setUserData(final);
+        console.log(userData);
+      })
       .catch(err => console.log("error", err));
-  })
+  }, []);
   return (
     <div id="page_wrapper">
       <div className="header_wrapper">
