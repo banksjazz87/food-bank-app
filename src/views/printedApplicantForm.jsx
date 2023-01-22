@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PrintedPersonCount from "../components/printedPersonCount.jsx";
 import PrintedInputPair from "../components/printedInputPair.jsx";
 import PrintedIncomeTable from "../components/printedIncomeTable.jsx";
@@ -7,6 +7,12 @@ import paLogo from "../assets/images/pa-logo.jpeg";
 import redArrow from "../assets/images/red-arrow.png";
 
 export default function PrintedApplicantForm() {
+
+  /*const [userData, setUserData] = useState([]);
+  
+  useEffect(() => {
+    fetch()
+  })*/
   return (
     <div id="page_wrapper">
       <div className="header_wrapper">

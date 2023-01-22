@@ -6,8 +6,12 @@ import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
+import {useNavigate} from "react-router-dom";
 
 export default function SearchApplicants() {
+
+  const navigate = useNavigate();
+
   //Will be used to update the current information about the applicant.
   const [applicantInfo, setApplicantInfo] = useState([
     {
@@ -136,7 +140,14 @@ export default function SearchApplicants() {
         display={showApplicant}
         editClick={displayEdit}
         printClick={() => {
-          alert("print has been selected");
+          
+          //Set the current applicant info into the session storage.
+          let currentApplicant = {id: applicantInfo[0].ApplicantID, first: applicantInfo[0].firstName, last: applicantInfo[0].lastName};
+          sessionStorage.setItem('currentApplicant', JSON.stringify(currentApplicant));
+
+          //Navigate to the print page.
+          navigate("/printed-applicant-form", {replace: true});
+
         }}
         deleteClick={() => {
           setDeleteAlert(true);

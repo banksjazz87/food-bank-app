@@ -169,6 +169,7 @@ app.get(
     });
 
     findApplicant.then((data) => res.send(data));
+      
   }
 );
 
