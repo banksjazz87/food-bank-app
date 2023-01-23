@@ -43,7 +43,8 @@ export default function PrintedApplicantForm() {
                 tableContents={[
                   {
                     title: "Children (0-17)",
-                    count: userData[0].children === null ? 0 : userData[0].children,
+                    count:
+                      userData[0].children === null ? 0 : userData[0].children,
                   },
                   {
                     title: "Adults",
@@ -51,7 +52,8 @@ export default function PrintedApplicantForm() {
                   },
                   {
                     title: "Seniors (60 and up)",
-                    count: userData[0].seniors === null ? 0 : userData[0].seniors,
+                    count:
+                      userData[0].seniors === null ? 0 : userData[0].seniors,
                   },
                 ]}
               />
@@ -69,10 +71,17 @@ export default function PrintedApplicantForm() {
           <div id="fields">
             <div id="field_block_1" className="field_block">
               <PrintedInputPair
-                pairArray={[{ value: `${userData[0].firstName} ${userData[0].lastName}`, label: "Recipient Name" }]}
+                pairArray={[
+                  {
+                    value: `${userData[0].firstName} ${userData[0].lastName}`,
+                    label: "Recipient Name",
+                  },
+                ]}
               />
               <PrintedInputPair
-                pairArray={[{ value: userData[0].street, label: "Street Address" }]}
+                pairArray={[
+                  { value: userData[0].street, label: "Street Address" },
+                ]}
               />
               <PrintedInputPair
                 pairArray={[
@@ -168,7 +177,6 @@ export default function PrintedApplicantForm() {
                   weekly: "168",
                 },
               ]}
-
               householdSize={userData[0].totalOccupants}
             />
           </div>
@@ -355,6 +363,14 @@ export default function PrintedApplicantForm() {
             </div>
           </div>
         </div>
+        <button 
+          className="print_button" 
+          type="button" 
+          onClick={() => { 
+            window.print();
+          }}>
+          Print
+        </button>
       </div>
     );
   }
