@@ -87,7 +87,7 @@ export default function PrintedApplicantForm() {
               <PrintedInputPair
                 pairArray={[
                   {
-                    value: "signature",
+                    value: "",
                     label: "Agency Representative Signature",
                   },
                   { value: userData[0].dateAltered, label: "Date" },

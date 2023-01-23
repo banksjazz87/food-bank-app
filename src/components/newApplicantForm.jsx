@@ -6,12 +6,12 @@ export default function NewApplicantForm(props) {
   //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.
   const currentDate = new Date();
   const [field, setField] = useState({
-    firstName: "", 
-    lastName: "", 
-    phone: null, 
+    firstName: "",
+    lastName: "",
+    phone: null,
     street: null,
     city: null,
-    state: null, 
+    state: null,
     zip: null,
     children: null,
     adults: null,
@@ -49,7 +49,11 @@ export default function NewApplicantForm(props) {
     } else {
       return (
         <div className="input_pair" key={`input_${y}`}>
-          <label className="new_applicant_label" key={`label_${y}`} htmlFor={x.name}>
+          <label
+            className="new_applicant_label"
+            key={`label_${y}`}
+            htmlFor={x.name}
+          >
             {x.placeHolder}
           </label>
           <br />

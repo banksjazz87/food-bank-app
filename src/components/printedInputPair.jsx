@@ -11,7 +11,7 @@ export default function PrintedInuptPair(props) {
   });
 
   return (
-    <div className="input_pair">
+    <div className="printed_input_pair">
       <div className="all_values">{returnValues}</div>
       <div className="all_labels">{returnLabels}</div>
     </div>
