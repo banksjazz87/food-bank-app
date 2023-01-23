@@ -30,7 +30,7 @@ export default function PrintedIncomeTable(props) {
       );
     } else {
       return (
-        <tr key={`row_${y}`}>
+        <tr className={props.householdSize === x.size ? 'circle_family_size' : ''} key={`row_${y}`}>
           <td>{x.size}</td>
           <td>$</td>
           <td>{x.annual}</td>

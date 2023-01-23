@@ -43,15 +43,15 @@ export default function PrintedApplicantForm() {
                 tableContents={[
                   {
                     title: "Children (0-17)",
-                    count: userData.children ? userData.children : 0,
+                    count: userData[0].children === null ? 0 : userData[0].children,
                   },
                   {
                     title: "Adults",
-                    count: userData.adults ? userData.adults : 0,
+                    count: userData[0].adults === null ? 0 : userData[0].adults,
                   },
                   {
                     title: "Seniors (60 and up)",
-                    count: userData.seniors ? userData.seniors : 0,
+                    count: userData[0].seniors === null ? 0 : userData[0].seniors,
                   },
                 ]}
               />
@@ -69,16 +69,16 @@ export default function PrintedApplicantForm() {
           <div id="fields">
             <div id="field_block_1" className="field_block">
               <PrintedInputPair
-                pairArray={[{ value: "Name", label: "Recipient Name" }]}
+                pairArray={[{ value: `${userData[0].firstName} ${userData[0].lastName}`, label: "Recipient Name" }]}
               />
               <PrintedInputPair
-                pairArray={[{ value: "402 Myrtle", label: "Street Address" }]}
+                pairArray={[{ value: userData[0].street, label: "Street Address" }]}
               />
               <PrintedInputPair
                 pairArray={[
-                  { value: "Emlenton", label: "City" },
-                  { value: "PA", label: "State" },
-                  { value: 16373, label: "Zip" },
+                  { value: userData[0].city, label: "City" },
+                  { value: userData[0].state, label: "State" },
+                  { value: userData[0].zip, label: "Zip" },
                 ]}
               />
             </div>
@@ -90,7 +90,7 @@ export default function PrintedApplicantForm() {
                     value: "signature",
                     label: "Agency Representative Signature",
                   },
-                  { value: "1/15/2023", label: "Date" },
+                  { value: userData[0].dateAltered, label: "Date" },
                 ]}
               />
               <PrintedInputPair
@@ -168,6 +168,8 @@ export default function PrintedApplicantForm() {
                   weekly: "168",
                 },
               ]}
+
+              householdSize={userData[0].totalOccupants}
             />
           </div>
 
