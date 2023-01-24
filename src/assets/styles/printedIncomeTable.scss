@@ -41,3 +41,22 @@
         border-radius: 16px;
     }
 }
+
+@media print {
+    #household_income_table {
+        caption {
+            -webkit-print-color-adjust:exact;
+            print-color-adjust:exact;
+        }
+    
+        #headings_top_row {
+            -webkit-print-color-adjust:exact;
+            print-color-adjust:exact;
+        }
+    
+        #headings_row {
+            -webkit-print-color-adjust:exact;
+            print-color-adjust:exact;
+    }
+}
+}
