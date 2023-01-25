@@ -22,7 +22,7 @@
             #person_count_wrapper {
                 position: absolute;
                 margin-left: 475px;
-                font-size: 12px;
+                font-size: 14px;
 
             }
 
@@ -44,12 +44,11 @@
         }
 
         #fields {
+            @include printed_form_paragraph;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             margin-top: 2px;
-            padding-left: 95px;
-            padding-right: 95px;
             margin-bottom: -35px;
 
         }
@@ -64,40 +63,38 @@
             margin-top: -10px;
 
             h2 {
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 700;
             }
 
             h4 {
                 margin-top: 4px;
-                font-size: 10px;
+                font-size: 12px;
             }
 
             h3 {
                 font-family: 'Times New Roman', Times, serif;
                 font-weight: 520;
                 margin-top: 0;
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .tefap_text {
                 margin-top: 8px;
                 line-height: 0;
                 padding-top: 0;
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 700;
             }
         }
 
         .paragraph_wrapper {
-            padding-left: 95px;
-            padding-right: 95px;
-            font-size: 11px;
+            @include printed_form_paragraph;
             margin-top: 27px;
 
             .all_caps {
                 font-weight: 900;
-                font-size: 10px;
+                font-size: 12px;
             }
         }
 
@@ -106,20 +103,18 @@
         }
 
         #house_hold_income_wrapper {
-            margin-left: 95px;
-            margin-right: 95px;
-            font-size: 10px;
+            @include printed_form_paragraph;
+            font-size: 12px;
             font-weight: 600;
             border: solid 1px #002579;
             margin-top: -5px;
         }
 
         #recipient_signature {
+            @include printed_form_paragraph;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin-right: 95px;
-            margin-left: 95px;
             border-top: solid 2px black;
             padding-top: 6px;
 
@@ -127,6 +122,8 @@
                 padding: 0;
                 font-weight: 550;
                 margin-top: -6px;
+                margin-right: 0;
+                margin-left: 0;
 
                 p {
                     line-height: 1px;
@@ -135,8 +132,7 @@
         }
 
         #arrow_text {
-            margin-right: 95px;
-            margin-left: 95px;
+            @include printed_form_paragraph;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -148,7 +144,7 @@
             }
 
             p {
-                font-size: 10px;
+                font-size: 12px;
             }
         }
 
@@ -160,11 +156,12 @@
         }
 
         #boxed_text {
-            margin-right: 95px;
-            margin-left: 95px;
+            @include printed_form_paragraph;
             border: solid 2px black;
             padding: 0;
-            margin-bottom: 140px;
+            padding-bottom: 3px; 
+            padding-top: 3px;
+            margin-bottom: 270px;
 
             p {
                 font-size: 10px;
@@ -174,7 +171,7 @@
         }
 
         .second_page_text {
-            font-size: 13px;
+            font-size: 15px;
             line-height: 18px;
             margin-top: 20px;
             color: black;
@@ -197,6 +194,8 @@
                 padding: 0;
                 color: #002579;
                 margin-top: 0;
+                margin-right: 0;
+                margin-left: 0;
             }
 
             #tefap_box {
@@ -204,6 +203,8 @@
                 text-align: center;
                 border-bottom: solid 2px black;
                 font-weight: 550;
+                margin-left: 0;
+                margin-right: 0;
             }
         }
 
@@ -310,7 +311,7 @@
         }
 
         .signature {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 200;
         }
 

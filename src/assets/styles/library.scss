@@ -266,3 +266,10 @@ $form-border-color: rgba(153, 102, 153, .5);
     margin-top: 0;
     margin-bottom: 2rem;
 }
+
+@mixin printed_form_paragraph {
+    font-family: arial;
+    font-size: 12px;
+    margin-left: 95px;
+    margin-right: 95px;
+}
