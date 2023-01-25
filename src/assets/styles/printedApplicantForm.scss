@@ -27,7 +27,7 @@
             }
 
             #pa_logo {
-                width: 245px;
+                width: 265px;
                 height: 110px;
             }
         }
@@ -233,6 +233,7 @@
                 flex-direction: row;
                 justify-content: flex-start;
                 margin-bottom: -1rem;
+                margin-left: 2px;
 
                 .authorize_line {
                     width: 180px;

@@ -19,13 +19,14 @@
 
     .value {
         margin-bottom: 6px;
+        font-size: 14px;
     }
 
     .all_labels {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        border-top: solid 1px #002579;
+        border-top: solid 2px #002579;
         width: 275px;
     }
 
