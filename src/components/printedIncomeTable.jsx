@@ -4,11 +4,7 @@ import "../assets/styles/printedIncomeTable.scss";
 export default function PrintedIncomeTable(props) {
   const allHeadings = props.headings.map((x, y) => {
     if (y === 0) {
-      return (
-        <th className="income_headings">
-         Circle One
-        </th>
-      );
+      return <th className="income_headings">Circle One</th>;
     } else {
       return <th className="income_headings">{x}</th>;
     }
@@ -30,7 +26,10 @@ export default function PrintedIncomeTable(props) {
       );
     } else {
       return (
-        <tr className={props.householdSize === x.size ? 'circle_family_size' : ''} key={`row_${y}`}>
+        <tr
+          className={props.householdSize === x.size ? "circle_family_size" : ""}
+          key={`row_${y}`}
+        >
           <td>{x.size}</td>
           <td>$</td>
           <td>{x.annual}</td>

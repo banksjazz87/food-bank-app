@@ -36,8 +36,8 @@ export default function NavBar() {
       "search",
       "current-registered-list",
       "past-registered-list",
-      "create-foodbank-list", 
-      "printed-applicant-form"
+      "create-foodbank-list",
+      "printed-applicant-form",
     ];
 
     for (let i = 0; i < fullNavUrls.length; i++) {
@@ -61,7 +61,11 @@ export default function NavBar() {
   if (fullNav) {
     return (
       <>
-        <nav className={displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"}>
+        <nav
+          className={
+            displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"
+          }
+        >
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/new_applicant">New Applicant</Link>
           <Link to="/search">Search Applicants</Link>
@@ -70,11 +74,14 @@ export default function NavBar() {
         <HamburgerIcon clickHandler={showNavBar} />
       </>
     );
-    
   } else {
     return (
       <>
-        <nav className={displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"}>
+        <nav
+          className={
+            displayNav === "standard" ? "nav_wrapper" : "mobile_nav_wrapper"
+          }
+        >
           <Link to="/login">Login</Link>
         </nav>
         <HamburgerIcon clickHandler={showNavBar} />

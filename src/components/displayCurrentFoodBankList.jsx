@@ -12,18 +12,18 @@ export default function DisplayCurrentFoodBankList(props) {
     let currentScreenWidth = window.innerWidth;
     if (currentScreenWidth <= 1024) {
       setMobileView(true);
-    } 
+    }
   }, []);
 
   //Add eventlistener to check for mobile.
-  window.addEventListener('resize', () => {
-    let currentScreenWidth = window.innerWidth; 
+  window.addEventListener("resize", () => {
+    let currentScreenWidth = window.innerWidth;
     if (currentScreenWidth <= 1024) {
       setMobileView(true);
     } else {
       setMobileView(false);
     }
-  })
+  });
 
   //Update the attendant present status in the array that is holding the state.
   const attendantPresent = (arr, index) => {
@@ -96,10 +96,10 @@ export default function DisplayCurrentFoodBankList(props) {
               index,
               props.tableDetails
             );
-          }}>
+          }}
+        >
           √
-          </button>
-        
+        </button>
       );
     } else {
       return (
@@ -116,10 +116,9 @@ export default function DisplayCurrentFoodBankList(props) {
               props.tableDetails
             );
           }}
-          >
+        >
           -
-          </button>
-        
+        </button>
       );
     }
   };
@@ -133,7 +132,9 @@ export default function DisplayCurrentFoodBankList(props) {
           <td id="lastName">{x.lastName}</td>
           <td id="firstName">{x.firstName}</td>
           <td id="phone">
-            <a className="call_button" href={`tel: ${x.phone}`}>Call</a>
+            <a className="call_button" href={`tel: ${x.phone}`}>
+              Call
+            </a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
           <td
@@ -167,9 +168,15 @@ export default function DisplayCurrentFoodBankList(props) {
     const renderNames = currentList.map((x, y) => {
       return (
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
-          <td id="name">{x.lastName}<br></br>{x.firstName}</td>
+          <td id="name">
+            {x.lastName}
+            <br></br>
+            {x.firstName}
+          </td>
           <td id="phone">
-            <a className="call_button" href={`tel: ${x.phone}`}>Call</a>
+            <a className="call_button" href={`tel: ${x.phone}`}>
+              Call
+            </a>
           </td>
           <td>{alreadyChecked(x, y)}</td>
           <td
@@ -215,7 +222,7 @@ export default function DisplayCurrentFoodBankList(props) {
             });
           }}
         >
-          <table style={mobileView ? {display: "none"} : {display: ""}}>
+          <table style={mobileView ? { display: "none" } : { display: "" }}>
             <tbody>
               <tr id="header_row">
                 <th>Last Name</th>
@@ -228,7 +235,7 @@ export default function DisplayCurrentFoodBankList(props) {
             </tbody>
           </table>
 
-          <table style={mobileView ? {display: ""} : {display: "none"}}>
+          <table style={mobileView ? { display: "" } : { display: "none" }}>
             <tbody>
               <tr id="header_row">
                 <th>Name</th>

@@ -1,13 +1,12 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import "../assets/styles/editDisplay.scss";
 
 export default function EditPage(props) {
-
   const navigate = useNavigate();
- 
+
   const returnInputs = dataPoints.map((x, y) => {
     if (x.type === null) {
       return (
@@ -49,33 +48,34 @@ export default function EditPage(props) {
             name={x.name}
             min={x.type === "number" ? 0 : ""}
             onChange={(e) => {
-              props.handleChange([x.name], e.target.value );
-            }
-            }
+              props.handleChange([x.name], e.target.value);
+            }}
           />
         </div>
       );
     }
   });
   return (
-   <div id="edit_applicant_wrapper" style={props.display ? {display: ""} : {display: "none"}}>
-    <form 
-      id="edit_form" 
-      method="post"
-      onSubmit={(e) => {
-        e.preventDefault();
-        putRequest("/applicant/update", props.currentApplicant[0])
-        .then(data => {
-          alert(data.message);
-          navigate('/dashboard', {replace: true});
-
-      });
-      }}
+    <div
+      id="edit_applicant_wrapper"
+      style={props.display ? { display: "" } : { display: "none" }}
+    >
+      <form
+        id="edit_form"
+        method="post"
+        onSubmit={(e) => {
+          e.preventDefault();
+          putRequest("/applicant/update", props.currentApplicant[0]).then(
+            (data) => {
+              alert(data.message);
+              navigate("/dashboard", { replace: true });
+            }
+          );
+        }}
       >
-       {returnInputs}
-      <input class="input_button" type="submit" value="Submit"/>
-       </form>
-    
-   </div>
+        {returnInputs}
+        <input class="input_button" type="submit" value="Submit" />
+      </form>
+    </div>
   );
 }

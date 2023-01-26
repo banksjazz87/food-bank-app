@@ -12,7 +12,11 @@ export default function DisplayFbList(props) {
           </a>
         </td>
         <td>
-          <p className={x.present === "true" ? "positive_symbol" : "negative_symbol"}>
+          <p
+            className={
+              x.present === "true" ? "positive_symbol" : "negative_symbol"
+            }
+          >
             {x.present === "true" ? "√" : "-"}
           </p>
         </td>
@@ -34,7 +38,11 @@ export default function DisplayFbList(props) {
           </a>
         </td>
         <td className="attended_row">
-          <p className={x.present === "true" ? "positive_symbol" : "negative_symbol"}>
+          <p
+            className={
+              x.present === "true" ? "positive_symbol" : "negative_symbol"
+            }
+          >
             {x.present === "true" ? "√" : "-"}
           </p>
         </td>

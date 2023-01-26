@@ -10,59 +10,57 @@ export default function EditModuleForCurrentList(props) {
   const hidePreviousSelected = () => {
     setShowSearchBar(false);
     setShowAddNewPerson(false);
-  }
-
+  };
 
   return (
-    <div 
+    <div
       id="cl_edit_module_overlay"
       style={props.display ? { display: "" } : { display: "none" }}
     >
-    <div
-      id="cl_edit_module_wrapper"
-      
-    >
-      <div id="cl_edit_module_questions">
-        <h3>Would you like to: </h3>
-        <div id="button_wrapper">
-          <button type="button" onClick={() => setShowSearchBar(true)}>
-            Add Existing
-          </button>
+      <div id="cl_edit_module_wrapper">
+        <div id="cl_edit_module_questions">
+          <h3>Would you like to: </h3>
+          <div id="button_wrapper">
+            <button type="button" onClick={() => setShowSearchBar(true)}>
+              Add Existing
+            </button>
 
-          <button type="button" onClick={() => setShowAddNewPerson(true)}>
-            Add New 
-          </button>
+            <button type="button" onClick={() => setShowAddNewPerson(true)}>
+              Add New
+            </button>
 
-          <button type="button" onClick={props.showRemoveHandler}>
-            Remove 
-          </button>
+            <button type="button" onClick={props.showRemoveHandler}>
+              Remove
+            </button>
 
-          <button 
-            onClick={() => {
+            <button
+              onClick={() => {
                 props.hideModuleHandler();
                 hidePreviousSelected();
-          }
-          }>Cancel</button>
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
-      </div>
-      <div
-        id="cl_edit_module_searchBar"
-        style={showSearchBar ? { display: "" } : { display: "none" }}
-      >
-        <SearchBar
-          handleChange={props.searchBarClick}
-          route="/all-applicants"
-          show={true}
-          title="Search All Applicants"
+        <div
+          id="cl_edit_module_searchBar"
+          style={showSearchBar ? { display: "" } : { display: "none" }}
+        >
+          <SearchBar
+            handleChange={props.searchBarClick}
+            route="/all-applicants"
+            show={true}
+            title="Search All Applicants"
+          />
+        </div>
+        <AddPartialApplicantForm
+          showForm={showAddNewPerson}
+          nameHandler={props.newApplicantHandler}
+          tableInfo={props.tableDetails}
+          addToTable={props.addNewHandler}
         />
       </div>
-      <AddPartialApplicantForm
-        showForm={showAddNewPerson}
-        nameHandler={props.newApplicantHandler}
-        tableInfo={props.tableDetails}
-        addToTable={props.addNewHandler}
-      />
-    </div>
     </div>
   );
 }

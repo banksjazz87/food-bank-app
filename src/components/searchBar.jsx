@@ -16,7 +16,7 @@ export default function SearchBar(props) {
 
   const [input, setInput] = useState({});
 
-  //for production 
+  //for production
   useEffect(() => {
     fetch(props.route)
       .then((response) => response.json())
@@ -56,7 +56,7 @@ export default function SearchBar(props) {
 
   if (data.length === 0) {
     return (
-      <div style={props.show ? {display: ""} : {display: "none"}}>
+      <div style={props.show ? { display: "" } : { display: "none" }}>
         <label for={props.description}>{props.title}</label>
         <select name={props.description} id="applicants">
           <option id="fetching">Fetching...</option>
@@ -65,7 +65,10 @@ export default function SearchBar(props) {
     );
   } else {
     return (
-      <div id="search_bar" style={props.show ? {display: ""} : {display: "none"}}>
+      <div
+        id="search_bar"
+        style={props.show ? { display: "" } : { display: "none" }}
+      >
         <form
           id="applicantSearch"
           onSubmit={(e) => {
@@ -78,7 +81,7 @@ export default function SearchBar(props) {
               .then((final) => props.handleChange(final));
 
             //used for development
-             //props.handleChange([data[0]]);
+            //props.handleChange([data[0]]);
           }}
         >
           <label for={props.description}>{props.title}</label>
