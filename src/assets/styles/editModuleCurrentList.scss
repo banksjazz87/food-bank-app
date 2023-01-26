@@ -5,7 +5,7 @@
 }
 
 #cl_edit_module_wrapper {
-   @include shadow-form;
+    @include shadow-form;
     position: fixed;
     z-index: 10;
     top: 10%;
@@ -13,11 +13,8 @@
     padding: 4rem 2rem 4rem 2rem;
     transform: translate(-50%, 0);
     z-index: 11;
-    
-
 
     #cl_edit_module_questions {
-
         h3 {
             @include paragraph-large;
             color: $white;
@@ -48,7 +45,6 @@
         }
     }
 }
-
 
 
 @media (max-width: 1024px) {

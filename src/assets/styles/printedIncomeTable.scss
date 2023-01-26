@@ -13,12 +13,10 @@
     #headings_top_row {
         background-color: rgb(255, 204, 153);
         font-size: 14px;
-
     }
 
     #headings_row {
         background-color: rgb(255, 204, 153);
-
 
         th {
             font-size: 14px;
@@ -43,21 +41,22 @@
     }
 }
 
+
 @media print {
     #household_income_table {
         caption {
-            -webkit-print-color-adjust:exact;
-            print-color-adjust:exact;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
-    
+
         #headings_top_row {
-            -webkit-print-color-adjust:exact;
-            print-color-adjust:exact;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
-    
+
         #headings_row {
-            -webkit-print-color-adjust:exact;
-            print-color-adjust:exact;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
     }
-}
 }

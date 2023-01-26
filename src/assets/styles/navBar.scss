@@ -1,7 +1,6 @@
 @import "./library.scss";
 
 .nav_wrapper {
-  //@include bottom-border;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,6 +25,7 @@
 .mobile_nav_wrapper {
   display: none;
 }
+
 
 @media screen and (max-width: 1023px) {
   .nav_wrapper {
@@ -67,6 +67,7 @@
     }
   }
 }
+
 
 @media (max-width: 767px) {
   .mobile_nav_wrapper {

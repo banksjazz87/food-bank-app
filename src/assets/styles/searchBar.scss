@@ -24,6 +24,7 @@
     }
 }
 
+
 @media (max-width: 1023px) {
     #applicantSearch {
         @include mobile-shadow-form;
@@ -31,6 +32,7 @@
         label {
             width: 80%;
         }
+
         select {
             width: 80%;
         }

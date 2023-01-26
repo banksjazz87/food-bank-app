@@ -52,8 +52,6 @@
             padding: 0 2rem 0 2rem;
             margin: 0 auto 0rem auto;
 
-
-
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -62,7 +60,6 @@
                 padding-bottom: 1rem;
                 padding-top: 2rem;
                 margin: 0 2rem 0 2rem;
-
 
                 .delete_button {
                     @include orange-cancel-button;
@@ -76,18 +73,15 @@
                     padding-bottom: 0;
                 }
 
-
                 td {
                     text-align: left;
                     @include paragraph-small;
                     padding: .5rem .5rem .5rem 1rem;
-
                 }
 
                 tr {
                     padding-bottom: 1rem;
                 }
-
             }
         }
     }
@@ -113,7 +107,6 @@
         p {
             margin-top: 1.5rem;
         }
-
     }
 
     #button_wrapper {
@@ -124,7 +117,6 @@
             @include btn-small;
         }
     }
-
 }
 
 @media (max-width: 1023px) {

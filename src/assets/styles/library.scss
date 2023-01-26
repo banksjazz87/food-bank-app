@@ -1,5 +1,5 @@
 $chapel-gray: #333333;
-$chapel-light-gray: #3f3f3f; 
+$chapel-light-gray: #3f3f3f;
 $chapel-purple: #9725bf;
 
 $white: #FFFFFF;
@@ -8,7 +8,7 @@ $dark-gray: #5D5D5D;
 $purple: #996699;
 $orange: #FB9400;
 $faded-orange: rgba(251, 148, 0, .6);
-$form-border-color: rgba(153, 102, 153, .5); 
+$form-border-color: rgba(153, 102, 153, .5);
 
 @mixin header-large-bold {
     font-family: 'Roboto Slab', serif;
@@ -19,7 +19,7 @@ $form-border-color: rgba(153, 102, 153, .5);
     font-style: inherit;
     text-transform: uppercase;
     background-color: $form-border-color;
-    
+
 }
 
 @mixin header-large {
@@ -197,9 +197,9 @@ $form-border-color: rgba(153, 102, 153, .5);
 @mixin btn-small-danger {
     @include btn-small;
 
-        &:hover {
-            background-color: $orange;
-        }
+    &:hover {
+        background-color: $orange;
+    }
 }
 
 @mixin btn-multiple {
@@ -227,6 +227,7 @@ $form-border-color: rgba(153, 102, 153, .5);
     border-radius: 4px;
     box-shadow: 0 4px 12px $form-border-color;
 }
+
 @mixin list-table {
     width: 100%;
     margin: auto;

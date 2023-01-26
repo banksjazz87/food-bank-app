@@ -16,19 +16,19 @@
         border-style: none;
     }
 
-    .statistic_header_wrapper{
+    .statistic_header_wrapper {
         width: 100%;
         background-color: $chapel-light-gray;
         padding-top: 1rem;
         padding-bottom: 1rem;
 
-    .statistic_type_header {
-        text-align: center;
-        margin-top: 0;
-        margin-bottom: .5rem; 
-        @include paragraph-large;
+        .statistic_type_header {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: .5rem;
+            @include paragraph-large;
+        }
     }
-}
 
     .statistic_wrapper {
         display: flex;
@@ -38,7 +38,6 @@
         column-gap: 2rem;
         row-gap: .5rem;
         margin-bottom: 2rem;
-
 
         .statistic_card {
             @include dashboard_icon;

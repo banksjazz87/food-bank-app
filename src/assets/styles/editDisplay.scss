@@ -1,6 +1,7 @@
 @import "./library.scss";
 
 #edit_applicant_wrapper {
+    
     h1 {
         @include header-large;
     }
@@ -9,7 +10,7 @@
         @include shadow-form;
     }
 
-    label{
+    label {
         @include medium-label;
         text-align: left;
     }
@@ -35,6 +36,7 @@
     }
 }
 
+
 @media (max-width: 1023px) {
     #edit_applicant_wrapper {
         form {
@@ -50,4 +52,3 @@
         }
     }
 }
-

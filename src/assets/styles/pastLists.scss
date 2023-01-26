@@ -1,12 +1,12 @@
 @import "./library.scss";
 
 #past_lists-wrapper {
+    overflow: hidden;
+
     .header_wrapper {
         @include large-header;
         color: white;
     }
-
-    overflow: hidden;
 
     #display_list {
         width: 960px;
@@ -88,6 +88,7 @@
         margin: 2rem auto auto auto;
     }
 }
+
 
 @media (max-width: 1024px) {
     #past_lists-wrapper {
