@@ -9,7 +9,6 @@ import "../assets/styles/currentFoodBankList.scss";
 //for development mode
 //import DummyData from "../variables/dummyData.js";
 
-
 export default function CurrentFoodBankList() {
   const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
   const [table, setTable] = useState([]);
@@ -18,8 +17,7 @@ export default function CurrentFoodBankList() {
   const [selectedAttendant, setSelectedAttendant] = useState([]);
   const [showEditModule, setShowEditModule] = useState(false);
 
-
-  ///Commented out for development
+  ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
   useEffect(() => {
     fetch("/most-recent-fb-list")
@@ -39,7 +37,6 @@ export default function CurrentFoodBankList() {
         }
       });
   }, []);
-  
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
@@ -121,29 +118,29 @@ export default function CurrentFoodBankList() {
   //This will be use to add a brand new applicant to the table.
   const addNewToTable = (obj) => {
     const currentTable = table.slice();
-    const arrayOfNeededFields = [{
-      firstName: obj.firstName,
-      lastName: obj.lastName, 
-      phone: obj.phone,
-      present: obj.present,
-      ApplicantID: obj.ApplicantID
-    }];
+    const arrayOfNeededFields = [
+      {
+        firstName: obj.firstName,
+        lastName: obj.lastName,
+        phone: obj.phone,
+        present: obj.present,
+        ApplicantID: obj.ApplicantID,
+      },
+    ];
 
     setTable(currentTable.concat(arrayOfNeededFields));
-  }
+  };
 
   return (
     <div id="current_fb_list">
-    <div className="header_wrapper">
-      <h1 className="header">Current Food Bank List</h1>
-    </div>
+      <div className="header_wrapper">
+        <h1 className="header">Current Food Bank List</h1>
+      </div>
 
       <NavBar />
       <DisplayCurrentFoodBankList
-
-        //Conditional is only for developement
+        //Conditional currentTableData is only for developement
         currentTableData={table}
-
         tableDetails={tableInfo}
         updateTableHandler={updateTable}
         showRemoveBtns={showRemoveButtons}
@@ -182,24 +179,18 @@ export default function CurrentFoodBankList() {
       />
 
       <div id="edit_cancel_button_wrapper">
-      <button 
-        class="edit_button" 
-        type="button" 
-        onClick={showEditHandler}
-      >
-        Edit
-      </button>
+        <button class="edit_button" type="button" onClick={showEditHandler}>
+          Edit
+        </button>
 
-      <button
-        class="cancel_button"
-        type="button"
-        style={showRemoveButtons ? { display: "" } : { display: "none" }}
-        onClick={() =>
-          setShowRemoveButtons(false)
-        }
-      >
-        Cancel
-      </button>
+        <button
+          class="cancel_button"
+          type="button"
+          style={showRemoveButtons ? { display: "" } : { display: "none" }}
+          onClick={() => setShowRemoveButtons(false)}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

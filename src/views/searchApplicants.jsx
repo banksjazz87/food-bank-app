@@ -6,10 +6,9 @@ import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import NavBar from "../components/navBar.jsx";
 import "../assets/styles/searchApplicants.scss";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchApplicants() {
-
   const navigate = useNavigate();
 
   //Will be used to update the current information about the applicant.
@@ -89,9 +88,9 @@ export default function SearchApplicants() {
 
   //Scroll into view after selecting an applicant name.
   const scrollToData = () => {
-    const applicantData = document.getElementById('display_applicant_wrapper');
-    setTimeout(() => applicantData.scrollIntoView({behavior: "smooth"}), 500);
-  }
+    const applicantData = document.getElementById("display_applicant_wrapper");
+    setTimeout(() => applicantData.scrollIntoView({ behavior: "smooth" }), 500);
+  };
 
   return (
     <div id="search_applicant_wrapper">
@@ -140,14 +139,19 @@ export default function SearchApplicants() {
         display={showApplicant}
         editClick={displayEdit}
         printClick={() => {
-          
           //Set the current applicant info into the session storage.
-          let currentApplicant = {id: applicantInfo[0].ApplicantID, first: applicantInfo[0].firstName, last: applicantInfo[0].lastName};
-          sessionStorage.setItem('currentApplicant', JSON.stringify(currentApplicant));
+          let currentApplicant = {
+            id: applicantInfo[0].ApplicantID,
+            first: applicantInfo[0].firstName,
+            last: applicantInfo[0].lastName,
+          };
+          sessionStorage.setItem(
+            "currentApplicant",
+            JSON.stringify(currentApplicant)
+          );
 
           //Navigate to the print page.
-          navigate("/printed-applicant-form", {replace: true});
-
+          navigate("/printed-applicant-form", { replace: true });
         }}
         deleteClick={() => {
           setDeleteAlert(true);

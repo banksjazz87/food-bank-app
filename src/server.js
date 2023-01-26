@@ -7,7 +7,7 @@ const mysql = require("mysql");
 
 const Dummy = require("./variables/dummyData.js");
 
-//Middleware instatiation
+//Middleware instantiation
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -169,7 +169,6 @@ app.get(
     });
 
     findApplicant.then((data) => res.send(data));
-      
   }
 );
 
@@ -549,33 +548,31 @@ app.get("/all-applicants/partial-forms", (req, res) => {
 
 //Retrieve all of seniors.
 app.get("/dashboard-statistics/:table", (req, res) => {
- 
-  let retrieveAll =  new Promise((resolve, reject) => {
-      let currentDb = mysql.createConnection(Db);
-      let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true";`;
+  let retrieveAll = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true";`;
 
-      currentDb.query(sql, (err, results) => {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve(results);
-        }
-      });
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
     });
+  });
 
-    retrieveAll
-      .then((data) => {
-        res.send({
-          message: "success", 
-          allData: data[0]
-        });
-      })
-      .catch(err => res.send(sqlError(err)))
+  retrieveAll
+    .then((data) => {
+      res.send({
+        message: "success",
+        allData: data[0],
+      });
+    })
+    .catch((err) => res.send(sqlError(err)));
 });
 
 //This query will be used to return all families who have registered this month.
-app.get('/dashboard-statistics-unique/:table', (req, res) => {
-
+app.get("/dashboard-statistics-unique/:table", (req, res) => {
   let retrieveUnique = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
     let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true" AND MONTH(sqlDate) = MONTH(SYSDATE());`;
@@ -583,18 +580,17 @@ app.get('/dashboard-statistics-unique/:table', (req, res) => {
     currentDb.query(sql, (err, results) => {
       if (err) {
         return reject(err);
-  
-    } else {
-      return resolve(results)
-    }
+      } else {
+        return resolve(results);
+      }
+    });
   });
-});
   retrieveUnique
-    .then(data => {
+    .then((data) => {
       res.send({
-        message: "success", 
-        allData: data[0]
+        message: "success",
+        allData: data[0],
       });
     })
-    .catch(err => res.send(sqlError(err)))
-})
+    .catch((err) => res.send(sqlError(err)));
+});

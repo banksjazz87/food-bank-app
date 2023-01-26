@@ -20,7 +20,7 @@ export default function PastLists() {
     }
   }, []);
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     if (window.innerWidth <= 1024) {
       setMobileScreen(true);
     } else {
@@ -52,7 +52,7 @@ export default function PastLists() {
     if (showList) {
       setShowList(false);
     }
-  }
+  };
 
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
@@ -70,26 +70,26 @@ export default function PastLists() {
         title="Past Lists"
       />
 
-    <div 
-      id="display_list"
-      style={showList ? {display: ""} : {display: "none"}}
+      <div
+        id="display_list"
+        style={showList ? { display: "" } : { display: "none" }}
       >
-      <DisplayFbList
-        allAttendants={listAttendants}
-        title={list.title}
-        dateModified={list.DateCreated}
-        displayList={showList}
-        mobileDevice={mobileScreen}
-      />
+        <DisplayFbList
+          allAttendants={listAttendants}
+          title={list.title}
+          dateModified={list.DateCreated}
+          displayList={showList}
+          mobileDevice={mobileScreen}
+        />
 
-      <button
-        id="delete_table_button" 
-        onClick={() => {
-          setShowDeleteAlert(true);
-        }}
-      >
-        Delete Table
-      </button>
+        <button
+          id="delete_table_button"
+          onClick={() => {
+            setShowDeleteAlert(true);
+          }}
+        >
+          Delete Table
+        </button>
       </div>
 
       <DeleteAlert

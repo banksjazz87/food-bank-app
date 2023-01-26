@@ -363,12 +363,13 @@ export default function PrintedApplicantForm() {
             </div>
           </div>
         </div>
-        <button 
-          className="print_button" 
-          type="button" 
-          onClick={() => { 
+        <button
+          className="print_button"
+          type="button"
+          onClick={() => {
             window.print();
-          }}>
+          }}
+        >
           Print
         </button>
       </div>
