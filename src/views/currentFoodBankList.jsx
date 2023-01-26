@@ -7,7 +7,7 @@ import DeleteAlert from "../components/deleteAlert.jsx";
 import "../assets/styles/currentFoodBankList.scss";
 
 //for development mode
-import DummyData from "../variables/dummyData.js";
+//import DummyData from "../variables/dummyData.js";
 
 
 export default function CurrentFoodBankList() {
