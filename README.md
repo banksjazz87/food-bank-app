@@ -1,8 +1,9 @@
 # Food Bank Application
 
+<br/>
+<br/>
 
-## What Does It Do?
------
+# What Does It Do?
 
 ### `Problem`
 Manually filling out food bank applications, creating food bank attendance lists, and tallying up the number of people that have attended a food bank, is both tedious and time consuming.  
@@ -10,15 +11,16 @@ Manually filling out food bank applications, creating food bank attendance lists
 ### `Solution`
 With this food application the user can:
 
-    -Fill out a food bank application.
-    -Instantly find out if the applicant qualifies.
-    -Create, update and delete food bank lists, and applicants.
-    -Have access to a dynamic attendance sheet, that you can add and remove from on the day of the event.
-    -Have access to all of the statistics needed for the food bank organization.
+- Fill out a food bank application.
+- Instantly find out if the applicant qualifies.
+- Create, update and delete food bank lists, and applicants.
+- Have access to a dynamic attendance sheet, that you can add and remove from on the day of the event.
+- Have access to all of the statistics needed for the food bank organization.
  
+<br/>
+<br/>
 
-## Features
------
+# Features
 ### `Login Page`
 For demo purposes the username is "Demo" and the password is "demo123".
 
@@ -34,7 +36,6 @@ Provides the user the ability to look up an applicant's information and the abil
 ### `Foodbank List Dashboard`
 Gives the user three different options.
 
-
     -Create Foodbank List
     -Search Foodbank Lists
     -Current Foodbank List
@@ -48,9 +49,10 @@ The user is provided the chance to search past lists and delete them if they so 
 ### `Current Foodbank List Page`
 This is a dynamic attendance sheet that is to be used on the day of the foodbank, or if you ever need to add applicants to the current list.
 
+<br/>
+<br/>
 
-## Getting Started
-----
+# Getting Started
 ### `Node`
 You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/).
 
@@ -70,67 +72,29 @@ The development mode will ron on [http://localhost:3000](http://localhost:3000).
     npm run start
 
 
+### `Production Mode`
+The server will run on [localhost:4000](localhost:4000).  The entire application can be ran locally by entering the following commands.
 
-###
+    npm run build
+    npm run server
+<br/>
+<br/>
 
-###
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Dependencies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React
+- React Router
+- Node
+- Express
+- Mysql
 
-### `yarn test`
+<br/>
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#  Summary
+This application was created largely for my wife.  She is in charge of running the logistics of the food bank at our church, and I thought it was crazy that she was still doing everything with pen and paper.  I built this app to streamline the foodbank application process, and simplify this aspect of her life.  I hope that others can benefit from it as well.
 
-### `yarn build`
+If you would like to have any fetures added or if you would like to make any, just shoot me a message or a pull request.  Thanks for checking out my food bank app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
