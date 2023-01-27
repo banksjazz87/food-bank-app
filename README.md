@@ -1,12 +1,11 @@
 # Food Bank Application
 
-<br/>
-<br/>
-
 # What Does It Do?
 
 ### `Problem`
 Manually filling out food bank applications, creating food bank attendance lists, and tallying up the number of people that have attended a food bank, is both tedious and time consuming.  
+
+<br/>
 
 ### `Solution`
 With this food application the user can:
@@ -21,17 +20,26 @@ With this food application the user can:
 <br/>
 
 # Features
+
 ### `Login Page`
 For demo purposes the username is "Demo" and the password is "demo123".
+
+<br/>
 
 ### `Dashboard Page`
 The dashboard page supplies the user with all of the statistics from the most recently created foodbank attendance list.
 
+<br/>
+
 ### `New Applicant Page`
 Supplies a very simple looking form for the user to fill out.  Upon completing the form the user is notified if the applicant qualifies or not.
 
+<br/>
+
 ### `Search Page`
-Provides the user the ability to look up an applicant's information and the ability to print the official foodbank form, with the data all pre-filled.
+Provides the user the ability to look up an applicant's information and the ability to print the official foodbank form, with the data pre-filled.
+
+<br/>
 
 ### `Foodbank List Dashboard`
 Gives the user three different options.
@@ -40,11 +48,17 @@ Gives the user three different options.
     -Search Foodbank Lists
     -Current Foodbank List
 
+<br/>
+
 ### `Create Foodbank List Page`
 Gives the user the ability to create a new list and add applicants to the list.  This page automatically saves, so there is no need to worry about saving.
 
+<br/>
+
 ### `Search Foodbank Lists Page`
 The user is provided the chance to search past lists and delete them if they so desire.
+
+<br/>
 
 ### `Current Foodbank List Page`
 This is a dynamic attendance sheet that is to be used on the day of the foodbank, or if you ever need to add applicants to the current list.
@@ -53,24 +67,35 @@ This is a dynamic attendance sheet that is to be used on the day of the foodbank
 <br/>
 
 # Getting Started
+<br/>
+
 ### `Node`
 You will need to have node.js installed on your local system.  You can do this by following the directions listed [here](https://nodejs.org/en/).
+
+<br/> 
 
 ### `Dependencies` 
 Once Node is installed.  In the project directory , you will need to install all of the package.json dependencies, this can be done by running. 
 
     npm install
 
+<br/>
+
 ### `Change Directory`
 You will need to enter into the correct directory in your terminal.
 
     cd my-app
 
+<br/>
+
 ### `Development Mode` 
-The development mode will ron on [http://localhost:3000](http://localhost:3000).  The development mode can be started by running the command.  (Keep in mind, none of the app will run completely in development mode, as most of it relies on being connected to the server).
+The development mode will run on [http://localhost:3000](http://localhost:3000).  Development mode can be started by running the command.  (Keep in mind, none of the app will run completely in development mode, as most of it relies on being connected to the server).
 
     npm run start
 
+(Keep in mind, app won't run completely in development mode, as most of it relies on being connected to the server).
+
+<br/>
 
 ### `Production Mode`
 The server will run on [localhost:4000](localhost:4000).  The entire application can be ran locally by entering the following commands.
