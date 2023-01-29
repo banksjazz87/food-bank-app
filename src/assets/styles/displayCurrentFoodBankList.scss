@@ -50,6 +50,15 @@
                 text-decoration: none;
             }
 
+            .incomplete_data {
+                color: $orange;
+
+                &:hover {
+                    color: $faded-orange;
+                    cursor: pointer;
+                }
+            }
+
             .not_present_button {
                 @include btn_small;
                 border-radius: 16px;

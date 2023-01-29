@@ -4,6 +4,7 @@ import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
+import EditPage from "../components/editDisplay.jsx";
 import "../assets/styles/currentFoodBankList.scss";
 
 //for development mode
@@ -16,6 +17,27 @@ export default function CurrentFoodBankList() {
   const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
   const [selectedAttendant, setSelectedAttendant] = useState([]);
   const [showEditModule, setShowEditModule] = useState(false);
+  const [selectedApplicant, setSelectedApplicant] = useState([
+    {
+      firstName: "",
+      lastName: "",
+      phone: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      children: "",
+      adults: "",
+      seniors: "",
+      totalOccupants: "",
+      weeklyIncome: 0,
+      monthlyIncome: 0,
+      annualIncome: 0,
+      totalIncome: 0,
+      dateAltered: "",
+    },
+  ]);
+  const [showEditPage, setShowEditPage] = useState(false);
 
   ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
@@ -29,7 +51,7 @@ export default function CurrentFoodBankList() {
             title: final.allData.title,
             dateCreated: final.allData.dateCreated,
           });
-          fetch(`/get-past-list/list-name/${final.allData.title}`)
+          fetch(`/get-past-list/list-name/${final.allData.title}/get-all`)
             .then((data) => data.json())
             .then((result) => setTable(result.allData));
         } else {
@@ -131,6 +153,30 @@ export default function CurrentFoodBankList() {
     setTable(currentTable.concat(arrayOfNeededFields));
   };
 
+  //This will be used to set the selected applicant that needs updated, and display the edit page.
+  const setEditApplicant = (arr, index) => {
+    
+    setSelectedApplicant([arr[index]]);
+    setShowEditPage(true);
+
+    setTimeout(() => {
+      const editPage = document.getElementById("edit_applicant_wrapper");
+      editPage.scrollIntoView({behavior: "smooth"});
+    }, 500);
+   
+  }
+
+  //This will update the current applicant's information, used if an applicant has missing information in their application.
+  const updateInfo = (field, value) => {
+    const currentDate = new Date();
+    let currentApplicant = selectedApplicant.slice();
+
+    currentApplicant[0][field] = value;
+    currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
+
+    setSelectedApplicant(currentApplicant);
+  }
+
   return (
     <div id="current_fb_list">
       <div className="header_wrapper">
@@ -146,6 +192,7 @@ export default function CurrentFoodBankList() {
         showRemoveBtns={showRemoveButtons}
         selectedRemovalHandler={selectedForRemoval}
         showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
+        editHandler={setEditApplicant}
       />
       <EditModuleForCurrentList
         display={showEditModule}
@@ -192,6 +239,11 @@ export default function CurrentFoodBankList() {
           Cancel
         </button>
       </div>
+      <EditPage 
+          display={showEditPage}
+          currentApplicant={selectedApplicant}
+          handleChange={updateInfo}
+        />
     </div>
   );
 }

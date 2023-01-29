@@ -401,6 +401,31 @@ app.get("/get-past-list/list-name/:listName/", (req, res) => {
     });
 });
 
+//This will be used to return a list and all of the data for each applicant in the foodbank list.
+app.get("/get-past-list/list-name/:listName/get-all", (req, res) => {
+  let retrieveTable = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `SELECT * FROM ${req.params.listName} LEFT JOIN applicant ON applicant.ApplicantID = ${req.params.listName}.ApplicantID ORDER BY ${req.params.listName}.lastName;`;
+
+    currentDb.query(sql, (err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  retrieveTable 
+    .then((data) => {
+      res.send({message: "Success", allData: data})
+    })
+    .catch((e) => {
+      res.send(sqlError(e));
+      console.log("error", e)
+    });
+});
+
 //this function will be used to delete a list from the database and it also removes the list from the table that holds all of the list names.
 app.delete("/delete-list/", (req, res) => {
   let removeFromList = new Promise((resolve, reject) => {

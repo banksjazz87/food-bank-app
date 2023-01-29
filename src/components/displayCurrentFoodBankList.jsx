@@ -3,9 +3,11 @@ import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
+import {useNavigate} from "react-router-dom";
 
 export default function DisplayCurrentFoodBankList(props) {
-  const [mobileView, setMobileView] = useState(false);
+  const [mobileView, setMobileView] = useState(false);  
+  const navigate = useNavigate();
 
   //Check if the user is on a mobile device, when the page loads.
   useEffect(() => {
@@ -81,6 +83,11 @@ export default function DisplayCurrentFoodBankList(props) {
       });
   };
 
+  //Redirects the user to the applicant page to complete information for an incomplete application.
+  const directToEdit = () => {
+    return navigate('/search', {replace: true});
+  }
+
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember, index) => {
     if (currentMember["present"] === "true") {
@@ -127,9 +134,16 @@ export default function DisplayCurrentFoodBankList(props) {
   const displayLargeScreenList = (array) => {
     const currentList = array;
     const renderNames = currentList.map((x, y) => {
+      const currentValues = Object.values(x);
       return (
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
-          <td id="lastName">{x.lastName}</td>
+          <td 
+            id="lastName" 
+            className={currentValues.indexOf(null) > -1 ? "incomplete_data": ""}
+            onClick={() => props.editHandler(props.currentTableData, y)}
+          >
+            {x.lastName}
+          </td>
           <td id="firstName">{x.firstName}</td>
           <td id="phone">
             <a className="call_button" href={`tel: ${x.phone}`}>
@@ -166,9 +180,16 @@ export default function DisplayCurrentFoodBankList(props) {
   const displayMobileList = (array) => {
     const currentList = array;
     const renderNames = currentList.map((x, y) => {
+
+      let currentValues = Object.values(x);
+
       return (
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
-          <td id="name">
+          <td 
+            id="name"
+            className={currentValues.indexOf(null) > -1 ? "incomplete_data": ""}
+            onClick={() => props.editHandler(props.currentTableData, y)}
+          >
             {x.lastName}
             <br></br>
             {x.firstName}
