@@ -160,7 +160,7 @@ export default function CurrentFoodBankList() {
     setShowEditPage(true);
 
     setTimeout(() => {
-      const editPage = document.getElementById("edit_applicant_wrapper");
+      const editPage = document.getElementById("current_fb_list");
       editPage.scrollIntoView({behavior: "smooth"});
     }, 500);
    
@@ -175,6 +175,17 @@ export default function CurrentFoodBankList() {
     currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
 
     setSelectedApplicant(currentApplicant);
+  }
+
+  //This will hide the eidt page after it has been submitted and then it will scroll back to the top of the page.
+  const hideEditPage = () => {
+    setShowEditPage(false);
+
+    setTimeout(() => {
+      const topOfList = document.getElementById("list_wrapper");
+      setShowEditPage(false);
+      topOfList.scrollIntoView({behavior: "smooth"});
+    }, 500);
   }
 
   return (
@@ -243,6 +254,7 @@ export default function CurrentFoodBankList() {
           display={showEditPage}
           currentApplicant={selectedApplicant}
           handleChange={updateInfo}
+          hidePage={hideEditPage}
         />
     </div>
   );

@@ -68,7 +68,14 @@ export default function EditPage(props) {
           putRequest("/applicant/update", props.currentApplicant[0]).then(
             (data) => {
               alert(data.message);
-              navigate("/dashboard", { replace: true });
+
+              const currentPath = window.location.pathname;
+
+              if (currentPath === "/current-registered-list") {
+                props.hidePage();
+              } else {
+                navigate("/dashboard", { replace: true });
+              }
             }
           );
         }}
