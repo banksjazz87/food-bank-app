@@ -1,28 +1,22 @@
-function findIndex(array, param) {
-    let blank = false;
 
-    for (let i = 0; i < array.length; i++) {
-        let values = Object.values(array[i]);
+let test = {name: "henry", sex: "male", address: "USA", phone: "null"};
 
-        if (values.indexOf(param) > -1) {
-            blank = true;
-        } 
-    }
 
-    if (blank) {
-        return "Item found";
-    } else {
-        return "Items not found";
-    }
+const allEntries = Object.entries(test);
+let ReqData = {};
+
+for (let i = 0; i < allEntries.length; i ++) {
+  let currentKey = Object.keys(test)[i];
+  let currentValue = Object.values(test)[i];
+
+  if (currentValue === "null") {
+    ReqData[currentKey] = null;
+  } else {
+    ReqData[currentKey] = currentValue;
+  }
 }
 
-const testArray = [
-    {name: "Mary", sex: "Female"}, 
-    {name: "Joe", sex: "Male"}, 
-    {name: "Albert", sex: "Male"}
-];
+console.log(ReqData);
 
-console.log(findIndex(testArray, "Mary"));
-console.log(findIndex(testArray, "Joe"));
-console.log(findIndex(testArray, "Henry"));
+
 

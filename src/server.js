@@ -198,9 +198,12 @@ app.get("/foodBank_attendance/check_sheet", (req, res, next) => {
 
 //put request to update an applicant's info
 app.put("/applicant/update", (req, res, next) => {
+
+
+
   let updateApplicant = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
-    let sql = `UPDATE applicant SET firstName = "${req.body.firstName}", lastName = "${req.body.lastName}", phone = "${req.body.phone}", street = "${req.body.street}", city = "${req.body.city}", state = "${req.body.state}", zip = "${req.body.zip}", children = "${req.body.children}", adults = "${req.body.adults}", seniors = "${req.body.seniors}", totalOccupants = "${req.body.totalOccupants}", weeklyIncome = "${req.body.weeklyIncome}", monthlyIncome = "${req.body.monthlyIncome}", annualIncome = "${req.body.annualIncome}", totalIncome = "${req.body.totalIncome}", dateAltered = "${req.body.dateAltered}"  WHERE ApplicantID = "${req.body.ApplicantID}";`;
+    let sql = `UPDATE applicant SET firstName = NULLIF("${req.body.firstName}", "null"), lastName = NULLIF("${req.body.lastName}", "null"), phone = NULLIF("${req.body.phone}", "null"), street = NULLIF("${req.body.street}", "null"), city = NULLIF("${req.body.city}", "null"), state = NULLIF("${req.body.state}", "null"), zip = NULLIF("${req.body.zip}", "null"), children = NULLIF("${req.body.children}", "null"), adults = NULLIF("${req.body.adults}", "null"), seniors = NULLIF("${req.body.seniors}", "null"), totalOccupants = NULLIF("${req.body.totalOccupants}", "null"), weeklyIncome = NULLIF("${req.body.weeklyIncome}", "null"), monthlyIncome = NULLIF("${req.body.monthlyIncome}", "null"), annualIncome = NULLIF("${req.body.annualIncome}", "null"), totalIncome = NULLIF("${req.body.totalIncome}", "null"), dateAltered = "${req.body.dateAltered}"  WHERE ApplicantID = "${req.body.ApplicantID}";`;
 
     currentDb.query(sql, (err, results) => {
       if (err) {

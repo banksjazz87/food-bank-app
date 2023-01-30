@@ -30,10 +30,10 @@ export default function CurrentFoodBankList() {
       adults: "",
       seniors: "",
       totalOccupants: "",
-      weeklyIncome: 0,
-      monthlyIncome: 0,
-      annualIncome: 0,
-      totalIncome: 0,
+      weeklyIncome: "",
+      monthlyIncome: "",
+      annualIncome: "",
+      totalIncome: "",
       dateAltered: "",
     },
   ]);
@@ -155,16 +155,14 @@ export default function CurrentFoodBankList() {
 
   //This will be used to set the selected applicant that needs updated, and display the edit page.
   const setEditApplicant = (arr, index) => {
-    
     setSelectedApplicant([arr[index]]);
     setShowEditPage(true);
 
     setTimeout(() => {
-      const editPage = document.getElementById("current_fb_list");
-      editPage.scrollIntoView({behavior: "smooth"});
+      const editPage = document.getElementById("edit_form");
+      editPage.scrollIntoView({ behavior: "smooth" });
     }, 500);
-   
-  }
+  };
 
   //This will update the current applicant's information, used if an applicant has missing information in their application.
   const updateInfo = (field, value) => {
@@ -175,18 +173,18 @@ export default function CurrentFoodBankList() {
     currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
 
     setSelectedApplicant(currentApplicant);
-  }
+  };
 
   //This will hide the eidt page after it has been submitted and then it will scroll back to the top of the page.
   const hideEditPage = () => {
     setShowEditPage(false);
 
     setTimeout(() => {
-      const topOfList = document.getElementById("list_wrapper");
+      const topOfList = document.getElementById("current_fb_list");
       setShowEditPage(false);
-      topOfList.scrollIntoView({behavior: "smooth"});
+      topOfList.scrollIntoView({ behavior: "smooth" });
     }, 500);
-  }
+  };
 
   return (
     <div id="current_fb_list">
@@ -250,12 +248,12 @@ export default function CurrentFoodBankList() {
           Cancel
         </button>
       </div>
-      <EditPage 
-          display={showEditPage}
-          currentApplicant={selectedApplicant}
-          handleChange={updateInfo}
-          hidePage={hideEditPage}
-        />
+      <EditPage
+        display={showEditPage}
+        currentApplicant={selectedApplicant}
+        handleChange={updateInfo}
+        hidePage={hideEditPage}
+      />
     </div>
   );
 }
