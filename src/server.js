@@ -485,7 +485,7 @@ app.get("/most-recent-fb-list", (req, res) => {
 
   getFoodBankLists
     .then((data) => {
-      res.send({ message: "success", allData: data[0] });
+      res.send({ message: "success", allData: data[0]});
       console.log("Success in getting data");
     })
     .catch((error) => {

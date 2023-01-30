@@ -70,6 +70,13 @@ export default function Dashboard() {
             <h2 id="table_name">{tableName}</h2>
           </div>
           <StatisticCard
+            heading="Drive-Thru Statistics"
+            dataArray={[
+              { title: "Registered", data: currentStats.totalRegistered },
+              { title: "Served", data: currentStats.totalFamilies},
+            ]}
+          />
+          <StatisticCard
             heading="General Statistics"
             dataArray={[
               { title: "Total Served", data: currentStats.totalServed },

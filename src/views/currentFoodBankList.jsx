@@ -38,6 +38,7 @@ export default function CurrentFoodBankList() {
     },
   ]);
   const [showEditPage, setShowEditPage] = useState(false);
+  const [totalPresent, setTotalPresent] = useState(0);
 
   ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
@@ -53,7 +54,10 @@ export default function CurrentFoodBankList() {
           });
           fetch(`/get-past-list/list-name/${final.allData.title}/get-all`)
             .then((data) => data.json())
-            .then((result) => setTable(result.allData));
+            .then((result) => {
+              setTable(result.allData);
+              PresentCountMethods.presentCount(result.allData);
+            });
         } else {
           alert(final.message);
         }
@@ -116,10 +120,12 @@ export default function CurrentFoodBankList() {
     }
   };
 
+  //Function used to remove an applicant from the list.
   const selectedForRemoval = (index, arr) => {
     const copyOfArr = arr.slice();
     const chosenFromArr = copyOfArr.slice(index, index + 1);
     setSelectedAttendant(chosenFromArr);
+    setShowRemoveButtons(false);
   };
 
   const removeFromArray = (fullArr, selectedArr) => {
@@ -186,6 +192,28 @@ export default function CurrentFoodBankList() {
     }, 500);
   };
 
+  //This will return the number of applicants who have gone through the foodbank.
+  const PresentCountMethods = {
+    presentCount: function (arr) {
+      let count = 0;
+
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].present === "true") {
+          count = count + 1;
+        }
+      }
+      return setTotalPresent(count);
+    },
+
+    incrementPresentCount: function (num) {
+      return setTotalPresent(num + 1);
+    },
+
+    decrementPresentCount: function (num) {
+      return setTotalPresent(num - 1);
+    },
+  };
+
   return (
     <div id="current_fb_list">
       <div className="header_wrapper">
@@ -193,6 +221,10 @@ export default function CurrentFoodBankList() {
       </div>
 
       <NavBar />
+
+      <h1>{`Total Registered = ${table.length}`}</h1>
+      <h1>{`Total Present = ${totalPresent}`}</h1>
+
       <DisplayCurrentFoodBankList
         //Conditional currentTableData is only for developement
         currentTableData={table}
@@ -202,6 +234,9 @@ export default function CurrentFoodBankList() {
         selectedRemovalHandler={selectedForRemoval}
         showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
         editHandler={setEditApplicant}
+        incrementHandler={PresentCountMethods.incrementPresentCount}
+        decrementHandler={PresentCountMethods.decrementPresentCount}
+        presentCount={totalPresent}
       />
       <EditModuleForCurrentList
         display={showEditModule}

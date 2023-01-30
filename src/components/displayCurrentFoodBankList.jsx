@@ -83,11 +83,6 @@ export default function DisplayCurrentFoodBankList(props) {
       });
   };
 
-  //Redirects the user to the applicant page to complete information for an incomplete application.
-  const directToEdit = () => {
-    return navigate('/search', {replace: true});
-  }
-
   //Simply checking the current data and determining if the "checked" attribute should be assigned.
   const alreadyChecked = (currentMember, index) => {
     if (currentMember["present"] === "true") {
@@ -103,6 +98,7 @@ export default function DisplayCurrentFoodBankList(props) {
               index,
               props.tableDetails
             );
+            props.decrementPresentCount(props.presentCount);
           }}
         >
           √
@@ -122,6 +118,7 @@ export default function DisplayCurrentFoodBankList(props) {
               index,
               props.tableDetails
             );
+            props.incrementHandler(props.presentCount)
           }}
         >
           -
