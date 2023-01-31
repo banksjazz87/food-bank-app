@@ -219,11 +219,10 @@ export default function CurrentFoodBankList() {
       <div className="header_wrapper">
         <h1 className="header">Current Food Bank List</h1>
       </div>
-
       <NavBar />
-
-      <h1>{`Total Registered = ${table.length}`}</h1>
-      <h1>{`Total Present = ${totalPresent}`}</h1>
+      <div id="progress_wrapper">
+      <p>{`Foodbank Progress: ${totalPresent}/${table.length}`}</p>
+      </div>
 
       <DisplayCurrentFoodBankList
         //Conditional currentTableData is only for developement

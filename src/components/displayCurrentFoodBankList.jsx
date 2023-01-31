@@ -3,12 +3,10 @@ import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
-import {useNavigate} from "react-router-dom";
 
 export default function DisplayCurrentFoodBankList(props) {
   const [mobileView, setMobileView] = useState(false);  
-  const navigate = useNavigate();
-
+  
   //Check if the user is on a mobile device, when the page loads.
   useEffect(() => {
     let currentScreenWidth = window.innerWidth;
@@ -98,7 +96,7 @@ export default function DisplayCurrentFoodBankList(props) {
               index,
               props.tableDetails
             );
-            props.decrementPresentCount(props.presentCount);
+            props.decrementHandler(props.presentCount);
           }}
         >
           √

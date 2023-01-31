@@ -21,6 +21,8 @@
         background-color: $chapel-light-gray;
         padding-top: 1rem;
         padding-bottom: 1rem;
+        color: white;
+        @include paragraph-large;
 
         .statistic_type_header {
             text-align: center;
