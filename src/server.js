@@ -47,7 +47,7 @@ app.post("/login-attempt", (req, res, next) => {
     req.body.currentUser === process.env.CHAPEL_USER &&
     req.body.currentPassword === process.env.CHAPEL_PASSWORD
   ) {
-    Db.database = "testingFoodBank";
+    Db.database = process.env.CHAPEL_DATABASE;
 
     let selectedDb = mysql.createConnection(Db);
     selectedDb.connect((err) => {
@@ -55,11 +55,18 @@ app.post("/login-attempt", (req, res, next) => {
     });
     res.send({ message: "valid" });
   } else if (
-    req.body.currentUser === process.env.TESTING_USER &&
-    req.body.currentPassword === process.env.TESTING_PASSWORD
+    req.body.currentUser === process.env.DEMO_USER &&
+    req.body.currentPassword === process.env.DEMO_PASSWORD
   ) {
-    console.log({ message: "valid" });
+
+    Db.database = process.env.DEMO_DATABASE;
+
+    let selectedDb = mysql.createConnection(Db);
+    selectedDb.connect((err) => {
+      err ? console.log(err) : console.log("you are connected to the database");
+    });
     res.send({ message: "valid" });
+
   } else {
     res.send({ message: "invalid" });
     console.log({ message: "invalid" });
@@ -146,11 +153,10 @@ app.post("/new-applicant/", (req, res, next) => {
   } else {
     res.send({
       status: "not good",
-      message: `The applicant's target income ($${
-        req.body.totalIncome
-      }) is more than the qualifying income ($${targetIncome(
-        req.body.totalOccupants
-      )}.00)`,
+      message: `The applicant's target income ($${req.body.totalIncome
+        }) is more than the qualifying income ($${targetIncome(
+          req.body.totalOccupants
+        )}.00)`,
     });
   }
 });
@@ -425,9 +431,9 @@ app.get("/get-past-list/list-name/:listName/get-all", (req, res) => {
     });
   });
 
-  retrieveTable 
+  retrieveTable
     .then((data) => {
-      res.send({message: "Success", allData: data})
+      res.send({ message: "Success", allData: data })
     })
     .catch((e) => {
       res.send(sqlError(e));
@@ -491,7 +497,7 @@ app.get("/most-recent-fb-list", (req, res) => {
 
   getFoodBankLists
     .then((data) => {
-      res.send({ message: "success", allData: data[0]});
+      res.send({ message: "success", allData: data[0] });
       console.log("Success in getting data");
     })
     .catch((error) => {
@@ -519,11 +525,9 @@ app.put("/update-attendant-status", (req, res) => {
     .then((data) => {
       res.send({
         status: "success",
-        message: `success, ${req.body.firstName} ${
-          req.body.lastName
-        } has been updated to the status of ${
-          req.body.present === "true" ? "Present" : "Not Present"
-        } in the ${req.body.title} table.`,
+        message: `success, ${req.body.firstName} ${req.body.lastName
+          } has been updated to the status of ${req.body.present === "true" ? "Present" : "Not Present"
+          } in the ${req.body.title} table.`,
       });
     })
     .catch((err) => {
