@@ -3,4 +3,4 @@ WORKDIR /my-app
 COPY . .
 RUN npm install 
 CMD ["node", "src/server.js"]
-EXPOSE 3000
+EXPOSE 5200
