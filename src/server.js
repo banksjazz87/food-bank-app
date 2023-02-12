@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 var cors = require("cors");
 const app = express();
-const port = 4000;
+const port = 3000;
 const mysql = require("mysql");
 
 const Dummy = require("./variables/dummyData.js");
@@ -11,7 +11,7 @@ const Dummy = require("./variables/dummyData.js");
 //Middleware instantiation
 app.use(cors());
 app.use(express.json());
-//app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 
 //The static file that will be used on the server
 //app.use("/", express.static("build"));
