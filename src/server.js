@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 var cors = require("cors");
 const app = express();
-const port = 5200;
+const port = 4000;
 const mysql = require("mysql");
 
 const Dummy = require("./variables/dummyData.js");
@@ -14,12 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //The static file that will be used on the server
-app.use("/", express.static("build"));
-/*app.use(express.static('/home/cbanks87/Documents/foodBankApp/my-app/build'))
+//app.use("/", express.static("build"));
+app.use(express.static('/home/cbanks87/Documents/foodBankApp/my-app/build'))
 
 app.get('/', function (req, res) {
   res.sendFile('/home/cbanks87/Documents/foodBankApp/my-app/build');
-})*/
+})
 
 //Just a console.log statement to let you know that the server is up and running and the port number.
 app.listen(port, () => {
@@ -28,7 +28,7 @@ app.listen(port, () => {
 
 //Database info
 let Db = {
-  host: "localhost",
+  host: "127.0.0.1",
   user: "root",
   password: process.env.MYSQL_PASSWORD,
   database: "",
@@ -43,17 +43,59 @@ let sqlError = (obj) => {
 
 //app.get("/all-applicants", allApplicants.findAll);
 app.post("/login-attempt", (req, res, next) => {
+
+ /* const establishChurchDb = new Promise((resolve, reject) => {
+      let currentDb = mysql.createConnection(Db);
+      let sql = `CREATE DATABASE IF NOT EXISTS ${process.env.CHAPEL_DATABASE}`;
+  
+      currentDb.query(sql, (error, results) => {
+        if (error) {
+          return reject(error);
+        } else {
+          return resolve(results);
+        }
+      });
+  });
+
+
+  const useChurchDb = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+    let sql = `USE ${process.env.CHAPEL_DATABASE}`;
+
+    currentDb.query(sql, (error, results) => {
+      if (error) {
+        return reject (error);
+      } else {
+        return resolve(results);
+      }
+    });
+  });
+
+  const dbConnect = new Promise((resolve, reject) => {
+    let currentDb = mysql.createConnection(Db);
+
+    currentDb.connect((err, results) => {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(results);
+      }
+    })
+  })*/
+
+
   if (
     req.body.currentUser === process.env.CHAPEL_USER &&
     req.body.currentPassword === process.env.CHAPEL_PASSWORD
   ) {
     Db.database = process.env.CHAPEL_DATABASE;
 
-    let selectedDb = mysql.createConnection(Db);
-    selectedDb.connect((err) => {
-      err ? console.log(err) : console.log("you are connected to the database");
-    });
-    res.send({ message: "valid" });
+      let selectedDb = mysql.createConnection(Db);
+      selectedDb.connect(function(err) {
+        err ? console.log(err) : console.log('connected');
+      });
+      res.send({ message: "valid" });
+      
   } else if (
     req.body.currentUser === process.env.DEMO_USER &&
     req.body.currentPassword === process.env.DEMO_PASSWORD
