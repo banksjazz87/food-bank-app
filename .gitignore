@@ -24,7 +24,11 @@ yarn-error.log*
 
 .env
 node_modules
+<<<<<<< HEAD
 
 #Database
 databaseConfig.db
 
+=======
+databaseConfig.db
+>>>>>>> 9e31def (chore: I have corrected a few style errors within the edit delete modules)

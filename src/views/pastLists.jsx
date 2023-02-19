@@ -96,6 +96,7 @@ export default function PastLists() {
         noClickHandler={() => {
           setShowDeleteAlert(false);
         }}
+        warningMessage={`Are you sure that you would like to permanantely delete ${list.title} from the database?`}
         display={showDeleteAlert}
         routePath={"/delete-list"}
         selected={list}

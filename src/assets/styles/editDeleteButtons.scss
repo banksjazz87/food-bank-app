@@ -11,3 +11,17 @@
         @include btn-small-danger;
     }
 }
+
+@media (max-width: 767px) {
+    #edit_delete_wrapper {
+       button {
+        width: 100px;
+        min-width: 100px;
+       }
+
+       .delete_button {
+        width: 100px;
+        min-width: 100px;
+       }
+    }
+}
