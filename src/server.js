@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const path = require("path");
 var cors = require("cors");
 const app = express();
+const port = 4000;
 const port = 4000;
 const mysql = require("mysql");
 
@@ -14,8 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //The static file that will be used on the server
-//app.use("/", express.static("build"));
-app.use(express.static('/home/cbanks87/Documents/foodBankApp/my-app/build'))
+app.use("/", express.static("build"));
+/*app.use(express.static('/home/cbanks87/Documents/foodBankApp/my-app/build'))
 
 app.get('/', function (req, res) {
   res.sendFile('/home/cbanks87/Documents/foodBankApp/my-app/build');
@@ -88,7 +88,7 @@ app.post("/login-attempt", (req, res, next) => {
     req.body.currentUser === process.env.CHAPEL_USER &&
     req.body.currentPassword === process.env.CHAPEL_PASSWORD
   ) {
-    Db.database = process.env.CHAPEL_DATABASE;
+    Db.database = "testingFoodBank";
 
       let selectedDb = mysql.createConnection(Db);
       selectedDb.connect(function(err) {
@@ -195,10 +195,11 @@ app.post("/new-applicant/", (req, res, next) => {
   } else {
     res.send({
       status: "not good",
-      message: `The applicant's target income ($${req.body.totalIncome
-        }) is more than the qualifying income ($${targetIncome(
-          req.body.totalOccupants
-        )}.00)`,
+      message: `The applicant's target income ($${
+        req.body.totalIncome
+      }) is more than the qualifying income ($${targetIncome(
+        req.body.totalOccupants
+      )}.00)`,
     });
   }
 });
@@ -252,8 +253,6 @@ app.get("/foodBank_attendance/check_sheet", (req, res, next) => {
 
 //put request to update an applicant's info
 app.put("/applicant/update", (req, res, next) => {
-
-
 
   let updateApplicant = new Promise((resolve, reject) => {
     let currentDb = mysql.createConnection(Db);
@@ -473,9 +472,9 @@ app.get("/get-past-list/list-name/:listName/get-all", (req, res) => {
     });
   });
 
-  retrieveTable
+  retrieveTable 
     .then((data) => {
-      res.send({ message: "Success", allData: data })
+      res.send({message: "Success", allData: data})
     })
     .catch((e) => {
       res.send(sqlError(e));
@@ -539,7 +538,7 @@ app.get("/most-recent-fb-list", (req, res) => {
 
   getFoodBankLists
     .then((data) => {
-      res.send({ message: "success", allData: data[0] });
+      res.send({ message: "success", allData: data[0]});
       console.log("Success in getting data");
     })
     .catch((error) => {
@@ -567,9 +566,11 @@ app.put("/update-attendant-status", (req, res) => {
     .then((data) => {
       res.send({
         status: "success",
-        message: `success, ${req.body.firstName} ${req.body.lastName
-          } has been updated to the status of ${req.body.present === "true" ? "Present" : "Not Present"
-          } in the ${req.body.title} table.`,
+        message: `success, ${req.body.firstName} ${
+          req.body.lastName
+        } has been updated to the status of ${
+          req.body.present === "true" ? "Present" : "Not Present"
+        } in the ${req.body.title} table.`,
       });
     })
     .catch((err) => {
