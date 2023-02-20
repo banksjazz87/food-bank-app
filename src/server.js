@@ -13,11 +13,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //The static file that will be used on the server
-app.use("/", express.static("/Users/chris/Documents/foodBankApp/my-app/build"));
+app.use("/", express.static("build"));
 
-app.get('/*', (req, res) => {
+/*app.get('/', (req, res) => {
   res.sendFile("/Users/chris/Documents/foodBankApp/my-app/build");
-});
+});*/
 
 //Just a console.log statement to let you know that the server is up and running and the port number.
 app.listen(port, () => {
