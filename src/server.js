@@ -27,7 +27,7 @@ app.listen(port, () => {
 //Database info
 let Db = {
   host: "127.0.0.1",
-  user: "root",
+  username: "root",
   password: process.env.MYSQL_PASSWORD,
   database: "",
 };
