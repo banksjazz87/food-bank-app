@@ -45,7 +45,10 @@ app.post("/login-attempt", (req, res, next) => {
     req.body.currentUser === process.env.CHAPEL_USER &&
     req.body.currentPassword === process.env.CHAPEL_PASSWORD
   ) {
-    Db.database = "testingFoodBank";
+    Db.database = process.env.CLEARDB_DATABASE;
+    Db.username = process.env.CLEARDB_USERNAME;
+    Db.host = process.env.CLEARDB_HOST;
+    Db.password = process.env.CLEARDB_PASSWORD;
 
     let selectedDb = mysql.createConnection(Db);
     selectedDb.connect((err) => {
@@ -57,7 +60,10 @@ app.post("/login-attempt", (req, res, next) => {
     req.body.currentPassword === process.env.DEMO_PASSWORD
   ) {
 
-    Db.database = process.env.DEMO_DATABASE;
+    Db.database = process.env.CRIMSON_DATABASE;
+    Db.username = process.env.CRIMSON_USERNAME;
+    Db.host = process.env.CRIMSON_HOST;
+    Db.password = process.env.CRIMSON_PASSWORD;
 
     let selectedDb = mysql.createConnection(Db);
     selectedDb.connect((err) => {
