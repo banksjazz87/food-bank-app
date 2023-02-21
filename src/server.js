@@ -46,7 +46,7 @@ app.post("/login-attempt", (req, res, next) => {
     req.body.currentPassword === process.env.CHAPEL_PASSWORD
   ) {
     Db.database = process.env.CLEARDB_DATABASE;
-    Db.username = process.env.CLEARDB_USERNAME;
+    Db.user = process.env.CLEARDB_USERNAME;
     Db.host = process.env.CLEARDB_HOST;
     Db.password = process.env.CLEARDB_PASSWORD;
 
@@ -61,7 +61,7 @@ app.post("/login-attempt", (req, res, next) => {
   ) {
 
     Db.database = process.env.CRIMSON_DATABASE;
-    Db.username = process.env.CRIMSON_USERNAME;
+    Db.user = process.env.CRIMSON_USERNAME;
     Db.host = process.env.CRIMSON_HOST;
     Db.password = process.env.CRIMSON_PASSWORD;
 
