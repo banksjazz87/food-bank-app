@@ -56,6 +56,7 @@ export default function EditModuleForCurrentList(props) {
         </div>
         <AddPartialApplicantForm
           showForm={showAddNewPerson}
+          hideForm={() => setShowAddNewPerson(false)}
           nameHandler={props.newApplicantHandler}
           tableInfo={props.tableDetails}
           addToTable={props.addNewHandler}

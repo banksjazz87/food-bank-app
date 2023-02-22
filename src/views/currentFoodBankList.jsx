@@ -94,7 +94,7 @@ export default function CurrentFoodBankList() {
 
     //Make a copy of the chosenNameArr and then add the present field of false to it.
     let copyOfChosen = chosenNameArr.slice();
-    copyOfChosen[0].present = "false";
+    copyOfChosen[0].present = 'false';
 
     let firstLast = copyOfArr.map((x, y) => {
       let first = x.firstName;
@@ -157,6 +157,7 @@ export default function CurrentFoodBankList() {
     ];
 
     setTable(currentTable.concat(arrayOfNeededFields));
+    showEditHandler();
   };
 
   //This will be used to set the selected applicant that needs updated, and display the edit page.

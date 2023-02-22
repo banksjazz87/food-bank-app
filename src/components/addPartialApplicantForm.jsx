@@ -13,14 +13,15 @@ export default function AddPartialApplicantForm(props) {
   const addApplicantToDb = (obj, id) => {
     const copyOfObj = obj;
     copyOfObj.ApplicantID = id;
-    copyOfObj.present = false;
+    copyOfObj.present = "false";
 
     postRequest(
       `/save-list/list-name/${props.tableInfo.title}`,
       copyOfObj
     ).then((data) => {
       alert(data.message);
-      return props.addToTable(copyOfObj);
+      props.addToTable(copyOfObj);
+      props.hideForm();
     });
   };
 
