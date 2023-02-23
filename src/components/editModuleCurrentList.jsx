@@ -12,6 +12,10 @@ export default function EditModuleForCurrentList(props) {
     setShowAddNewPerson(false);
   };
 
+  const hideSearchBar = () => {
+    setShowSearchBar(false);
+  }
+
   return (
     <div
       id="cl_edit_module_overlay"
@@ -48,7 +52,10 @@ export default function EditModuleForCurrentList(props) {
           style={showSearchBar ? { display: "" } : { display: "none" }}
         >
           <SearchBar
-            handleChange={props.searchBarClick}
+            handleChange={(value) => {
+              props.searchBarClick(value);
+              hideSearchBar();
+            }}
             route="/all-applicants"
             show={true}
             title="Search All Applicants"
