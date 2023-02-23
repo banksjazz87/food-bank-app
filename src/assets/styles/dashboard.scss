@@ -25,3 +25,13 @@
         border-radius: 16px 16px 0 0;
     }
 }
+
+@media (max-width: 767px) {
+    #content_wrapper {
+        width: 90vw;
+
+    .header_wrapper {
+        width: 90vw;
+    }
+    }
+}

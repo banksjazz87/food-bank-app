@@ -60,3 +60,19 @@
         }
     }
 }
+
+@media (max-width: 767px) {
+
+    #login_container {
+        align-content: flex-start;
+
+        form {
+            height: 250px;
+            margin-top: 6rem;
+
+            .submit_button {
+                margin: 1rem auto auto;
+            }
+        }
+    }
+}

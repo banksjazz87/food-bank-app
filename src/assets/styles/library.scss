@@ -11,8 +11,8 @@ $faded-orange: rgba(251, 148, 0, .6);
 $form-border-color: rgba(153, 102, 153, .5);
 
 @mixin header-large-bold {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 500;
+    font-family: 'Ubuntu';
+    font-weight: 400;
     line-height: 1.3;
     letter-spacing: 0;
     color: inherit;
@@ -23,8 +23,8 @@ $form-border-color: rgba(153, 102, 153, .5);
 }
 
 @mixin header-large {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 400;
+    font-family: 'Ubuntu';
+    font-weight: 300;
     font-size: 36px;
     font-style: normal;
     line-height: 1.55em;
@@ -32,8 +32,8 @@ $form-border-color: rgba(153, 102, 153, .5);
 }
 
 @mixin header-medium {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 400;
+    font-family: 'Ubuntu';
+    font-weight: 300;
     font-size: 24px;
     font-style: normal;
     line-height: 1.55em;
@@ -41,7 +41,7 @@ $form-border-color: rgba(153, 102, 153, .5);
 }
 
 @mixin header-small {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Ubuntu';
     font-weight: 400;
     font-size: 18px;
     font-style: normal;
