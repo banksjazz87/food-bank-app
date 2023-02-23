@@ -124,7 +124,7 @@ const dataPoints = [
     type: "number",
     maxWidth: 6,
     name: "annualIncome",
-    placeHolder: "Anual Income",
+    placeHolder: "Annual Income",
   },
   {
     value: 0,
