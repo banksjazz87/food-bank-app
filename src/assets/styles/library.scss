@@ -11,9 +11,10 @@ $faded-orange: rgba(251, 148, 0, .6);
 $form-border-color: rgba(153, 102, 153, .5);
 $background-radial: radial-gradient($chapel-light-gray, $chapel-gray);
 $purple-linear: linear-gradient(15deg, rgba(153, 102, 153, .7), rgba(153, 102, 153, .6), rgba(153, 102, 153, .7));
+$header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 
 @mixin header-large-bold {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-family: $header-font;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.3;
@@ -31,16 +32,16 @@ $purple-linear: linear-gradient(15deg, rgba(153, 102, 153, .7), rgba(153, 102, 1
 }
 
 @mixin header-large {
-    font-family: 'Roboto', serif;
-    font-weight: 400;
+    font-family: $header-font;
+    font-weight: 500;
     font-size: 36px;
     font-style: normal;
     line-height: 1.55em;
-    letter-spacing: 0em;
+    letter-spacing: .75px;
 }
 
 @mixin header-medium {
-    font-family: 'Roboto', serif;
+    font-family: $header-font;
     font-weight: 300;
     font-size: 24px;
     font-style: normal;
@@ -49,7 +50,7 @@ $purple-linear: linear-gradient(15deg, rgba(153, 102, 153, .7), rgba(153, 102, 1
 }
 
 @mixin header-small {
-    font-family: 'Roboto', serif;
+    font-family: $header-font;
     font-weight: 400;
     font-size: 18px;
     font-style: normal;

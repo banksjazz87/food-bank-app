@@ -24,7 +24,7 @@
         justify-content: center;
         border-radius: 16px;
         margin: auto;
-        margin-top: 2rem;
+        margin-top: 6rem;
         
         p {
             @include paragraph-large;
@@ -35,6 +35,14 @@
     #list_title {
         margin-top: 4rem;
         margin-bottom: 0;
+        @include header-large;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 0;
+        @include header-large;
+        padding: 0;
     }
 
     form {
