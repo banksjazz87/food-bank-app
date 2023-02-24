@@ -221,10 +221,7 @@ export default function CurrentFoodBankList() {
         <h1 className="header">Current Food Bank List</h1>
       </div>
       <NavBar />
-      <div id="progress_wrapper">
-      <p>{`Foodbank Progress: ${totalPresent}/${table.length}`}</p>
-      </div>
-
+    
       <DisplayCurrentFoodBankList
         //Conditional currentTableData is only for developement
         currentTableData={table}
@@ -237,6 +234,7 @@ export default function CurrentFoodBankList() {
         incrementHandler={PresentCountMethods.incrementPresentCount}
         decrementHandler={PresentCountMethods.decrementPresentCount}
         presentCount={totalPresent}
+        progressText={`Foodbank Progress: ${totalPresent}/${table.length}`}
       />
       <EditModuleForCurrentList
         display={showEditModule}

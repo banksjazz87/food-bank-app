@@ -7,7 +7,7 @@ body {
     width: 100%;
     height: 100%;
     padding: 0;
-    background-color: $chapel-gray;
+    background-image: $background-radial;
     overflow-x: hidden;
 }
 
@@ -19,3 +19,10 @@ body {
     height: 100%;
     padding: 0;
 }
+
+#header_wrapper {
+    @include large-header;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  
+  }

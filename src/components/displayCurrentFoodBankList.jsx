@@ -226,6 +226,9 @@ export default function DisplayCurrentFoodBankList(props) {
   } else {
     return (
       <div id="list_wrapper">
+        <div id="progress_wrapper">
+          <p>{props.progressText}</p>
+        </div>
         <h1 id="list_title">{`${props.tableDetails.title}`}</h1>
         <h1>Attendance Sheet</h1>
         <form

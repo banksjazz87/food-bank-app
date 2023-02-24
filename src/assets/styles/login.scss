@@ -1,7 +1,7 @@
 @import "./library.scss";
 
 #login_container {
-    background-color: $chapel-gray;
+    background-image: $background-radial;
     display: flex;
     justify-content: center;
     height: 100vh;
@@ -19,7 +19,7 @@
         margin: auto;
         background-color: $chapel-gray;
         justify-content: center;
-        box-shadow: 0 4px 12px $form-border-color;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
         border-radius: 4px;
         max-width: 560px;
 
@@ -46,6 +46,10 @@
             width: 80vw;
             padding-left: 1.5rem;
             padding-right: 1.5rem;
+
+            label {
+                margin-left: 1.25%;
+            }
 
         }
 
