@@ -2,13 +2,13 @@
 
 #applicantSearch {
     @include shadow-form;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 
     label {
         @include medium-section-heading;
         margin-top: 0;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
         color: white;
     }
 

@@ -46,7 +46,7 @@
     width: 100%;
     padding-bottom: 2rem;
     border-radius: 0px 12px 12px 0px;
-    box-shadow: 0px 9px 80px rgba(0, 0, 0, .6);
+    box-shadow: 0px 9px 36px rgba(0, 0, 0, .4);
     background-color: $chapel-gray;
     z-index: 5;
     position: fixed;
@@ -71,6 +71,6 @@
 
 @media (max-width: 767px) {
   .mobile_nav_wrapper {
-    top: 10rem;
+    top: 8rem;
   }
 }

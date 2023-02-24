@@ -3,12 +3,13 @@
 #footer_wrapper {
     margin-top: 2rem;
     width: 100vw;
-    background-color: $form-border-color;
+    background-image: $purple-linear;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     @include paragraph-small;
+    @include header-font-shadow;
     line-height: 6px;
     padding-bottom: 6px;
     padding-top: 6px;

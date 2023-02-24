@@ -9,6 +9,7 @@ body {
     padding: 0;
     background-image: $background-radial;
     overflow-x: hidden;
+    overscroll-behavior: none;
 }
 
 #root {
@@ -18,6 +19,7 @@ body {
     width: 100%;
     height: 100%;
     padding: 0;
+    background-image: $background-radial;
 }
 
 #header_wrapper {

@@ -13,9 +13,14 @@
 
     h2 {
         @include paragraph-large;
-        margin-top: 4rem;
+        margin-top: 0;
         margin-bottom: 1rem;
+    }
 
+    #search_options_wrapper {
+        @include shadow-form;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 
     #choose_applicant_type {
@@ -61,6 +66,18 @@
 
 
 @media (max-width: 1023px) {
+    #search_applicant_wrapper {
+        #search_options_wrapper {
+            @include mobile-shadow-form;
+            label {
+                width: 80%;
+            }
+
+            select {
+                width: 80%;
+            }
+        }
+    }
     #display_applicant_wrapper {
         @include mobile-shadow-form;
     }

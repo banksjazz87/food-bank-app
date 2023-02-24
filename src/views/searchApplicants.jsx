@@ -98,19 +98,20 @@ export default function SearchApplicants() {
         <h1>Search Applicants</h1>
       </div>
       <NavBar />
-
-      <h2>What would you like to search for?</h2>
-      <select
-        id="choose_applicant_type"
-        onChange={(e) => {
-          e.preventDefault();
-          updateSearchHandler(e.target.value);
-        }}
-      >
-        <option>Choose from the following</option>
-        <option>All Applicants</option>
-        <option>Partial Forms</option>
-      </select>
+      <div id="search_options_wrapper">
+        <h2>What would you like to search for?</h2>
+        <select
+          id="choose_applicant_type"
+          onChange={(e) => {
+            e.preventDefault();
+            updateSearchHandler(e.target.value);
+          }}
+        >
+          <option>Choose from the following</option>
+          <option>All Applicants</option>
+          <option>Partial Forms</option>
+        </select>
+      </div>
 
       <SearchBar
         handleChange={updateApplicant}
