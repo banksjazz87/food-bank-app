@@ -6,10 +6,10 @@ export default function PrintFoodBankList(props) {
     const displayData = props.tableData.map((x, y) => {
         return (
             <tr key={`applicant_${y}`}>
-                <td><div className="checkbox_div"></div></td>
                 <td>{x.lastName}</td>
                 <td>{x.firstName}</td>
                 <td>{x.phone}</td>
+                <td><div className="checkbox_div"></div></td>
             </tr>
         )
     });
@@ -26,10 +26,10 @@ export default function PrintFoodBankList(props) {
                     <table>
                         <tbody>
                             <tr className="header_row">
-                                <th>Present</th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
                                 <th>Phone Number</th>
+                                <th>Present</th>
                             </tr>
                             {displayData}
                         </tbody>
