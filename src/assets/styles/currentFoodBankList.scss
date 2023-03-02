@@ -22,4 +22,53 @@
         }
     }
 }
- 
+
+@media print {
+    #current_fb_list {
+        #header_wrapper {
+            display: none;
+        }
+
+        .nav_wrapper {
+            display: none;
+        }
+
+        form {
+            display: none;
+        }
+
+        h1 {
+            display: none;
+        }
+
+        #progress_wrapper {
+            display: none;
+        }
+
+        #edit_cancel_button_wrapper {
+            display: none;
+        }
+
+        #list_title {
+            display: none;
+        }
+
+        #print_list_wrapper {
+            display: flex;
+
+            #printable_attendance_sheet {
+                margin-top: -2rem;
+
+                .list_name {
+                    margin-top: 0;
+
+                    h1 {
+                        display: block;
+                        @include paragraph-large;
+                    }
+
+                }
+            }
+        }
+    }
+}

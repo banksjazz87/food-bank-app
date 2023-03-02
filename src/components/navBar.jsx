@@ -23,28 +23,30 @@ export default function NavBar() {
         setNavDisplay("standard");
       }
     });
-  });
+  }, []);
 
   //Check the url to determine if a full navigation menu is needed.
   useEffect(() => {
-    let url = window.location.href;
+    let url = window.location.pathname;
 
     //List of urls that need a full navigation menu.
     const fullNavUrls = [
-      "dashboard",
-      "new_applicant",
-      "search",
-      "current-registered-list",
-      "past-registered-list",
-      "create-foodbank-list",
-      "printed-applicant-form",
+      "/dashboard",
+      "/new_applicant",
+      "/search",
+      "/current-registered-list",
+      "/past-registered-list",
+      "/create-foodbank-list",
+      "/printed-applicant-form",
+      "/foodbank-list-dashboard"
     ];
 
-    for (let i = 0; i < fullNavUrls.length; i++) {
-      if (url.includes(fullNavUrls[i])) {
-        setFullNav(true);
-      }
+    if (fullNavUrls.indexOf(url) > -1) {
+      setFullNav(true);
+    } else {
+      setFullNav(false);
     }
+
   }, []);
 
   //This will be the function used on the onClick event for the hamburger icon.

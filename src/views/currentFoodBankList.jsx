@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar.jsx";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
+import PrintFoodBankList from "../components/printFoodBankList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import EditPage from "../components/editDisplay.jsx";
@@ -11,6 +12,7 @@ import "../assets/styles/currentFoodBankList.scss";
 //import DummyData from "../variables/dummyData.js";
 
 export default function CurrentFoodBankList() {
+
   const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
   const [table, setTable] = useState([]);
   const [showRemoveButtons, setShowRemoveButtons] = useState(false);
@@ -221,7 +223,7 @@ export default function CurrentFoodBankList() {
         <h1 className="header">Current Food Bank List</h1>
       </div>
       <NavBar />
-    
+
       <DisplayCurrentFoodBankList
         //Conditional currentTableData is only for developement
         currentTableData={table}
@@ -236,6 +238,12 @@ export default function CurrentFoodBankList() {
         presentCount={totalPresent}
         progressText={`Foodbank Progress: ${totalPresent}/${table.length}`}
       />
+
+      <PrintFoodBankList
+        tableTitle={tableInfo.title}
+        tableData={table}
+      />
+
       <EditModuleForCurrentList
         display={showEditModule}
         searchBarClick={addApplicant}
@@ -270,6 +278,14 @@ export default function CurrentFoodBankList() {
       <div id="edit_cancel_button_wrapper">
         <button class="edit_button" type="button" onClick={showEditHandler}>
           Edit
+        </button>
+
+        <button
+          class="edit_button"
+          type="button"
+          onClick={() => window.print()}
+        >
+          Print
         </button>
 
         <button
