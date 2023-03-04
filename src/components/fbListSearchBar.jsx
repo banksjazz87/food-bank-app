@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MathFunctions from "../functions/mathFunctions.js";
+import LoadingIcon from "../components/loadingIcon.jsx";
 import "../assets/styles/fbListSearchBar.scss";
 
 export default function FbListSearchBar(props) {
@@ -63,6 +64,8 @@ export default function FbListSearchBar(props) {
       </form>
     );
   } else {
-    return <p id="fetching">Fetching Options</p>;
+    return (
+      <LoadingIcon />
+    );
   }
 }

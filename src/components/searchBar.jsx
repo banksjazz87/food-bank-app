@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/searchBar.scss";
 import MathFunctions from "../functions/mathFunctions.js";
+import LoadingIcon from "../components/loadingIcon.jsx";
 
 //For Development only
 //import DummyData from "../variables/dummyData.js";
@@ -56,12 +57,7 @@ export default function SearchBar(props) {
 
   if (data.length === 0) {
     return (
-      <div style={props.show ? { display: "" } : { display: "none" }}>
-        <label for={props.description}>{props.title}</label>
-        <select name={props.description} id="applicants">
-          <option id="fetching">Fetching...</option>
-        </select>
-      </div>
+      <LoadingIcon />
     );
   } else {
     return (

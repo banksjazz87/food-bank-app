@@ -3,6 +3,7 @@ import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
+import LoadingIcon from "../components/loadingIcon.jsx";
 
 export default function DisplayCurrentFoodBankList(props) {
   const [mobileView, setMobileView] = useState(false);  
@@ -222,7 +223,9 @@ export default function DisplayCurrentFoodBankList(props) {
 
   //The main return section for this page.
   if (props.currentTableData.length === 0) {
-    return <h1>Data is Loading</h1>;
+    return (
+      <LoadingIcon />
+    );
   } else {
     return (
       <div id="list_wrapper">

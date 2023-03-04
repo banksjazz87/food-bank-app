@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PrintedPersonCount from "../components/printedPersonCount.jsx";
 import PrintedInputPair from "../components/printedInputPair.jsx";
 import PrintedIncomeTable from "../components/printedIncomeTable.jsx";
+import LoadingIcon from "../components/loadingIcon.jsx";
 import Navbar from "../components/navBar.jsx";
 import paLogo from "../assets/images/pa-logo.jpeg";
 import redArrow from "../assets/images/red-arrow.png";
@@ -23,7 +24,9 @@ export default function PrintedApplicantForm() {
   }, []);
 
   if (userData.length === 0) {
-    return <h1>Fetching data</h1>;
+    return (
+      <LoadingIcon />
+    )
   } else {
     return (
       <div id="page_wrapper">
