@@ -3,6 +3,7 @@ import postRequest from "../functions/post.js";
 import NewApplicantForm from "../components/newApplicantForm.jsx";
 
 export default function AddPartialApplicantForm(props) {
+
   /**
    *
    * @param {*} obj

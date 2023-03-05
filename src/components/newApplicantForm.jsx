@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import "../assets/styles/newApplicantForm.scss";
 
 export default function NewApplicantForm(props) {
   //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.
   const currentDate = new Date();
-  const [field, setField] = useState({
+  const initialFormState = {
     firstName: "",
     lastName: "",
     phone: null,
@@ -22,7 +22,9 @@ export default function NewApplicantForm(props) {
     annualIncome: null,
     totalIncome: null,
     dateAltered: currentDate.toLocaleDateString(),
-  });
+  };
+
+  const [field, setField] = useState(initialFormState);
 
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
@@ -74,13 +76,26 @@ export default function NewApplicantForm(props) {
 
   return (
     <form
+      id="applicant_form"
       className="shadow_form"
       action={props.route}
       method="post"
       onSubmit={(e) => {
         e.preventDefault();
-        props.submissionHandler(field);
-      }}
+        const currentForm = document.getElementById('applicant_form');
+
+        if (field.firstName.length > 0 && field.lastName.length > 0) {
+
+          props.submissionHandler(field);
+          setField(initialFormState);
+          currentForm.reset();
+
+        } else {
+          alert('First Name and Last Name are required.');
+          currentForm.scrollIntoView({behavior: 'smooth'});
+        }
+      }
+      }
     >
       {returnFields}
       <input id="new_applicant_submit" type="submit" value="Submit" />

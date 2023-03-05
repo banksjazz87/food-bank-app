@@ -12,10 +12,13 @@ export default function Login() {
     LoginProcedure.checkCredentials("/login-attempt", {
       currentUser: userName,
       currentPassword: password,
-    }).then((data) =>
-      LoginProcedure.redirect(data.message, "valid")
-        ? navigate("/dashboard", { replace: true })
-        : alert("invalid credentials")
+    }).then((data) => {
+      if (LoginProcedure.redirect(data.message, "valid")) {
+        navigate("/dashboard", {replace: true});
+      } else {
+        alert("Invalid Credentials");
+      }
+    }
     );
   };
 
