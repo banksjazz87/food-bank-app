@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import "../assets/styles/newApplicantForm.scss";
 
@@ -75,30 +75,42 @@ export default function NewApplicantForm(props) {
   });
 
   return (
-    <form
-      id="applicant_form"
-      className="shadow_form"
-      action={props.route}
-      method="post"
-      onSubmit={(e) => {
-        e.preventDefault();
-        const currentForm = document.getElementById('applicant_form');
-
-        if (field.firstName.length > 0 && field.lastName.length > 0) {
-
-          props.submissionHandler(field);
+    <div id="applicant_form_wrapper">
+      <button
+        id="close_form_x"
+        type="button"
+        style={window.location.pathname === '/current-registered-list' ? { display: "" } : { display: 'none' }}
+        onClick={() => {
+          props.cancel();
           setField(initialFormState);
-          currentForm.reset();
+        }}
+      >X
+      </button>
+      <form
+        id="applicant_form"
+        className="shadow_form"
+        action={props.route}
+        method="post"
+        onSubmit={(e) => {
+          e.preventDefault();
+          const currentForm = document.getElementById('applicant_form');
 
-        } else {
-          alert('First Name and Last Name are required.');
-          currentForm.scrollIntoView({behavior: 'smooth'});
+          if (field.firstName.length > 0 && field.lastName.length > 0) {
+
+            props.submissionHandler(field);
+            setField(initialFormState);
+            currentForm.reset();
+
+          } else {
+            alert('First Name and Last Name are required.');
+            currentForm.scrollIntoView({ behavior: 'smooth' });
+          }
         }
-      }
-      }
-    >
-      {returnFields}
-      <input id="new_applicant_submit" type="submit" value="Submit" />
-    </form>
+        }
+      >
+        {returnFields}
+        <input id="new_applicant_submit" type="submit" value="Submit" />
+      </form>
+    </div>
   );
 }

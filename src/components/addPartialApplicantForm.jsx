@@ -50,6 +50,12 @@ export default function AddPartialApplicantForm(props) {
       });
   };
 
+  const cancelForm = () => {
+    const currentForm = document.getElementById('applicant_form');
+    currentForm.reset();
+    props.hideForm();
+  }
+
   return (
     <div
       id="cl_edit_module_addNew"
@@ -58,6 +64,7 @@ export default function AddPartialApplicantForm(props) {
       <NewApplicantForm
         submissionHandler={submitHandler}
         route="/new-applicant"
+        cancel={cancelForm}
       />
     </div>
   );

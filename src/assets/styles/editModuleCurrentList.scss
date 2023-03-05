@@ -24,11 +24,33 @@
 
     #cl_edit_module_addNew {
         position: fixed;
-        top: 17rem;
+        top: -10rem;
         bottom: 0;
         overflow-y: scroll;
         overflow-x: hidden;
-        height: 50vh;
+        height: 100vh;
+        z-index: 12;
+        background-color: $chapel-gray;
+        border-radius: 16px;
+
+        #applicant_form {
+            margin-top: 1rem;
+            padding: 2rem 8rem;
+            box-shadow: none;
+        }
+
+        #close_form_x {
+            @include btn-small;
+            @include header-medium;
+            min-width: 0;
+            padding: .5rem 1rem;
+            font-weight: 500;
+            position: absolute;
+            right: 1rem;
+            top: .5rem;
+            margin-top: 0;
+
+        }
     }
 
     #button_wrapper {
@@ -57,6 +79,10 @@
         #cl_edit_module_addNew {
             .shadow_form {
                 padding-bottom: 30rem;
+            }
+
+            #close_form_x {
+                right: 20%;
             }
         }
     }

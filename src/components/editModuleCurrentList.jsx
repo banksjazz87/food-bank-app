@@ -29,7 +29,15 @@ export default function EditModuleForCurrentList(props) {
               Add Existing
             </button>
 
-            <button type="button" onClick={() => setShowAddNewPerson(true)}>
+            <button 
+              type="button" 
+              onClick={() => {
+                setShowAddNewPerson(true);
+                const form = document.getElementById('applicant_form');
+                setTimeout(() => {
+                  form.scrollIntoView({behavior: 'smooth'});
+                }, 1000);
+            }}>
               Add New
             </button>
 
