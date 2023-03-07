@@ -12,16 +12,8 @@ import "../assets/styles/currentFoodBankList.scss";
 //import DummyData from "../variables/dummyData.js";
 
 export default function CurrentFoodBankList() {
-
-  const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
-  const [table, setTable] = useState([]);
-  const [showRemoveButtons, setShowRemoveButtons] = useState(false);
-  const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
-  const [selectedAttendant, setSelectedAttendant] = useState([]);
-  const [showEditModule, setShowEditModule] = useState(false);
-  const [selectedApplicant, setSelectedApplicant] = useState([
-    {
-      firstName: "",
+  let initialApplicant = [{
+    firstName: "",
       lastName: "",
       phone: "",
       street: "",
@@ -37,8 +29,16 @@ export default function CurrentFoodBankList() {
       annualIncome: "",
       totalIncome: "",
       dateAltered: "",
-    },
-  ]);
+    }
+  ];
+
+  const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
+  const [table, setTable] = useState([]);
+  const [showRemoveButtons, setShowRemoveButtons] = useState(false);
+  const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
+  const [selectedAttendant, setSelectedAttendant] = useState([]);
+  const [showEditModule, setShowEditModule] = useState(false);
+  const [selectedApplicant, setSelectedApplicant] = useState(initialApplicant);
   const [showEditPage, setShowEditPage] = useState(false);
   const [totalPresent, setTotalPresent] = useState(0);
 
@@ -164,6 +164,7 @@ export default function CurrentFoodBankList() {
 
   //This will be used to set the selected applicant that needs updated, and display the edit page.
   const setEditApplicant = (arr, index) => {
+    clearSelectedApplicant();
     setSelectedApplicant([arr[index]]);
     setShowEditPage(true);
 
@@ -172,6 +173,13 @@ export default function CurrentFoodBankList() {
       editPage.scrollIntoView({ behavior: "smooth" });
     }, 500);
   };
+
+  //This will clear the previously selected applicant.
+  const clearSelectedApplicant = () => {
+    const editForm = document.getElementById('edit_form');
+    editForm.reset();
+    setSelectedApplicant(initialApplicant);
+  }
 
   //This will update the current applicant's information, used if an applicant has missing information in their application.
   const updateInfo = (field, value) => {
@@ -302,6 +310,7 @@ export default function CurrentFoodBankList() {
         currentApplicant={selectedApplicant}
         handleChange={updateInfo}
         hidePage={hideEditPage}
+        clearForm={clearSelectedApplicant}
       />
     </div>
   );

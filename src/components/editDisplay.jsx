@@ -72,6 +72,7 @@ export default function EditPage(props) {
               const currentPath = window.location.pathname;
 
               if (currentPath === "/current-registered-list") {
+                props.clearForm();
                 props.hidePage();
               } else {
                 navigate("/dashboard", { replace: true });
