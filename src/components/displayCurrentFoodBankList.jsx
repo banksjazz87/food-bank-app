@@ -4,9 +4,12 @@ import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 import LoadingIcon from "../components/loadingIcon.jsx";
+import AlertModule from "../components/alertModule.jsx";
 
 export default function DisplayCurrentFoodBankList(props) {
-  const [mobileView, setMobileView] = useState(false);  
+  const [mobileView, setMobileView] = useState(false);
+  const [showAlert, setShowAlert]  = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   
   //Check if the user is on a mobile device, when the page loads.
   useEffect(() => {
@@ -59,9 +62,14 @@ export default function DisplayCurrentFoodBankList(props) {
       present: presence,
     };
 
-    putRequest("/update-attendant-status", requestObj).then((data) =>
-      alert(data.message)
-    );
+    putRequest("/update-attendant-status", requestObj).then((data) => {
+      setAlertMessage(data.message);
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        setAlertMessage(false);
+      }, 1000);
+    });
   };
 
   //Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
@@ -229,6 +237,10 @@ export default function DisplayCurrentFoodBankList(props) {
   } else {
     return (
       <div id="list_wrapper">
+        <AlertModule 
+          showModule={showAlert}
+          message={alertMessage}
+        />
         <div id="progress_wrapper">
           <p>{props.progressText}</p>
         </div>

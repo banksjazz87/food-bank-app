@@ -1,0 +1,28 @@
+@import './library.scss';
+
+#custom_alert_overlay {
+    @include dark-overlay;
+
+#custom_alert {
+    position: fixed;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    padding: .5rem 2rem;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, .4);
+    background: $purple;
+    min-width: 500px;
+    right: 2rem;
+    border-radius: 4px;
+    z-index: 11;
+    
+        p {
+            @include paragraph-small;
+            @include header-font-shadow;
+        }
+
+}
+}
