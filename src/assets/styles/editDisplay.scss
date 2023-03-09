@@ -41,6 +41,7 @@
     #edit_applicant_wrapper {
         form {
             @include mobile-shadow-form;
+            margin-bottom: 40rem;
         }
 
         .input_pair {
