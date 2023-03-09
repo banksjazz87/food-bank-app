@@ -19,6 +19,15 @@ export default function DisplayApplicant(props) {
 
       return <h1 key={`header_${y}`}>{x.placeHolder}</h1>;
 
+    }else if (x.currency === true && x.name !== "null") {
+      return (
+        <>
+        <p key={`description_${y}`}>
+        {`${x.placeHolder}: ${parseInt(props.currentApplicant[0][x.name]).toFixed(2)}`}
+        </p>
+      </>
+      )
+
     } else {
         
       return (

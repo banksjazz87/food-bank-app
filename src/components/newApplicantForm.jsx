@@ -104,9 +104,20 @@ export default function NewApplicantForm(props) {
 
           if (field.firstName.length > 0 && field.lastName.length > 0) {
 
-            props.submissionHandler(field);
-            setField(initialFormState);
-            currentForm.reset();
+            fetch(`/single-applicant-check/first/${field.firstName}/last/${field.lastName}`)
+              .then(results => results.json())
+              .then((data) => {
+                if (data.length === 0) {
+                  props.submissionHandler(field);
+                  setField(initialFormState);
+                  currentForm.reset();
+                } else {
+                  alert(`An applicant by the name of ${field.firstName} ${field.lastName} is already in the database.`);
+                  setField(initialFormState);
+                  currentForm.reset();
+                  currentForm.scrollIntoView({behavior: 'smooth'});
+                }
+            });
 
           } else {
             alert('First Name and Last Name are required.');
