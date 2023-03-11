@@ -65,20 +65,64 @@ export default function EditPage(props) {
         method="post"
         onSubmit={(e) => {
           e.preventDefault();
-          putRequest("/applicant/update", props.currentApplicant[0]).then(
-            (data) => {
-              alert(data.message);
 
-              const currentPath = window.location.pathname;
+          if (props.currentApplicant[0].firstName.length > 0 && props.currentApplicant[0].lastName.length > 0) {
+            //Get the current foodbank list table.
+            let currentFoodBankList = '';
 
-              if (currentPath === "/current-registered-list") {
-                props.clearForm();
-                props.hidePage();
-              } else {
-                navigate("/dashboard", { replace: true });
-              }
-            }
-          );
+            fetch('/most-recent-fb-list')
+              .then(data => data.json())
+              .then((final) => {
+                currentFoodBankList = final.allData.title;
+
+                fetch(`/find-user/table/${currentFoodBankList}/applicant/${props.currentApplicant[0].ApplicantID}`)
+                  .then(data => data.json())
+                  .then((final) => {
+                    if (final.length > 0) {
+                      props.currentApplicant[0].tableName = currentFoodBankList;
+                      console.log(props.currentApplicant[0].tableName);
+                      putRequest('/update-applicant/current-list', props.currentApplicant[0]).then(
+                        (data) => {
+                          if (data.message.includes('Success')) {
+                            alert(data.message);
+
+                            const currentPath = window.location.pathname;
+
+                            if (currentPath === "/current-registered-list") {
+                              props.clearForm();
+                              props.hidePage();
+                            } else {
+                              navigate("/dashboard", { replace: true });
+                            }
+
+                          } else {
+                            alert(data.message);
+                          }
+                        });
+                    } else {
+                      putRequest("/applicant/update", props.currentApplicant[0]).then(
+                        (data) => {
+                          if (data.message.includes('Success')) {
+                            alert(data.message);
+
+                            const currentPath = window.location.pathname;
+
+                            if (currentPath === "/current-registered-list") {
+                              props.clearForm();
+                              props.hidePage();
+                            } else {
+                              navigate("/dashboard", { replace: true });
+                            }
+                          } else {
+                            alert(data.message);
+                          }
+                        });
+                    }
+                  });
+              });
+          } else {
+            alert('All applicants must have a first and last name');
+          }
         }}
       >
         {returnInputs}
