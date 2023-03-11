@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000;
 const mysql = require("mysql");
 
 const Dummy = require("./variables/dummyData.js");
+const { Console } = require("console");
 
 //Middleware instantiation
 app.use(cors());
@@ -283,7 +284,7 @@ app.put("/applicant/update", (req, res, next) => {
 		.then((data) => {
 			if (data.protocol41 === true) {
 				res.send({
-					message: `${req.body.firstName} ${req.body.lastName} has been updated`,
+					message:`Success ${req.body.firstName} ${req.body.lastName} has been updated`,
 				});
 			}
 		})
@@ -698,4 +699,70 @@ app.get("/dashboard-statistics-unique/:table", (req, res) => {
 			});
 		})
 		.catch((err) => res.send(sqlError(err)));
+});
+
+
+//This query will be used to find an applicant by applicant ID in the current foodbank list.
+app.get('/find-user/table/:table/applicant/:id', (req, res) => {
+	let retrieveApplicant = new Promise ((resolve, reject) => {
+		let currentDb = mysql.createConnection(Db);
+		let sql = `SELECT * FROM ${req.params.table} WHERE ApplicantID = "${req.params.id}";`;
+
+		currentDb.query(sql, (err, results) => {
+			if (err) {
+				return reject(err);
+			} else {
+				return resolve(results);
+			}
+		});
+		currentDb.end((err) => err ? console.log(err) : console.log('end')); 
+	});
+
+	retrieveApplicant.then((data) => {
+		res.send(data)
+		console.log(data);
+	}).catch(err => console.log(err));
+})
+
+
+//Used to update an applicant's information only in the current foodbank list.
+app.put('/update-applicant/current-list', (req, res) => {
+	let updateTableApplicant = new Promise((resolve, reject) => {
+		let currentDb = mysql.createConnection(Db);
+		let sql = `UPDATE ${req.body.tableName} SET firstName = "${req.body.firstName}", lastName = "${req.body.lastName}", phone = NULLIF("${req.body.phone}", "null") WHERE ApplicantID = "${req.body.ApplicantID}";`;
+
+		currentDb.query(sql, (err, results) => {
+			if (err) {
+				console.log('ERRROR', err);
+				return reject(err);
+			} else {
+				console.log(results);
+				return resolve(results);
+			}
+		});
+		currentDb.end((err) => err ? console.log(err) : console.log('end'));
+	});
+
+
+	let updateApplicant = new Promise((resolve, reject) => {
+		let currentDb = mysql.createConnection(Db);
+		let sql = `UPDATE applicant SET firstName = NULLIF("${req.body.firstName}", "null"), lastName = NULLIF("${req.body.lastName}", "null"), phone = NULLIF("${req.body.phone}", "null"), street = NULLIF("${req.body.street}", "null"), city = NULLIF("${req.body.city}", "null"), state = NULLIF("${req.body.state}", "null"), zip = NULLIF("${req.body.zip}", "null"), children = NULLIF("${req.body.children}", "null"), adults = NULLIF("${req.body.adults}", "null"), seniors = NULLIF("${req.body.seniors}", "null"), totalOccupants = NULLIF("${req.body.totalOccupants}", "null"), weeklyIncome = NULLIF("${req.body.weeklyIncome}", "null"), monthlyIncome = NULLIF("${req.body.monthlyIncome}", "null"), annualIncome = NULLIF("${req.body.annualIncome}", "null"), totalIncome = NULLIF("${req.body.totalIncome}", "null"), dateAltered = "${req.body.dateAltered}"  WHERE ApplicantID = "${req.body.ApplicantID}";`;
+
+		currentDb.query(sql, (err, results) => {
+			if (err) {
+				console.log(err);
+				return reject(err);
+			} else {
+				console.log(results);
+				return resolve(results);
+			}
+		});
+		currentDb.end((err) => err ? console.log(err) : console.log('end'));
+	});
+
+
+	Promise.all([updateTableApplicant, updateApplicant])
+		.then((data) => res.send({message: "Success", allData: data}))
+		.catch(err => res.send(sqlError(err)));
+		
 });
