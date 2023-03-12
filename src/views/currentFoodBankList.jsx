@@ -14,22 +14,22 @@ import "../assets/styles/currentFoodBankList.scss";
 export default function CurrentFoodBankList() {
   let initialApplicant = [{
     firstName: "",
-      lastName: "",
-      phone: "",
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
-      children: "",
-      adults: "",
-      seniors: "",
-      totalOccupants: "",
-      weeklyIncome: "",
-      monthlyIncome: "",
-      annualIncome: "",
-      totalIncome: "",
-      dateAltered: "",
-    }
+    lastName: "",
+    phone: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: "",
+    children: "",
+    adults: "",
+    seniors: "",
+    totalOccupants: "",
+    weeklyIncome: "",
+    monthlyIncome: "",
+    annualIncome: "",
+    totalIncome: "",
+    dateAltered: "",
+  }
   ];
 
   const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
@@ -41,6 +41,7 @@ export default function CurrentFoodBankList() {
   const [selectedApplicant, setSelectedApplicant] = useState(initialApplicant);
   const [showEditPage, setShowEditPage] = useState(false);
   const [totalPresent, setTotalPresent] = useState(0);
+  const [selectedRow, setSelectedRow] = useState(0);
 
   ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
@@ -162,10 +163,12 @@ export default function CurrentFoodBankList() {
     showEditHandler();
   };
 
+
   //This will be used to set the selected applicant that needs updated, and display the edit page.
   const setEditApplicant = (arr, index) => {
     clearSelectedApplicant();
     setSelectedApplicant([arr[index]]);
+    setSelectedRow(index);
     setShowEditPage(true);
 
     setTimeout(() => {
@@ -192,14 +195,23 @@ export default function CurrentFoodBankList() {
     setSelectedApplicant(currentApplicant);
   };
 
-  //This will hide the eidt page after it has been submitted and then it will scroll back to the top of the page.
+  //This will hide the eidt page after it has been submitted and then it will scroll back to the selected row.
   const hideEditPage = () => {
     setShowEditPage(false);
 
     setTimeout(() => {
-      const topOfList = document.getElementById("current_fb_list");
-      setShowEditPage(false);
-      topOfList.scrollIntoView({ behavior: "smooth" });
+
+      let currentRow = "";
+
+      if (window.innerWidth > 1024) {
+        currentRow = document.getElementById(`row_number_${selectedRow}`);
+        currentRow.scrollIntoView({ behavior: "smooth" });
+      } else {
+        currentRow = document.getElementById(`mobile_row_number_${selectedRow}`);
+
+      }
+
+      currentRow.scrollIntoView({ behavior: "smooth" });
     }, 500);
   };
 

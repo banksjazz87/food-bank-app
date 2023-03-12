@@ -188,7 +188,7 @@ export default function DisplayCurrentFoodBankList(props) {
       let currentValues = Object.values(x);
 
       return (
-        <tr id={`row_number_${y}`} key={`rowNum${y}`}>
+        <tr id={`mobile_row_number_${y}`} key={`rowNum${y}`}>
           <td 
             id="name"
             className={currentValues.indexOf(null) > -1 ? "incomplete_data": ""}
