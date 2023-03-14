@@ -80,7 +80,6 @@ export default function EditPage(props) {
                   .then((final) => {
                     if (final.length > 0) {
                       props.currentApplicant[0].tableName = currentFoodBankList;
-                      console.log(props.currentApplicant[0].tableName);
                       putRequest('/update-applicant/current-list', props.currentApplicant[0]).then(
                         (data) => {
                           if (data.message.includes('Success')) {

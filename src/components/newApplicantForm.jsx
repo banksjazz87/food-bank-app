@@ -70,7 +70,6 @@ export default function NewApplicantForm(props) {
             onChange={(e) => {
                 if (x.currency === true) {
                   setField({...field, [x.name]: parseInt(e.target.value).toFixed(2)});
-                  console.log(field);
                 } else {
                   setField({ ...field, [x.name]: e.target.value });
                 }

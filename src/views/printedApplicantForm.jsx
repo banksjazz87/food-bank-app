@@ -20,7 +20,7 @@ export default function PrintedApplicantForm() {
       .then((final) => {
         setUserData(final);
       })
-      .catch((err) => console.log("error", err));
+      .catch((err) => alert("error", err));
   }, []);
 
   if (userData.length === 0) {
