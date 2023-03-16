@@ -1,0 +1,30 @@
+@import "./library.scss";
+
+#welcome_back_wrapper {
+    @include shadow-form;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: .75s;
+
+    h1 {
+        @include header-large;
+    }
+
+    p {
+        @include paragraph-medium;
+    }
+
+    #welcome_back_bttn_wrapper {
+        @include btn-multiple;
+
+        button {
+            @include btn-small;
+        }
+    }  
+}
+
+@media (max-width: 1024px) {
+    #welcome_back_wrapper {
+        @include mobile-shadow-form;
+    }
+}
