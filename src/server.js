@@ -1,37 +1,64 @@
 require("dotenv").config();
 const express = require("express");
+const cookieParser = require('cookie-parser');
 var cors = require("cors");
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4600;
 const mysql = require("mysql");
 
 const Dummy = require("./variables/dummyData.js");
-const { Console } = require("console");
+
 
 //Middleware instantiation
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //The static file that will be used on the server
 app.use("/", express.static("build"));
 
-/*app.get('/', (req, res) => {
-  res.sendFile("/Users/chris/Documents/foodBankApp/my-app/build");
+
+/*app.get('/*', (req, res) => {
+	res.sendFile('/Users/chris/Documents/foodBankApp/my-app/build/index.html');
 });*/
+
+//List of all of the react router paths.
+const menuPaths = ['/dashboard', '/new_applicant', '/login', '/search', '/current-registered-list', '/foodbank-list-dashboard', '/create-foodbank-list', '/past-registered-list', '/printed-applicant-form'];
+
+//Send the build index.html file back when the user is on a react router path, or refreshes the page.
+app.get(menuPaths, (req, res) => {
+	res.sendFile('/Users/chris/Documents/foodBankApp/my-app/build/index.html');
+});
+
 
 //Just a console.log statement to let you know that the server is up and running and the port number.
 app.listen(port, () => {
 	console.log(`App is listening on port ${port}`);
 });
 
-//Database info
-let Db = {
-	host: "localhost",
-	user: "root",
-	password: process.env.MYSQL_PASSWORD,
-	database: "",
-};
+
+//This will be used to create a database based on the cookies that are passed.
+class Database {
+	constructor(host, user, password, database) {
+		this.host = host;
+		this.user = user;
+		this.password = password;
+		this.database = database;
+	}
+
+	getDb() {
+		let currentDb = {
+			host: this.host, 
+			user: this.user, 
+			password: this.password, 
+			database: this.database
+		}
+
+		return currentDb;
+	}
+}
+
 
 //Error message if something doesn't work in the sql query.
 let sqlError = (obj) => {
@@ -40,21 +67,27 @@ let sqlError = (obj) => {
 	};
 };
 
-//app.get("/all-applicants", allApplicants.findAll);
+//Post request for the login.
 app.post("/login-attempt", (req, res, next) => {
 	if (
 		req.body.currentUser === process.env.CHAPEL_USER &&
 		req.body.currentPassword === process.env.CHAPEL_PASSWORD
 	) {
-		Db.database = process.env.CLEARDB_DATABASE;
-		Db.user = process.env.CLEARDB_USERNAME;
-		Db.host = process.env.CLEARDB_HOST;
-		Db.password = process.env.CLEARDB_PASSWORD;
+		
+		let Db = new Database(process.env.CLEARDB_HOST, process.env.CLEARDB_USERNAME, process.env.CLEARDB_PASSWORD, process.env.CLEARDB_DATABASE);
+		let selectedDb = mysql.createConnection(Db.getDb());
 
-		let selectedDb = mysql.createConnection(Db);
 		selectedDb.connect((err) => {
 			err ? console.log(err) : console.log("you are connected to the database");
 		});
+
+		res.cookie('account', 'Demo');
+		res.cookie('host', process.env.CLEARDB_HOST, { httpOnly: true, sameSite: 'lax'});
+		res.cookie('user', process.env.CLEARDB_USERNAME, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('database', process.env.CLEARDB_DATABASE, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('password', process.env.CLEARDB_PASSWORD, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('loggedIn', true);
+
 		res.send({ message: "valid" });
 		selectedDb.end((err) => err ? console.log(err) : console.log('end'));
 
@@ -63,15 +96,20 @@ app.post("/login-attempt", (req, res, next) => {
 		req.body.currentPassword === process.env.DEMO_PASSWORD
 	) {
 
-		Db.database = process.env.CRIMSON_DATABASE;
-		Db.user = process.env.CRIMSON_USERNAME;
-		Db.host = process.env.CRIMSON_HOST;
-		Db.password = process.env.CRIMSON_PASSWORD;
+		let Db = new Database(process.env.CRIMSON_HOST, process.env.CRIMSON_USERNAME, process.env.CRIMSON_PASSWORD, process.env.CRIMSON_DATABASE);
+		let selectedDb = mysql.createConnection(Db.getDb());
 
-		let selectedDb = mysql.createConnection(Db);
 		selectedDb.connect((err) => {
 			err ? console.log(err) : console.log("you are connected to the database");
 		});
+
+		res.cookie('account', 'Demonstrator');
+		res.cookie('host', process.env.CRIMSON_HOST, { httpOnly: true, sameSite: 'lax'});
+		res.cookie('user', process.env.CRIMSON_USERNAME, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('database', process.env.CRIMSON_DATABASE, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('password', process.env.CRIMSON_PASSWORD, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('loggedIn', true);
+
 		res.send({ message: "valid" });
 		selectedDb.end((err) => err ? console.log(err) : console.log('end'));
 
@@ -79,12 +117,22 @@ app.post("/login-attempt", (req, res, next) => {
 		req.body.currentUser === process.env.TESTING_USER && 
 		req.body.currentPassword === process.env.TESTING_PASSWORD) {
 
-		Db.database = process.env.TESTING_DATABASE;
-		let selectedDb = mysql.createConnection(Db);
+		let Db = new Database('localhost', 'tester', process.env.TESTING_PASSWORD, process.env.TESTING_DATABASE);
+		let selectedDb = mysql.createConnection(Db.getDb());
+
 		selectedDb.connect((err) => {
 			err ? console.log(err) : console.log('you are connected to the testing database');
 		});
+		
+		res.cookie('account', 'Tester');
+		res.cookie('host', 'localhost', {httpOnly: true, sameSite: 'lax'});
+		res.cookie('user', 'root', {httpOnly: true, sameSite: 'lax'});
+		res.cookie('password', process.env.MYSQL_PASSWORD, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('database', process.env.TESTING_DATABASE, {httpOnly: true, sameSite: 'lax'});
+		res.cookie('loggedIn', true)
+
 		res.send({ message: "valid" });
+		
 		selectedDb.end((err) => err ? console.log(err) : console.log('end'));
 
 	} else {
@@ -94,11 +142,13 @@ app.post("/login-attempt", (req, res, next) => {
 	next();
 });
 
+
 //return all applicants from the selected database from the login.
 app.get("/all-applicants", (req, res, next) => {
 
 	let allApplicants = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = "SELECT * FROM applicant ORDER BY lastName";
 
 		currentDb.query(sql, (error, results) => {
@@ -111,6 +161,7 @@ app.get("/all-applicants", (req, res, next) => {
 		currentDb.end((err) => err ? console.log(err) : console.log('ended'));
 	});
 
+	console.log(req.cookies.database);
 	allApplicants.then((data) => res.send(data))
 });
 
@@ -147,7 +198,8 @@ app.post("/new-applicant/", (req, res, next) => {
 	if (req.body.totalIncome <= targetIncome(req.body.totalOccupants)) {
 
 		let createApplicant =  new Promise((resolve, reject) => {
-			let currentDb = mysql.createConnection(Db);
+			let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+			let currentDb = mysql.createConnection(Db.getDb());
 			let sql = `INSERT INTO applicant (firstName, lastName, phone, street, city, state, zip, children, adults, seniors, totalOccupants, weeklyIncome, monthlyIncome, annualIncome, totalIncome, dateAltered) VALUES (?)`;
 
 			currentDb.query(sql, [requiredData], (err, results) => {
@@ -191,7 +243,8 @@ app.get(
 	"/single-applicant/first/:firstName/last/:lastName/id/:ApplicantID",
 	(req, res) => {
 		let findApplicant = new Promise((resolve, reject) => {
-			let currentDb = mysql.createConnection(Db);
+			let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+			let currentDb = mysql.createConnection(Db.getDb());
 			let sql = `SELECT * FROM applicant WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = ${req.params.ApplicantID};`;
 
 			currentDb.query(sql, (err, results) => {
@@ -215,7 +268,8 @@ app.get(
 app.get('/single-applicant-check/first/:firstName/last/:lastName', (req, res) => {
 
 	let checkApplicant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM applicant WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -265,7 +319,8 @@ app.get("/foodBank_attendance/check_sheet", (req, res, next) => {
 app.put("/applicant/update", (req, res, next) => {
 
 	let updateApplicant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `UPDATE applicant SET firstName = NULLIF("${req.body.firstName}", "null"), lastName = NULLIF("${req.body.lastName}", "null"), phone = NULLIF("${req.body.phone}", "null"), street = NULLIF("${req.body.street}", "null"), city = NULLIF("${req.body.city}", "null"), state = NULLIF("${req.body.state}", "null"), zip = NULLIF("${req.body.zip}", "null"), children = NULLIF("${req.body.children}", "null"), adults = NULLIF("${req.body.adults}", "null"), seniors = NULLIF("${req.body.seniors}", "null"), totalOccupants = NULLIF("${req.body.totalOccupants}", "null"), weeklyIncome = NULLIF("${req.body.weeklyIncome}", "null"), monthlyIncome = NULLIF("${req.body.monthlyIncome}", "null"), annualIncome = NULLIF("${req.body.annualIncome}", "null"), totalIncome = NULLIF("${req.body.totalIncome}", "null"), dateAltered = "${req.body.dateAltered}"  WHERE ApplicantID = "${req.body.ApplicantID}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -294,7 +349,8 @@ app.put("/applicant/update", (req, res, next) => {
 //Endpoint for removing an applicant from the database.
 app.delete("/remove/applicant", (req, res) => {
 	let deleteApplicant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `DELETE FROM applicant WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -323,7 +379,8 @@ app.post("/new_foodbank_list", (req, res, next) => {
 	let requiredData = [req.body.title];
 
 	let saveNewTableName = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `INSERT INTO FoodBankList (title) VALUES (?);`;
 
 		currentDb.query(sql, [requiredData], (err, results) => {
@@ -337,7 +394,8 @@ app.post("/new_foodbank_list", (req, res, next) => {
 	});
 
 	let createNewTable = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `CREATE TABLE ${req.body.title} (firstName VARCHAR(20), lastName VARCHAR(20), phone VARCHAR(15), present VARCHAR(10), ApplicantID INT);`;
 
 		currentDb.query(sql, (err, results) => {
@@ -369,7 +427,8 @@ app.post("/save-list/list-name/:listName", (req, res) => {
 	];
 
 	let insertApplicants = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `INSERT INTO ${req.params.listName} (firstName, lastName, phone, present, ApplicantID) VALUES (?);`;
 
 		currentDb.query(sql, [requestDataValues], (err, results) => {
@@ -403,7 +462,8 @@ app.delete("/remove-attendant/table/:tableName", (req, res) => {
 	let table = req.params.tableName;
 
 	let removeAttendant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `DELETE FROM ${table} WHERE firstName = "${firstName}" AND lastName = "${lastName}" AND ApplicantID = "${id}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -424,7 +484,8 @@ app.delete("/remove-attendant/table/:tableName", (req, res) => {
 //This will be used to return all tables from the database.
 app.get("/all/food-bank-lists", (req, res) => {
 	let retrieveAllLists = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM FoodBankList`;
 
 		currentDb.query(sql, (err, results) => {
@@ -451,7 +512,8 @@ app.get("/all/food-bank-lists", (req, res) => {
 //This will be used to return a specific list from the database.
 app.get("/get-past-list/list-name/:listName/", (req, res) => {
 	let retrieveTable = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM ${req.params.listName};`;
 
 		currentDb.query(sql, (err, results) => {
@@ -478,7 +540,8 @@ app.get("/get-past-list/list-name/:listName/", (req, res) => {
 //This will be used to return a list and all of the data for each applicant in the foodbank list.
 app.get("/get-past-list/list-name/:listName/get-all", (req, res) => {
 	let retrieveTable = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM ${req.params.listName} LEFT JOIN applicant ON applicant.ApplicantID = ${req.params.listName}.ApplicantID ORDER BY ${req.params.listName}.lastName;`;
 
 		currentDb.query(sql, (err, results) => {
@@ -504,7 +567,8 @@ app.get("/get-past-list/list-name/:listName/get-all", (req, res) => {
 //this function will be used to delete a list from the database and it also removes the list from the table that holds all of the list names.
 app.delete("/delete-list/", (req, res) => {
 	let removeFromList = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `DELETE FROM FoodBankList WHERE Table_ID = ${req.body.Table_ID} AND title = "${req.body.title}";`;
 
 		currentDb.query(sql, (err, result) => {
@@ -518,7 +582,8 @@ app.delete("/delete-list/", (req, res) => {
 	});
 
 	let removeTable = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `DROP TABLE ${req.body.title};`;
 
 		currentDb.query(sql, (err, result) => {
@@ -545,7 +610,8 @@ app.delete("/delete-list/", (req, res) => {
 //Retrieve the most recent food bank list title.
 app.get("/most-recent-fb-list", (req, res) => {
 	let getFoodBankLists = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = "SELECT * FROM FoodBankList ORDER BY DateCreated DESC";
 
 		currentDb.query(sql, (err, results) => {
@@ -571,7 +637,8 @@ app.get("/most-recent-fb-list", (req, res) => {
 
 //This is going to be the api endpoint used to update an attendant's status of being present or not present.
 app.put("/update-attendant-status", (req, res) => {
-	let currentDb = mysql.createConnection(Db);
+	let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+	let currentDb = mysql.createConnection(Db.getDb());
 	let sql = `UPDATE ${req.body.title} SET present = "${req.body.present}" WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
 
 	let updateAttendantPresent = new Promise((resolve, reject) => {
@@ -604,7 +671,8 @@ app.put("/update-attendant-status", (req, res) => {
 app.get(
 	"/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID",
 	(req, res) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM ${req.params.tableName} WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}" AND ApplicantID = "${req.params.ApplicantID}";`;
 
 		let findApplicantPresentStatus = new Promise((resolve, reject) => {
@@ -633,7 +701,8 @@ app.get(
 //Retrieve all applicants who have incomplete application forms
 app.get("/all-applicants/partial-forms", (req, res) => {
 	let getPartialForms = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql =
 			"SELECT * FROM applicant WHERE firstName IS NULL OR lastName IS NULL OR phone IS NULL OR street IS NULL OR city IS NULL OR state is NULL OR zip IS NULL OR children IS NULL OR  adults IS NULL OR seniors IS NULL OR totalOccupants IS NULL OR weeklyIncome IS NULL OR monthlyIncome IS NULL OR annualIncome IS NULL OR totalIncome IS NULL;";
 
@@ -653,7 +722,8 @@ app.get("/all-applicants/partial-forms", (req, res) => {
 //Retrieve all of seniors.
 app.get("/dashboard-statistics/:table", (req, res) => {
 	let retrieveAll = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -679,7 +749,8 @@ app.get("/dashboard-statistics/:table", (req, res) => {
 //This query will be used to return all families who have registered this month.
 app.get("/dashboard-statistics-unique/:table", (req, res) => {
 	let retrieveUnique = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true" AND MONTH(sqlDate) = MONTH(SYSDATE());`;
 
 		currentDb.query(sql, (err, results) => {
@@ -705,7 +776,8 @@ app.get("/dashboard-statistics-unique/:table", (req, res) => {
 //This query will be used to find an applicant by applicant ID in the current foodbank list.
 app.get('/find-user/table/:table/applicant/:id', (req, res) => {
 	let retrieveApplicant = new Promise ((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `SELECT * FROM ${req.params.table} WHERE ApplicantID = "${req.params.id}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -728,7 +800,8 @@ app.get('/find-user/table/:table/applicant/:id', (req, res) => {
 //Used to update an applicant's information only in the current foodbank list.
 app.put('/update-applicant/current-list', (req, res) => {
 	let updateTableApplicant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `UPDATE ${req.body.tableName} SET firstName = "${req.body.firstName}", lastName = "${req.body.lastName}", phone = NULLIF("${req.body.phone}", "null") WHERE ApplicantID = "${req.body.ApplicantID}";`;
 
 		currentDb.query(sql, (err, results) => {
@@ -745,7 +818,8 @@ app.put('/update-applicant/current-list', (req, res) => {
 
 
 	let updateApplicant = new Promise((resolve, reject) => {
-		let currentDb = mysql.createConnection(Db);
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
 		let sql = `UPDATE applicant SET firstName = NULLIF("${req.body.firstName}", "null"), lastName = NULLIF("${req.body.lastName}", "null"), phone = NULLIF("${req.body.phone}", "null"), street = NULLIF("${req.body.street}", "null"), city = NULLIF("${req.body.city}", "null"), state = NULLIF("${req.body.state}", "null"), zip = NULLIF("${req.body.zip}", "null"), children = NULLIF("${req.body.children}", "null"), adults = NULLIF("${req.body.adults}", "null"), seniors = NULLIF("${req.body.seniors}", "null"), totalOccupants = NULLIF("${req.body.totalOccupants}", "null"), weeklyIncome = NULLIF("${req.body.weeklyIncome}", "null"), monthlyIncome = NULLIF("${req.body.monthlyIncome}", "null"), annualIncome = NULLIF("${req.body.annualIncome}", "null"), totalIncome = NULLIF("${req.body.totalIncome}", "null"), dateAltered = "${req.body.dateAltered}"  WHERE ApplicantID = "${req.body.ApplicantID}";`;
 
 		currentDb.query(sql, (err, results) => {
