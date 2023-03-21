@@ -50,7 +50,7 @@ const dataPoints = [
     placeHolder: "City",
   },
   {
-    value: "",
+    value: "PA",
     type: "text",
     maxWidth: 30,
     name: "state",

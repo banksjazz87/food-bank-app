@@ -11,7 +11,7 @@ export default function NewApplicantForm(props) {
     phone: null,
     street: null,
     city: null,
-    state: null,
+    state: "PA",
     zip: null,
     children: null,
     adults: null,
@@ -63,6 +63,7 @@ export default function NewApplicantForm(props) {
             key={`input_${y}`}
             type={x.type}
             id={x.name}
+            value={x.value ? x.value : field[x.name]}
             className="new_applicant_input"
             maxLength={x.maxWidth}
             name={x.name}
