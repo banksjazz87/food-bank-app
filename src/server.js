@@ -19,10 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", express.static("build"));
 
 
-/*app.get('/*', (req, res) => {
-	res.sendFile('/Users/chris/Documents/foodBankApp/my-app/build/index.html');
-});*/
-
 //List of all of the react router paths.
 const menuPaths = ['/dashboard', '/new_applicant', '/login', '/search', '/current-registered-list', '/foodbank-list-dashboard', '/create-foodbank-list', '/past-registered-list', '/printed-applicant-form'];
 
