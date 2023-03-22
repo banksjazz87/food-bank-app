@@ -72,6 +72,7 @@ const dataPoints = [
   },
   {
     value: 0,
+    occupants: true,
     type: "number",
     maxWidth: 2,
     name: "children",
@@ -79,6 +80,7 @@ const dataPoints = [
   },
   {
     value: 0,
+    occupants: true,
     type: "number",
     maxWidth: 2,
     name: "adults",
@@ -87,6 +89,7 @@ const dataPoints = [
   {
     value: 0,
     type: "number",
+    occupants: true,
     maxWidth: 2,
     name: "seniors",
     placeHolder: "Number of Senior Citizens",

@@ -23,6 +23,29 @@ const MathFunctions = {
 
     return num;
   },
+
+  checkForValidNumbers: ([...args]) => {
+    let validNumbers = false;
+    for (let i = 0; i < args.length; i++) {
+      if (!isNaN(parseInt(args[i]))) {
+        validNumbers = true;
+      } else {
+        validNumbers = false;
+      }
+    }
+    return validNumbers;
+  },
+
+  returnSum: ([...args]) => {
+    let total = 0;
+    
+    if (MathFunctions.checkForValidNumbers(args)) {
+      for (let i = 0; i < args.length; i++) {
+        total += parseInt(args[i]);
+      }
+      return total;
+    }
+  }
 };
 
 export default MathFunctions;

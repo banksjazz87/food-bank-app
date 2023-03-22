@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar.jsx";
+import MathFunctions from "../functions/mathFunctions.js";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import PrintFoodBankList from "../components/printFoodBankList.jsx";
@@ -66,6 +67,16 @@ export default function CurrentFoodBankList() {
         }
       });
   }, []);
+
+
+  //Update the current value for total occupants, on the edit form.
+ useEffect(() => {
+    let copyOfArr = selectedApplicant.slice();
+    copyOfArr[0].totalOccupants = MathFunctions.returnSum([selectedApplicant[0].adults, selectedApplicant[0].children, selectedApplicant[0].seniors]);
+
+    setSelectedApplicant(copyOfArr);
+  }, [selectedApplicant]);
+
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {

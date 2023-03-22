@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
+import MathFunctions from "../functions/mathFunctions.js";
 import "../assets/styles/newApplicantForm.scss";
 
 export default function NewApplicantForm(props) {
   //React Hook that will be used to update the state of each input, will initialize the state with the dateAltered field.
   const currentDate = new Date();
+
   const initialFormState = {
     firstName: "",
     lastName: "",
@@ -13,9 +15,9 @@ export default function NewApplicantForm(props) {
     city: null,
     state: "PA",
     zip: null,
-    children: null,
-    adults: null,
-    seniors: null,
+    children: 0,
+    adults: 0,
+    seniors: 0,
     totalOccupants: null,
     weeklyIncome: null,
     monthlyIncome: null,
@@ -23,8 +25,14 @@ export default function NewApplicantForm(props) {
     totalIncome: null,
     dateAltered: currentDate.toLocaleDateString(),
   };
-
   const [field, setField] = useState(initialFormState);
+
+  useEffect(() => {
+    setField({...field, 
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])});
+  }, [field]);
+
+  
 
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
@@ -63,17 +71,16 @@ export default function NewApplicantForm(props) {
             key={`input_${y}`}
             type={x.type}
             id={x.name}
-            value={x.value ? x.value : field[x.name]}
+            value={x.value === 'PA' ? x.value : field[x.name]}
             className="new_applicant_input"
             maxLength={x.maxWidth}
             name={x.name}
             min={x.type === "number" ? 0 : ""}
             onChange={(e) => {
-                if (x.currency === true) {
-                  setField({...field, [x.name]: parseInt(e.target.value).toFixed(2)});
-                } else {
-                  setField({ ...field, [x.name]: e.target.value });
-                }
+              if (x.currency === true) {
+                setField({...field, [x.name]: parseInt(e.target.value).toFixed(2)});
+              }
+                setField({ ...field, [x.name]: e.target.value });
             }}
           />
         </div>
