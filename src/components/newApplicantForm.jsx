@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import MathFunctions from "../functions/mathFunctions.js";
+import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
 import "../assets/styles/newApplicantForm.scss";
 
 export default function NewApplicantForm(props) {
@@ -18,7 +19,7 @@ export default function NewApplicantForm(props) {
     children: 0,
     adults: 0,
     seniors: 0,
-    totalOccupants: null,
+    totalOccupants: 0,
     weeklyIncome: null,
     monthlyIncome: null,
     annualIncome: null,
@@ -26,13 +27,36 @@ export default function NewApplicantForm(props) {
     dateAltered: currentDate.toLocaleDateString(),
   };
   const [field, setField] = useState(initialFormState);
+  const [zipCodes, setZipCodes] = useState({});
 
+
+  //This is used to update the total occupants after all occupants have been entered.
   useEffect(() => {
     setField({...field, 
-        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])});
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
+      });
   }, [field]);
 
-  
+
+  //This is used to update the zip code if a zip code exists for the entered city.
+  useEffect(() => {
+    if (field.city) {
+      setField({...field, 
+        zip: ZipCodeFunctions.getZipCode(zipCodes, field.city)})
+    }
+  }, [zipCodes, field]);
+
+
+  //Sets the zipCodes object to be used when checking to see if a zip code exists for a city.
+  useEffect(() => {
+    fetch('/get-city-zip').then(data => data.json()).then((final) => {
+      if (final.length > 0){
+        let codes = ZipCodeFunctions.getZipCodePairs(final);
+        setZipCodes(codes);
+      } 
+      });
+  }, []);
+
 
   const returnFields = dataPoints.map((x, y) => {
     if (x.value === null) {
@@ -71,7 +95,7 @@ export default function NewApplicantForm(props) {
             key={`input_${y}`}
             type={x.type}
             id={x.name}
-            value={x.value === 'PA' ? x.value : field[x.name]}
+            value={field[x.name]}
             className="new_applicant_input"
             maxLength={x.maxWidth}
             name={x.name}

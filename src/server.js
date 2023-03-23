@@ -836,3 +836,28 @@ app.put('/update-applicant/current-list', (req, res) => {
 		.catch(err => res.send(sqlError(err)));
 		
 });
+
+//This will be an endpoint used to retrieve the city and zipcode pairs.
+app.get('/get-city-zip', (req, res) => {
+	let getCityZip = new Promise((resolve, reject) => {
+		let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+		let currentDb = mysql.createConnection(Db.getDb());
+		let sql = `SELECT DISTINCT zip, city FROM applicant;`;
+
+		currentDb.query(sql, (err, results) => {
+			if (err) {
+				console.log('ERRROR', err);
+				return reject(err);
+			} else {
+				console.log(results);
+				return resolve(results);
+			}
+		});
+		currentDb.end((err) => err ? console.log(err) : console.log('end'));
+	});
+
+	getCityZip.then((data) => {
+		console.log(data);
+		res.send(data)}
+	).catch((err) => console.log(err));
+})

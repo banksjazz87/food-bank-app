@@ -145,7 +145,7 @@ const dataPoints = [
       const currentDate = new Date();
       return currentDate.toLocaleDateString();
     },
-    type: "date",
+    type: "text",
     style: "hidden",
     name: "dateAltered",
     placeHolder: "Revision Date",
