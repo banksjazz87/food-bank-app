@@ -30,19 +30,16 @@ export default function NewApplicantForm(props) {
   const [zipCodes, setZipCodes] = useState({});
 
 
-  //This is used to update the total occupants after all occupants have been entered.
-  useEffect(() => {
-    setField({...field, 
-        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
-      });
-  }, [field]);
-
-
-  //This is used to update the zip code if a zip code exists for the entered city.
+  //This is used to update the zip code if a zip code exists for the entered city, and also updates the total occupants.
   useEffect(() => {
     if (field.city) {
       setField({...field, 
-        zip: ZipCodeFunctions.getZipCode(zipCodes, field.city)})
+        zip: ZipCodeFunctions.getZipCode(zipCodes, field.city, field.zip), 
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])
+      });
+    } else {
+      setField({...field, 
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])});
     }
   }, [zipCodes, field]);
 

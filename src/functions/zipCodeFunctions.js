@@ -15,11 +15,13 @@ const ZipCodeFunctions = {
     },
 
     //Get the zip code for a specific city.
-    getZipCode: (obj, city) => {
+    getZipCode: (obj, city, input) => {
         let cityLowerCase = city.toLowerCase();
 
         if (obj[cityLowerCase]) {
             return obj[cityLowerCase];
+        } else {
+            return input;
         }
     },
 }
