@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import SearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayApplicant.jsx";
-import MathFunctions from "../functions/mathFunctions.js";
-import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
 import EditDeleteButtons from "../components/editDeleteButtons.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import DeleteAlert from "../components/deleteAlert.jsx";
@@ -39,42 +37,8 @@ export default function SearchApplicants() {
   const [showEditPage, setShowEditPage] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [searchBy, setSearchBy] = useState("");
-  const [zipCodes, setZipCodes] = useState({});
+  
  
- //Update the zip code and the total occupants as the user types thier information in.
-  useEffect(() => {
-    if (showEditPage) {
-      let copyOfApplicant = applicantInfo.slice();
-
-      if (copyOfApplicant[0].city) {
-        copyOfApplicant[0].zip = ZipCodeFunctions.getZipCode(zipCodes, copyOfApplicant[0].city, copyOfApplicant[0].zip);
-  
-        copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([copyOfApplicant[0].children, copyOfApplicant[0].adults, copyOfApplicant[0].seniors ]);
-  
-        setApplicantInfo(copyOfApplicant);
-
-      } else {
-        let copyOfApplicant = applicantInfo.slice();
-  
-        copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([copyOfApplicant[0].children, copyOfApplicant[0].adults, copyOfApplicant[0].seniors]);
-  
-        setApplicantInfo(copyOfApplicant);
-      }
-    
-    }
-  }, [applicantInfo, showEditPage, zipCodes]);
-
-   //Set zip codes object
-   useEffect(() => {
-    fetch('/get-city-zip').then(data => data.json()).then((final) => {
-      if (final.length > 0){
-        let codes = ZipCodeFunctions.getZipCodePairs(final);
-        setZipCodes(codes);
-      } 
-      });
-  }, []);
-
-
   //This is called when the user selects an option from a SearchBar.
   const updateApplicant = (array) => {
     setApplicantInfo(array);
@@ -88,6 +52,10 @@ export default function SearchApplicants() {
     setShowEditPage(true);
     setShowApplicant(false);
   };
+
+  const editApplicant = (array) => {
+    setApplicantInfo(array);
+  }
 
   //Updates the applicant's info when a revision is made.
   const updateInfo = (field, value) => {
@@ -202,6 +170,7 @@ export default function SearchApplicants() {
         display={showEditPage}
         currentApplicant={applicantInfo}
         handleChange={updateInfo}
+        updateApplicant={editApplicant}
       />
 
       <DeleteAlert

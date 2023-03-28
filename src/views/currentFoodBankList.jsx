@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar.jsx";
-import MathFunctions from "../functions/mathFunctions.js";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import PrintFoodBankList from "../components/printFoodBankList.jsx";
 import postRequest from "../functions/post.js";
-import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import "../assets/styles/currentFoodBankList.scss";
@@ -44,7 +42,7 @@ export default function CurrentFoodBankList() {
   const [showEditPage, setShowEditPage] = useState(false);
   const [totalPresent, setTotalPresent] = useState(0);
   const [selectedRow, setSelectedRow] = useState(0);
-  const [zipCodes, setZipCodes] = useState({});
+ 
 
   ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
@@ -71,39 +69,17 @@ export default function CurrentFoodBankList() {
   }, []);
 
 
-  //This is used to update the zip code if a zip code exists for the entered city, and also updates the total occupants.
-  useEffect(() => {
-    const copyOfApplicant = selectedApplicant.slice();
-
-    if (copyOfApplicant[0].city) {
-      copyOfApplicant[0].zip = ZipCodeFunctions.getZipCode(zipCodes, copyOfApplicant[0].city, copyOfApplicant[0].zip);
-
-      copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([copyOfApplicant[0].children, copyOfApplicant[0].adults, copyOfApplicant[0].seniors ]);
-
-      setSelectedApplicant(copyOfApplicant);
-    } else {
-      let copyOfApplicant = selectedApplicant.slice();
-
-      copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([copyOfApplicant[0].children, copyOfApplicant[0].adults, copyOfApplicant[0].seniors]);
-
-      setSelectedApplicant(copyOfApplicant);
-    }
-  }, [zipCodes, selectedApplicant]);
-
-  //Set zip codes object
-  useEffect(() => {
-    fetch('/get-city-zip').then(data => data.json()).then((final) => {
-      if (final.length > 0){
-        let codes = ZipCodeFunctions.getZipCodePairs(final);
-        setZipCodes(codes);
-      } 
-      });
-  }, []);
+  
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {
     setTable(arr);
   };
+
+  //Used to update the selected applicant this will be passed to the edit page component.
+  const updateSelectedApplicant = (arr) => {
+    setSelectedApplicant(arr);
+  }
 
   //Inserts an already existing applicant into the most recent table.
   const insertAlreadyExistingIntoTable = (arr) => {
@@ -356,6 +332,7 @@ export default function CurrentFoodBankList() {
         handleChange={updateInfo}
         hidePage={hideEditPage}
         clearForm={clearSelectedApplicant}
+        updateApplicant={updateSelectedApplicant}
       />
     </div>
   );

@@ -1,11 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
+import MathFunctions from "../functions/mathFunctions.js";
 import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import "../assets/styles/editDisplay.scss";
 
 export default function EditPage(props) {
   const navigate = useNavigate();
+
+  const [zipCodes, setZipCodes] = useState({});
+
+  //Get all of the different zip codes.
+  useEffect(() => {
+    fetch('/get-city-zip').then(data => data.json()).then((final) => {
+      if (final.length > 0){
+        let codes = ZipCodeFunctions.getZipCodePairs(final);
+        setZipCodes(codes);
+        console.log(zipCodes);
+        console.log(codes);
+      } 
+      });
+  }, []);
+
+  useEffect(() => {
+    if (props.display) {
+      let copyOfApplicant = props.currentApplicant.slice();
+      let firstIndex = copyOfApplicant[0];
+
+      if (firstIndex.city) {
+        copyOfApplicant[0].zip = ZipCodeFunctions.getZipCode(zipCodes, firstIndex.city, firstIndex.zip);
+  
+        copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors ]);
+  
+        props.updateApplicant(copyOfApplicant);
+
+      } else {
+        let copyOfApplicant = props.currentApplicant.slice();
+        let firstIndex = copyOfApplicant[0];
+  
+        copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors]);
+  
+        props.updateApplicant(copyOfApplicant);
+      }
+    
+    }
+  }, [props, zipCodes]);
+
  
   const returnInputs = dataPoints.map((x, y) => {
     if (x.type === null) {
