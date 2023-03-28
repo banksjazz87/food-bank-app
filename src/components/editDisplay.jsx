@@ -6,7 +6,7 @@ import "../assets/styles/editDisplay.scss";
 
 export default function EditPage(props) {
   const navigate = useNavigate();
-
+ 
   const returnInputs = dataPoints.map((x, y) => {
     if (x.type === null) {
       return (
