@@ -26,9 +26,9 @@ export default function NewApplicantForm(props) {
     totalIncome: null,
     dateAltered: currentDate.toLocaleDateString(),
   };
+
   const [field, setField] = useState(initialFormState);
   const [zipCodes, setZipCodes] = useState({});
-
 
   //This is used to update the zip code if a zip code exists for the entered city, and also updates the total occupants.
   useEffect(() => {
