@@ -42,7 +42,7 @@ export default function CurrentFoodBankList() {
   const [showEditPage, setShowEditPage] = useState(false);
   const [totalPresent, setTotalPresent] = useState(0);
   const [selectedRow, setSelectedRow] = useState(0);
- 
+
 
   ///Comment out for development
   //Setting the tableInfo as well as the table data on the initial render.
@@ -69,7 +69,7 @@ export default function CurrentFoodBankList() {
   }, []);
 
 
-  
+
 
   //This function will be used to just update the current table data, replacing it with a new array.
   const updateTable = (arr) => {

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import SearchBar from "../components/searchBar.jsx";
 import DisplayApplicant from "../components/displayApplicant.jsx";
 import EditDeleteButtons from "../components/editDeleteButtons.jsx";
@@ -37,8 +37,8 @@ export default function SearchApplicants() {
   const [showEditPage, setShowEditPage] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [searchBy, setSearchBy] = useState("");
-  
- 
+
+
   //This is called when the user selects an option from a SearchBar.
   const updateApplicant = (array) => {
     setApplicantInfo(array);
