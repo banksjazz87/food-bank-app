@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import MathFunctions from "../functions/mathFunctions.js";
 import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
+import PhoneNumberCheck from "../functions/phoneNumberCheck.js";
 import "../assets/styles/newApplicantForm.scss";
 
 export default function NewApplicantForm(props) {
@@ -35,11 +36,14 @@ export default function NewApplicantForm(props) {
     if (field.city) {
       setField({...field, 
         zip: ZipCodeFunctions.getZipCode(zipCodes, field.city, field.zip), 
-        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
+        phone: PhoneNumberCheck.checkLength(field.phone)
       });
     } else {
       setField({...field, 
-        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors])});
+        totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
+        phone: PhoneNumberCheck.checkLength(field.phone)
+      });
     }
   }, [zipCodes, field]);
 

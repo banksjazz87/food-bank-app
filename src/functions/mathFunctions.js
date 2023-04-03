@@ -13,16 +13,15 @@ const MathFunctions = {
   //Takes a string and returns a string of the values that can be numbers.
   returnNums: (string) => {
     let num = "";
-
     for (let i = 0; i < string.length; i++) {
       let numCheck = parseInt(string[i]);
       if (!isNaN(numCheck)) {
         num = num + string[i];
       }
     }
-
     return num;
   },
+
 
   checkForValidNumbers: ([...args]) => {
     let validNumbers = false;
@@ -36,9 +35,9 @@ const MathFunctions = {
     return validNumbers;
   },
 
+  
   returnSum: ([...args]) => {
     let total = 0;
-    
     if (MathFunctions.checkForValidNumbers(args)) {
       for (let i = 0; i < args.length; i++) {
         total += parseInt(args[i]);

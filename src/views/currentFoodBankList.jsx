@@ -18,7 +18,7 @@ export default function CurrentFoodBankList() {
     phone: "",
     street: "",
     city: "",
-    state: "",
+    state: "PA",
     zip: "",
     children: "",
     adults: "",

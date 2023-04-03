@@ -24,7 +24,7 @@ const dataPoints = [
   {
     value: "",
     type: "tel",
-    maxWidth: 15,
+    maxWidth: 14,
     name: "phone",
     placeHolder: "Phone Number",
   },

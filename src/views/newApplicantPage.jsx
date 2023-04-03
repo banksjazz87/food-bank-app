@@ -7,19 +7,25 @@ import "../assets/styles/newApplicantPage.scss";
 
 export default function Applicant() {
   const navigate = useNavigate();
+
   const newApplicantConfirmation = (obj) => {
+
     if (obj.firstName.length === 0 || obj.lastName.length === 0) {
       alert('A First Name and Last Name must be provided.');
       const topOfPage = document.getElementById('new_applicant_wrapper');
       topOfPage.scrollIntoView({behavior: "smooth"});
+
     } else {
+      
     postRequest("/new-applicant", obj).then((data) => {
+
       if (data.status === "okay") {
         alert(data.message);
         navigate("/dashboard", { replace: true });
       } else {
         alert(data.message);
       }
+
     });
   };
 };
