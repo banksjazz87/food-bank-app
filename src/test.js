@@ -75,6 +75,16 @@ function setPhoneNumber(str) {
     return formattedArray.join(' ').toString();
 }
 
+function returnNumbers(str) {
+    let finalStr = '';
+    for (let i = 0; i < str.length; i++) {
+        if (!isNaN(parseInt(str[i]))) {
+            finalStr += str[i];
+        }
+    }
+    return finalStr;
+}
+
 
 console.log(addBracketsAndDash(814));
 
@@ -91,4 +101,6 @@ console.log(formatFullPhoneNumber('8143712141'));
 
 console.log(setPhoneNumber('814'));
 console.log(setPhoneNumber('814657'));
-console.log(setPhoneNumber('8146571245'));
+console.log(setPhoneNumber('81465712'));
+
+console.log(returnNumbers('8!2....3'));

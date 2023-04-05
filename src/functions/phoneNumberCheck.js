@@ -94,20 +94,33 @@ const PhoneNumberCheck = {
         }
     },
 
-    setPhoneNumber: (str) => {
-        let formattedArray = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
+    phoneSetUp: ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''],
 
+    returnNumbers: (str) => {
+        let finalStr = '';
+        for (let i = 0; i < str.length; i++) {
+            if (!isNaN(parseInt(str[i]))) {
+                finalStr += str[i];
+            }
+        }
+        return finalStr;
+    },
+
+    setPhoneNumber: (str) => {
+        if (str) {
+        str = PhoneNumberCheck.returnNumbers(str);
+        PhoneNumberCheck.phoneSetUp = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
         let arrayOfStr = str.split('');
 
-        for (let i = 0; i < formattedArray.length; i++) {
-            if (formattedArray[i] === '' && arrayOfStr.length > 0) {
-                formattedArray[i] = arrayOfStr[0];
+        for (let i = 0; i < PhoneNumberCheck.phoneSetUp.length; i++) {
+            if (PhoneNumberCheck.phoneSetUp[i] === "" && arrayOfStr.length > 0) {
+                PhoneNumberCheck.phoneSetUp[i] = arrayOfStr[0];
                 arrayOfStr.splice(0, 1);
             }
         }
 
-        return formattedArray.join(' ').toString();
-
+        return PhoneNumberCheck.phoneSetUp.join('').toString();
+    }
 }
 }
 
