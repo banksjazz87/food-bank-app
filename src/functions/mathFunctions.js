@@ -10,6 +10,7 @@ const MathFunctions = {
     return parseInt(stringOfNum);
   },
 
+  
   //Takes a string and returns a string of the values that can be numbers.
   returnNums: (string) => {
     let num = "";
@@ -35,7 +36,7 @@ const MathFunctions = {
     return validNumbers;
   },
 
-  
+
   returnSum: ([...args]) => {
     let total = 0;
     if (MathFunctions.checkForValidNumbers(args)) {

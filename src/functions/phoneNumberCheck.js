@@ -1,7 +1,7 @@
 const PhoneNumberCheck = {
 
     addBracketsAndDash: (str) => {
-        if (str.length === 3) {
+        if (str.length === 3 && str[0] !== "(") {
             let newStr = `(${str})-`;
             return newStr;
         }
@@ -43,39 +43,72 @@ const PhoneNumberCheck = {
             } else {
                 alert('invalid phone number');
             }
-        } else if (str.length === 10 && str[0] !== '(' && str[4] !== ')' && str[5] !== "-" && str[9] !== '-') {
+        } /*else if (str.length === 10 && str[0] !== '(' && str[4] !== ')' && str[5] !== "-" && str[9] !== '-') {
             let array = str.split('');
             let firstThree = array.slice(0, 3).join('').toString();
             let secondThree = array.slice(3, 6).join('').toString();
             let finalFour = array.slice(6).join('').toString();
             let formattedPhone = `(${firstThree})-${secondThree}-${finalFour}`;
             return formattedPhone;
-
+        } else {
+            return str + input.value;
+        }*/
+        else {
+            return str;
         }
     },
 
+    previousLength: 0,
 
     checkLength: (str) => {
         if (str) {
-            if (PhoneNumberCheck.checkForNumber(str[str.length - 1])) {
-                if (str && str.length === 3) {
-                    return PhoneNumberCheck.addBracketsAndDash(str);
-                } else if (str && str.length === 9) {
-                    return PhoneNumberCheck.addSecondDash(str);
-                } else if (str && str.length >= 10) {
-                    return PhoneNumberCheck.checkPhoneFormat(str);
-                } else if (str) {
-                    return str;
+
+            if (str.length > PhoneNumberCheck.previousLength) {
+                if (PhoneNumberCheck.checkForNumber(str[str.length - 1])) {
+                    if (str && str.length === 3) {
+                        let currentString = PhoneNumberCheck.addBracketsAndDash(str);
+                        PhoneNumberCheck.previousLength = currentString.length;
+                        return currentString;
+                    } else if (str && str.length === 9) {
+                        let currentString = PhoneNumberCheck.addSecondDash(str);
+                        PhoneNumberCheck.previousLength = currentString.length;
+                        return currentString;
+                    } else if (str && str.length > 10) {
+                        let currentString = PhoneNumberCheck.checkPhoneFormat(str);
+                        PhoneNumberCheck.previousLength = currentString.length;
+                        return currentString;
+                    } else if (str) {
+                        PhoneNumberCheck.previousLength = str.length;
+                        return str;
+                    } else {
+                        return;
+                    }
                 } else {
-                    return;
+                    alert('Please provide a valid phone number');
+                    return '';
                 }
             } else {
-                alert('Please provide a valid phone number');
-                return '';
+                PhoneNumberCheck.previousLength = str.length;
+                return str;
             }
         }
     },
 
+    setPhoneNumber: (str) => {
+        let formattedArray = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
+
+        let arrayOfStr = str.split('');
+
+        for (let i = 0; i < formattedArray.length; i++) {
+            if (formattedArray[i] === '' && arrayOfStr.length > 0) {
+                formattedArray[i] = arrayOfStr[0];
+                arrayOfStr.splice(0, 1);
+            }
+        }
+
+        return formattedArray.join(' ').toString();
+
+}
 }
 
 export default PhoneNumberCheck;

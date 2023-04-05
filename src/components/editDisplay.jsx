@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ZipCodeFunctions from "../functions/zipCodeFunctions.js";
 import MathFunctions from "../functions/mathFunctions.js";
+import PhoneNumberCheck from "../functions/phoneNumberCheck.js";
 import putRequest from "../functions/putRequest.js";
 import dataPoints from "../variables/newApplicantDataPoints.js";
 import "../assets/styles/editDisplay.scss";
@@ -17,8 +18,6 @@ export default function EditPage(props) {
       if (final.length > 0) {
         let codes = ZipCodeFunctions.getZipCodePairs(final);
         setZipCodes(codes);
-        console.log(zipCodes);
-        console.log(codes);
       }
     });
   }, []);
@@ -33,6 +32,8 @@ export default function EditPage(props) {
 
         copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors]);
 
+        copyOfApplicant[0].phone = PhoneNumberCheck.checkLength(firstIndex.phone);
+
         props.updateApplicant(copyOfApplicant);
 
       } else {
@@ -40,6 +41,8 @@ export default function EditPage(props) {
         let firstIndex = copyOfApplicant[0];
 
         copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors]);
+
+        copyOfApplicant[0].phone = PhoneNumberCheck.checkLength(firstIndex.phone);
 
         props.updateApplicant(copyOfApplicant);
       }

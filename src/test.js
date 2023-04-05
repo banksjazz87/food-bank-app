@@ -61,7 +61,19 @@ function formatFullPhoneNumber(str){
     return formattedPhone;
 }
 
+function setPhoneNumber(str) {
+    let formattedArray = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
+    let arrayOfStr = str.split('');
 
+    for (let i = 0; i < formattedArray.length; i++) {
+        if (formattedArray[i] === '' && arrayOfStr.length > 0) {
+            formattedArray[i] = arrayOfStr[0];
+            arrayOfStr.splice(0, 1);
+        }
+    }
+
+    return formattedArray.join(' ').toString();
+}
 
 
 console.log(addBracketsAndDash(814));
@@ -76,3 +88,7 @@ console.log(checkPhoneFormat('8146712189'));
 console.log(checkForNumber('fdfdsaf81'));
 console.log(checkForNumber('81456789'));
 console.log(formatFullPhoneNumber('8143712141'));
+
+console.log(setPhoneNumber('814'));
+console.log(setPhoneNumber('814657'));
+console.log(setPhoneNumber('8146571245'));

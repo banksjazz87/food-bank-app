@@ -37,12 +37,13 @@ export default function NewApplicantForm(props) {
       setField({...field, 
         zip: ZipCodeFunctions.getZipCode(zipCodes, field.city, field.zip), 
         totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
-        phone: PhoneNumberCheck.checkLength(field.phone)
+        phone: PhoneNumberCheck.setPhoneNumber(field.phone)
       });
     } else {
       setField({...field, 
         totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]), 
-        phone: PhoneNumberCheck.checkLength(field.phone)
+        phone: PhoneNumberCheck.setPhoneNumber(field.phone)
+        
       });
     }
   }, [zipCodes, field]);
