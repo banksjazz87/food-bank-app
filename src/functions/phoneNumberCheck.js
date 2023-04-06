@@ -1,7 +1,5 @@
 const PhoneNumberCheck = {
-
-    phoneSetUp: ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''],
-
+    
     returnNumbers: (str) => {
         let finalStr = '';
         for (let i = 0; i < str.length; i++) {
@@ -14,16 +12,16 @@ const PhoneNumberCheck = {
 
     setPhoneNumber: (str) => {
         if (str) {
-            PhoneNumberCheck.phoneSetUp = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
+            let phoneFormat = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
             let arrayOfStr = PhoneNumberCheck.returnNumbers(str).split('');
 
-            for (let i = 0; i < PhoneNumberCheck.phoneSetUp.length; i++) {
-                if (PhoneNumberCheck.phoneSetUp[i] === "" && arrayOfStr.length > 0) {
-                    PhoneNumberCheck.phoneSetUp[i] = arrayOfStr[0];
+            for (let i = 0; i < phoneFormat.length; i++) {
+                if (phoneFormat[i] === "" && arrayOfStr.length > 0) {
+                    phoneFormat[i] = arrayOfStr[0];
                     arrayOfStr.splice(0, 1);
                 }
             }
-            return PhoneNumberCheck.phoneSetUp.join('').toString();
+            return phoneFormat.join('').toString();
         }
     }
 
