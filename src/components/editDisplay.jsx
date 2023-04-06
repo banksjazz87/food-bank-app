@@ -32,7 +32,7 @@ export default function EditPage(props) {
 
         copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors]);
 
-        copyOfApplicant[0].phone = PhoneNumberCheck.checkLength(firstIndex.phone);
+        copyOfApplicant[0].phone = PhoneNumberCheck.setPhoneNumber(firstIndex.phone);
 
         props.updateApplicant(copyOfApplicant);
 
@@ -42,7 +42,7 @@ export default function EditPage(props) {
 
         copyOfApplicant[0].totalOccupants = MathFunctions.returnSum([firstIndex.children, firstIndex.adults, firstIndex.seniors]);
 
-        copyOfApplicant[0].phone = PhoneNumberCheck.checkLength(firstIndex.phone);
+        copyOfApplicant[0].phone = PhoneNumberCheck.setPhoneNumber(firstIndex.phone);
 
         props.updateApplicant(copyOfApplicant);
       }
