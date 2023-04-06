@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require('cookie-parser');
 var cors = require("cors");
 const app = express();
+const path = require('node:path');
 const port = process.env.PORT || 4600;
 const mysql = require("mysql");
 
@@ -18,13 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 //The static file that will be used on the server
 app.use("/", express.static("build"));
 
-
 //List of all of the react router paths.
 const menuPaths = ['/dashboard', '/new_applicant', '/login', '/search', '/current-registered-list', '/foodbank-list-dashboard', '/create-foodbank-list', '/past-registered-list', '/printed-applicant-form'];
 
 //Send the build index.html file back when the user is on a react router path, or refreshes the page.
 app.get(menuPaths, (req, res) => {
-	res.sendFile('/Users/chris/Documents/foodBankApp/my-app/build/index.html');
+	res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 
