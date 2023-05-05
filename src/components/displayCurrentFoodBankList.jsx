@@ -150,7 +150,7 @@ export default function DisplayCurrentFoodBankList(props) {
           </td>
           <td id="firstName">{x.firstName}</td>
           <td id="phone">
-            <a className="call_button" href={`tel: ${x.phone}`}>
+            <a style={x.phone && x.phone.length > 0 ? {display: ""} : {display: "none"}}className="call_button" href={`tel: ${x.phone}`}>
               Call
             </a>
           </td>
@@ -199,7 +199,7 @@ export default function DisplayCurrentFoodBankList(props) {
             {x.firstName}
           </td>
           <td id="phone">
-            <a className="call_button" href={`tel: ${x.phone}`}>
+            <a style={x.phone && x.phone.length > 0 ? {display: ""} : {display: "none"}} className="call_button" href={`tel: ${x.phone}`}>
               Call
             </a>
           </td>
