@@ -68,6 +68,9 @@ export default function Dashboard() {
         <div id="content_wrapper">
           <div class="header_wrapper">
             <h2 id="table_name">{tableName}</h2>
+            <p>Unique Statistics for Chapel for the month of May Correction:</p>
+            <p>Total Families = 19</p>
+            <p>Total People = 44</p>
           </div>
           <StatisticCard
             heading="General Statistics"
