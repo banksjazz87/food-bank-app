@@ -392,7 +392,7 @@ app.post("/new_foodbank_list", (req, res, next) => {
     let createNewTable = new Promise((resolve, reject) => {
         let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
         let currentDb = mysql.createConnection(Db.getDb());
-        let sql = `CREATE TABLE ${req.body.title} (firstName VARCHAR(20), lastName VARCHAR(20), phone VARCHAR(15), present VARCHAR(10), ApplicantID INT);`;
+        let sql = `CREATE TABLE ${req.body.title} (firstName VARCHAR(20), lastName VARCHAR(20), phone VARCHAR(15), present VARCHAR(10), checkedIn TINYINT DEFAULT 0, checkedInNum SMALLINT DEFAULT 0, ApplicantID INT);`;
 
         currentDb.query(sql, (err, results) => {
             if (err) {
