@@ -663,6 +663,38 @@ app.put("/update-attendant-status", (req, res) => {
         });
 });
 
+//This will be used to check an applicant in upon arrival.
+app.put("/check-attendant-in", (req, res) => {
+    let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+    let currentDb = mysql.createConnection(Db.getDb());
+    let sql = `UPDATE ${req.body.title} SET checkedIn = "${req.body.checkedIn}",  WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
+
+    let updateAttendantCheckedIn = new Promise((resolve, reject) => {
+        currentDb.query(sql, (err, results) => {
+            if (err) {
+                return reject(err);
+            } else {
+                return resolve(results);
+            }
+        });
+        currentDb.end((err) => err ? console.log(err) : console.log('end'));
+    });
+
+    updateAttendantCheckedIn
+        .then((data) => {
+            res.send({
+                status: "success",
+                message: `${req.body.firstName} ${req.body.lastName
+					} is ${req.body.checkedIn === 1 ? "Checked In" : "NOT Checked In"
+					}.`,
+            });
+        })
+        .catch((err) => {
+            res.send(sqlError(err));
+            console.log("Error!", err);
+        });
+});
+
 //This is going to be a get request that will return the current status of an applicant on the current list
 app.get(
     "/applicant-present-status/:tableName/:firstName/:lastName/:ApplicantID",

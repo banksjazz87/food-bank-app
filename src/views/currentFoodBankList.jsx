@@ -6,334 +6,333 @@ import PrintFoodBankList from "../components/printFoodBankList.jsx";
 import postRequest from "../functions/post.js";
 import DeleteAlert from "../components/deleteAlert.jsx";
 import EditPage from "../components/editDisplay.jsx";
+import DisplayCurrentFoodBankCheckIn from "../components/displayCurrentFoodBankCheckIn.jsx";
 import "../assets/styles/currentFoodBankList.scss";
 
 //for development mode
 //import DummyData from "../variables/dummyData.js";
 
 export default function CurrentFoodBankList() {
-  let initialApplicant = [{
-    firstName: "",
-    lastName: "",
-    phone: "",
-    street: "",
-    city: "",
-    state: "PA",
-    zip: "",
-    children: "",
-    adults: "",
-    seniors: "",
-    totalOccupants: "",
-    weeklyIncome: "",
-    monthlyIncome: "",
-    annualIncome: "",
-    totalIncome: "",
-    dateAltered: "",
-  }
-  ];
+	let initialApplicant = [
+		{
+			firstName: "",
+			lastName: "",
+			phone: "",
+			street: "",
+			city: "",
+			state: "PA",
+			zip: "",
+			children: "",
+			adults: "",
+			seniors: "",
+			totalOccupants: "",
+			weeklyIncome: "",
+			monthlyIncome: "",
+			annualIncome: "",
+			totalIncome: "",
+			dateAltered: "",
+		},
+	];
 
-  const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
-  const [table, setTable] = useState([]);
-  const [showRemoveButtons, setShowRemoveButtons] = useState(false);
-  const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
-  const [selectedAttendant, setSelectedAttendant] = useState([]);
-  const [showEditModule, setShowEditModule] = useState(false);
-  const [selectedApplicant, setSelectedApplicant] = useState(initialApplicant);
-  const [showEditPage, setShowEditPage] = useState(false);
-  const [totalPresent, setTotalPresent] = useState(0);
-  const [selectedRow, setSelectedRow] = useState(0);
+	const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
+	const [table, setTable] = useState([]);
+	const [showRemoveButtons, setShowRemoveButtons] = useState(false);
+	const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
+	const [selectedAttendant, setSelectedAttendant] = useState([]);
+	const [showEditModule, setShowEditModule] = useState(false);
+	const [selectedApplicant, setSelectedApplicant] = useState(initialApplicant);
+	const [showEditPage, setShowEditPage] = useState(false);
+	const [totalPresent, setTotalPresent] = useState(0);
+	const [selectedRow, setSelectedRow] = useState(0);
 
+	///Comment out for development
+	//Setting the tableInfo as well as the table data on the initial render.
+	useEffect(() => {
+		fetch("/most-recent-fb-list")
+			.then((data) => data.json())
+			.then((final) => {
+				if (final.message === "success") {
+					setTableInfo({
+						...tableInfo,
+						title: final.allData.title,
+						dateCreated: final.allData.dateCreated,
+					});
+					fetch(`/get-past-list/list-name/${final.allData.title}/get-all`)
+						.then((data) => data.json())
+						.then((result) => {
+							setTable(result.allData);
+							PresentCountMethods.presentCount(result.allData);
+						});
+				} else {
+					alert(final.message);
+				}
+			});
+	}, []);
 
-  ///Comment out for development
-  //Setting the tableInfo as well as the table data on the initial render.
-  useEffect(() => {
-    fetch("/most-recent-fb-list")
-      .then((data) => data.json())
-      .then((final) => {
-        if (final.message === "success") {
-          setTableInfo({
-            ...tableInfo,
-            title: final.allData.title,
-            dateCreated: final.allData.dateCreated,
-          });
-          fetch(`/get-past-list/list-name/${final.allData.title}/get-all`)
-            .then((data) => data.json())
-            .then((result) => {
-              setTable(result.allData);
-              PresentCountMethods.presentCount(result.allData);
-            });
-        } else {
-          alert(final.message);
-        }
-      });
-  }, []);
+	//This function will be used to just update the current table data, replacing it with a new array.
+	const updateTable = (arr) => {
+		setTable(arr);
+	};
 
+	//Used to update the selected applicant this will be passed to the edit page component.
+	const updateSelectedApplicant = (arr) => {
+		setSelectedApplicant(arr);
+	};
 
+	//Inserts an already existing applicant into the most recent table.
+	const insertAlreadyExistingIntoTable = (arr) => {
+		let applicantObj = {
+			firstName: arr[0].firstName,
+			lastName: arr[0].lastName,
+			phone: arr[0].phone,
+			ApplicantID: arr[0].ApplicantID,
+		};
 
+		postRequest(`/save-list/list-name/${tableInfo.title}`, applicantObj).then((data) => {
+			if (data.message !== "success") {
+				alert(data.message);
+			}
+		});
+	};
 
-  //This function will be used to just update the current table data, replacing it with a new array.
-  const updateTable = (arr) => {
-    setTable(arr);
-  };
+	//This function will add an already existing applicant to the current foodbank list.
+	const addApplicant = (chosenNameArr) => {
+		let copyOfArr = table.slice();
+		let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
 
-  //Used to update the selected applicant this will be passed to the edit page component.
-  const updateSelectedApplicant = (arr) => {
-    setSelectedApplicant(arr);
-  }
+		//Make a copy of the chosenNameArr and then add the present field of false to it.
+		let copyOfChosen = chosenNameArr.slice();
+		copyOfChosen[0].present = "false";
 
-  //Inserts an already existing applicant into the most recent table.
-  const insertAlreadyExistingIntoTable = (arr) => {
-    let applicantObj = {
-      firstName: arr[0].firstName,
-      lastName: arr[0].lastName,
-      phone: arr[0].phone,
-      ApplicantID: arr[0].ApplicantID,
-    };
+		let firstLast = copyOfArr.map((x, y) => {
+			let first = x.firstName;
+			let last = x.lastName;
+			return first + last;
+		});
 
-    postRequest(`/save-list/list-name/${tableInfo.title}`, applicantObj).then(
-      (data) => {
-        if (data.message !== "success") {
-          alert(data.message);
-        }
-      }
-    );
-  };
+		if (firstLast.indexOf(selectedName) > -1) {
+			alert("This person is already included in this table");
+			setShowEditModule(false);
+		} else {
+			setTable(copyOfArr.concat(copyOfChosen));
+			insertAlreadyExistingIntoTable(chosenNameArr);
+			setShowEditModule(false);
+		}
+	};
 
-  //This function will add an already existing applicant to the current foodbank list.
-  const addApplicant = (chosenNameArr) => {
-    let copyOfArr = table.slice();
-    let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
+	const showEditHandler = () => {
+		if (showEditModule) {
+			setShowEditModule(false);
+		} else {
+			setShowEditModule(true);
+		}
+	};
 
-    //Make a copy of the chosenNameArr and then add the present field of false to it.
-    let copyOfChosen = chosenNameArr.slice();
-    copyOfChosen[0].present = 'false';
+	//Function used to remove an applicant from the list.
+	const selectedForRemoval = (index, arr) => {
+		const copyOfArr = arr.slice();
+		const chosenFromArr = copyOfArr.slice(index, index + 1);
+		setSelectedAttendant(chosenFromArr);
+		setShowRemoveButtons(false);
+	};
 
-    let firstLast = copyOfArr.map((x, y) => {
-      let first = x.firstName;
-      let last = x.lastName;
-      return first + last;
-    });
+	const removeFromArray = (fullArr, selectedArr) => {
+		const allFirstLast = fullArr.map((x, y) => {
+			let fullName = `${x.firstName}${x.lastName}`;
+			return fullName;
+		});
 
-    if (firstLast.indexOf(selectedName) > -1) {
-      alert("This person is already included in this table");
-      setShowEditModule(false);
-    } else {
-      setTable(copyOfArr.concat(copyOfChosen));
-      insertAlreadyExistingIntoTable(chosenNameArr);
-      setShowEditModule(false);
-    }
-  };
+		const selectedFirstLast = `${selectedArr[0].firstName}${selectedArr[0].lastName}`;
 
-  const showEditHandler = () => {
-    if (showEditModule) {
-      setShowEditModule(false);
-    } else {
-      setShowEditModule(true);
-    }
-  };
+		if (allFirstLast.indexOf(selectedFirstLast) > -1) {
+			const copyOfFull = fullArr.slice();
+			copyOfFull.splice(allFirstLast.indexOf(selectedFirstLast), 1);
+			return setTable(copyOfFull);
+		}
+	};
 
-  //Function used to remove an applicant from the list.
-  const selectedForRemoval = (index, arr) => {
-    const copyOfArr = arr.slice();
-    const chosenFromArr = copyOfArr.slice(index, index + 1);
-    setSelectedAttendant(chosenFromArr);
-    setShowRemoveButtons(false);
-  };
+	//This will be use to add a brand new applicant to the table.
+	const addNewToTable = (obj) => {
+		const currentTable = table.slice();
+		const arrayOfNeededFields = [
+			{
+				firstName: obj.firstName,
+				lastName: obj.lastName,
+				phone: obj.phone,
+				present: obj.present,
+				ApplicantID: obj.ApplicantID,
+			},
+		];
 
-  const removeFromArray = (fullArr, selectedArr) => {
-    const allFirstLast = fullArr.map((x, y) => {
-      let fullName = `${x.firstName}${x.lastName}`;
-      return fullName;
-    });
+		setTable(currentTable.concat(arrayOfNeededFields));
+		showEditHandler();
+	};
 
-    const selectedFirstLast = `${selectedArr[0].firstName}${selectedArr[0].lastName}`;
+	//This will be used to set the selected applicant that needs updated, and display the edit page.
+	const setEditApplicant = (arr, index) => {
+		clearSelectedApplicant();
+		setSelectedApplicant([arr[index]]);
+		setSelectedRow(index);
+		setShowEditPage(true);
 
-    if (allFirstLast.indexOf(selectedFirstLast) > -1) {
-      const copyOfFull = fullArr.slice();
-      copyOfFull.splice(allFirstLast.indexOf(selectedFirstLast), 1);
-      return setTable(copyOfFull);
-    }
-  };
+		setTimeout(() => {
+			const editPage = document.getElementById("edit_form");
+			editPage.scrollIntoView({ behavior: "smooth" });
+		}, 500);
+	};
 
-  //This will be use to add a brand new applicant to the table.
-  const addNewToTable = (obj) => {
-    const currentTable = table.slice();
-    const arrayOfNeededFields = [
-      {
-        firstName: obj.firstName,
-        lastName: obj.lastName,
-        phone: obj.phone,
-        present: obj.present,
-        ApplicantID: obj.ApplicantID,
-      },
-    ];
+	//This will clear the previously selected applicant.
+	const clearSelectedApplicant = () => {
+		const editForm = document.getElementById("edit_form");
+		editForm.reset();
+		setSelectedApplicant(initialApplicant);
+	};
 
-    setTable(currentTable.concat(arrayOfNeededFields));
-    showEditHandler();
-  };
+	//This will update the current applicant's information, used if an applicant has missing information in their application.
+	const updateInfo = (field, value) => {
+		const currentDate = new Date();
+		let currentApplicant = selectedApplicant.slice();
 
+		currentApplicant[0][field] = value;
+		currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
 
-  //This will be used to set the selected applicant that needs updated, and display the edit page.
-  const setEditApplicant = (arr, index) => {
-    clearSelectedApplicant();
-    setSelectedApplicant([arr[index]]);
-    setSelectedRow(index);
-    setShowEditPage(true);
+		setSelectedApplicant(currentApplicant);
+	};
 
-    setTimeout(() => {
-      const editPage = document.getElementById("edit_form");
-      editPage.scrollIntoView({ behavior: "smooth" });
-    }, 500);
-  };
+	//This will hide the eidt page after it has been submitted and then it will scroll back to the selected row.
+	const hideEditPage = () => {
+		setShowEditPage(false);
 
-  //This will clear the previously selected applicant.
-  const clearSelectedApplicant = () => {
-    const editForm = document.getElementById('edit_form');
-    editForm.reset();
-    setSelectedApplicant(initialApplicant);
-  }
+		setTimeout(() => {
+			let currentRow = "";
 
-  //This will update the current applicant's information, used if an applicant has missing information in their application.
-  const updateInfo = (field, value) => {
-    const currentDate = new Date();
-    let currentApplicant = selectedApplicant.slice();
+			if (window.innerWidth > 1024) {
+				currentRow = document.getElementById(`row_number_${selectedRow}`);
+				currentRow.scrollIntoView({ behavior: "smooth" });
+			} else {
+				currentRow = document.getElementById(`mobile_row_number_${selectedRow}`);
+			}
 
-    currentApplicant[0][field] = value;
-    currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
+			currentRow.scrollIntoView({ behavior: "smooth" });
+		}, 500);
+	};
 
-    setSelectedApplicant(currentApplicant);
-  };
+	//This will return the number of applicants who have gone through the foodbank.
+	const PresentCountMethods = {
+		presentCount: function (arr) {
+			let count = 0;
 
-  //This will hide the eidt page after it has been submitted and then it will scroll back to the selected row.
-  const hideEditPage = () => {
-    setShowEditPage(false);
+			for (let i = 0; i < arr.length; i++) {
+				if (arr[i].present === "true") {
+					count = count + 1;
+				}
+			}
+			return setTotalPresent(count);
+		},
 
-    setTimeout(() => {
+		incrementPresentCount: function (num) {
+			return setTotalPresent(num + 1);
+		},
 
-      let currentRow = "";
+		decrementPresentCount: function (num) {
+			return setTotalPresent(num - 1);
+		},
+	};
 
-      if (window.innerWidth > 1024) {
-        currentRow = document.getElementById(`row_number_${selectedRow}`);
-        currentRow.scrollIntoView({ behavior: "smooth" });
-      } else {
-        currentRow = document.getElementById(`mobile_row_number_${selectedRow}`);
-
-      }
-
-      currentRow.scrollIntoView({ behavior: "smooth" });
-    }, 500);
-  };
-
-  //This will return the number of applicants who have gone through the foodbank.
-  const PresentCountMethods = {
-    presentCount: function (arr) {
-      let count = 0;
-
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].present === "true") {
-          count = count + 1;
-        }
-      }
-      return setTotalPresent(count);
-    },
-
-    incrementPresentCount: function (num) {
-      return setTotalPresent(num + 1);
-    },
-
-    decrementPresentCount: function (num) {
-      return setTotalPresent(num - 1);
-    },
-  };
-
-  return (
-    <div id="current_fb_list">
-      <div className="header_wrapper">
-        <h1 className="header">Current Food Bank List</h1>
-      </div>
-      <NavBar />
-
-      <DisplayCurrentFoodBankList
-        //Conditional currentTableData is only for developement
-        currentTableData={table}
-        tableDetails={tableInfo}
-        updateTableHandler={updateTable}
-        showRemoveBtns={showRemoveButtons}
-        selectedRemovalHandler={selectedForRemoval}
-        showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
-        editHandler={setEditApplicant}
-        incrementHandler={PresentCountMethods.incrementPresentCount}
-        decrementHandler={PresentCountMethods.decrementPresentCount}
-        presentCount={totalPresent}
-        progressText={`Foodbank Progress: ${totalPresent}/${table.length}`}
-      />
-
-      <PrintFoodBankList
-        tableTitle={tableInfo.title}
-        tableData={table}
-      />
-
-      <EditModuleForCurrentList
-        display={showEditModule}
-        searchBarClick={addApplicant}
-        tableDetails={tableInfo}
-        allTableData={table}
-        showRemoveHandler={() => {
-          setShowRemoveButtons(true);
-          setShowEditModule(false);
-        }}
-        hideModuleHandler={() => setShowEditModule(false)}
-        addNewHandler={addNewToTable}
-      />
-
-      <DeleteAlert
-        display={displayDeleteAlert}
-        routePath={`/remove-attendant/table/${tableInfo.title}`}
-        selected={selectedAttendant[0]}
-        warningMessage={
-          selectedAttendant.length > 0
-            ? `Are you sure that you would like to remove ${selectedAttendant[0].firstName} ${selectedAttendant[0].lastName} from the current foodbank list?`
-            : ""
-        }
-        noClickHandler={() => {
-          setDisplayDeleteAlert(false);
-        }}
-        yesClickHandler={() => {
-          removeFromArray(table, selectedAttendant);
-          setDisplayDeleteAlert(false);
-        }}
-      />
-
-      <div id="edit_cancel_button_wrapper">
-        <button class="edit_button" type="button" onClick={showEditHandler}>
-          Edit
-        </button>
-
-        <button
-          class="edit_button"
-          type="button"
-          onClick={() => window.print()}
-        >
-          Print
-        </button>
-
-        <button
-          class="cancel_button"
-          type="button"
-          style={showRemoveButtons ? { display: "" } : { display: "none" }}
-          onClick={() => setShowRemoveButtons(false)}
-        >
-          Cancel
-        </button>
-      </div>
-      <EditPage
-        display={showEditPage}
-        currentApplicant={selectedApplicant}
-        handleChange={updateInfo}
-        hidePage={hideEditPage}
-        clearForm={clearSelectedApplicant}
-        updateApplicant={updateSelectedApplicant}
-      />
-    </div>
-  );
+	return (
+		<div id="current_fb_list">
+			<div className="header_wrapper">
+				<h1 className="header"> Current Food Bank List </h1>{" "}
+			</div>{" "}
+			<NavBar />
+			<DisplayCurrentFoodBankCheckIn
+				//Conditional currentTableData is only for developement
+				currentTableData={table}
+				tableDetails={tableInfo}
+				updateTableHandler={updateTable}
+				showRemoveBtns={showRemoveButtons}
+				selectedRemovalHandler={selectedForRemoval}
+				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
+				editHandler={setEditApplicant}
+				incrementHandler={PresentCountMethods.incrementPresentCount}
+				decrementHandler={PresentCountMethods.decrementPresentCount}
+				presentCount={totalPresent}
+			/>
+			<DisplayCurrentFoodBankList
+				//Conditional currentTableData is only for developement
+				currentTableData={table}
+				tableDetails={tableInfo}
+				updateTableHandler={updateTable}
+				showRemoveBtns={showRemoveButtons}
+				selectedRemovalHandler={selectedForRemoval}
+				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
+				editHandler={setEditApplicant}
+				incrementHandler={PresentCountMethods.incrementPresentCount}
+				decrementHandler={PresentCountMethods.decrementPresentCount}
+				presentCount={totalPresent}
+				progressText={`Foodbank Progress: ${totalPresent}/${table.length}`}
+			/>
+			<PrintFoodBankList
+				tableTitle={tableInfo.title}
+				tableData={table}
+			/>
+			<EditModuleForCurrentList
+				display={showEditModule}
+				searchBarClick={addApplicant}
+				tableDetails={tableInfo}
+				allTableData={table}
+				showRemoveHandler={() => {
+					setShowRemoveButtons(true);
+					setShowEditModule(false);
+				}}
+				hideModuleHandler={() => setShowEditModule(false)}
+				addNewHandler={addNewToTable}
+			/>
+			<DeleteAlert
+				display={displayDeleteAlert}
+				routePath={`/remove-attendant/table/${tableInfo.title}`}
+				selected={selectedAttendant[0]}
+				warningMessage={selectedAttendant.length > 0 ? `Are you sure that you would like to remove ${selectedAttendant[0].firstName} ${selectedAttendant[0].lastName} from the current foodbank list?` : ""}
+				noClickHandler={() => {
+					setDisplayDeleteAlert(false);
+				}}
+				yesClickHandler={() => {
+					removeFromArray(table, selectedAttendant);
+					setDisplayDeleteAlert(false);
+				}}
+			/>
+			<div id="edit_cancel_button_wrapper">
+				<button
+					class="edit_button"
+					type="button"
+					onClick={showEditHandler}
+				>
+					Edit{" "}
+				</button>
+				<button
+					class="edit_button"
+					type="button"
+					onClick={() => window.print()}
+				>
+					Print{" "}
+				</button>
+				<button
+					class="cancel_button"
+					type="button"
+					style={showRemoveButtons ? { display: "" } : { display: "none" }}
+					onClick={() => setShowRemoveButtons(false)}
+				>
+					Cancel{" "}
+				</button>{" "}
+			</div>{" "}
+			<EditPage
+				display={showEditPage}
+				currentApplicant={selectedApplicant}
+				handleChange={updateInfo}
+				hidePage={hideEditPage}
+				clearForm={clearSelectedApplicant}
+				updateApplicant={updateSelectedApplicant}
+			/>{" "}
+		</div>
+	);
 }

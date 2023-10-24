@@ -244,8 +244,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <div id="progress_wrapper">
           <p>{props.progressText}</p>
         </div>
-        <h1 id="list_title">{`${props.tableDetails.title}`}</h1>
-        <h1>Attendance Sheet</h1>
+        <h2 className="subheading">Attendance Sheet</h2>
         <form
           action="/foodBank_attendance/check_sheet"
           method="post"
