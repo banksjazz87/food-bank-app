@@ -893,3 +893,29 @@ app.get('/get-city-zip', (req, res) => {
         res.send(data)
     }).catch((err) => console.log(err));
 });
+
+//Used to return the list of checked in attendants in the current foodbank list.
+app.get(`/get-checked-in/:table`, (req, res) => {
+    const getCheckedIn = new Promise((resolve, reject) => {
+        let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+        let currentDb = mysql.createConnection(Db.getDb());
+        let sql = `SELECT * FROM ${req.params.table} WHERE checkedIn = 1 AND checkedInNum > 0 ORDER BY checkedInNum ASC;`;
+
+        currentDb.query(sql, (err, results) => {
+            if (err) {
+                console.log('Errorrrrr', err);
+                return reject(err);
+            } else {
+                console.log(results);
+                return resolve(results);
+            }
+        });
+        currentDb.end((err) => err ? console.log(err) : console.log('end'));
+    });
+
+    getCheckedIn.then((data) => {
+        res.send(data)
+    }).catch((err) => {
+        res.send(sqlError(err));
+    });
+});

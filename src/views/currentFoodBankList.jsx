@@ -57,6 +57,7 @@ export default function CurrentFoodBankList() {
 						title: final.allData.title,
 						dateCreated: final.allData.dateCreated,
 					});
+
 					fetch(`/get-past-list/list-name/${final.allData.title}/get-all`)
 						.then((data) => data.json())
 						.then((result) => {
@@ -68,6 +69,16 @@ export default function CurrentFoodBankList() {
 				}
 			});
 	}, []);
+
+  useEffect(() => {
+    if (tableInfo.title.length > 0) {
+    fetch(`/get-checked-in/${tableInfo.title}`)
+            .then((data) => data.json())
+              .then((result) => {
+                console.log('This is it', result);
+              });
+    }
+  }, [tableInfo]);
 
 	//This function will be used to just update the current table data, replacing it with a new array.
 	const updateTable = (arr) => {

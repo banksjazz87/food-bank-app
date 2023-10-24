@@ -9,17 +9,17 @@ import AlertModule from "./alertModule.jsx";
 export default function DisplayCurrentFoodBankCheckIn(props) {
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
-
-
-	//Update the attendant present status in the array that is holding the state.
-	const attendantPresent = (arr, index) => {
+   
+    
+    //Update the attendant present status in the array that is holding the state.
+	const checkInAttendant = (arr, index) => {
 		const copyOfArr = arr.slice();
 		const updatedArr = copyOfArr.map((x, y) => {
 			if (y === index) {
-				if (copyOfArr[index].present === "false") {
-					return { ...x, present: "true" };
+				if (copyOfArr[index].checkedIn === 0 ) {
+					return { ...x, checkedIn: 1 };
 				} else {
-					return { ...x, present: "false" };
+					return { ...x, checkedIn: 0 };
 				}
 			} else {
 				return x;
@@ -76,7 +76,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					className="check_in_button present_button"
 					value={true}
 					onClick={() => {
-						attendantPresent(props.currentTableData, index);
+						checkInAttendant(props.currentTableData, index);
 						updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
 					}}
 				>
@@ -91,7 +91,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					name="checkBox"
 					value={false}
 					onClick={() => {
-						attendantPresent(props.currentTableData, index);
+						checkInAttendant(props.currentTableData, index);
 						updateAttendantPresentInDb(props.currentTableData, index, props.tableDetails);
 					}}
 				>
