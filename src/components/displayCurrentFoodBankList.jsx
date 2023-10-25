@@ -142,6 +142,9 @@ export default function DisplayCurrentFoodBankList(props) {
       const currentValues = Object.values(x);
       return (
         <tr id={`row_number_${y}`} key={`rowNum${y}`}>
+          <td>
+            {x.checkedInNum}
+          </td>
           <td 
             id="lastName" 
             className={currentValues.indexOf(null) > -1 ? "incomplete_data": ""}
@@ -190,6 +193,9 @@ export default function DisplayCurrentFoodBankList(props) {
 
       return (
         <tr id={`mobile_row_number_${y}`} key={`rowNum${y}`}>
+          <td>
+            {x.checkedInNum}
+          </td>
           <td 
             id="name"
             className={currentValues.indexOf(null) > -1 ? "incomplete_data": ""}
@@ -245,7 +251,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <div id="progress_wrapper">
           <p>{props.progressText}</p>
         </div>
-
+        
         <form
           action="/foodBank_attendance/check_sheet"
           method="post"
@@ -257,9 +263,14 @@ export default function DisplayCurrentFoodBankList(props) {
           }}
         >
           <table style={mobileView ? { display: "none" } : { display: "" }}>
-            <h2 className="subheading">Attendance Sheet</h2>
             <tbody>
+              <tr>
+                <td colspan="5">
+                  <h2 className="subheading">Attendance Sheet</h2>
+                </td>
+              </tr>
               <tr id="header_row">
+                <th>Order#</th>
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Phone Number</th>
@@ -271,9 +282,14 @@ export default function DisplayCurrentFoodBankList(props) {
           </table>
 
           <table style={mobileView ? { display: "" } : { display: "none" }}>
-          <h2 className="subheading">Attendance Sheet</h2>
             <tbody>
+            <tr>
+                <td colspan="4">
+                  <h2 className="subheading">Attendance Sheet</h2>
+                </td>
+              </tr>
               <tr id="header_row">
+                <th>Order#</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Present</th>

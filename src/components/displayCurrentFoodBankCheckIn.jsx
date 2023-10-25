@@ -37,7 +37,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			ApplicantID: id,
 			present: presence,
 			checkedIn: checkIn,
-            checkedInNum: checkInNum
+			checkedInNum: checkInNum,
 		};
 
 		putRequest("/check-attendant-in", requestObj).then((data) => {
@@ -46,7 +46,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			setTimeout(() => {
 				setShowAlert(false);
 				setAlertMessage(false);
-                window.location.reload();
+				window.location.reload();
 			}, 1000);
 		});
 	};
@@ -62,8 +62,8 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			.then((data) => data.json())
 			.then((final) => {
 				if (final.allData.checkedIn === 0) {
-                    let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
-                    let checkedInNum = parseInt(lastCheckedIn) + 1;
+					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+					let checkedInNum = parseInt(lastCheckedIn) + 1;
 					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
 				} else {
 					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
@@ -160,8 +160,12 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					}}
 				>
 					<table>
-						<h2 className="subheading">Check In</h2>
 						<tbody>
+							<tr>
+								<td colspan="3">
+									<h2 className="subheading">Check In</h2>
+								</td>
+							</tr>
 							<tr id="header_row">
 								<th> Name </th>
 								<th> Phone Number </th>
