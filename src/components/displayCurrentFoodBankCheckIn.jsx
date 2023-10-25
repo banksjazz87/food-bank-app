@@ -9,17 +9,17 @@ import AlertModule from "./alertModule.jsx";
 export default function DisplayCurrentFoodBankCheckIn(props) {
 	const [showAlert, setShowAlert] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("");
-   
-    
-    //Update the attendant present status in the array that is holding the state.
+
+	//Update the attendant present status in the array that is holding the state.
 	const checkInAttendant = (arr, index) => {
 		const copyOfArr = arr.slice();
 		const updatedArr = copyOfArr.map((x, y) => {
 			if (y === index) {
-				if (copyOfArr[index].checkedIn === 0 ) {
-					return { ...x, checkedIn: 1 };
+				if (copyOfArr[index].checkedIn === 0) {
+					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+					return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
 				} else {
-					return { ...x, checkedIn: 0 };
+					return { ...x, checkedIn: 0, checkedInNum: 0 };
 				}
 			} else {
 				return x;
@@ -29,14 +29,15 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	};
 
 	//The actual put request for updating whether the attendant is present or not.
-	const requestAttendantPresence = (tableName, firstName, lastName, id, presence, checkIn) => {
+	const requestAttendantPresence = (tableName, firstName, lastName, id, presence, checkIn, checkInNum) => {
 		let requestObj = {
 			title: tableName,
 			firstName: firstName,
 			lastName: lastName,
 			ApplicantID: id,
 			present: presence,
-            checkedIn: checkIn,
+			checkedIn: checkIn,
+            checkedInNum: checkInNum
 		};
 
 		putRequest("/check-attendant-in", requestObj).then((data) => {
@@ -45,6 +46,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			setTimeout(() => {
 				setShowAlert(false);
 				setAlertMessage(false);
+                window.location.reload();
 			}, 1000);
 		});
 	};
@@ -59,10 +61,12 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		fetch(`/applicant-present-status/${tableName}/${first}/${last}/${id}`)
 			.then((data) => data.json())
 			.then((final) => {
-				if (final.allData.present === "false") {
-					requestAttendantPresence(tableName, first, last, id, "true");
+				if (final.allData.checkedIn === 0) {
+                    let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+                    let checkedInNum = parseInt(lastCheckedIn) + 1;
+					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
 				} else {
-					requestAttendantPresence(tableName, first, last, id, "false");
+					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
 				}
 			});
 	};
@@ -134,7 +138,6 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		return renderNames;
 	};
 
-	
 	//The main return section for this page.
 	if (props.currentTableData.length === 0) {
 		return <LoadingIcon />;
@@ -157,12 +160,12 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					}}
 				>
 					<table>
-                    <h2 className="subheading">Check In</h2>
+						<h2 className="subheading">Check In</h2>
 						<tbody>
 							<tr id="header_row">
-								<th> Name </th> 
-                                <th> Phone Number </th> 
-                                <th> Checked In </th>
+								<th> Name </th>
+								<th> Phone Number </th>
+								<th> Checked In </th>
 							</tr>
 							{displayLargeScreenList(props.currentTableData)}
 						</tbody>

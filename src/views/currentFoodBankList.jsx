@@ -266,6 +266,7 @@ export default function CurrentFoodBankList() {
 			<DisplayCurrentFoodBankCheckIn
 				//Conditional currentTableData is only for developement
 				currentTableData={table}
+        checkedInTable={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateTable}
 				showRemoveBtns={showRemoveButtons}

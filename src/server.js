@@ -667,7 +667,7 @@ app.put("/update-attendant-status", (req, res) => {
 app.put("/check-attendant-in", (req, res) => {
     let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
     let currentDb = mysql.createConnection(Db.getDb());
-    let sql = `UPDATE ${req.body.title} SET checkedIn = "${req.body.checkedIn}",  WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
+    let sql = `UPDATE ${req.body.title} SET checkedIn = ${req.body.checkedIn}, checkedInNum = ${req.body.checkedInNum}  WHERE firstName = "${req.body.firstName}" AND lastName = "${req.body.lastName}" AND ApplicantID = "${req.body.ApplicantID}";`;
 
     let updateAttendantCheckedIn = new Promise((resolve, reject) => {
         currentDb.query(sql, (err, results) => {
