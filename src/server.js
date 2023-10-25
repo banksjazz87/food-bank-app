@@ -914,7 +914,10 @@ app.get(`/get-checked-in/:table`, (req, res) => {
     });
 
     getCheckedIn.then((data) => {
-        res.send(data)
+        res.send({
+            message: "Success",
+            data: data
+        })
     }).catch((err) => {
         res.send(sqlError(err));
     });

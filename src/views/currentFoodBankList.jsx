@@ -44,6 +44,7 @@ export default function CurrentFoodBankList() {
 	const [showEditPage, setShowEditPage] = useState(false);
 	const [totalPresent, setTotalPresent] = useState(0);
 	const [selectedRow, setSelectedRow] = useState(0);
+	const [checkedInList, setCheckedInList] = useState([]);
 
 	///Comment out for development
 	//Setting the tableInfo as well as the table data on the initial render.
@@ -70,15 +71,21 @@ export default function CurrentFoodBankList() {
 			});
 	}, []);
 
-  useEffect(() => {
-    if (tableInfo.title.length > 0) {
-    fetch(`/get-checked-in/${tableInfo.title}`)
-            .then((data) => data.json())
-              .then((result) => {
-                console.log('This is it', result);
-              });
-    }
-  }, [tableInfo]);
+  //Get the checked in table.
+	useEffect(() => {
+		if (tableInfo.title.length > 0) {
+			fetch(`/get-checked-in/${tableInfo.title}`)
+				.then((data) => data.json())
+				.then((result) => {
+					if (result.message === "Success") {
+						setCheckedInList(result.data);
+						console.log(result.data);
+					} else {
+						alert(result);
+					}
+				});
+		}
+	}, [tableInfo]);
 
 	//This function will be used to just update the current table data, replacing it with a new array.
 	const updateTable = (arr) => {
@@ -271,7 +278,7 @@ export default function CurrentFoodBankList() {
 			/>
 			<DisplayCurrentFoodBankList
 				//Conditional currentTableData is only for developement
-				currentTableData={table}
+				currentTableData={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateTable}
 				showRemoveBtns={showRemoveButtons}

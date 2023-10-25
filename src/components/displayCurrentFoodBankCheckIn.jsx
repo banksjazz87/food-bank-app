@@ -146,7 +146,6 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					message={alertMessage}
 				/>
 				<h1 id="list_title"> {props.tableDetails.title} </h1>
-                <h2 className="subheading">Check In</h2>
 				<form
 					action="/foodBank_attendance/check_sheet"
 					method="post"
@@ -158,6 +157,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					}}
 				>
 					<table>
+                    <h2 className="subheading">Check In</h2>
 						<tbody>
 							<tr id="header_row">
 								<th> Name </th> 

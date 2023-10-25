@@ -244,7 +244,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <div id="progress_wrapper">
           <p>{props.progressText}</p>
         </div>
-        <h2 className="subheading">Attendance Sheet</h2>
+
         <form
           action="/foodBank_attendance/check_sheet"
           method="post"
@@ -256,6 +256,7 @@ export default function DisplayCurrentFoodBankList(props) {
           }}
         >
           <table style={mobileView ? { display: "none" } : { display: "" }}>
+            <h2 className="subheading">Attendance Sheet</h2>
             <tbody>
               <tr id="header_row">
                 <th>Last Name</th>
@@ -269,6 +270,7 @@ export default function DisplayCurrentFoodBankList(props) {
           </table>
 
           <table style={mobileView ? { display: "" } : { display: "none" }}>
+          <h2 className="subheading">Attendance Sheet</h2>
             <tbody>
               <tr id="header_row">
                 <th>Name</th>
