@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
-import "../assets/styles/displayCurrentFoodBankList.scss";
+// import "../assets/styles/displayCurrentFoodBankList.scss";
+import "../assets/styles/displayCurrentFoodBankCheckIn.scss";
 import MathFunctions from "../functions/mathFunctions.js";
 import LoadingIcon from "./loadingIcon.jsx";
 import AlertModule from "./alertModule.jsx";
@@ -143,7 +144,8 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		return <LoadingIcon />;
 	} else {
 		return (
-			<div id="list_wrapper">
+			<div id="check_in_wrapper"
+            >
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}

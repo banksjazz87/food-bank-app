@@ -3,7 +3,6 @@ import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankList.scss";
 import MathFunctions from "../functions/mathFunctions.js";
-import LoadingIcon from "../components/loadingIcon.jsx";
 import AlertModule from "../components/alertModule.jsx";
 
 export default function DisplayCurrentFoodBankList(props) {
@@ -239,7 +238,7 @@ export default function DisplayCurrentFoodBankList(props) {
   //The main return section for this page.
   if (props.currentTableData.length === 0) {
     return (
-      <LoadingIcon />
+      <div></div>
     );
   } else {
     return (
@@ -247,11 +246,7 @@ export default function DisplayCurrentFoodBankList(props) {
         <AlertModule 
           showModule={showAlert}
           message={alertMessage}
-        />
-        <div id="progress_wrapper">
-          <p>{props.progressText}</p>
-        </div>
-        
+        />  
         <form
           action="/foodBank_attendance/check_sheet"
           method="post"
@@ -265,8 +260,11 @@ export default function DisplayCurrentFoodBankList(props) {
           <table style={mobileView ? { display: "none" } : { display: "" }}>
             <tbody>
               <tr>
-                <td colspan="5">
+                <td colspan="4">
                   <h2 className="subheading">Attendance Sheet</h2>
+                </td>
+                <td colspan="1" style={{textAlign: "center", paddingLeft: "0"}}>
+                  <p>{props.progressText}</p>
                 </td>
               </tr>
               <tr id="header_row">
@@ -274,7 +272,7 @@ export default function DisplayCurrentFoodBankList(props) {
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Phone Number</th>
-                <th>Present</th>
+                <th>Served</th>
               </tr>
 
               {displayLargeScreenList(props.currentTableData)}
@@ -284,17 +282,19 @@ export default function DisplayCurrentFoodBankList(props) {
           <table style={mobileView ? { display: "" } : { display: "none" }}>
             <tbody>
             <tr>
-                <td colspan="4">
+                <td colspan="3">
                   <h2 className="subheading">Attendance Sheet</h2>
+                </td>
+                <td colspan="1" style={{textAlign: "center", paddingLeft: "0"}}>
+                  <p>{props.progressText}</p>
                 </td>
               </tr>
               <tr id="header_row">
                 <th>Order#</th>
                 <th>Name</th>
                 <th>Phone</th>
-                <th>Present</th>
+                <th>Served</th>
               </tr>
-
               {displayMobileList(props.currentTableData)}
             </tbody>
           </table>

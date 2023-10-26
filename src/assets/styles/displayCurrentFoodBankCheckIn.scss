@@ -1,5 +1,5 @@
 @import "library.scss";
-#list_wrapper {
+#check_in_wrapper {
     margin: 0;
     padding: 0;
     color: white;
@@ -21,6 +21,8 @@
     form {
         @include table-container;
         margin-top: 4rem;
+        height: 50vh;
+        overflow-x: scroll;
         table {
             @include list-table;
             th {
@@ -74,9 +76,9 @@
             td:last-of-type {
                 border-right: none;
             }
-            td:nth-last-child(2) {
-                border-right: none;
-            }
+            // td:nth-last-child(2) {
+            //     border-right: none;
+            // }
             th:last-of-type {
                 border-right: none;
             }
@@ -88,7 +90,7 @@
 }
 
 @media (max-width: 1024px) {
-    #list_wrapper {
+    #check_in_wrapper {
         form {
             width: 95%;
             margin: auto;
