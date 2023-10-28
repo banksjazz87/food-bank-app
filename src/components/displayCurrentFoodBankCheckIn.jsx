@@ -123,7 +123,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					>
 						{`${x.lastName}, ${x.firstName}`}
 					</td>
-					<td id="phone">
+					<td className="phone">
 						<a
 							style={x.phone && x.phone.length > 5 ? { display: "" } : { display: "none" }}
 							className="call_button"

@@ -21,8 +21,9 @@
     form {
         @include table-container;
         margin-top: 4rem;
-        height: 50vh;
-        overflow-x: scroll;
+        height: 40vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
         table {
             @include list-table;
             th {
@@ -91,6 +92,9 @@
 
 @media (max-width: 1024px) {
     #check_in_wrapper {
+        #list_title {
+            margin-top: 4rem;
+        }
         form {
             width: 95%;
             margin: auto;
