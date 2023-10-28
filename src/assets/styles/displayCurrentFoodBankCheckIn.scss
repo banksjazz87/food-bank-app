@@ -21,7 +21,7 @@
     form {
         @include table-container;
         margin-top: 4rem;
-        height: 40vh;
+        height: 60vh;
         overflow-y: scroll;
         overflow-x: hidden;
         table {
@@ -98,6 +98,7 @@
         form {
             width: 95%;
             margin: auto;
+            margin-top: 4rem;
             table {
                 width: 100%;
                 th {

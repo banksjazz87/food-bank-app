@@ -71,7 +71,7 @@ export default function CurrentFoodBankList() {
 			});
 	}, []);
 
-  //Get the checked in table.
+	//Get the checked in table.
 	useEffect(() => {
 		if (tableInfo.title.length > 0) {
 			fetch(`/get-checked-in/${tableInfo.title}`)
@@ -260,13 +260,13 @@ export default function CurrentFoodBankList() {
 	return (
 		<div id="current_fb_list">
 			<div className="header_wrapper">
-				<h1 className="header"> Current Food Bank List </h1>{" "}
-			</div>{" "}
+				<h1 className="header"> Current Food Bank List </h1>
+			</div>
 			<NavBar />
 			<DisplayCurrentFoodBankCheckIn
 				//Conditional currentTableData is only for developement
 				currentTableData={table}
-        checkedInTable={checkedInList}
+				checkedInTable={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateTable}
 				showRemoveBtns={showRemoveButtons}
@@ -277,6 +277,32 @@ export default function CurrentFoodBankList() {
 				decrementHandler={PresentCountMethods.decrementPresentCount}
 				presentCount={totalPresent}
 			/>
+
+			<div id="edit_cancel_button_wrapper">
+				<button
+					class="edit_button"
+					type="button"
+					onClick={showEditHandler}
+				>
+					Edit
+				</button>
+				<button
+					class="edit_button"
+					type="button"
+					onClick={() => window.print()}
+				>
+					Print
+				</button>
+				<button
+					class="cancel_button"
+					type="button"
+					style={showRemoveButtons ? { display: "" } : { display: "none" }}
+					onClick={() => setShowRemoveButtons(false)}
+				>
+					Cancel
+				</button>
+			</div>
+
 			<DisplayCurrentFoodBankList
 				//Conditional currentTableData is only for developement
 				currentTableData={checkedInList}
@@ -320,30 +346,7 @@ export default function CurrentFoodBankList() {
 					setDisplayDeleteAlert(false);
 				}}
 			/>
-			<div id="edit_cancel_button_wrapper">
-				<button
-					class="edit_button"
-					type="button"
-					onClick={showEditHandler}
-				>
-					Edit{" "}
-				</button>
-				<button
-					class="edit_button"
-					type="button"
-					onClick={() => window.print()}
-				>
-					Print{" "}
-				</button>
-				<button
-					class="cancel_button"
-					type="button"
-					style={showRemoveButtons ? { display: "" } : { display: "none" }}
-					onClick={() => setShowRemoveButtons(false)}
-				>
-					Cancel{" "}
-				</button>{" "}
-			</div>{" "}
+	
 			<EditPage
 				display={showEditPage}
 				currentApplicant={selectedApplicant}
@@ -351,7 +354,7 @@ export default function CurrentFoodBankList() {
 				hidePage={hideEditPage}
 				clearForm={clearSelectedApplicant}
 				updateApplicant={updateSelectedApplicant}
-			/>{" "}
+			/>
 		</div>
 	);
 }
