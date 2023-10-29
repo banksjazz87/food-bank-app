@@ -92,6 +92,11 @@ export default function CurrentFoodBankList() {
 		setTable(arr);
 	};
 
+	//Used to updated the checked in list.
+	const updateCheckedInList = (arr) => {
+		setCheckedInList(arr);
+	};
+
 	//Used to update the selected applicant this will be passed to the edit page component.
 	const updateSelectedApplicant = (arr) => {
 		setSelectedApplicant(arr);
@@ -307,7 +312,7 @@ export default function CurrentFoodBankList() {
 				//Conditional currentTableData is only for developement
 				currentTableData={checkedInList}
 				tableDetails={tableInfo}
-				updateTableHandler={updateTable}
+				updateTableHandler={updateCheckedInList}
 				showRemoveBtns={showRemoveButtons}
 				selectedRemovalHandler={selectedForRemoval}
 				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
