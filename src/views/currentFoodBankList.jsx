@@ -262,6 +262,16 @@ export default function CurrentFoodBankList() {
 		},
 	};
 
+	const addToCheckedIn = (arrName, indexNum) => {
+		console.log('Array', arrName);
+		console.log('data', arrName[indexNum]);
+		const selected = arrName.slice(indexNum, indexNum + 1);
+		const copyOfCurrent = checkedInList.slice();
+		const newArr = copyOfCurrent.concat(selected);
+		setCheckedInList(newArr);
+		
+	}
+
 	return (
 		<div id="current_fb_list">
 			<div className="header_wrapper">
@@ -281,6 +291,7 @@ export default function CurrentFoodBankList() {
 				incrementHandler={PresentCountMethods.incrementPresentCount}
 				decrementHandler={PresentCountMethods.decrementPresentCount}
 				presentCount={totalPresent}
+				addToCheckedInHandler={addToCheckedIn}
 			/>
 
 			<div id="edit_cancel_button_wrapper">

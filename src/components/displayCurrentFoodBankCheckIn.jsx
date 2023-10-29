@@ -47,7 +47,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			setTimeout(() => {
 				setShowAlert(false);
 				setAlertMessage(false);
-				window.location.reload();
+				// window.location.reload();
 			}, 1000);
 		});
 	};
@@ -66,6 +66,8 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
 					let checkedInNum = parseInt(lastCheckedIn) + 1;
 					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
+					props.addToCheckedInHandler(arr, index);
+
 				} else {
 					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
 				}
