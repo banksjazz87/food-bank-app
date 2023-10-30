@@ -45,6 +45,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			if (data.status === "Success") {
 				setAlertMessage(data.message);
 				setShowAlert(true);
+				updateCheckedInList(id, checkIn, checkInNum);
 				setTimeout(() => {
 					setShowAlert(false);
 					setAlertMessage(false);
@@ -57,11 +58,13 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	};
 
 	//The following will be used to update the checked in list.
-	/*const updateCheckedInList = (id, checked) => {
+	const updateCheckedInList = (id, checked, num) => {
 		if (checked === 1) {
-			props.addToCheckedInHandler(arr, index, checkedInNum);
+			props.addToCheckedInHandler(id, num);
+		} else {
+			props.removeFromCheckedInHandler(id);
 		}
-	}*/
+	}
 
 	//Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
 	const updateAttendantPresentInDb = (arr, index, table) => {
@@ -77,10 +80,8 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
 					let checkedInNum = parseInt(lastCheckedIn) + 1;
 					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
-					props.addToCheckedInHandler(arr, index, checkedInNum);
 				} else {
 					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
-					props.removeFromCheckedInHandler(id);
 				}
 			});
 	};

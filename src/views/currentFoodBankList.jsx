@@ -264,24 +264,6 @@ export default function CurrentFoodBankList() {
 
 	/**
 	 * 
-	 * @param {*array} arrName 
-	 * @param {*number} indexNum 
-	 * @param {*number} checkInNum 
-	 * @returns void
-	 * @description used to update the state of the attendant when they are checked in.
-	 */
-	const addToCheckedIn = (arrName, indexNum, checkInNum) => {
-		const selected = arrName.slice(indexNum, indexNum + 1);
-		selected[0].checkedInNum = checkInNum;
-
-		const copyOfCurrent = checkedInList.slice();
-		const newArr = copyOfCurrent.concat(selected);
-
-		setCheckedInList(newArr);	
-	}
-
-	/**
-	 * 
 	 * @param {*array} arr 
 	 * @param {*number} id 
 	 * @returns null or number
@@ -303,19 +285,35 @@ export default function CurrentFoodBankList() {
 
 	/**
 	 * 
+	 * @param {*array} arrName 
+	 * @param {*number} indexNum 
+	 * @param {*number} checkInNum 
+	 * @returns void
+	 * @description used to update the state of the attendant when they are checked in.
+	 */
+	const addToCheckedIn = (id, orderNum) => {
+		const indexNum = findAttendantIndexById(table, id);
+		const selected = table.slice(indexNum, indexNum + 1);
+		selected[0].checkedInNum = orderNum;
+		const copyOfCheckedIn = checkedInList.slice();
+		const finalArr = copyOfCheckedIn.concat(selected);
+
+		setCheckedInList(finalArr);	
+	}
+
+	
+	/**
+	 * 
 	 * @param {number} id 
 	 * @returns void
 	 * @description updates the state in the checkedInList to remove an attendant.
 	 */
 	const removeFromCheckedIn = (id) => {
 		let arrayCopy = checkedInList.slice();
-		let targetIndex = findAttendantIndexById(id);
+		let targetIndex = findAttendantIndexById(checkedInList, id);
+		arrayCopy.splice(targetIndex, 1);
 
-		let firstHalfOfArr = arrayCopy.slice(0, targetIndex);
-		let lastHalfOfArr = arrayCopy.slice(targetIndex + 1);
-		let finalArr = firstHalfOfArr.concat(lastHalfOfArr);
-
-		setCheckedInList(finalArr);
+		setCheckedInList(arrayCopy);
 	}
 
 	return (
