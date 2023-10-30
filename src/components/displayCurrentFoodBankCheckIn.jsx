@@ -42,15 +42,26 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		};
 
 		putRequest("/check-attendant-in", requestObj).then((data) => {
-			setAlertMessage(data.message);
-			setShowAlert(true);
-			setTimeout(() => {
-				setShowAlert(false);
-				setAlertMessage(false);
-				// window.location.reload();
-			}, 1000);
+			if (data.status === "Success") {
+				setAlertMessage(data.message);
+				setShowAlert(true);
+				setTimeout(() => {
+					setShowAlert(false);
+					setAlertMessage(false);
+					// window.location.reload();
+				}, 1000);
+			} else {
+				alert(data.message);
+			}
 		});
 	};
+
+	//The following will be used to update the checked in list.
+	/*const updateCheckedInList = (id, checked) => {
+		if (checked === 1) {
+			props.addToCheckedInHandler(arr, index, checkedInNum);
+		}
+	}*/
 
 	//Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
 	const updateAttendantPresentInDb = (arr, index, table) => {
@@ -66,10 +77,10 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
 					let checkedInNum = parseInt(lastCheckedIn) + 1;
 					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
-					props.addToCheckedInHandler(arr, index);
-
+					props.addToCheckedInHandler(arr, index, checkedInNum);
 				} else {
 					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
+					props.removeFromCheckedInHandler(id);
 				}
 			});
 	};
@@ -146,8 +157,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		return <LoadingIcon />;
 	} else {
 		return (
-			<div id="check_in_wrapper"
-            >
+			<div id="check_in_wrapper">
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}

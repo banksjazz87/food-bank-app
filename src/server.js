@@ -683,7 +683,7 @@ app.put("/check-attendant-in", (req, res) => {
     updateAttendantCheckedIn
         .then((data) => {
             res.send({
-                status: "success",
+                status: "Success",
                 message: `${req.body.firstName} ${req.body.lastName
 					} is ${req.body.checkedIn === 1 ? "Checked In" : "NOT Checked In"
 					}.`,
