@@ -109,15 +109,40 @@
                     @include paragraph-small;
                     border: none;
                 }
-                .present_button {
-                    @include btn_small;
-                    margin-top: 0;
-                    min-width: 10px;
-                    padding: 0.15rem 0.3rem;
-                    @include paragraph-large;
-                }
                 #attended {
                     width: 40px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    #check_in_wrapper {
+        form {
+            table {
+                width: 100%;
+                .present_button,
+                .not_present_button {
+                    min-width: unset;
+                    width: unset;
+                    padding: 0.25rem 1rem 0.25rem 1rem;
+                }
+                .call_button {
+                    border-radius: 16px;
+                    min-width: unset;
+                    width: unset;
+                    margin-top: 2rem;
+                    padding: 0.25rem 1rem 0.25rem 1rem;
+                    cursor: pointer;
+                    @include paragraph-small;
+                    color: white;
+                    text-decoration: none;
+                    background-color: $purple;
+                    &:hover {
+                        box-shadow: 0 1px 4px $light-gray;
+                        filter: brightness(90%);
+                    }
                 }
             }
         }

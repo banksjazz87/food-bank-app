@@ -67,7 +67,6 @@ export default function DisplayCurrentFoodBankList(props) {
       setTimeout(() => {
         setShowAlert(false);
         setAlertMessage(false);
-        // window.location.reload();
       }, 1000);
     });
   };
