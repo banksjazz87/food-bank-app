@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import postRequest from "../functions/post.js";
 import putRequest from "../functions/putRequest.js";
-// import "../assets/styles/displayCurrentFoodBankList.scss";
 import "../assets/styles/displayCurrentFoodBankCheckIn.scss";
-import MathFunctions from "../functions/mathFunctions.js";
 import LoadingIcon from "./loadingIcon.jsx";
 import AlertModule from "./alertModule.jsx";
 

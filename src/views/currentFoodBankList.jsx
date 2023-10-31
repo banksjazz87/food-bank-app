@@ -323,18 +323,11 @@ export default function CurrentFoodBankList() {
 			</div>
 			<NavBar />
 			<DisplayCurrentFoodBankCheckIn
-				//Conditional currentTableData is only for developement
 				currentTableData={table}
 				checkedInTable={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateTable}
-				showRemoveBtns={showRemoveButtons}
-				selectedRemovalHandler={selectedForRemoval}
-				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
 				editHandler={setEditApplicant}
-				incrementHandler={PresentCountMethods.incrementPresentCount}
-				decrementHandler={PresentCountMethods.decrementPresentCount}
-				presentCount={totalPresent}
 				addToCheckedInHandler={addToCheckedIn}
 				removeFromCheckedInHandler={removeFromCheckedIn}
 			/>
@@ -365,7 +358,6 @@ export default function CurrentFoodBankList() {
 			</div>
 
 			<DisplayCurrentFoodBankList
-				//Conditional currentTableData is only for developement
 				currentTableData={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateCheckedInList}
