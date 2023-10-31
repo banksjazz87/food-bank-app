@@ -36,6 +36,7 @@ export default function CurrentFoodBankList() {
 
 	const [tableInfo, setTableInfo] = useState({ title: "", dateCreated: "" });
 	const [table, setTable] = useState([]);
+	const [tableLoaded, setTableLoaded] = useState(false);
 	const [showRemoveButtons, setShowRemoveButtons] = useState(false);
 	const [displayDeleteAlert, setDisplayDeleteAlert] = useState(false);
 	const [selectedAttendant, setSelectedAttendant] = useState([]);
@@ -63,6 +64,7 @@ export default function CurrentFoodBankList() {
 						.then((data) => data.json())
 						.then((result) => {
 							setTable(result.allData);
+							setTableLoaded(true);
 							PresentCountMethods.presentCount(result.allData);
 						});
 				} else {
@@ -79,7 +81,6 @@ export default function CurrentFoodBankList() {
 				.then((result) => {
 					if (result.message === "Success") {
 						setCheckedInList(result.data);
-						console.log(result.data);
 					} else {
 						alert(result);
 					}
@@ -324,6 +325,7 @@ export default function CurrentFoodBankList() {
 			<NavBar />
 			<DisplayCurrentFoodBankCheckIn
 				currentTableData={table}
+				loadStatus={tableLoaded}
 				checkedInTable={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateTable}

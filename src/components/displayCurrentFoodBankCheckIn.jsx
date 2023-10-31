@@ -15,8 +15,12 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		const updatedArr = copyOfArr.map((x, y) => {
 			if (y === index) {
 				if (copyOfArr[index].checkedIn === 0) {
-					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
-					return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
+					if (copyOfArr.length === 1) {
+						return { ...x, checkedIn: 1, checkedInNum: 1 };
+					} else {
+						let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+						return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
+					}
 				} else {
 					return { ...x, checkedIn: 0, checkedInNum: 0 };
 				}
@@ -24,6 +28,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 				return x;
 			}
 		});
+
 		props.updateTableHandler(updatedArr);
 	};
 
@@ -62,7 +67,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		} else {
 			props.removeFromCheckedInHandler(id);
 		}
-	}
+	};
 
 	//Check the current Present status in the database, according to the selected name, and then updates the database to reflect the adjustement.
 	const updateAttendantPresentInDb = (arr, index, table) => {
@@ -74,10 +79,15 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		fetch(`/applicant-present-status/${tableName}/${first}/${last}/${id}`)
 			.then((data) => data.json())
 			.then((final) => {
+				console.log(props.checkedInTable.length);
 				if (final.allData.checkedIn === 0) {
-					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
-					let checkedInNum = parseInt(lastCheckedIn) + 1;
-					requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
+					if (props.checkedInTable.length === 0) {
+						requestAttendantPresence(tableName, first, last, id, "false", 1, 1);
+					} else {
+						let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+						let checkedInNum = parseInt(lastCheckedIn) + 1;
+						requestAttendantPresence(tableName, first, last, id, "false", 1, checkedInNum);
+					}
 				} else {
 					requestAttendantPresence(tableName, first, last, id, "false", 0, 0);
 				}
@@ -152,7 +162,13 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	};
 
 	//The main return section for this page.
-	if (props.currentTableData.length === 0) {
+	if (props.loadStatus && props.currentTableData.length === 0) {
+		return (
+			<div>
+				<h1>No entries found for this table currently.</h1>
+			</div>
+		);
+	} else if (!props.loadStatus && props.currentTableData.length === 0) {
 		return <LoadingIcon />;
 	} else {
 		return (
