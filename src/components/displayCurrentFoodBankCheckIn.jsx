@@ -14,9 +14,9 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		const copyOfArr = arr.slice();
 		const updatedArr = copyOfArr.map((x, y) => {
 			if (y === index) {
-				if (copyOfArr[index].checkedIn === 0 && copyOfArr.length === 1) {
+				if (copyOfArr[index].checkedIn === 0 && props.checkedInTable.length === 0) {
 					return { ...x, checkedIn: 1, checkedInNum: 1 };
-				} else if (copyOfArr[index].checkedIn === 0 && copyOfArr.length > 1) {
+				} else if (copyOfArr[index].checkedIn === 0 && props.checkedInTable.length > 0) {
 					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
 					return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
 				} else {

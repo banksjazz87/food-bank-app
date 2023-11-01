@@ -127,6 +127,9 @@ export default function CurrentFoodBankList() {
 		//Make a copy of the chosenNameArr and then add the present field of false to it.
 		let copyOfChosen = chosenNameArr.slice();
 		copyOfChosen[0].present = "false";
+		copyOfChosen[0].checkedIn = 0;
+		copyOfChosen[0].checkedInNum = 0;
+
 
 		let firstLast = copyOfArr.map((x, y) => {
 			let first = x.firstName;
@@ -185,6 +188,8 @@ export default function CurrentFoodBankList() {
 				phone: obj.phone,
 				present: obj.present,
 				ApplicantID: obj.ApplicantID,
+				checkedIn: 0, 
+				checkedInNum: 0
 			},
 		];
 
