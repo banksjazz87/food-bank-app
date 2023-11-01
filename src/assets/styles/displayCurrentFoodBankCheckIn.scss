@@ -1,4 +1,16 @@
 @import "library.scss";
+#no_entries_wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    h2 {
+        @include paragraph-large;
+        margin-top: 4rem;
+        text-align: center;
+        color: white;
+    }
+}
+
 #check_in_wrapper {
     margin: 0;
     padding: 0;

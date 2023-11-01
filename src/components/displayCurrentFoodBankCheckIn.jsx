@@ -14,13 +14,11 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		const copyOfArr = arr.slice();
 		const updatedArr = copyOfArr.map((x, y) => {
 			if (y === index) {
-				if (copyOfArr[index].checkedIn === 0) {
-					if (copyOfArr.length === 1) {
-						return { ...x, checkedIn: 1, checkedInNum: 1 };
-					} else {
-						let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
-						return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
-					}
+				if (copyOfArr[index].checkedIn === 0 && copyOfArr.length === 1) {
+					return { ...x, checkedIn: 1, checkedInNum: 1 };
+				} else if (copyOfArr[index].checkedIn === 0 && copyOfArr.length > 1) {
+					let lastCheckedIn = props.checkedInTable[props.checkedInTable.length - 1].checkedInNum;
+					return { ...x, checkedIn: 1, checkedInNum: parseInt(lastCheckedIn) + 1 };
 				} else {
 					return { ...x, checkedIn: 0, checkedInNum: 0 };
 				}
@@ -79,7 +77,6 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		fetch(`/applicant-present-status/${tableName}/${first}/${last}/${id}`)
 			.then((data) => data.json())
 			.then((final) => {
-				console.log(props.checkedInTable.length);
 				if (final.allData.checkedIn === 0) {
 					if (props.checkedInTable.length === 0) {
 						requestAttendantPresence(tableName, first, last, id, "false", 1, 1);
@@ -164,8 +161,10 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	//The main return section for this page.
 	if (props.loadStatus && props.currentTableData.length === 0) {
 		return (
-			<div>
-				<h1>No entries found for this table currently.</h1>
+			<div id="no_entries_wrapper">
+				<div>
+					<h2>No entries found for this table currently.</h2>
+				</div>
 			</div>
 		);
 	} else if (!props.loadStatus && props.currentTableData.length === 0) {
