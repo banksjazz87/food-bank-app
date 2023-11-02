@@ -241,7 +241,7 @@ export default function DisplayCurrentFoodBankList(props) {
 						});
 					}}
 				>
-					<table style={mobileView ? { display: "none" } : { display: "" }}>
+					<table>
 						<tbody>
 							<tr>
 								<td colspan="4">
