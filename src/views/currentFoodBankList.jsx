@@ -375,7 +375,7 @@ export default function CurrentFoodBankList() {
 				incrementHandler={PresentCountMethods.incrementPresentCount}
 				decrementHandler={PresentCountMethods.decrementPresentCount}
 				presentCount={totalPresent}
-				progressText={`${totalPresent}/${table.length} served`}
+				progressText={`${totalPresent}/${table.length} Served`}
 				tableLoadStatus={tableLoaded}
 			/>
 			<PrintFoodBankList
