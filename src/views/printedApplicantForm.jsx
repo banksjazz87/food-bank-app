@@ -59,7 +59,7 @@ export default function PrintedApplicantForm() {
             </div>
           </div>
           <div id="top_heading">
-            <h2> Bureau of Food Assistance </h2> <h2 className="tefap_text">The Emergency Food Assistance Program(TEFAP) </h2> <h4> "Self Declaration of Need" </h4> <h3> Effective July 1, 2022 to June 30, 2023 </h3>
+            <h2> Bureau of Food Assistance </h2> <h2 className="tefap_text">The Emergency Food Assistance Program(TEFAP) </h2> <h4> "Self Declaration of Need" </h4> <h3> Effective July 1, 2023 to June 30, 2024 </h3>
           </div>
           <div id="fields">
             <div
@@ -116,39 +116,39 @@ export default function PrintedApplicantForm() {
             <PrintedIncomeTable
               headings={["Household Size Circle One", "", "Annual", "", "Monthly", "", "Weekly", ""]}
               data={[
-                { size: 1, annual: "25,142", monthly: "2,095", weekly: "484" },
-                { size: 2, annual: "33,874", monthly: "2,823", weekly: "651" },
-                { size: 3, annual: "42,606", monthly: "3,551", weekly: "819" },
-                { size: 4, annual: "51,338", monthly: "4,278", weekly: "987" },
+                { size: 1, annual: "26,973", monthly: "2,248", weekly: "519" },
+                { size: 2, annual: "36,482", monthly: "3,040", weekly: "702" },
+                { size: 3, annual: "45,991", monthly: "3,833", weekly: "884" },
+                { size: 4, annual: "55,500", monthly: "4,625", weekly: "1,067" },
                 {
                   size: 5,
-                  annual: "60,070",
-                  monthly: "5,006",
-                  weekly: "1,155",
+                  annual: "65,009",
+                  monthly: "5,417",
+                  weekly: "1,250",
                 },
                 {
                   size: 6,
-                  annual: "68,802",
-                  monthly: "5,734",
-                  weekly: "1,323",
+                  annual: "74,518",
+                  monthly: "6,210",
+                  weekly: "1,433",
                 },
                 {
                   size: 7,
-                  annual: "77,534",
-                  monthly: "6,461",
-                  weekly: "1,491",
+                  annual: "84,027",
+                  monthly: "7,002",
+                  weekly: "1,616",
                 },
                 {
                   size: 8,
-                  annual: "86,266",
-                  monthly: "7,189",
-                  weekly: "1,659",
+                  annual: "93,536",
+                  monthly: "7,795",
+                  weekly: "1,799",
                 },
                 {
                   size: "For each additional family member add:",
-                  annual: "8,732",
-                  monthly: "728",
-                  weekly: "168",
+                  annual: "9,509",
+                  monthly: "792",
+                  weekly: "183",
                 },
               ]}
               householdSize={userData[0].totalOccupants}
@@ -157,7 +157,7 @@ export default function PrintedApplicantForm() {
           <div className="paragraph_wrapper">
             <p>
               I understand the household income limitations and hereby certify that my household size and income make me eligible for participation in the program.I also certify that, as of today, my household lives in the area served by Pennsylvania
-              in The Emergency Food Assistance Program.This certification form is being completed in connection with the receipt of Federal assistance.
+              in The Emergency Food Assistance Program.  This certification form is being completed in connection with the receipt of Federal assistance.
             </p>
           </div>
           <div
@@ -209,13 +209,13 @@ export default function PrintedApplicantForm() {
           </div>
           <div className="paragraph_wrapper second_page_text">
             <p>
-              Program information may be made available in languages other than English.Persons with disabilities who require alternative means of communication to obtain program information(e.g., Braille, large print, audiotape, American Sign
-              Language), should contact the responsible state or local agency that administers the program or USDA 's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at(800) 877 - 8339.
+              Program information may be made available in languages other than English.  Persons with disabilities who require alternative means of communication to obtain program information(e.g., Braille, large print, audiotape, American Sign
+              Language), should contact the responsible state or local agency that administers the program or USDA 's TARGET Center at (202) 720-2600 (voice and TTY) or contact USDA through the Federal Relay Service at(800) 877-8339.
             </p>
           </div>
           <div className="paragraph_wrapper second_page_text">
             <p>
-              To file a program discrimination complaint, a Complainant should complete a Form AD - 3027, USDA Program Discrimination Complaint Form which can be obtained online at: https://www.usda.gov/sites/default/files/documents/USDA-OASCR%20P-Complaint-Form-0508-0002-508- 11 - 28 - 17 Fax2Mail.pdf, from any USDA office, by calling(866) 632 - 9992, or by writing a letter addressed to USDA.The letter must contain the complainant 's name, address, telephone number, and a written description of the alleged discriminatory action in sufficient detail to inform the Assistant Secretary for Civil Rights(ASCR) about the nature and date of an alleged civil rights violation.The completed AD - 3027 form or letter must be submitted to USDA by:
+            To file a program discrimination complaint, a Complainant should complete a Form AD-3027, USDA Program Discrimination Complaint Form which can be obtained online at: https://www.usda.gov/sites/default/files/documents/USDA-OASCR%20P-Complaint-Form-0508-0002-508-11-28-17Fax2Mail.pdf, from any USDA office, by calling (866) 632-9992, or by writing a letter addressed to USDA. The letter must contain the complainant’s name, address, telephone number, and a written description of the alleged discriminatory action in sufficient detail to inform the Assistant Secretary for Civil Rights (ASCR) about the nature and date of an alleged civil rights violation. The completed AD-3027 form or letter must be submitted to USDA by:
             </p>
           </div>
           <div
@@ -227,11 +227,11 @@ export default function PrintedApplicantForm() {
               U.S.Department of Agriculture <br />
               Office of the Assistant Secretary for Civil Rights <br />
               1400 Independence Avenue, SW <br />
-              Washington, D.C.20250 - 9410; or <br />
+              Washington, D.C. 20250 - 9410; or <br />
               <span className="bold_p"> 2. fax: </span> <br />
               (833) 256 - 1665 or(202) 690 - 7442; or <br />
               <span className="bold_p"> 3. email: </span> <br />
-              program.intake @usda.gov
+              program.intake@usda.gov
             </p>
           </div>
           <div
