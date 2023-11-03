@@ -184,9 +184,9 @@ app.post("/new-applicant/", (req, res, next) => {
 
     function targetIncome(occupants) {
         if (occupants === 1) {
-            return 25142;
+            return 26973;
         } else {
-            let income = 25142 + (occupants - 1) * 8732;
+            let income = 26973 + (occupants - 1) * 9509;
             return income;
         }
     }
