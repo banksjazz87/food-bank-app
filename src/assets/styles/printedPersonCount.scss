@@ -1,20 +1,16 @@
 @import "./library.scss";
-
-#person_count_table {
+.person_count_table {
     color: black;
     font-size: 9px;
     border-collapse: collapse;
     table-layout: fixed;
-
     tr {
         line-height: 2px;
         padding: 1px;
     }
-
     .title {
         text-align: right;
     }
-
     .count {
         border-bottom: solid 1px black;
         width: 70px;

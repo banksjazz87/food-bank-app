@@ -1,5 +1,4 @@
 @import './library.scss';
-
 #page_wrapper {
     #printed_form_wrapper {
         background-color: white;
@@ -9,40 +8,58 @@
         margin: auto;
         font-family: arial;
         padding-bottom: 20px;
-
         h1 {
             @include paragraph-small;
         }
-
         #logo_individuals_wrapper {
             display: flex;
             flex-direction: row;
             justify-content: center;
-
             #person_count_wrapper {
                 position: absolute;
                 margin-left: 475px;
                 font-size: 14px;
-
             }
-
+            #phone_number_wrapper {
+                position: absolute;
+                margin-right: 440px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 2px;
+                color: #2f4159;
+                width: 185px;
+                .no_margin {
+                    border-bottom: 0px;
+                    margin-bottom: 0;
+                    text-align: center;
+                    font-size: 14px;
+                    text-align: center;
+                    margin-top: 30px;
+                }
+                .top_border {
+                    width: 100%;
+                    border-top: 1px solid #2f4159;
+                    margin-top: 0px;
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 700;
+                    letter-spacing: .15px;
+                    padding-top: 2px;
+                }
+            }
             #pa_logo {
                 width: 265px;
                 height: 110px;
             }
         }
-
         #person_count_wrapper {
             display: flex;
             flex-direction: row;
-
             #title_wrapper {
                 display: flex;
                 flex-direction: column;
-
             }
         }
-
         #fields {
             @include printed_form_paragraph;
             display: flex;
@@ -51,30 +68,25 @@
             margin-top: 2px;
             margin-bottom: -35px;
         }
-
         #top_heading {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: -10px;
-
             h2 {
                 font-size: 16px;
                 font-weight: 700;
             }
-
             h4 {
                 margin-top: 4px;
                 font-size: 12px;
             }
-
             h3 {
                 font-family: 'Times New Roman', Times, serif;
                 font-weight: 520;
                 margin-top: 0;
                 font-size: 14px;
             }
-
             .tefap_text {
                 margin-top: 8px;
                 line-height: 0;
@@ -83,21 +95,17 @@
                 font-weight: 700;
             }
         }
-
         .paragraph_wrapper {
             @include printed_form_paragraph;
             margin-top: 27px;
-
             .all_caps {
                 font-weight: 900;
                 font-size: 12px;
             }
         }
-
         #all_caps_wrapper {
             margin-bottom: 28px;
         }
-
         #house_hold_income_wrapper {
             @include printed_form_paragraph;
             font-size: 12px;
@@ -105,7 +113,6 @@
             border: solid 1px #002579;
             margin-top: -5px;
         }
-
         #recipient_signature {
             @include printed_form_paragraph;
             display: flex;
@@ -113,44 +120,37 @@
             justify-content: space-between;
             border-top: solid 2px black;
             padding-top: 6px;
-
             .paragraph_wrapper {
                 padding: 0;
                 font-weight: 550;
                 margin-top: -6px;
                 margin-right: 0;
                 margin-left: 0;
-
                 p {
                     line-height: 1px;
                 }
             }
         }
-
         #arrow_text {
             @include printed_form_paragraph;
             display: flex;
             flex-direction: row;
             align-items: center;
             column-gap: 2px;
-
             #red_arrow {
                 width: 63px;
                 height: 25px;
             }
-
             p {
                 font-size: 12px;
             }
         }
-
         #red_text {
             text-align: center;
             font-size: 16px;
             font-weight: 550;
             color: red;
         }
-
         #boxed_text {
             @include printed_form_paragraph;
             border: solid 2px black;
@@ -158,34 +158,28 @@
             padding-bottom: 3px;
             padding-top: 3px;
             margin-bottom: 270px;
-
             p {
                 font-size: 10px;
                 margin-left: 4px;
                 color: black;
             }
         }
-
         .second_page_text {
             font-size: 15px;
             line-height: 18px;
             margin-top: 20px;
             color: black;
         }
-
         .bold_p {
             font-weight: 600;
         }
-
         #institution_wrapper {
             margin-bottom: 70px;
         }
-
         #bottom_box_container {
             border: solid 1px black;
             margin-left: 95px;
             margin-right: 95px;
-
             .paragraph_wrapper {
                 padding: 0;
                 color: #002579;
@@ -193,7 +187,6 @@
                 margin-right: 0;
                 margin-left: 0;
             }
-
             #tefap_box {
                 border: solid 1px black;
                 text-align: center;
@@ -203,19 +196,16 @@
                 margin-right: 0;
             }
         }
-
         #bottom_date {
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-
             #date_line {
                 width: 180px;
                 border-bottom: solid 1px black;
                 margin-left: 1rem;
             }
         }
-
         #authorize_bottom {
             display: flex;
             flex-direction: column;
@@ -223,14 +213,12 @@
             margin-left: 2px;
             margin-top: 6px;
             margin-bottom: 45px;
-
             .auth_row {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
                 margin-bottom: -1rem;
                 margin-left: 2px;
-
                 .authorize_line {
                     width: 180px;
                     border-bottom: solid 1px #002579;
@@ -238,27 +226,22 @@
                 }
             }
         }
-
         #signatures_wrapper {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             margin-top: 45px;
-
             .line_bottom_text {
                 display: flex;
                 flex-direction: column;
-
                 .line {
                     width: 275px;
                     border-bottom: solid 1px black;
                 }
-
                 .signature {
                     margin-top: -.75rem;
                 }
             }
-
             #checkbox {
                 width: 10px;
                 height: 12px;
@@ -266,30 +249,25 @@
                 margin-top: .75rem;
                 margin-left: -20px;
             }
-
             #proxy_sig_line {
                 width: 220px;
             }
         }
-
         #final_signatures_wrapper {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             margin-top: 0;
             margin-bottom: 12px;
-
             .line_bottom_text {
                 display: flex;
                 flex-direction: column;
-
                 .line {
                     width: 275px;
                     border-bottom: solid 1px black;
                     margin-bottom: -.75rem;
                 }
             }
-
             #box_text {
                 display: flex;
                 flex-direction: row;
@@ -297,7 +275,6 @@
                 column-gap: 12px;
                 padding-right: 100px;
                 margin-top: -2rem;
-
                 #small_box {
                     width: 11px;
                     height: 14px;
@@ -305,17 +282,14 @@
                 }
             }
         }
-
         .signature {
             font-size: 13px;
             font-weight: 200;
         }
-
         .marg_left {
             margin-left: 2px;
         }
     }
-
     .print_button {
         @include btn-small;
         position: fixed;
@@ -324,24 +298,20 @@
         left: 50%;
         transform: translateX(-50%);
         background-color: $purple;
-
         &:hover {
             background-color: $orange;
         }
     }
 }
 
-
 @media print {
     #page_wrapper {
         .header_wrapper {
             display: none;
         }
-
         nav {
             display: none;
         }
-
         button {
             display: none;
         }

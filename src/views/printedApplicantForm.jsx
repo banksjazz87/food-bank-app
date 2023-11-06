@@ -39,6 +39,10 @@ export default function PrintedApplicantForm() {
               alt="Logo of Pennsylvania Department of Agriculture"
               id="pa_logo"
             ></img>
+            <div id="phone_number_wrapper">
+             <p className="no_margin">{userData[0].phone}</p>
+             <p className="top_border">Phone Number</p>
+            </div>
             <div id="person_count_wrapper">
               <PrintedPersonCount
                 tableContents={[

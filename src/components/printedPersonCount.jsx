@@ -14,7 +14,7 @@ export default function PrintedPersonCount(props) {
   });
 
   return (
-    <table id="person_count_table">
+    <table class="person_count_table">
       <tr>
         <th></th>
         <th></th>
