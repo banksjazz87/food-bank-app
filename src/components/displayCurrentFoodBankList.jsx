@@ -241,8 +241,19 @@ export default function DisplayCurrentFoodBankList(props) {
 				>
 					<table>
 						<tbody>
+							<tr className="no_border">
+								<td colspan="4">
+									<button
+										type="button"
+										className="refresh_button"
+										onClick={() => window.location.reload()}
+									>
+										Refresh Page
+									</button>
+								</td>
+								<td colspan="1"></td>
+							</tr>
 							<tr>
-								<td></td>
 								<td colspan="4">
 									<h2 className="subheading">Attendance Sheet</h2>
 								</td>
