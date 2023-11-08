@@ -21,6 +21,12 @@
     form {
         @include table-container;
         margin-top: 4rem;
+        .refresh_button {
+            @include btn-small;
+            @include btn-purple;
+            border-radius: 5px;
+            font-size: 16px;
+        }
         table {
             @include list-table;
             th {
@@ -81,6 +87,9 @@
                 border-right: none;
             }
             tr:last-of-type {
+                border-bottom: none;
+            }
+            .no_border {
                 border-bottom: none;
             }
         }

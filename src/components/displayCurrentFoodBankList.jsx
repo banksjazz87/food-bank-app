@@ -221,12 +221,10 @@ export default function DisplayCurrentFoodBankList(props) {
 
 	//The main return section for this page.
 	if (props.currentTableData.length === 0 && !props.tableLoadStatus) {
-		return (
-			<div></div>
-		);
+		return <div></div>;
 	} else if (props.currentTableData.length === 0 && props.tableLoadStatus) {
 		return (
-      <div id="list_wrapper">
+			<div id="list_wrapper">
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
@@ -244,6 +242,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					<table>
 						<tbody>
 							<tr>
+								<td></td>
 								<td colspan="4">
 									<h2 className="subheading">Attendance Sheet</h2>
 								</td>
@@ -258,7 +257,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					</table>
 				</form>
 			</div>
-    )
+		);
 	} else {
 		return (
 			<div id="list_wrapper">
@@ -266,6 +265,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					showModule={showAlert}
 					message={alertMessage}
 				/>
+
 				<form
 					action="/foodBank_attendance/check_sheet"
 					method="post"
@@ -278,6 +278,18 @@ export default function DisplayCurrentFoodBankList(props) {
 				>
 					<table style={mobileView ? { display: "none" } : { display: "" }}>
 						<tbody>
+							<tr className="no_border">
+								<td colspan="4">
+									<button
+										type="button"
+										className="refresh_button"
+										onClick={() => window.location.reload()}
+									>
+										Refresh Page
+									</button>
+								</td>
+								<td colspan="1"></td>
+							</tr>
 							<tr>
 								<td colspan="4">
 									<h2 className="subheading">Attendance Sheet</h2>
@@ -303,6 +315,18 @@ export default function DisplayCurrentFoodBankList(props) {
 
 					<table style={mobileView ? { display: "" } : { display: "none" }}>
 						<tbody>
+							<tr className="no_border">
+								<td colspan="3">
+									<button
+										type="button"
+										className="refresh_button"
+										onClick={() => window.location.reload()}
+									>
+										Refresh Page
+									</button>
+								</td>
+								<td colspan="1"></td>
+							</tr>
 							<tr>
 								<td colspan="3">
 									<h2 className="subheading">Attendance Sheet</h2>
