@@ -163,6 +163,8 @@ export default function CurrentFoodBankList() {
 		setShowRemoveButtons(false);
 	};
 
+
+
 	const removeFromArray = (fullArr, selectedArr) => {
 		const allFirstLast = fullArr.map((x, y) => {
 			let fullName = `${x.firstName}${x.lastName}`;
@@ -177,6 +179,24 @@ export default function CurrentFoodBankList() {
 			return setTable(copyOfFull);
 		}
 	};
+
+	const removeCheckedInFromMain = (selectedAttendant) => {
+		const firstLast = checkedInList.map((x, y) => {
+			let fullName = `${x.firstName}${x.lastName}`;
+			return fullName;
+		});
+
+		const selectedFirstLast = `${selectedAttendant[0].firstName}${selectedAttendant[0].lastName}`;
+		if (firstLast.indexOf(selectedFirstLast) > -1) {
+			console.log(checkedInList);
+			console.log(firstLast.indexOf(selectedFirstLast));
+			const copyOfArr = checkedInList.slice();
+			copyOfArr.splice(firstLast.indexOf(selectedFirstLast), 1);
+			return setCheckedInList(copyOfArr);
+		}
+	}
+
+
 
 	//This will be use to add a brand new applicant to the table.
 	const addNewToTable = (obj) => {
@@ -407,6 +427,7 @@ export default function CurrentFoodBankList() {
 				}}
 				yesClickHandler={() => {
 					removeFromArray(table, selectedAttendant);
+					removeCheckedInFromMain(selectedAttendant);
 					setDisplayDeleteAlert(false);
 				}}
 			/>
