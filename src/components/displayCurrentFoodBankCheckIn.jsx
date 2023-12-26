@@ -4,6 +4,7 @@ import putRequest from "../functions/putRequest.js";
 import "../assets/styles/displayCurrentFoodBankCheckIn.scss";
 import LoadingIcon from "./loadingIcon.jsx";
 import AlertModule from "./alertModule.jsx";
+import MathFunctions from "../functions/mathFunctions.js";
 
 export default function DisplayCurrentFoodBankCheckIn(props) {
 	const [showAlert, setShowAlert] = useState(false);
@@ -151,6 +152,20 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 						</a>
 					</td>
 					<td> {alreadyChecked(x, y)} </td>
+					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
+						<button
+							id={`remove_attendant_${y}`}
+							className="remove_button"
+							type="button"
+							onClick={(e) => {
+								props.selectedRemovalHandler(parseInt(MathFunctions.returnNums(e.target.id)), props.currentTableData);
+
+								props.showDeleteAlertHandler();
+							}}
+						>
+							X
+						</button>
+					</td>
 				</tr>
 			);
 		});

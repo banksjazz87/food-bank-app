@@ -337,6 +337,9 @@ export default function CurrentFoodBankList() {
 				editHandler={setEditApplicant}
 				addToCheckedInHandler={addToCheckedIn}
 				removeFromCheckedInHandler={removeFromCheckedIn}
+				showRemoveBtns={showRemoveButtons}
+				selectedRemovalHandler={selectedForRemoval}
+				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
 			/>
 
 			<div id="edit_cancel_button_wrapper">
