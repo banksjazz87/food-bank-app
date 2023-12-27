@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/navBar.jsx";
+import AttendanceSubHeading from "../components/attendanceSubHeading.jsx";
 import DisplayCurrentFoodBankList from "../components/displayCurrentFoodBankList";
 import EditModuleForCurrentList from "../components/editModuleCurrentList.jsx";
 import PrintFoodBankList from "../components/printFoodBankList.jsx";
@@ -164,8 +165,8 @@ export default function CurrentFoodBankList() {
 	};
 
 
-
-	const removeFromArray = (fullArr, selectedArr) => {
+	//This is used for removing a selected Attendant from an array.  Primarily being used for the table array and the checkedInList array.
+	const removeFromArray = (fullArr, selectedArr, setMethod) => {
 		const allFirstLast = fullArr.map((x, y) => {
 			let fullName = `${x.firstName}${x.lastName}`;
 			return fullName;
@@ -176,28 +177,12 @@ export default function CurrentFoodBankList() {
 		if (allFirstLast.indexOf(selectedFirstLast) > -1) {
 			const copyOfFull = fullArr.slice();
 			copyOfFull.splice(allFirstLast.indexOf(selectedFirstLast), 1);
-			return setTable(copyOfFull);
+			// return setTable(copyOfFull);
+			setMethod(copyOfFull);
 		}
 	};
 
-	const removeCheckedInFromMain = (selectedAttendant) => {
-		const firstLast = checkedInList.map((x, y) => {
-			let fullName = `${x.firstName}${x.lastName}`;
-			return fullName;
-		});
-
-		const selectedFirstLast = `${selectedAttendant[0].firstName}${selectedAttendant[0].lastName}`;
-		if (firstLast.indexOf(selectedFirstLast) > -1) {
-			console.log(checkedInList);
-			console.log(firstLast.indexOf(selectedFirstLast));
-			const copyOfArr = checkedInList.slice();
-			copyOfArr.splice(firstLast.indexOf(selectedFirstLast), 1);
-			return setCheckedInList(copyOfArr);
-		}
-	}
-
-
-
+	
 	//This will be use to add a brand new applicant to the table.
 	const addNewToTable = (obj) => {
 		const currentTable = table.slice();
@@ -344,10 +329,11 @@ export default function CurrentFoodBankList() {
 
 	return (
 		<div id="current_fb_list">
-			<div className="header_wrapper">
+			<div id="current_fb_list_header_wrapper" className="header_wrapper">
 				<h1 className="header"> Current Food Bank List </h1>
 			</div>
 			<NavBar />
+			<AttendanceSubHeading />
 			<DisplayCurrentFoodBankCheckIn
 				currentTableData={table}
 				loadStatus={tableLoaded}
@@ -426,8 +412,8 @@ export default function CurrentFoodBankList() {
 					setDisplayDeleteAlert(false);
 				}}
 				yesClickHandler={() => {
-					removeFromArray(table, selectedAttendant);
-					removeCheckedInFromMain(selectedAttendant);
+					removeFromArray(table, selectedAttendant, setTable);
+					removeFromArray(checkedInList, selectedAttendant, setCheckedInList);
 					setDisplayDeleteAlert(false);
 				}}
 			/>
