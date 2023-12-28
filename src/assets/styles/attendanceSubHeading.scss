@@ -1,0 +1,23 @@
+@import "../styles/library.scss";
+#attendance_sub_heading {
+    text-align: center;
+    background-color: $faded-orange;
+    padding-top: .15rem;
+    padding-bottom: .15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    p {
+        @include paragraph-medium;
+        color: white;
+        font-size: 16px;
+        line-height: 0;
+    }
+    .sticky_heading {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+    }
+}

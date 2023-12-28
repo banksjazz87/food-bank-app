@@ -1,27 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "../assets/styles/attendanceSubHeading.scss";
 
-export default function AttendanceSubHeading() {
-    const [stickyHeading, setStickyHeading] = useState(false);
-    const [currentAttendanceView, setCurrentAttendanceView] = useState('');
+export default function AttendanceSubHeading(props) {
 
-    useEffect(() => {
-        const header = document.getElementById('current_fb_list_header_wrapper');
-        let headerPosition = header.getBoundingClientRect();
-
-        window.addEventListener('scroll', () => {
-            let scrollPosition = window.scrollY;
-            if (scrollPosition > headerPosition.bottom) {
-                setStickyHeading(true);
-            } else {
-                setStickyHeading(false);
-            }
-        });
-    });
-
-   
 	return (
-		<div id="sticky_heading" style={stickyHeading ? {backgroundColor: "red"}: {backgroundColor: "blue"}}>
-			<p> This is the subheading </p>
+		<div id="attendance_sub_heading" className="sticky_heading">
+			<p>{props.currentCount}</p>
 		</div>
 	);
 }
