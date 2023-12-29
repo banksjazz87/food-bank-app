@@ -3,7 +3,7 @@ import "../assets/styles/attendanceSubHeading.scss";
 
 export default function AttendanceSubHeading(props) {
 	const [stickyHeader, setSticky] = useState(false);
-	const [currentView, setCurrentView] = useState("Check In Sheet");
+	const [currentView, setCurrentView] = useState("Check In");
 
 	useEffect(() => {
 		const mainHeader = document.getElementById("current_fb_list_header_wrapper");
@@ -29,9 +29,9 @@ export default function AttendanceSubHeading(props) {
 				let screenLocation = window.scrollY;
 
 				if (screenLocation > checkInSheetLocation) {
-					setCurrentView("Attendance Sheet");
+					setCurrentView("Check Out");
 				} else {
-					setCurrentView("Check In Sheet");
+					setCurrentView("Check In");
 				}
 			});
 		}

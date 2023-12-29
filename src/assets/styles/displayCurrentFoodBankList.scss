@@ -31,9 +31,11 @@
             @include list-table;
             th {
                 @include list-table-header;
+                border: none;
             }
             td {
                 @include list-table-data;
+                border: none;
             }
             tr {
                 @include list-table-row;

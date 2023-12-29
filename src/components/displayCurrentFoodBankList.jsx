@@ -123,7 +123,7 @@ export default function DisplayCurrentFoodBankList(props) {
 	const displayLargeScreenList = (array) => {
 		const currentList = array;
 		const renderNames = currentList.map((x, y) => {
-			const currentValues = Object.values(x);
+			
 			return (
 				<tr
 					id={`row_number_${y}`}
@@ -132,7 +132,6 @@ export default function DisplayCurrentFoodBankList(props) {
 					<td>{x.checkedInNum}</td>
 					<td
 						id="lastName"
-						className={currentValues.indexOf(null) > -1 ? "incomplete_data" : ""}
 						onClick={() => props.editHandler(props.currentTableData, y)}
 					>
 						{x.lastName}
@@ -165,6 +164,8 @@ export default function DisplayCurrentFoodBankList(props) {
 		const renderNames = currentList.map((x, y) => {
 			let currentValues = Object.values(x);
 
+			console.log('values here', currentValues);
+
 			return (
 				<tr
 					id={`mobile_row_number_${y}`}
@@ -173,7 +174,6 @@ export default function DisplayCurrentFoodBankList(props) {
 					<td>{x.checkedInNum}</td>
 					<td
 						id="name"
-						className={currentValues.indexOf(null) > -1 ? "incomplete_data" : ""}
 						onClick={() => props.editHandler(props.currentTableData, y)}
 					>
 						{`${x.lastName}, ${x.firstName}`}
@@ -235,7 +235,7 @@ export default function DisplayCurrentFoodBankList(props) {
 							</tr>
 							<tr>
 								<td colspan="2">
-									<h2 className="subheading">Attendance Sheet</h2>
+									<h2 className="subheading">Check-Out</h2>
 								</td>
 								<td
 									colspan="1"
@@ -283,7 +283,7 @@ export default function DisplayCurrentFoodBankList(props) {
 							</tr>
 							<tr>
 								<td colspan="3">
-									<h2 className="subheading">Attendance Sheet</h2>
+									<h2 className="subheading">Check Out</h2>
 								</td>
 								<td
 									colspan="1"
@@ -319,7 +319,7 @@ export default function DisplayCurrentFoodBankList(props) {
 							</tr>
 							<tr>
 								<td colspan="2">
-									<h2 className="subheading">Attendance Sheet</h2>
+									<h2 className="subheading">Check Out</h2>
 								</td>
 								<td
 									colspan="1"
