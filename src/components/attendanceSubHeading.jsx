@@ -20,7 +20,7 @@ export default function AttendanceSubHeading(props) {
 	});
 
 	useEffect(() => {
-		const checkInSheet = document.getElementById("edit_cancel_button_wrapper");
+		const checkInSheet = document.getElementById("check_in_form");
 
 		if (checkInSheet) {
 			const checkInSheetLocation = checkInSheet.getBoundingClientRect().height;
