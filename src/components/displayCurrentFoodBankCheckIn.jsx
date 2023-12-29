@@ -192,6 +192,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 				/>
 				<h1 id="list_title"> {props.tableDetails.title} </h1>
 				<form
+					id="check_in_form"
 					action="/foodBank_attendance/check_sheet"
 					method="post"
 					onSubmit={(e) => {

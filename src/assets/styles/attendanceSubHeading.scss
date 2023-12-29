@@ -1,5 +1,6 @@
 @import "../styles/library.scss";
-#attendance_sub_heading {
+#attendance_sub_heading,
+#current_view_heading {
     text-align: center;
     background-color: $orange;
     padding-top: .15rem;
@@ -16,6 +17,10 @@
         line-height: 0;
         text-transform: uppercase;
     }
+}
+
+#current_view_heading {
+    background-color: $purple;
 }
 
 .sticky_heading {

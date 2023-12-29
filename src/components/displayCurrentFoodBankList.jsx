@@ -176,9 +176,7 @@ export default function DisplayCurrentFoodBankList(props) {
 						className={currentValues.indexOf(null) > -1 ? "incomplete_data" : ""}
 						onClick={() => props.editHandler(props.currentTableData, y)}
 					>
-						{x.lastName}
-						<br></br>
-						{x.firstName}
+						{`${x.lastName}, ${x.firstName}`}
 					</td>
 					<td>{alreadyChecked(x, y)}</td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
