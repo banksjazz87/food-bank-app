@@ -138,15 +138,6 @@ export default function DisplayCurrentFoodBankList(props) {
 						{x.lastName}
 					</td>
 					<td id="firstName">{x.firstName}</td>
-					<td id="phone">
-						<a
-							style={x.phone && x.phone.length > 5 ? { display: "" } : { display: "none" }}
-							className="call_button"
-							href={`tel: ${x.phone}`}
-						>
-							Call
-						</a>
-					</td>
 					<td>{alreadyChecked(x, y)}</td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
 						<button
@@ -188,15 +179,6 @@ export default function DisplayCurrentFoodBankList(props) {
 						{x.lastName}
 						<br></br>
 						{x.firstName}
-					</td>
-					<td id="phone">
-						<a
-							style={x.phone && x.phone.length > 5 ? { display: "" } : { display: "none" }}
-							className="call_button"
-							href={`tel: ${x.phone}`}
-						>
-							Call
-						</a>
 					</td>
 					<td>{alreadyChecked(x, y)}</td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
@@ -242,7 +224,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					<table>
 						<tbody>
 							<tr className="no_border">
-								<td colspan="4">
+								<td colspan="2">
 									<button
 										type="button"
 										className="refresh_button"
@@ -254,12 +236,12 @@ export default function DisplayCurrentFoodBankList(props) {
 								<td colspan="1"></td>
 							</tr>
 							<tr>
-								<td colspan="4">
+								<td colspan="2">
 									<h2 className="subheading">Attendance Sheet</h2>
 								</td>
 								<td
 									colspan="1"
-									style={{ textAlign: "center", paddingLeft: "0" }}
+									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
 									<p>{props.progressText}</p>
 								</td>
@@ -290,7 +272,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					<table style={mobileView ? { display: "none" } : { display: "" }}>
 						<tbody>
 							<tr className="no_border">
-								<td colspan="4">
+								<td colspan="3">
 									<button
 										type="button"
 										className="refresh_button"
@@ -302,12 +284,12 @@ export default function DisplayCurrentFoodBankList(props) {
 								<td colspan="1"></td>
 							</tr>
 							<tr>
-								<td colspan="4">
+								<td colspan="3">
 									<h2 className="subheading">Attendance Sheet</h2>
 								</td>
 								<td
 									colspan="1"
-									style={{ textAlign: "center", paddingLeft: "0" }}
+									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
 									<p>{props.progressText}</p>
 								</td>
@@ -316,7 +298,6 @@ export default function DisplayCurrentFoodBankList(props) {
 								<th>Order#</th>
 								<th>Last Name</th>
 								<th>First Name</th>
-								<th>Phone Number</th>
 								<th>Served</th>
 							</tr>
 
@@ -327,7 +308,7 @@ export default function DisplayCurrentFoodBankList(props) {
 					<table style={mobileView ? { display: "" } : { display: "none" }}>
 						<tbody>
 							<tr className="no_border">
-								<td colspan="3">
+								<td colspan="2">
 									<button
 										type="button"
 										className="refresh_button"
@@ -339,12 +320,12 @@ export default function DisplayCurrentFoodBankList(props) {
 								<td colspan="1"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="2">
 									<h2 className="subheading">Attendance Sheet</h2>
 								</td>
 								<td
 									colspan="1"
-									style={{ textAlign: "center", paddingLeft: "0" }}
+									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
 									<p>{props.progressText}</p>
 								</td>
@@ -352,7 +333,6 @@ export default function DisplayCurrentFoodBankList(props) {
 							<tr id="header_row">
 								<th>Order#</th>
 								<th>Name</th>
-								<th>Phone</th>
 								<th>Served</th>
 							</tr>
 							{displayMobileList(props.currentTableData)}

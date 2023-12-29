@@ -151,7 +151,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 							Call
 						</a>
 					</td>
-					<td> {alreadyChecked(x, y)} </td>
+					<td className="checked_in_data"> {alreadyChecked(x, y)} </td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
 						<button
 							id={`remove_attendant_${y}`}

@@ -1,5 +1,4 @@
 @import "./library.scss";
-
 #hamburg_wrapper {
     position: fixed;
     left: 1rem;
@@ -17,7 +16,7 @@
     background-color: $chapel-gray;
     padding-left: 1rem;
     padding-right: 1rem;
-
+    z-index: 5;
     &:hover {
         background-color: $purple;
     }
@@ -30,7 +29,6 @@
     margin-top: 3px;
     margin-bottom: 3px;
 }
-
 
 @media (min-width: 1023px) {
     #hamburg_wrapper {

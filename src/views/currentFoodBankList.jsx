@@ -327,13 +327,6 @@ export default function CurrentFoodBankList() {
 		setCheckedInList(arrayCopy);
 	}
 
-	const getDifference = (num1, num2) => {
-		const numOf1 = parseInt(num1);
-		const numOf2 = parseInt(num2);
-		const final = numOf1 - numOf2;
-		return final;
-	}
-
 	return (
 		<div id="current_fb_list">
 			<div id="current_fb_list_header_wrapper" className="header_wrapper">
