@@ -9,7 +9,7 @@ export default function DeleteAlert(props) {
 			style={props.display ? { display: "" } : { display: "none" }}
 		>
 			<div id="delete_alert_wrapper">
-				<p> {props.warningMessage} </p>{" "}
+				<p> {props.warningMessage} </p>
 				<div id="delete_alert_buttons">
 					<button
 						className="delete_button"
@@ -20,11 +20,11 @@ export default function DeleteAlert(props) {
 								.catch((e) => console.log("error has occurred", e));
 						}}
 					>
-						Yes{" "}
+						Yes
 					</button>
-					<button onClick={props.noClickHandler}> No </button>{" "}
-				</div>{" "}
-			</div>{" "}
+					<button onClick={props.noClickHandler}> No </button>
+				</div>
+			</div>
 		</div>
 	);
 }
