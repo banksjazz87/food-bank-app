@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assets/styles/attendanceSubHeading.scss";
 
 export default function AttendanceSubHeading(props) {
-	const [stickyHeader, setSticky] = useState(true);
+	const [stickyHeader, setSticky] = useState(false);
 	const [currentView, setCurrentView] = useState("Check In");
 
 	useEffect(() => {
