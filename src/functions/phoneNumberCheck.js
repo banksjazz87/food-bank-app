@@ -1,27 +1,24 @@
 const PhoneNumberCheck = {
-    
-    returnNumbers: (str) => {
-        let finalStr = '';
-        for (let i = 0; i < str.length; i++) {
-            if (!isNaN(parseInt(str[i]))) {
-                finalStr += str[i];
-            }
-        }
-        return finalStr;
-    },
 
     setPhoneNumber: (str) => {
         if (str) {
-            let phoneFormat = ['(', '', '', '', ')', '-', '', '', '', '-', '', '', '', ''];
-            let arrayOfStr = PhoneNumberCheck.returnNumbers(str).split('');
-
-            for (let i = 0; i < phoneFormat.length; i++) {
-                if (phoneFormat[i] === "" && arrayOfStr.length > 0) {
-                    phoneFormat[i] = arrayOfStr[0];
-                    arrayOfStr.splice(0, 1);
-                }
+            let newStr;
+            switch (str.length) {
+                case 3:
+                    newStr = `(${str})-`;
+                    break;
+                case 9:
+                    newStr = str + "-";
+                    break;
+                case 15:
+                    newStr = str.slice(0, -1);
+                    break;
+                default:
+                    newStr = str;
+                    break;
             }
-            return phoneFormat.join('').toString();
+            return newStr;
+
         }
     }
 

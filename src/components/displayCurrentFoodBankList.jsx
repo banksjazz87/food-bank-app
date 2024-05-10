@@ -123,21 +123,19 @@ export default function DisplayCurrentFoodBankList(props) {
 	const displayLargeScreenList = (array) => {
 		const currentList = array;
 		const renderNames = currentList.map((x, y) => {
-			
 			return (
 				<tr
 					id={`row_number_${y}`}
 					key={`rowNum${y}`}
 				>
-					<td>{x.checkedInNum}</td>
+					<td> {x.checkedInNum} </td>
 					<td
 						id="lastName"
 						onClick={() => props.editHandler(props.currentTableData, y)}
 					>
 						{x.lastName}
 					</td>
-					<td id="firstName">{x.firstName}</td>
-					<td>{alreadyChecked(x, y)}</td>
+					<td id="firstName"> {x.firstName} </td> <td> {alreadyChecked(x, y)} </td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
 						<button
 							id={`remove_attendant_${y}`}
@@ -162,23 +160,19 @@ export default function DisplayCurrentFoodBankList(props) {
 	const displayMobileList = (array) => {
 		const currentList = array;
 		const renderNames = currentList.map((x, y) => {
-			let currentValues = Object.values(x);
-
-			console.log('values here', currentValues);
-
 			return (
 				<tr
 					id={`mobile_row_number_${y}`}
 					key={`rowNum${y}`}
 				>
-					<td>{x.checkedInNum}</td>
+					<td> {x.checkedInNum} </td>
 					<td
 						id="name"
 						onClick={() => props.editHandler(props.currentTableData, y)}
 					>
 						{`${x.lastName}, ${x.firstName}`}
 					</td>
-					<td>{alreadyChecked(x, y)}</td>
+					<td> {alreadyChecked(x, y)} </td>
 					<td style={props.showRemoveBtns ? { display: "" } : { display: "none" }}>
 						<button
 							id={`remove_attendant_${y}`}
@@ -201,7 +195,7 @@ export default function DisplayCurrentFoodBankList(props) {
 
 	//The main return section for this page.
 	if (props.currentTableData.length === 0 && !props.tableLoadStatus) {
-		return <div></div>;
+		return <div> </div>;
 	} else if (props.currentTableData.length === 0 && props.tableLoadStatus) {
 		return (
 			<div id="list_wrapper">
@@ -231,17 +225,17 @@ export default function DisplayCurrentFoodBankList(props) {
 										Refresh Page
 									</button>
 								</td>
-								<td colspan="1"></td>
+								<td colspan="1"> </td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<h2 className="subheading">Check-Out</h2>
+									<h2 className="subheading"> Check - Out </h2>
 								</td>
 								<td
 									colspan="1"
 									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
-									<p>{props.progressText}</p>
+									<p> {props.progressText} </p>
 								</td>
 							</tr>
 						</tbody>
@@ -256,7 +250,6 @@ export default function DisplayCurrentFoodBankList(props) {
 					showModule={showAlert}
 					message={alertMessage}
 				/>
-
 				<form
 					action="/foodBank_attendance/check_sheet"
 					method="post"
@@ -279,30 +272,25 @@ export default function DisplayCurrentFoodBankList(props) {
 										Refresh Page
 									</button>
 								</td>
-								<td colspan="1"></td>
+								<td colspan="1"> </td>
 							</tr>
 							<tr>
 								<td colspan="3">
-									<h2 className="subheading">Check Out</h2>
+									<h2 className="subheading"> Check Out </h2>
 								</td>
 								<td
 									colspan="1"
 									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
-									<p>{props.progressText}</p>
+									<p> {props.progressText} </p>
 								</td>
 							</tr>
 							<tr id="header_row">
-								<th>Order#</th>
-								<th>Last Name</th>
-								<th>First Name</th>
-								<th>Served</th>
+								<th> Order# </th> <th> Last Name </th> <th> First Name </th> <th> Served </th>
 							</tr>
-
 							{displayLargeScreenList(props.currentTableData)}
 						</tbody>
 					</table>
-
 					<table style={mobileView ? { display: "" } : { display: "none" }}>
 						<tbody>
 							<tr className="no_border">
@@ -315,23 +303,21 @@ export default function DisplayCurrentFoodBankList(props) {
 										Refresh Page
 									</button>
 								</td>
-								<td colspan="1"></td>
+								<td colspan="1"> </td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<h2 className="subheading">Check Out</h2>
+									<h2 className="subheading"> Check Out </h2>
 								</td>
 								<td
 									colspan="1"
 									style={{ textAlign: "left", paddingLeft: "0" }}
 								>
-									<p>{props.progressText}</p>
+									<p> {props.progressText} </p>
 								</td>
 							</tr>
 							<tr id="header_row">
-								<th>Order#</th>
-								<th>Name</th>
-								<th>Served</th>
+								<th> Order# </th> <th> Name </th> <th> Served </th>
 							</tr>
 							{displayMobileList(props.currentTableData)}
 						</tbody>

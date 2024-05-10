@@ -9,6 +9,7 @@ import DeleteAlert from "../components/deleteAlert.jsx";
 import EditPage from "../components/editDisplay.jsx";
 import DisplayCurrentFoodBankCheckIn from "../components/displayCurrentFoodBankCheckIn.jsx";
 import "../assets/styles/currentFoodBankList.scss";
+import PhoneNumberCheck from "../functions/phoneNumberCheck.js";
 
 //for development mode
 //import DummyData from "../variables/dummyData.js";
@@ -131,7 +132,6 @@ export default function CurrentFoodBankList() {
 		copyOfChosen[0].checkedIn = 0;
 		copyOfChosen[0].checkedInNum = 0;
 
-
 		let firstLast = copyOfArr.map((x, y) => {
 			let first = x.firstName;
 			let last = x.lastName;
@@ -164,7 +164,6 @@ export default function CurrentFoodBankList() {
 		setShowRemoveButtons(false);
 	};
 
-
 	//This is used for removing a selected Attendant from an array.  Primarily being used for the table array and the checkedInList array.
 	const removeFromArray = (fullArr, selectedArr, setMethod) => {
 		const allFirstLast = fullArr.map((x, y) => {
@@ -182,7 +181,6 @@ export default function CurrentFoodBankList() {
 		}
 	};
 
-	
 	//This will be use to add a brand new applicant to the table.
 	const addNewToTable = (obj) => {
 		const currentTable = table.slice();
@@ -193,8 +191,8 @@ export default function CurrentFoodBankList() {
 				phone: obj.phone,
 				present: obj.present,
 				ApplicantID: obj.ApplicantID,
-				checkedIn: 0, 
-				checkedInNum: 0
+				checkedIn: 0,
+				checkedInNum: 0,
 			},
 		];
 
@@ -222,15 +220,56 @@ export default function CurrentFoodBankList() {
 		setSelectedApplicant(initialApplicant);
 	};
 
+	/**
+	 *
+	 * @param {array} field the field that is being updated.
+	 * @param {string} value the value that is being entered into the
+	 * @param {object} obj the current object that is being updated
+	 * @param {date object} date the current date object
+	 * @returns {void} updates the state of the selectedApplicant
+	 */
+	const phoneNumberUpdate = (field, value, obj, date) => {
+		const prevPhone = obj[0].phone;
+		if (value.length > prevPhone.length) {
+			checkNumberAndUpdate(field, value, obj, date);
+		} else {
+			obj[0][field] = value;
+			obj[0]["dateAltered"] = date.toLocaleDateString();
+			setSelectedApplicant(obj);
+		}
+	};
+
+	/**
+	 *
+	 * @param {array} field the field that is being updated.
+	 * @param {string} value the value that is being entered into the
+	 * @param {object} obj the current object that is being updated
+	 * @param {date object} date the current date object
+	 * @returns {void} updates the state of the selectedApplicant phone number field, or throws an alert to provide a valid number.
+	 */
+	const checkNumberAndUpdate = (field, value, obj, date) => {
+		if (!isNaN(parseInt(value[value.length - 1]))) {
+			let phoneNum = PhoneNumberCheck.setPhoneNumber(value);
+			obj[0][field] = phoneNum;
+			obj[0]["dateAltered"] = date.toLocaleDateString();
+			setSelectedApplicant(obj);
+		} else {
+			alert("Please provide a valid Number");
+		}
+	};
+
 	//This will update the current applicant's information, used if an applicant has missing information in their application.
 	const updateInfo = (field, value) => {
 		const currentDate = new Date();
 		let currentApplicant = selectedApplicant.slice();
 
-		currentApplicant[0][field] = value;
-		currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
-
-		setSelectedApplicant(currentApplicant);
+		if (field[0] === "phone") {
+			phoneNumberUpdate(field, value, currentApplicant, currentDate);
+		} else {
+			currentApplicant[0][field] = value;
+			currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
+			setSelectedApplicant(currentApplicant);
+		}
 	};
 
 	//This will hide the eidt page after it has been submitted and then it will scroll back to the selected row.
@@ -274,9 +313,9 @@ export default function CurrentFoodBankList() {
 	};
 
 	/**
-	 * 
-	 * @param {*array} arr 
-	 * @param {*number} id 
+	 *
+	 * @param {*array} arr
+	 * @param {*number} id
 	 * @returns null or number
 	 */
 	const findAttendantIndexById = (arr, id) => {
@@ -292,13 +331,13 @@ export default function CurrentFoodBankList() {
 		}
 
 		return targetIndex;
-	}
+	};
 
 	/**
-	 * 
-	 * @param {*array} arrName 
-	 * @param {*number} indexNum 
-	 * @param {*number} checkInNum 
+	 *
+	 * @param {*array} arrName
+	 * @param {*number} indexNum
+	 * @param {*number} checkInNum
 	 * @returns void
 	 * @description used to update the state of the attendant when they are checked in.
 	 */
@@ -309,13 +348,12 @@ export default function CurrentFoodBankList() {
 		const copyOfCheckedIn = checkedInList.slice();
 		const finalArr = copyOfCheckedIn.concat(selected);
 
-		setCheckedInList(finalArr);	
-	}
+		setCheckedInList(finalArr);
+	};
 
-	
 	/**
-	 * 
-	 * @param {number} id 
+	 *
+	 * @param {number} id
 	 * @returns void
 	 * @description updates the state in the checkedInList to remove an attendant.
 	 */
@@ -325,17 +363,18 @@ export default function CurrentFoodBankList() {
 		arrayCopy.splice(targetIndex, 1);
 
 		setCheckedInList(arrayCopy);
-	}
+	};
 
 	return (
 		<div id="current_fb_list">
-			<div id="current_fb_list_header_wrapper" className="header_wrapper">
+			<div
+				id="current_fb_list_header_wrapper"
+				className="header_wrapper"
+			>
 				<h1 className="header"> Current Food Bank List </h1>
 			</div>
 			<NavBar />
-			<AttendanceSubHeading 
-				currentCount={parseInt(table.length) - parseInt(totalPresent) + ` Remaining`}
-			/>
+			<AttendanceSubHeading currentCount={parseInt(table.length) - parseInt(totalPresent) + ` Remaining`} />
 			<DisplayCurrentFoodBankCheckIn
 				currentTableData={table}
 				loadStatus={tableLoaded}
@@ -349,7 +388,6 @@ export default function CurrentFoodBankList() {
 				selectedRemovalHandler={selectedForRemoval}
 				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
 			/>
-
 			<div id="edit_cancel_button_wrapper">
 				<button
 					class="edit_button"
@@ -374,7 +412,6 @@ export default function CurrentFoodBankList() {
 					Cancel
 				</button>
 			</div>
-
 			<DisplayCurrentFoodBankList
 				currentTableData={checkedInList}
 				tableDetails={tableInfo}
@@ -419,7 +456,6 @@ export default function CurrentFoodBankList() {
 					setDisplayDeleteAlert(false);
 				}}
 			/>
-	
 			<EditPage
 				display={showEditPage}
 				currentApplicant={selectedApplicant}
