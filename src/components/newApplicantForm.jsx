@@ -38,13 +38,11 @@ export default function NewApplicantForm(props) {
 				...field,
 				zip: ZipCodeFunctions.getZipCode(zipCodes, field.city, field.zip),
 				totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]),
-				// phone: PhoneNumberCheck.setPhoneNumber(field.phone)
 			});
 		} else {
 			setField({
 				...field,
 				totalOccupants: MathFunctions.returnSum([field.children, field.adults, field.seniors]),
-				// phone: PhoneNumberCheck.setPhoneNumber(field.phone)
 			});
 		}
 	}, [zipCodes, field]);
@@ -110,7 +108,6 @@ export default function NewApplicantForm(props) {
 							if (x.currency === true) {
 								setField({ ...field, [x.name]: parseInt(e.target.value).toFixed(2) });
 							} else if (x.name === "phone") {
-								///ADD NEEDED Logic HERE!!!!!!!!
 								setField({ ...field, [x.name]: PhoneNumberCheck.returnUpdatedPhoneNumber(e.target.value, field) });
 							} else {
 								setField({ ...field, [x.name]: e.target.value });
