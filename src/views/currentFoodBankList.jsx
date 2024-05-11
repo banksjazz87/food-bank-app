@@ -220,51 +220,13 @@ export default function CurrentFoodBankList() {
 		setSelectedApplicant(initialApplicant);
 	};
 
-	/**
-	 *
-	 * @param {array} field the field that is being updated.
-	 * @param {string} value the value that is being entered into the
-	 * @param {object} obj the current object that is being updated
-	 * @param {date object} date the current date object
-	 * @returns {void} updates the state of the selectedApplicant
-	 */
-	const phoneNumberUpdate = (field, value, obj, date) => {
-		const prevPhone = obj[0].phone;
-		if (value.length > prevPhone.length) {
-			checkNumberAndUpdate(field, value, obj, date);
-		} else {
-			obj[0][field] = value;
-			obj[0]["dateAltered"] = date.toLocaleDateString();
-			setSelectedApplicant(obj);
-		}
-	};
-
-	/**
-	 *
-	 * @param {array} field the field that is being updated.
-	 * @param {string} value the value that is being entered into the
-	 * @param {object} obj the current object that is being updated
-	 * @param {date object} date the current date object
-	 * @returns {void} updates the state of the selectedApplicant phone number field, or throws an alert to provide a valid number.
-	 */
-	const checkNumberAndUpdate = (field, value, obj, date) => {
-		if (!isNaN(parseInt(value[value.length - 1]))) {
-			let phoneNum = PhoneNumberCheck.setPhoneNumber(value);
-			obj[0][field] = phoneNum;
-			obj[0]["dateAltered"] = date.toLocaleDateString();
-			setSelectedApplicant(obj);
-		} else {
-			alert("Please provide a valid Number");
-		}
-	};
-
 	//This will update the current applicant's information, used if an applicant has missing information in their application.
 	const updateInfo = (field, value) => {
 		const currentDate = new Date();
 		let currentApplicant = selectedApplicant.slice();
 
 		if (field[0] === "phone") {
-			phoneNumberUpdate(field, value, currentApplicant, currentDate);
+			PhoneNumberCheck.phoneNumberUpdate(field, value, currentApplicant, currentDate, setSelectedApplicant);
 		} else {
 			currentApplicant[0][field] = value;
 			currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();

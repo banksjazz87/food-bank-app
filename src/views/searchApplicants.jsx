@@ -57,51 +57,13 @@ export default function SearchApplicants() {
 		setApplicantInfo(array);
 	};
 
-	/**
-	 *
-	 * @param {array} field the field that is being updated.
-	 * @param {string} value the value that is being entered into the
-	 * @param {object} obj the current object that is being updated
-	 * @param {date object} date the current date object
-	 * @returns {void} updates the state of the selectedApplicant
-	 */
-	const phoneNumberUpdate = (field, value, obj, date) => {
-		const prevPhone = obj[0].phone;
-		if (value.length > prevPhone.length) {
-			checkNumberAndUpdate(field, value, obj, date);
-		} else {
-			obj[0][field] = value;
-			obj[0]["dateAltered"] = date.toLocaleDateString();
-			setApplicantInfo(obj);
-		}
-	};
-
-	/**
-	 *
-	 * @param {array} field the field that is being updated.
-	 * @param {string} value the value that is being entered into the
-	 * @param {object} obj the current object that is being updated
-	 * @param {date object} date the current date object
-	 * @returns {void} updates the state of the selectedApplicant phone number field, or throws an alert to provide a valid number.
-	 */
-	const checkNumberAndUpdate = (field, value, obj, date) => {
-		if (!isNaN(parseInt(value[value.length - 1]))) {
-			let phoneNum = PhoneNumberCheck.setPhoneNumber(value);
-			obj[0][field] = phoneNum;
-			obj[0]["dateAltered"] = date.toLocaleDateString();
-			setApplicantInfo(obj);
-		} else {
-			alert("Please provide a valid Number");
-		}
-	};
-
 	//Updates the applicant's info when a revision is made.
 	const updateInfo = (field, value) => {
 		const currentDate = new Date();
 		let currentApplicant = applicantInfo.slice();
 
 		if (field[0] === "phone") {
-			phoneNumberUpdate(field, value, currentApplicant, currentDate);
+			PhoneNumberCheck.phoneNumberUpdate(field, value, currentApplicant, currentDate, setApplicantInfo);
 		} else {
 			currentApplicant[0][field] = value;
 			currentApplicant[0]["dateAltered"] = currentDate.toLocaleDateString();
