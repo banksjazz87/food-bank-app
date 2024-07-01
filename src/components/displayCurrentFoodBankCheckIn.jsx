@@ -175,9 +175,12 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	//The main return section for this page.
 	if (props.loadStatus && props.currentTableData.length === 0) {
 		return (
-			<div id="no_entries_wrapper">
+			<div
+				id="no_entries_wrapper"
+				style={!props.displayTable ? { display: "none" } : { display: "" }}
+			>
 				<div>
-					<h2>No entries found for this table currently.</h2>
+					<h2> No entries found for this table currently. </h2>
 				</div>
 			</div>
 		);
@@ -185,7 +188,10 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		return <LoadingIcon />;
 	} else {
 		return (
-			<div id="check_in_wrapper">
+			<div
+				id="check_in_wrapper"
+				style={!props.displayTable ? { display: "none" } : { display: "" }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
@@ -206,13 +212,11 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 						<tbody>
 							<tr>
 								<td colspan="3">
-									<h2 className="subheading">Check In</h2>
+									<h2 className="subheading"> Check In </h2>
 								</td>
 							</tr>
 							<tr id="header_row">
-								<th> Name </th>
-								<th> Phone Number </th>
-								<th> Checked In </th>
+								<th> Name </th> <th> Phone Number </th> <th> Checked In </th>
 							</tr>
 							{displayLargeScreenList(props.currentTableData)}
 						</tbody>

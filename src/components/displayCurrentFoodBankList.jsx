@@ -198,7 +198,10 @@ export default function DisplayCurrentFoodBankList(props) {
 		return <div> </div>;
 	} else if (props.currentTableData.length === 0 && props.tableLoadStatus) {
 		return (
-			<div id="list_wrapper">
+			<div
+				id="list_wrapper"
+				style={!props.showTable ? { display: 'none' } : { display: '' }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
@@ -245,7 +248,10 @@ export default function DisplayCurrentFoodBankList(props) {
 		);
 	} else {
 		return (
-			<div id="list_wrapper">
+			<div
+				id="list_wrapper"
+				style={!props.showTable ? { display: "none" } : { display: "" }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}

@@ -48,6 +48,9 @@ export default function CurrentFoodBankList() {
 	const [totalPresent, setTotalPresent] = useState(0);
 	const [selectedRow, setSelectedRow] = useState(0);
 	const [checkedInList, setCheckedInList] = useState([]);
+	const [showCheckInTable, setShowCheckInTable] = useState(false);
+	const [showCheckOutTable, setShowCheckOutTable] = useState(false);
+	const [currentTable, setCurrentTable] = useState('check-in');
 
 	///Comment out for development
 	//Setting the tableInfo as well as the table data on the initial render.
@@ -89,6 +92,17 @@ export default function CurrentFoodBankList() {
 				});
 		}
 	}, [tableInfo]);
+
+	//Update the table that needs to be displayed
+	useEffect(() => {
+		if (currentTable === 'check-in') {
+			setShowCheckOutTable(false);
+			setShowCheckInTable(true);
+		} else {
+			setShowCheckInTable(false);
+			setShowCheckOutTable(true);
+		}
+	}, [currentTable]);
 
 	//This function will be used to just update the current table data, replacing it with a new array.
 	const updateTable = (arr) => {
@@ -338,6 +352,7 @@ export default function CurrentFoodBankList() {
 			<NavBar />
 			<AttendanceSubHeading currentCount={parseInt(table.length) - parseInt(totalPresent) + ` Remaining`} />
 			<DisplayCurrentFoodBankCheckIn
+				displayTable={showCheckInTable}
 				currentTableData={table}
 				loadStatus={tableLoaded}
 				checkedInTable={checkedInList}
@@ -375,6 +390,7 @@ export default function CurrentFoodBankList() {
 				</button>
 			</div>
 			<DisplayCurrentFoodBankList
+				displayTable={showCheckOutTable}
 				currentTableData={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateCheckedInList}
