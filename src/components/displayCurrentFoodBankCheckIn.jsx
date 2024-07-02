@@ -177,7 +177,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 		return (
 			<div
 				id="no_entries_wrapper"
-				style={!props.displayTable ? { display: "none" } : { display: "" }}
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
 			>
 				<div>
 					<h2> No entries found for this table currently. </h2>
@@ -185,18 +185,21 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 			</div>
 		);
 	} else if (!props.loadStatus && props.currentTableData.length === 0) {
-		return <LoadingIcon />;
+		return (
+			<div style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}>
+				<LoadingIcon />
+			</div>
+		);
 	} else {
 		return (
 			<div
 				id="check_in_wrapper"
-				style={!props.displayTable ? { display: "none" } : { display: "" }}
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
 			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
 				/>
-				<h1 id="list_title"> {props.tableDetails.title} </h1>
 				<form
 					id="check_in_form"
 					action="/foodBank_attendance/check_sheet"

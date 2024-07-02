@@ -48,9 +48,7 @@ export default function CurrentFoodBankList() {
 	const [totalPresent, setTotalPresent] = useState(0);
 	const [selectedRow, setSelectedRow] = useState(0);
 	const [checkedInList, setCheckedInList] = useState([]);
-	const [showCheckInTable, setShowCheckInTable] = useState(false);
-	const [showCheckOutTable, setShowCheckOutTable] = useState(false);
-	const [currentTable, setCurrentTable] = useState('check-in');
+	const [currentTable, setCurrentTable] = useState('');
 
 	///Comment out for development
 	//Setting the tableInfo as well as the table data on the initial render.
@@ -93,16 +91,19 @@ export default function CurrentFoodBankList() {
 		}
 	}, [tableInfo]);
 
-	//Update the table that needs to be displayed
+
+	//Get the session storage table item, to determine which table should be displayed.
 	useEffect(() => {
-		if (currentTable === 'check-in') {
-			setShowCheckOutTable(false);
-			setShowCheckInTable(true);
+		const neededTable = sessionStorage.getItem('tableView');
+
+		if (neededTable) {
+			setCurrentTable(neededTable);
 		} else {
-			setShowCheckInTable(false);
-			setShowCheckOutTable(true);
+			setCurrentTable('check-in-table');
 		}
-	}, [currentTable]);
+	}, []);
+
+	
 
 	//This function will be used to just update the current table data, replacing it with a new array.
 	const updateTable = (arr) => {
@@ -341,6 +342,18 @@ export default function CurrentFoodBankList() {
 		setCheckedInList(arrayCopy);
 	};
 
+
+	/**
+	 * 
+	 * @param {*} str string
+	 * @returns void
+	 * @description updatges the state of the current table that should be displayed, and also updates the session storage variable.
+	 */
+	const viewClickHandler = (str) => {
+		setCurrentTable(str);
+		sessionStorage.setItem('tableView', str);
+	}
+
 	return (
 		<div id="current_fb_list">
 			<div
@@ -351,8 +364,31 @@ export default function CurrentFoodBankList() {
 			</div>
 			<NavBar />
 			<AttendanceSubHeading currentCount={parseInt(table.length) - parseInt(totalPresent) + ` Remaining`} />
+
+			<div id="table_name">
+				<h1 id="list_title">{tableInfo.title}</h1>
+			</div>
+
+			<div className="table_toggle_buttons">
+				<button
+					type="button"
+					onClick={() => viewClickHandler("check-in-table")}
+					className={currentTable === "check-in-table" ? "selected_btn" : "non_selected_btn"}
+				>
+					Check In
+				</button>
+				<button
+					type="button"
+					onClick={() => viewClickHandler("check-out-table")}
+					className={currentTable === "check-out-table" ? "selected_btn" : "non_selected_btn"}
+				>
+					Check Out
+				</button>
+			</div>
+
 			<DisplayCurrentFoodBankCheckIn
-				displayTable={showCheckInTable}
+				tableToDisplay={currentTable}
+				tableName="check-in-table"
 				currentTableData={table}
 				loadStatus={tableLoaded}
 				checkedInTable={checkedInList}
@@ -365,7 +401,10 @@ export default function CurrentFoodBankList() {
 				selectedRemovalHandler={selectedForRemoval}
 				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
 			/>
-			<div id="edit_cancel_button_wrapper">
+			<div
+				id="edit_cancel_button_wrapper"
+				style={currentTable === "check-in-table" ? { display: "" } : { display: "none" }}
+			>
 				<button
 					class="edit_button"
 					type="button"
@@ -390,7 +429,8 @@ export default function CurrentFoodBankList() {
 				</button>
 			</div>
 			<DisplayCurrentFoodBankList
-				displayTable={showCheckOutTable}
+				tableToDisplay={currentTable}
+				tableName="check-out-table"
 				currentTableData={checkedInList}
 				tableDetails={tableInfo}
 				updateTableHandler={updateCheckedInList}
