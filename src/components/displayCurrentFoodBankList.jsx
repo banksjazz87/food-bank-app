@@ -195,10 +195,13 @@ export default function DisplayCurrentFoodBankList(props) {
 
 	//The main return section for this page.
 	if (props.currentTableData.length === 0 && !props.tableLoadStatus) {
-		return <div> </div>;
+		return <div style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}></div>;
 	} else if (props.currentTableData.length === 0 && props.tableLoadStatus) {
 		return (
-			<div id="list_wrapper">
+			<div
+				id="list_wrapper"
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
@@ -245,7 +248,10 @@ export default function DisplayCurrentFoodBankList(props) {
 		);
 	} else {
 		return (
-			<div id="list_wrapper">
+			<div
+				id="list_wrapper"
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}

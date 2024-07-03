@@ -175,22 +175,31 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 	//The main return section for this page.
 	if (props.loadStatus && props.currentTableData.length === 0) {
 		return (
-			<div id="no_entries_wrapper">
+			<div
+				id="no_entries_wrapper"
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
+			>
 				<div>
-					<h2>No entries found for this table currently.</h2>
+					<h2> No entries found for this table currently. </h2>
 				</div>
 			</div>
 		);
 	} else if (!props.loadStatus && props.currentTableData.length === 0) {
-		return <LoadingIcon />;
+		return (
+			<div style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}>
+				<LoadingIcon />
+			</div>
+		);
 	} else {
 		return (
-			<div id="check_in_wrapper">
+			<div
+				id="check_in_wrapper"
+				style={props.tableToDisplay === props.tableName ? { display: "" } : { display: "none" }}
+			>
 				<AlertModule
 					showModule={showAlert}
 					message={alertMessage}
 				/>
-				<h1 id="list_title"> {props.tableDetails.title} </h1>
 				<form
 					id="check_in_form"
 					action="/foodBank_attendance/check_sheet"
@@ -206,13 +215,11 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 						<tbody>
 							<tr>
 								<td colspan="3">
-									<h2 className="subheading">Check In</h2>
+									<h2 className="subheading"> Check In </h2>
 								</td>
 							</tr>
 							<tr id="header_row">
-								<th> Name </th>
-								<th> Phone Number </th>
-								<th> Checked In </th>
+								<th> Name </th> <th> Phone Number </th> <th> Checked In </th>
 							</tr>
 							{displayLargeScreenList(props.currentTableData)}
 						</tbody>

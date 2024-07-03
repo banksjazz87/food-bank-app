@@ -1,21 +1,58 @@
 @import "./library.scss";
-
 #current_fb_list {
     display: flex;
     flex-direction: column;
     align-content: center;
     overflow: hidden;
     padding-bottom: 6rem;
-
+    #table_name {
+        #list_title {
+            margin-top: 4rem;
+            margin-bottom: 0;
+            @include header-large;
+            padding: 0;
+            color: white;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            @include header-large;
+            padding: 0;
+        }
+    }
+    .table_toggle_buttons {
+        margin-top: 4rem;
+        width: 960px;
+        margin: auto;
+        button {
+            @include btn-small;
+            border-radius: 0;
+            opacity: .6;
+            &:hover {
+                box-shadow: unset;
+                opacity: .8;
+            }
+        }
+        .selected_btn {
+            opacity: 1;
+            &:hover {
+                background-color: $purple;
+                filter: unset;
+                cursor: unset;
+            }
+        }
+        @media (max-width: 1024px) {
+            width: 95%;
+            margin: auto;
+        }
+    }
     #edit_cancel_button_wrapper {
         @include btn-multiple;
         margin-top: 4rem;
-
         .edit_button {
             @include btn-small;
             margin: auto;
         }
-
         .cancel_button {
             @include btn-small;
             margin: auto;
@@ -28,45 +65,34 @@
         #header_wrapper {
             display: none;
         }
-
         .nav_wrapper {
             display: none;
         }
-
         form {
             display: none;
         }
-
         h1 {
             display: none;
         }
-
         #progress_wrapper {
             display: none;
         }
-
         #edit_cancel_button_wrapper {
             display: none;
         }
-
         #list_title {
             display: none;
         }
-
         #print_list_wrapper {
             display: flex;
-
             #printable_attendance_sheet {
                 margin-top: -2rem;
-
                 .list_name {
                     margin-top: 0;
-
                     h1 {
                         display: block;
                         @include paragraph-large;
                     }
-
                 }
             }
         }

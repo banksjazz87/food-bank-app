@@ -1,7 +1,6 @@
 $chapel-gray: #333333;
 $chapel-light-gray: #3f3f3f;
 $chapel-purple: #9725bf;
-
 $white: #FFFFFF;
 $light-gray: #808080;
 $dark-gray: #5D5D5D;
@@ -9,10 +8,18 @@ $purple: #996699;
 $orange: #FB9400;
 $faded-orange: rgba(251, 148, 0, .6);
 $form-border-color: rgba(153, 102, 153, .5);
+$dark-purple: #9400d3;
 $background-radial: radial-gradient($chapel-light-gray, $chapel-gray);
 $purple-linear: linear-gradient(15deg, rgba(153, 102, 153, .7), rgba(153, 102, 153, .6), rgba(153, 102, 153, .7));
-$header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-
+$header-font: -apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+Oxygen-Sans,
+Ubuntu,
+Cantarell,
+"Helvetica Neue",
+sans-serif;
 @mixin header-large-bold {
     font-family: $header-font;
     font-weight: 500;
@@ -24,7 +31,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
     text-transform: capitalize;
     text-shadow: 1px 5px 7px rgba(0, 0, 0, .2);
     background-image: $purple-linear;
-
 }
 
 @mixin header-font-shadow {
@@ -111,7 +117,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
     padding: .5rem 1.5rem .5rem 1.5rem;
     color: white;
     cursor: pointer;
-
     &:hover {
         box-shadow: 0 1px 4px $light-gray;
         filter: brightness(90%);
@@ -126,7 +131,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
     color: white;
     border-style: none;
     border-radius: 50%;
-
     &:hover {
         background-color: $faded-orange;
         box-shadow: 0 1px 4px $light-gray;
@@ -137,7 +141,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
 @mixin medium-input {
     @include paragraph-medium;
     padding-left: .5rem;
-
     &:focus {
         outline: none;
         border-style: solid;
@@ -201,7 +204,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
 
 @mixin btn-small-danger {
     @include btn-small;
-
     &:hover {
         background-color: $orange;
     }
@@ -256,7 +258,6 @@ $header-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubu
     padding-top: 1rem;
     border-right: 1px solid $form-border-color;
     @include paragraph-medium;
-
 }
 
 @mixin list-table-row {
