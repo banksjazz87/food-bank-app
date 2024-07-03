@@ -24,12 +24,26 @@
         margin-top: 4rem;
         width: 960px;
         margin: auto;
-        .selected_btn {
-            background-color: $orange;
-        }
         button {
             @include btn-small;
             border-radius: 0;
+            opacity: .6;
+            &:hover {
+                box-shadow: unset;
+                opacity: .8;
+            }
+        }
+        .selected_btn {
+            opacity: 1;
+            &:hover {
+                background-color: $purple;
+                filter: unset;
+                cursor: unset;
+            }
+        }
+        @media (max-width: 1024px) {
+            width: 95%;
+            margin: auto;
         }
     }
     #edit_cancel_button_wrapper {
