@@ -1,5 +1,4 @@
 @import "./library.scss";
-
 body {
     margin: 0;
     top: 0;
@@ -26,5 +25,15 @@ body {
     @include large-header;
     padding-right: 2rem;
     padding-left: 2rem;
-  
-  }
+}
+
+//Remove the arrows on the number input fields.
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}

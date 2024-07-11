@@ -106,12 +106,20 @@ export default function NewApplicantForm(props) {
 						min={x.type === "number" ? 0 : ""}
 						onChange={(e) => {
 							if (x.currency === true) {
-								setField({ ...field, [x.name]: parseInt(e.target.value).toFixed(2) });
+								setField({ ...field, [x.name]: parseInt(e.target.value) });
 							} else if (x.name === "phone") {
 								setField({ ...field, [x.name]: PhoneNumberCheck.returnUpdatedPhoneNumber(e.target.value, field) });
 							} else {
 								setField({ ...field, [x.name]: e.target.value });
 							}
+						}}
+						onBlur={(e) => {
+							if (x.currency === true) {
+								setField({...field, [x.name]: parseFloat(field[x.name]).toFixed(2)})
+							}
+						}}
+						onWheel={(e) => {
+							e.target.blur();
 						}}
 					/>
 				</div>
