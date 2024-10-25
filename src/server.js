@@ -779,7 +779,7 @@ app.get("/dashboard-statistics-unique/:table", (req, res) => {
     let retrieveUnique = new Promise((resolve, reject) => {
         let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
         let currentDb = mysql.createConnection(Db.getDb());
-        let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true" AND MONTH(OriginalInsertion) = MONTH(SYSDATE()) AND YEAR(OriginalInsertion) = YEAR(SYSDATE());`;
+        let sql = `SELECT SUM(children) AS totalChildren, SUM(adults) AS totalAdults, SUM(seniors) AS totalSeniors, SUM(totalOccupants) AS totalPeople, COUNT(*) AS totalFamilies FROM ${req.params.table} LEFT JOIN applicant ON ${req.params.table}.ApplicantID = applicant.ApplicantID WHERE present = "true" AND (MONTH(OriginalInsertion) = MONTH(SYSDATE()) OR MONTH(OriginalInsertion) = MONTH(SYSDATE() - INTERVAL 1 MONTH)) AND YEAR(OriginalInsertion) = YEAR(SYSDATE());`;
 
         currentDb.query(sql, (err, results) => {
             if (err) {
