@@ -1,5 +1,4 @@
 @import "./library.scss";
-
 .header_wrapper {
     @include large-header;
     color: white;
@@ -16,7 +15,6 @@
     width: 80vw;
     margin-bottom: 6rem;
     row-gap: 0;
-
     .header_wrapper {
         width: 80vw;
         max-width: 560px;
@@ -29,9 +27,8 @@
 @media (max-width: 767px) {
     #content_wrapper {
         width: 90vw;
-
-    .header_wrapper {
-        width: 90vw;
-    }
+        .header_wrapper {
+            width: 90vw;
+        }
     }
 }

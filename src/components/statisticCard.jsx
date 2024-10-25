@@ -4,11 +4,16 @@ import "../assets/styles/statisticCard.scss";
 export default function StatisticCard(props) {
   const returnStats = props.dataArray.map((x, y) => {
     return (
-      <div key={`statistic_card_${y}`} className="statistic_card">
-        <h3 className="statistic_title">{x.title}</h3>
-        <p className="statistic_data">{x.data}</p>
-      </div>
-    );
+			<div
+				key={`statistic_card_${y}`}
+				className="statistic_card"
+			>
+				<p className="statistic_data">{x.data}</p>
+				<div class="card_footer">
+					<h3 className="statistic_title">{x.title}</h3>
+				</div>
+			</div>
+		);
   });
   return (
     <div className="content_wrapper">
