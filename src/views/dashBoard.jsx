@@ -49,7 +49,7 @@ export default function Dashboard() {
 									totalPersons: uniqueData.totalPeople ? uniqueData.totalPeople : 0,
 									totalChildren: uniqueData.totalChildren ? uniqueData.totalChildren : 0,
 									totalAdults: uniqueData.totalAdults ? uniqueData.totalAdults : 0,
-									totalSeniors: uniqueData.totalAdults ? uniqueData.totalAdults : 0,
+									totalSeniors: uniqueData.totalSeniors ? uniqueData.totalSeniors : 0,
 									uniqueRetrieved: true,
 								});
 							} else {
@@ -77,21 +77,21 @@ export default function Dashboard() {
 					<StatisticCard
 						heading="General Statistics"
 						dataArray={[
-							{ title: "Served", data: currentStats.totalServed },
-							{ title: "Families", data: currentStats.totalFamilies },
 							{ title: "Seniors", data: currentStats.totalSeniors },
 							{ title: "Adults", data: currentStats.totalAdults },
 							{ title: "Children", data: currentStats.totalChildren },
+							{ title: "People", data: currentStats.totalServed },
+							{ title: "Families", data: currentStats.totalFamilies },
 						]}
 					/>
 					<StatisticCard
 						heading="Unique Statistcs"
 						dataArray={[
-							{ title: "People", data: uniqueStats.totalPersons },
-							{ title: "Families", data: uniqueStats.totalFamilies },
 							{ title: "Seniors", data: uniqueStats.totalSeniors },
 							{ title: "Adults", data: uniqueStats.totalAdults },
 							{ title: "Children", data: uniqueStats.totalChildren },
+							{ title: "People", data: uniqueStats.totalPersons },
+							{ title: "Families", data: uniqueStats.totalFamilies },
 						]}
 					/>
 				</div>
