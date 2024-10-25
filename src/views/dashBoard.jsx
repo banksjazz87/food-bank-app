@@ -72,23 +72,26 @@ export default function Dashboard() {
 				<NavBar />
 				<div id="content_wrapper">
 					<div class="header_wrapper">
-						<h2 id="table_name"> {tableName} </h2> <p> Unique Statistics for Chapel for the month of May Correction: </p> <p> Total Families = 19 </p> <p> Total People = 44 </p>
+						<h2 id="table_name"> {tableName} </h2>
 					</div>
 					<StatisticCard
 						heading="General Statistics"
 						dataArray={[
-							{ title: "Total Served", data: currentStats.totalServed },
-							{ title: "Total Families", data: currentStats.totalFamilies },
-							{ title: "Total Seniors", data: currentStats.totalSeniors },
-							{ title: "Total Adults", data: currentStats.totalAdults },
-							{ title: "Total Children", data: currentStats.totalChildren },
+							{ title: "Served", data: currentStats.totalServed },
+							{ title: "Families", data: currentStats.totalFamilies },
+							{ title: "Seniors", data: currentStats.totalSeniors },
+							{ title: "Adults", data: currentStats.totalAdults },
+							{ title: "Children", data: currentStats.totalChildren },
 						]}
 					/>
 					<StatisticCard
 						heading="Unique Statistcs"
 						dataArray={[
-							{ title: "Total Families", data: uniqueStats.totalFamilies },
-							{ title: "Total People", data: uniqueStats.totalPersons },
+							{ title: "People", data: uniqueStats.totalPersons },
+							{ title: "Families", data: uniqueStats.totalFamilies },
+							{ title: "Seniors", data: uniqueStats.totalSeniors },
+							{ title: "Adults", data: uniqueStats.totalAdults },
+							{ title: "Children", data: uniqueStats.totalChildren },
 						]}
 					/>
 				</div>
