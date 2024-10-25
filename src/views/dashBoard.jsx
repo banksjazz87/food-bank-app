@@ -41,7 +41,6 @@ export default function Dashboard() {
 						.then((data) => data.json())
 						.then((final) => {
 							if (final.message === "success") {
-                console.log(final);
                 const uniqueData = final.allData;
 								setUniqueStats({
 									...uniqueStats,
