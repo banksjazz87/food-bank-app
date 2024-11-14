@@ -328,21 +328,15 @@ export default function CurrentFoodBankList() {
 		setCheckedInList(finalArr);
 	};
 
+	
 	/**
-	 *
-	 * @param {number} id
+	 * 
+	 * @param {*} id the id of the user to be removed
+	 * @param {*} array the array that will need to be updated, to update the state
+	 * @param {*} updateMethod the method used to update the state
+	 * @description updates the state of the designated array, after removing an attendant.
 	 * @returns void
-	 * @description updates the state in the checkedInList to remove an attendant.
 	 */
-	const removeFromCheckedIn = (id) => {
-		let arrayCopy = checkedInList.slice();
-		let targetIndex = findAttendantIndexById(checkedInList, id);
-		arrayCopy.splice(targetIndex, 1);
-
-		setCheckedInList(arrayCopy);
-	};
-
-
 	const removeFromList= (id, array, updateMethod) => {
 		let arrayCopy = array.slice();
 		let targetIndex = findAttendantIndexById(array, id);
@@ -405,7 +399,6 @@ export default function CurrentFoodBankList() {
 				updateTableHandler={updateTable}
 				editHandler={setEditApplicant}
 				addToCheckedInHandler={addToCheckedIn}
-				// removeFromCheckedInHandler={removeFromCheckedIn}
 				removeFromCheckedInHandler={(id) => {
 					removeFromList(id, checkedInList, setCheckedInList);
 					removeFromList(id, currentTable, setCurrentTable);
