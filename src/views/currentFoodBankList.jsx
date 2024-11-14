@@ -48,7 +48,7 @@ export default function CurrentFoodBankList() {
 	const [totalPresent, setTotalPresent] = useState(0);
 	const [selectedRow, setSelectedRow] = useState(0);
 	const [checkedInList, setCheckedInList] = useState([]);
-	const [currentTable, setCurrentTable] = useState('');
+	const [currentTable, setCurrentTable] = useState([]);
 
 	///Comment out for development
 	//Setting the tableInfo as well as the table data on the initial render.
@@ -343,6 +343,15 @@ export default function CurrentFoodBankList() {
 	};
 
 
+	const removeFromList= (id, array, updateMethod) => {
+		let arrayCopy = array.slice();
+		let targetIndex = findAttendantIndexById(array, id);
+		arrayCopy.splice(targetIndex, 1);
+
+		updateMethod(arrayCopy);
+	}
+
+
 	/**
 	 * 
 	 * @param {*} str string
@@ -396,7 +405,11 @@ export default function CurrentFoodBankList() {
 				updateTableHandler={updateTable}
 				editHandler={setEditApplicant}
 				addToCheckedInHandler={addToCheckedIn}
-				removeFromCheckedInHandler={removeFromCheckedIn}
+				// removeFromCheckedInHandler={removeFromCheckedIn}
+				removeFromCheckedInHandler={(id) => {
+					removeFromList(id, checkedInList, setCheckedInList);
+					removeFromList(id, currentTable, setCurrentTable);
+				}}
 				showRemoveBtns={showRemoveButtons}
 				selectedRemovalHandler={selectedForRemoval}
 				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}
