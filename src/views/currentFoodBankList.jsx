@@ -120,6 +120,20 @@ export default function CurrentFoodBankList() {
 		setSelectedApplicant(arr);
 	};
 
+
+	//Used to get the applicant from a certain table, this will only return the firstname.  Using this method as a check to verify that we can't add an attendant that already exists in the table.
+	const getApplicant = async (table, first, last) => {
+		try {
+			const applicantRequest = await fetch(`/check-applicant-exists-in-table/${table}/${first}/${last}`);
+			const applicantJSON = await applicantRequest.json();
+
+			return applicantJSON;
+
+		} catch(e) {
+			return `The following error occurred, ${e}`;
+		}
+	}
+
 	//Inserts an already existing applicant into the most recent table.
 	const insertAlreadyExistingIntoTable = (arr) => {
 		let applicantObj = {
@@ -139,28 +153,28 @@ export default function CurrentFoodBankList() {
 	//This function will add an already existing applicant to the current foodbank list.
 	const addApplicant = (chosenNameArr) => {
 		let copyOfArr = table.slice();
-		let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
+		const firstName = chosenNameArr[0].firstName;
+		const lastName = chosenNameArr[0].lastName;
 
-		//Make a copy of the chosenNameArr and then add the present field of false to it.
+		// //Make a copy of the chosenNameArr and then add the present field of false to it.
 		let copyOfChosen = chosenNameArr.slice();
 		copyOfChosen[0].present = "false";
 		copyOfChosen[0].checkedIn = 0;
 		copyOfChosen[0].checkedInNum = 0;
 
-		let firstLast = copyOfArr.map((x, y) => {
-			let first = x.firstName;
-			let last = x.lastName;
-			return first + last;
-		});
 
-		if (firstLast.indexOf(selectedName) > -1) {
-			alert("This person is already included in this table");
-			setShowEditModule(false);
-		} else {
-			setTable(copyOfArr.concat(copyOfChosen));
-			insertAlreadyExistingIntoTable(chosenNameArr);
-			setShowEditModule(false);
-		}
+		getApplicant(tableInfo.title, firstName, lastName).then((data) => {
+			if (data.data.length > 0) {
+				alert("This person is already included in this table");
+				setShowEditModule(false);
+			} else {
+				setTable(copyOfArr.concat(copyOfChosen));
+				insertAlreadyExistingIntoTable(chosenNameArr);
+				setShowEditModule(false);
+			}
+		}).catch((err) => {
+			console.warn(err.message);
+		});
 	};
 
 	const showEditHandler = () => {

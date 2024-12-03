@@ -922,3 +922,31 @@ app.get(`/get-checked-in/:table`, (req, res) => {
         res.send(sqlError(err));
     });
 });
+
+app.get('/check-applicant-exists-in-table/:tableName/:firstName/:lastName', (req, res) => {
+    const getApplicant = new Promise((resolve, reject) => {
+        let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
+        let currentDb = mysql.createConnection(Db.getDb());
+
+        let sql = `SELECT firstName FROM ${req.params.tableName} WHERE firstName = "${req.params.firstName}" AND lastName = "${req.params.lastName}";`;
+        currentDb.query(sql, (err, results) => {
+            if (err) {
+                console.log(err)
+                return reject(err);
+            } else {
+                console.log(results);
+                return resolve(results);
+            }
+        });
+
+    });
+
+    getApplicant.then((data) => {
+        res.send({
+            message: "Success",
+            data: data
+        });
+    }).catch((err) => {
+        res.send(sqlError(err));
+    });
+});
