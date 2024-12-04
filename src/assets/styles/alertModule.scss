@@ -1,5 +1,6 @@
 @import './library.scss';
 #custom_alert_overlay {
+    @include dark-overlay;
     #custom_alert {
         position: fixed;
         top: 2rem;

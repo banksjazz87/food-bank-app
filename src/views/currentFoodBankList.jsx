@@ -357,9 +357,11 @@ export default function CurrentFoodBankList() {
 	const removeFromList= (id, array, updateMethod) => {
 		let arrayCopy = array.slice();
 		let targetIndex = findAttendantIndexById(array, id);
-		arrayCopy.splice(targetIndex, 1);
 
-		updateMethod(arrayCopy);
+		if (targetIndex) {
+			arrayCopy.splice(targetIndex, 1);
+			updateMethod(arrayCopy);
+		}
 	}
 
 
