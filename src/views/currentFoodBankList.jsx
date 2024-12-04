@@ -161,15 +161,19 @@ export default function CurrentFoodBankList() {
 		copyOfChosen[0].checkedIn = 0;
 		copyOfChosen[0].checkedInNum = 0;
 
+		const searchForm = document.getElementById('applicantSearch');
+
 
 		getApplicant(tableInfo.title, attendantID).then((data) => {
 			if (data.data.length > 0) {
 				alert("This person is already included in this table");
 				setShowEditModule(false);
+				searchForm.reset();
 			} else {
 				setTable(copyOfArr.concat(copyOfChosen));
 				insertAlreadyExistingIntoTable(chosenNameArr);
 				setShowEditModule(false);
+				searchForm.reset();
 			}
 		}).catch((err) => {
 			console.warn(err.message);
