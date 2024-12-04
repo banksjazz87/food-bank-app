@@ -122,9 +122,9 @@ export default function CurrentFoodBankList() {
 
 
 	//Used to get the applicant from a certain table, this will only return the firstname.  Using this method as a check to verify that we can't add an attendant that already exists in the table.
-	const getApplicant = async (table, first, last) => {
+	const getApplicant = async (table, attendantID) => {
 		try {
-			const applicantRequest = await fetch(`/check-applicant-exists-in-table/${table}/${first}/${last}`);
+			const applicantRequest = await fetch(`/check-applicant-exists-in-table/${table}/${attendantID}`);
 			const applicantJSON = await applicantRequest.json();
 
 			return applicantJSON;
@@ -153,17 +153,16 @@ export default function CurrentFoodBankList() {
 	//This function will add an already existing applicant to the current foodbank list.
 	const addApplicant = (chosenNameArr) => {
 		let copyOfArr = table.slice();
-		const firstName = chosenNameArr[0].firstName;
-		const lastName = chosenNameArr[0].lastName;
+		const attendantID = chosenNameArr[0].ApplicantID;
 
-		// //Make a copy of the chosenNameArr and then add the present field of false to it.
+		//Make a copy of the chosenNameArr and then add the present field of false to it.
 		let copyOfChosen = chosenNameArr.slice();
 		copyOfChosen[0].present = "false";
 		copyOfChosen[0].checkedIn = 0;
 		copyOfChosen[0].checkedInNum = 0;
 
 
-		getApplicant(tableInfo.title, firstName, lastName).then((data) => {
+		getApplicant(tableInfo.title, attendantID).then((data) => {
 			if (data.data.length > 0) {
 				alert("This person is already included in this table");
 				setShowEditModule(false);
