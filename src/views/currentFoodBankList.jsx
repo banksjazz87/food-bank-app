@@ -48,7 +48,7 @@ export default function CurrentFoodBankList() {
 	const [totalPresent, setTotalPresent] = useState(0);
 	const [selectedRow, setSelectedRow] = useState(0);
 	const [checkedInList, setCheckedInList] = useState([]);
-	const [currentTable, setCurrentTable] = useState('');
+	const [currentTable, setCurrentTable] = useState([]);
 
 	///Comment out for development
 	//Setting the tableInfo as well as the table data on the initial render.
@@ -120,6 +120,20 @@ export default function CurrentFoodBankList() {
 		setSelectedApplicant(arr);
 	};
 
+
+	//Used to get the applicant from a certain table, this will only return the firstname.  Using this method as a check to verify that we can't add an attendant that already exists in the table.
+	const getApplicant = async (table, attendantID) => {
+		try {
+			const applicantRequest = await fetch(`/check-applicant-exists-in-table/${table}/${attendantID}`);
+			const applicantJSON = await applicantRequest.json();
+
+			return applicantJSON;
+
+		} catch(e) {
+			return `The following error occurred, ${e}`;
+		}
+	}
+
 	//Inserts an already existing applicant into the most recent table.
 	const insertAlreadyExistingIntoTable = (arr) => {
 		let applicantObj = {
@@ -139,7 +153,7 @@ export default function CurrentFoodBankList() {
 	//This function will add an already existing applicant to the current foodbank list.
 	const addApplicant = (chosenNameArr) => {
 		let copyOfArr = table.slice();
-		let selectedName = `${chosenNameArr[0].firstName}${chosenNameArr[0].lastName}`;
+		const attendantID = chosenNameArr[0].ApplicantID;
 
 		//Make a copy of the chosenNameArr and then add the present field of false to it.
 		let copyOfChosen = chosenNameArr.slice();
@@ -147,20 +161,23 @@ export default function CurrentFoodBankList() {
 		copyOfChosen[0].checkedIn = 0;
 		copyOfChosen[0].checkedInNum = 0;
 
-		let firstLast = copyOfArr.map((x, y) => {
-			let first = x.firstName;
-			let last = x.lastName;
-			return first + last;
-		});
+		const searchForm = document.getElementById('applicantSearch');
 
-		if (firstLast.indexOf(selectedName) > -1) {
-			alert("This person is already included in this table");
-			setShowEditModule(false);
-		} else {
-			setTable(copyOfArr.concat(copyOfChosen));
-			insertAlreadyExistingIntoTable(chosenNameArr);
-			setShowEditModule(false);
-		}
+
+		getApplicant(tableInfo.title, attendantID).then((data) => {
+			if (data.data.length > 0) {
+				alert("This person is already included in this table");
+				setShowEditModule(false);
+				searchForm.reset();
+			} else {
+				setTable(copyOfArr.concat(copyOfChosen));
+				insertAlreadyExistingIntoTable(chosenNameArr);
+				setShowEditModule(false);
+				searchForm.reset();
+			}
+		}).catch((err) => {
+			console.warn(err.message);
+		});
 	};
 
 	const showEditHandler = () => {
@@ -328,19 +345,22 @@ export default function CurrentFoodBankList() {
 		setCheckedInList(finalArr);
 	};
 
+	
 	/**
-	 *
-	 * @param {number} id
+	 * 
+	 * @param {*} id the id of the user to be removed
+	 * @param {*} array the array that will need to be updated, to update the state
+	 * @param {*} updateMethod the method used to update the state
+	 * @description updates the state of the designated array, after removing an attendant.
 	 * @returns void
-	 * @description updates the state in the checkedInList to remove an attendant.
 	 */
-	const removeFromCheckedIn = (id) => {
-		let arrayCopy = checkedInList.slice();
-		let targetIndex = findAttendantIndexById(checkedInList, id);
-		arrayCopy.splice(targetIndex, 1);
+	const removeFromList= (id, array, updateMethod) => {
+		let arrayCopy = array.slice();
+		let targetIndex = findAttendantIndexById(array, id);
 
-		setCheckedInList(arrayCopy);
-	};
+		arrayCopy.splice(targetIndex, 1);
+		updateMethod(arrayCopy);
+	}
 
 
 	/**
@@ -396,7 +416,9 @@ export default function CurrentFoodBankList() {
 				updateTableHandler={updateTable}
 				editHandler={setEditApplicant}
 				addToCheckedInHandler={addToCheckedIn}
-				removeFromCheckedInHandler={removeFromCheckedIn}
+				removeFromCheckedInHandler={(id) => {
+					removeFromList(id, checkedInList, setCheckedInList);
+				}}
 				showRemoveBtns={showRemoveButtons}
 				selectedRemovalHandler={selectedForRemoval}
 				showDeleteAlertHandler={() => setDisplayDeleteAlert(true)}

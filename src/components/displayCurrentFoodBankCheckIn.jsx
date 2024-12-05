@@ -51,7 +51,7 @@ export default function DisplayCurrentFoodBankCheckIn(props) {
 				setTimeout(() => {
 					setShowAlert(false);
 					setAlertMessage(false);
-				}, 1000);
+				}, 700);
 			} else {
 				alert(data.message);
 			}
