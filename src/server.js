@@ -923,6 +923,7 @@ app.get(`/get-checked-in/:table`, (req, res) => {
     });
 });
 
+//Used to check if an applicant already exists in a table, we just pass the table name and attendant id.
 app.get('/check-applicant-exists-in-table/:tableName/:attendantID', (req, res) => {
     const getApplicant = new Promise((resolve, reject) => {
         let Db = new Database(req.cookies.host, req.cookies.user, req.cookies.password, req.cookies.database);
