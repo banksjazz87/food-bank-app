@@ -358,10 +358,8 @@ export default function CurrentFoodBankList() {
 		let arrayCopy = array.slice();
 		let targetIndex = findAttendantIndexById(array, id);
 
-		if (targetIndex) {
-			arrayCopy.splice(targetIndex, 1);
-			updateMethod(arrayCopy);
-		}
+		arrayCopy.splice(targetIndex, 1);
+		updateMethod(arrayCopy);
 	}
 
 
@@ -420,7 +418,6 @@ export default function CurrentFoodBankList() {
 				addToCheckedInHandler={addToCheckedIn}
 				removeFromCheckedInHandler={(id) => {
 					removeFromList(id, checkedInList, setCheckedInList);
-					removeFromList(id, currentTable, setCurrentTable);
 				}}
 				showRemoveBtns={showRemoveButtons}
 				selectedRemovalHandler={selectedForRemoval}
